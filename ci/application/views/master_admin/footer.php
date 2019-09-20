@@ -12,11 +12,12 @@
     <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
 
     <script>
-            let all_users_permission_table = $('#all-users-permission-table').DataTable({
-                responsive: true
-            })
-            .columns.adjust()
-            .responsive.recalc();
+        let all_users_permission_table = $('#all-users-permission-table').DataTable({
+            dom: '"<"flex items-center"<"flex-grow items-center w-2/4"l><"flex flex-grow items-center w-2/4 justify-end"f>><"w-full"rt><"col-md-6"i><"col-md-6"p>',
+            responsive: true
+        })
+        .columns.adjust()
+        .responsive.recalc();
     </script>
 
     </body>

@@ -79,8 +79,9 @@
                     <h1>All Users Permission</h1>
                     <hr class="my-8 border-b-2 border-gray-200">
                 </div>
+
                 <div id="app" class="flex">
-                    <div class="markdown mb-6 px-6 max-w-3xl">
+                    <div class="markdown mb-6 px-6 flex-grow max-w-3xl">
                         <table id="all-users-permission-table" class="w-full text-left table-collapse">
                             <thead>
                                 <tr>
@@ -113,6 +114,7 @@
                         </table>
                     </div>
                 </div>
+
             </div>
         </div>
 
