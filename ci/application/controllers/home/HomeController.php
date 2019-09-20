@@ -18,6 +18,8 @@ class HomeController extends Master_Controller {
 
 	public function index()
 	{
+    
+
 		// RECURSIVE FUNCTION
 		$result = $this->factory(5);
 		// die(var_dump($result));
