@@ -81,7 +81,7 @@
                 </div>
                 <div id="app" class="flex">
                     <div class="markdown mb-6 px-6 max-w-3xl">
-                        <table class="w-full text-left table-collapse">
+                        <table id="all-users-permission-table" class="w-full text-left table-collapse">
                             <thead>
                                 <tr>
                                     <th class="text-sm font-semibold text-gray-700 p-2 bg-gray-100">No</th>
