@@ -11,7 +11,7 @@
                     <a href="" class="hover:text-pink-300 font-medium inline-block text-white my-3 mx-4">
                         <i class="fas fa-user-secret w-5"></i>Privileges
                     </a>
-                    <a href="" class="hover:text-pink-300 font-medium inline-block text-white my-3 mx-4">
+                    <a href="<?php echo site_url('') ?>" class="hover:text-pink-300 font-medium inline-block text-white my-3 mx-4">
                         <i class="fas fa-lock w-5"></i>Change Password
                     </a>
                 </div>
