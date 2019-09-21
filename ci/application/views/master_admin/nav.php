@@ -65,10 +65,17 @@
                 <nav id="nav-admin" class="px-6 pt-6 overflow-y-auto text-base sticky?lg:h-screen">
                     <div class="mb-10">
                         <a href="javascript:void(0)" class="flex items-center px-2 -mx-2 py-1 hover:text-pink-300 font-medium text-white">
-                        <i class="fas fa-key w-8"></i>Permission</a>
-                        <a href="javascript:void(0)" class="flex items-center px-2 -mx-2 py-1 hover:text-pink-300 font-medium text-white">
-                        <i class="fas fa-sliders-h w-8"></i>Settings</a>
-                    </div>
+                        <i class="fas fa-key w-8"></i>Permission <i class="w-8 ml-5 fas fa-chevron-right"></i></a>
+                        <div class="relative">
+                            <a href="javascript:void(0)" class="flex items-center px-2 -mx-2 py-1 hover:text-pink-300 font-medium text-white">
+                            <i class="fas fa-sliders-h w-8"></i>Settings <i class="w-8 ml-5 fas fa-chevron-right"></i>
+                            </a>
+                            <div class="absolute mx-5 hidden px-2 py-2">
+                                <p class="font-medium text-white">
+                                    <i class="fas fa-user-secret w-5"></i> Privileges
+                                </p>
+                            </div>
+                        </div>
                 </nav>
             </div>
         </div>
@@ -103,7 +110,144 @@
                                             <i class="fas fa-edit w-8"></i>
                                         </a>
                                         <a href="javascript:void(0)" class="hover:text-pink-300">
-                                            <i class="fa fa-plus w-8"></i>
+                                            <i class="fa fa-trash w-8"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2 border-t border-gray-300 font-mono text-xs text-purple-700 whitespace-pre">1</td>
+                                    <td class="p-2 border-t border-gray-300 font-mono text-xs text-purple-700 whitespace-pre">Reihan Agam</td>
+                                    <td class="p-2 border-t border-gray-300 font-mono text-xs text-purple-700 whitespace-pre">reihanagam7@gmail.com</td>
+                                    <td class="p-2 border-t border-gray-300 font-mono text-xs text-purple-700 whitespace-pre">Super Admin</td>
+                                    <td class="p-2 border-t border-gray-300 text-xs whitespace-nowrap">
+                                        <a href="javascript:void(0)" class="hover:text-pink-300">
+                                            <i class="fas fa-edit w-8"></i>
+                                        </a>
+                                        <a href="javascript:void(0)" class="hover:text-pink-300">
+                                            <i class="fa fa-trash w-8"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2 border-t border-gray-300 font-mono text-xs text-purple-700 whitespace-pre">1</td>
+                                    <td class="p-2 border-t border-gray-300 font-mono text-xs text-purple-700 whitespace-pre">Reihan Agam</td>
+                                    <td class="p-2 border-t border-gray-300 font-mono text-xs text-purple-700 whitespace-pre">reihanagam7@gmail.com</td>
+                                    <td class="p-2 border-t border-gray-300 font-mono text-xs text-purple-700 whitespace-pre">Super Admin</td>
+                                    <td class="p-2 border-t border-gray-300 text-xs whitespace-nowrap">
+                                        <a href="javascript:void(0)" class="hover:text-pink-300">
+                                            <i class="fas fa-edit w-8"></i>
+                                        </a>
+                                        <a href="javascript:void(0)" class="hover:text-pink-300">
+                                            <i class="fa fa-trash w-8"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2 border-t border-gray-300 font-mono text-xs text-purple-700 whitespace-pre">1</td>
+                                    <td class="p-2 border-t border-gray-300 font-mono text-xs text-purple-700 whitespace-pre">Reihan Agam</td>
+                                    <td class="p-2 border-t border-gray-300 font-mono text-xs text-purple-700 whitespace-pre">reihanagam7@gmail.com</td>
+                                    <td class="p-2 border-t border-gray-300 font-mono text-xs text-purple-700 whitespace-pre">Super Admin</td>
+                                    <td class="p-2 border-t border-gray-300 text-xs whitespace-nowrap">
+                                        <a href="javascript:void(0)" class="hover:text-pink-300">
+                                            <i class="fas fa-edit w-8"></i>
+                                        </a>
+                                        <a href="javascript:void(0)" class="hover:text-pink-300">
+                                            <i class="fa fa-trash w-8"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2 border-t border-gray-300 font-mono text-xs text-purple-700 whitespace-pre">1</td>
+                                    <td class="p-2 border-t border-gray-300 font-mono text-xs text-purple-700 whitespace-pre">Reihan Agam</td>
+                                    <td class="p-2 border-t border-gray-300 font-mono text-xs text-purple-700 whitespace-pre">reihanagam7@gmail.com</td>
+                                    <td class="p-2 border-t border-gray-300 font-mono text-xs text-purple-700 whitespace-pre">Super Admin</td>
+                                    <td class="p-2 border-t border-gray-300 text-xs whitespace-nowrap">
+                                        <a href="javascript:void(0)" class="hover:text-pink-300">
+                                            <i class="fas fa-edit w-8"></i>
+                                        </a>
+                                        <a href="javascript:void(0)" class="hover:text-pink-300">
+                                            <i class="fa fa-trash w-8"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2 border-t border-gray-300 font-mono text-xs text-purple-700 whitespace-pre">1</td>
+                                    <td class="p-2 border-t border-gray-300 font-mono text-xs text-purple-700 whitespace-pre">Reihan Agam</td>
+                                    <td class="p-2 border-t border-gray-300 font-mono text-xs text-purple-700 whitespace-pre">reihanagam7@gmail.com</td>
+                                    <td class="p-2 border-t border-gray-300 font-mono text-xs text-purple-700 whitespace-pre">Super Admin</td>
+                                    <td class="p-2 border-t border-gray-300 text-xs whitespace-nowrap">
+                                        <a href="javascript:void(0)" class="hover:text-pink-300">
+                                            <i class="fas fa-edit w-8"></i>
+                                        </a>
+                                        <a href="javascript:void(0)" class="hover:text-pink-300">
+                                            <i class="fa fa-trash w-8"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2 border-t border-gray-300 font-mono text-xs text-purple-700 whitespace-pre">1</td>
+                                    <td class="p-2 border-t border-gray-300 font-mono text-xs text-purple-700 whitespace-pre">Reihan Agam</td>
+                                    <td class="p-2 border-t border-gray-300 font-mono text-xs text-purple-700 whitespace-pre">reihanagam7@gmail.com</td>
+                                    <td class="p-2 border-t border-gray-300 font-mono text-xs text-purple-700 whitespace-pre">Super Admin</td>
+                                    <td class="p-2 border-t border-gray-300 text-xs whitespace-nowrap">
+                                        <a href="javascript:void(0)" class="hover:text-pink-300">
+                                            <i class="fas fa-edit w-8"></i>
+                                        </a>
+                                        <a href="javascript:void(0)" class="hover:text-pink-300">
+                                            <i class="fa fa-trash w-8"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2 border-t border-gray-300 font-mono text-xs text-purple-700 whitespace-pre">1</td>
+                                    <td class="p-2 border-t border-gray-300 font-mono text-xs text-purple-700 whitespace-pre">Reihan Agam</td>
+                                    <td class="p-2 border-t border-gray-300 font-mono text-xs text-purple-700 whitespace-pre">reihanagam7@gmail.com</td>
+                                    <td class="p-2 border-t border-gray-300 font-mono text-xs text-purple-700 whitespace-pre">Super Admin</td>
+                                    <td class="p-2 border-t border-gray-300 text-xs whitespace-nowrap">
+                                        <a href="javascript:void(0)" class="hover:text-pink-300">
+                                            <i class="fas fa-edit w-8"></i>
+                                        </a>
+                                        <a href="javascript:void(0)" class="hover:text-pink-300">
+                                            <i class="fa fa-trash w-8"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2 border-t border-gray-300 font-mono text-xs text-purple-700 whitespace-pre">1</td>
+                                    <td class="p-2 border-t border-gray-300 font-mono text-xs text-purple-700 whitespace-pre">Reihan Agam</td>
+                                    <td class="p-2 border-t border-gray-300 font-mono text-xs text-purple-700 whitespace-pre">reihanagam7@gmail.com</td>
+                                    <td class="p-2 border-t border-gray-300 font-mono text-xs text-purple-700 whitespace-pre">Super Admin</td>
+                                    <td class="p-2 border-t border-gray-300 text-xs whitespace-nowrap">
+                                        <a href="javascript:void(0)" class="hover:text-pink-300">
+                                            <i class="fas fa-edit w-8"></i>
+                                        </a>
+                                        <a href="javascript:void(0)" class="hover:text-pink-300">
+                                            <i class="fa fa-trash w-8"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2 border-t border-gray-300 font-mono text-xs text-purple-700 whitespace-pre">1</td>
+                                    <td class="p-2 border-t border-gray-300 font-mono text-xs text-purple-700 whitespace-pre">Reihan Agam</td>
+                                    <td class="p-2 border-t border-gray-300 font-mono text-xs text-purple-700 whitespace-pre">reihanagam7@gmail.com</td>
+                                    <td class="p-2 border-t border-gray-300 font-mono text-xs text-purple-700 whitespace-pre">Super Admin</td>
+                                    <td class="p-2 border-t border-gray-300 text-xs whitespace-nowrap">
+                                        <a href="javascript:void(0)" class="hover:text-pink-300">
+                                            <i class="fas fa-edit w-8"></i>
+                                        </a>
+                                        <a href="javascript:void(0)" class="hover:text-pink-300">
+                                            <i class="fa fa-trash w-8"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2 border-t border-gray-300 font-mono text-xs text-purple-700 whitespace-pre">1</td>
+                                    <td class="p-2 border-t border-gray-300 font-mono text-xs text-purple-700 whitespace-pre">Reihan Agam</td>
+                                    <td class="p-2 border-t border-gray-300 font-mono text-xs text-purple-700 whitespace-pre">reihanagam7@gmail.com</td>
+                                    <td class="p-2 border-t border-gray-300 font-mono text-xs text-purple-700 whitespace-pre">Super Admin</td>
+                                    <td class="p-2 border-t border-gray-300 text-xs whitespace-nowrap">
+                                        <a href="javascript:void(0)" class="hover:text-pink-300">
+                                            <i class="fas fa-edit w-8"></i>
                                         </a>
                                         <a href="javascript:void(0)" class="hover:text-pink-300">
                                             <i class="fa fa-trash w-8"></i>

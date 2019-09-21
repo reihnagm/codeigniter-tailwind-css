@@ -1,4 +1,3 @@
-
     <!-- JQUERY JS -->
     <script
     src="https://code.jquery.com/jquery-3.4.1.min.js"
@@ -13,11 +12,15 @@
 
     <script>
         let all_users_permission_table = $('#all-users-permission-table').DataTable({
-            dom: '"<"flex items-center"<"flex-grow items-center w-2/4"l><"flex flex-grow items-center w-2/4 justify-end"f>><"w-full"rt><"col-md-6"i><"col-md-6"p>',
+            dom: '"<"flex items-center"<"flex-grow items-center w-2/4"l><"flex flex-grow items-center w-2/4 justify-end"f>><"w-full"rt><"flex items-center"<"flex-grow items-center w-2/4"i><"flex flex-grow items-center w-2/4 justify-end"p>>',
             responsive: true
         })
         .columns.adjust()
         .responsive.recalc();
+
+        $(document).on("click", "", function() {
+            
+        })
     </script>
 
     </body>
