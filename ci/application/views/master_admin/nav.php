@@ -67,10 +67,10 @@
                         <a href="javascript:void(0)" class="flex items-center px-2 -mx-2 py-1 hover:text-pink-300 font-medium text-white">
                         <i class="fas fa-key w-8"></i>Permission <i class="w-8 ml-5 fas fa-chevron-right"></i></a>
                         <div class="relative">
-                            <a href="javascript:void(0)" class="flex items-center px-2 -mx-2 py-1 hover:text-pink-300 font-medium text-white">
+                            <a id="btn-settings-admin" href="javascript:void(0)" class="flex items-center px-2 -mx-2 py-1 hover:text-pink-300 font-medium text-white">
                             <i class="fas fa-sliders-h w-8"></i>Settings <i class="w-8 ml-5 fas fa-chevron-right"></i>
                             </a>
-                            <div class="absolute mx-5 hidden px-2 py-2">
+                            <div id="child-settings-admin" class="absolute hidden px-2 py-2">
                                 <p class="font-medium text-white">
                                     <i class="fas fa-user-secret w-5"></i> Privileges
                                 </p>
