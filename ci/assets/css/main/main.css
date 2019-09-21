@@ -1,0 +1,5 @@
+#child-settings-admin
+{
+    max-height: 0;
+    transition: max-height 0.2s ease-out;
+}

@@ -66,15 +66,13 @@
                     <div class="mb-10">
                         <a href="javascript:void(0)" class="flex items-center px-2 -mx-2 py-1 hover:text-pink-300 font-medium text-white">
                         <i class="fas fa-key w-8"></i>Permission <i class="w-8 ml-5 fas fa-chevron-right"></i></a>
-                        <div class="relative">
-                            <a id="btn-settings-admin" href="javascript:void(0)" class="flex items-center px-2 -mx-2 py-1 hover:text-pink-300 font-medium text-white">
-                            <i class="fas fa-sliders-h w-8"></i>Settings <i class="w-8 ml-5 fas fa-chevron-right"></i>
+                        <a id="btn-settings-admin" href="javascript:void(0)" class="flex items-center px-2 -mx-2 py-1 hover:text-pink-300 font-medium text-white">
+                        <i class="fas fa-sliders-h w-8"></i>Settings <i id="chevron-right" class="w-8 ml-5 fas fa-chevron-right"></i>
+                        </a>
+                        <div id="child-settings-admin" class="overflow-hidden px-6 mx-2">
+                            <a href="javascript:void(0)" class="font-medium text-white">
+                                <i class="fas fa-user-secret w-5"></i> Privileges
                             </a>
-                            <div id="child-settings-admin" class="absolute hidden px-2 py-2">
-                                <p class="font-medium text-white">
-                                    <i class="fas fa-user-secret w-5"></i> Privileges
-                                </p>
-                            </div>
                         </div>
                 </nav>
             </div>
