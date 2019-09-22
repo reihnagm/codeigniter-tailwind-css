@@ -10,26 +10,18 @@ $route['register']['POST'] = 'auth/RegisterController/register';
 // LOGOUT
 $route['logout']['POST'] = 'auth/LogoutController/logout';
 
-// ADMIN DASHBOARD
+// ADMIN
 $route['admin']['GET'] = 'admin/AdminController/index';
 
-// ADMIN CHANGE PASSWORD
-$route['admin/change-password']['GET'] = 'admin/AdminController/change_password';
+// ADMIN PERMISSIONS / USER
+$route['admin/permissions/user']['GET'] = 'admin/AdminController/permissions_user';
 
-// ADMIN PRIVILEGES
-$route['admin/privileges']['GET'] = 'admin/AdminController/privileges';
+// ADMIN SETTINGS / CHANGE PASSWORD
+$route['admin/settings/change-password']['GET'] = 'admin/AdminController/change_password';
 
-// ADMIN SETTING PERMISSIONS
-$route['admin/setting/permissions']['GET']= 'admin/AdminController/setting_permissions';
+// ADMIN SETTINGS / PRIVILEGES
+$route['admin/settings/privileges']['GET'] = 'admin/AdminController/privileges';
 
-// ADMIN UPDATE SETTING PERMISSIONS
-$route['admin/update/setting/permissions/(:num)']['PUT'] = 'admin/AdminController/update_setting_permissions/$1';
-
-// ADMIN DESTROY SETTING PERMISSIONS
-$route['admin/destroy/setting/permissions/(:num)']['DELETE'] = 'admin/AdminController/destroy_setting_permissions/$1';
-
-// ADMIN STORE SETTING PERMISSIONS
-$route['admin/store/setting/permissions']['POST'] = 'admin/AdminController/store_setting_permissions';
 
 $route['default_controller'] = 'home/HomeController';
 $route['404_override'] = '';

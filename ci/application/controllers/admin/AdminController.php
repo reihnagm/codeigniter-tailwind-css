@@ -25,4 +25,11 @@ class AdminController extends Master_Controller
         $this->load->view('master_admin/footer');
     }
 
+    public function permissions_user()
+    {
+        $this->load->view('master_admin/header');
+        $this->load->view('admin/permissions_user');
+        $this->load->view('master_admin/footer');
+    }
+
 }
