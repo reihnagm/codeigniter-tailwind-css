@@ -1,6 +1,7 @@
 <div id="sidebar" class="bg-pink-500 w-1/4">
     <nav id="nav-admin" class="px-6 pt-6 overflow-y-auto text-base">
         <div class="mb-10">
+    
             <a id="btn-permissions-admin" href="javascript:void(0)" class="px-2 -mx-2 py-1 inline-block hover:text-pink-300 font-medium text-white">
                 <i class="fas fa-key w-8"></i>Permissions
                 <i id="chevron-right-permissions" class="ml-5 fas fa-chevron-right"></i>
