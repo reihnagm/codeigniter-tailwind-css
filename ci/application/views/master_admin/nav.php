@@ -26,33 +26,42 @@
 <!-- w-1/6 SAME AS width: 16.666667% -->
 
 
-<div class="h-16 flex items-center">
-    <div class="w-full max-w-screen-xl relative mx-auto px-6">
+<div class="h-16 flex items-center relative">
+    <div class="w-full mx-auto px-6">
         <div class="flex items-center -mx-6">
 
-            <div class="lg:w-1/4 xl:w-1/5 pl-6 pr-6 lg:pr-8">
+            <div class="w-1/4 pl-6 pr-6">
                 <div class="flex items-center">
-                    <a class="block lg:mr-4" href="javascript:void(0)">Your Logo</a>
+                    <a class="block mr-4" href="javascript:void(0)">Your Logo</a>
                 </div>
             </div>
 
-            <div class="flex flex-grow items-center justify-end w-3/4">
-                <div class="hidden lg:block lg:w-1/4 px-6">
-                    <div class="flex justify-start items-center text-grey">
-                        <div class="p-2 bg-pink-500 items-center text-indigo-100 leading-none lg:rounded-full flex lg:inline-flex" role="alert">
-                            <span class="flex rounded-full bg-pink-300 uppercase px-2 py-1 text-xs font-bold mr-3">5</span>
-                            <span class="font-semibold mr-2 text-left flex-auto">
-                                <i class="fas fa-bell"></i>
-                            </span>
-                            <svg class="fill-current opacity-75 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"/></svg>
-                        </div>
-                        <a href="javascript:void(0)" class="block text-pink-500 flex items-center hover:text-pink-300 ml-6">
-                            <i class="fas fa-chevron-right"></i>
-                        </a>
+            <div class="flex justify-end w-3/4 h-16 border-b-2 border-gray-300">
+                <div class="flex justify-start items-center w-1/4 px-6">
+
+                    <div class="p-2 bg-pink-500 items-center text-indigo-100 leading-none lg:rounded-full flex lg:inline-flex" role="alert">
+                        <span class="flex rounded-full bg-pink-300 uppercase px-2 py-1 text-xs font-bold mr-3">5</span>
+                        <span class="font-semibold mr-2 text-left flex-auto">
+                            <i class="fas fa-bell"></i>
+                        </span>
+                        <svg class="fill-current opacity-75 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"/></svg>
                     </div>
+
+                    <a id="btn-nav-admin" href="javascript:void(0)"
+                        class="relative block text-pink-500 flex items-center hover:text-pink-300 ml-6">
+                        <i id="chevron-right-nav" class="fas fa-chevron-right"></i>
+                    </a>
+
                 </div>
             </div>
 
         </div>
+    </div>
+
+
+    <div id="child-nav-admin" class="absolute overflow-hidden bg-pink-500">
+        <a href="<?php echo site_url('admin/settings/privileges') ?>" target="_blank" class="hover:text-pink-300 font-medium inline-block text-white my-3 mx-4">
+            test
+        </a>
     </div>
 </div>

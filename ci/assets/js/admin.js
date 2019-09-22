@@ -4,10 +4,11 @@ $(function() {
     let svg3 = $("#svg-3");
     let child_permissions_admin = document.getElementById("child-permissions-admin");
     let child_settings_admin = document.getElementById("child-settings-admin");
+    let child_nav_admin = document.getElementById("child-nav-admin");
+
     let chevron_right_permissions = $("#chevron-right-permissions");
     let chevron_right_settings = $("#chevron-right-settings");
-
-    console.log(chevron_right_permissions);
+    let chevron_right_nav = $("#chevron-right-nav");
 
     $(document).on("click", "#btn-settings-admin", function() {
         if(child_settings_admin.style.maxHeight)
@@ -36,6 +37,21 @@ $(function() {
             chevron_right_permissions.removeClass("fa-chevron-right");
             chevron_right_permissions.addClass("fa-chevron-down");
             child_permissions_admin.style.maxHeight =  child_permissions_admin.scrollHeight + "px";
+        }
+    });
+
+    $(document).on("click", "#btn-nav-admin", function() {
+        if(child_nav_admin.style.maxHeight)
+        {
+            chevron_right_nav.removeClass("fa-chevron-down");
+            chevron_right_nav.addClass("fa-chevron-right");
+            child_nav_admin.style.maxHeight = null;
+        }
+        else
+        {
+            chevron_right_nav.removeClass("fa-chevron-right");
+            chevron_right_nav.addClass("fa-chevron-down");
+            child_nav_admin.style.maxHeight =  child_nav_admin.scrollHeight + "px";
         }
     });
 
