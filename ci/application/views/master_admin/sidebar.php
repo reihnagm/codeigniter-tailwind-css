@@ -8,10 +8,10 @@
                 <i class="fas fa-sliders-h w-8"></i>Settings<i id="chevron-right" class="w-8 ml-5 fas fa-chevron-right"></i>
                 </a>
                 <div id="child-settings-admin" class="overflow-hidden my-3 bg-pink-600">
-                    <a href="" class="hover:text-pink-300 font-medium inline-block text-white my-3 mx-4">
+                    <a href="<?php echo site_url('admin/privileges') ?>" target="_blank" class="hover:text-pink-300 font-medium inline-block text-white my-3 mx-4">
                         <i class="fas fa-user-secret w-5"></i>Privileges
                     </a>
-                    <a href="<?php echo site_url('') ?>" class="hover:text-pink-300 font-medium inline-block text-white my-3 mx-4">
+                    <a href="<?php echo site_url('admin/change-password') ?>" target="_blank" class="hover:text-pink-300 font-medium inline-block text-white my-3 mx-4">
                         <i class="fas fa-lock w-5"></i>Change Password
                     </a>
                 </div>

@@ -11,7 +11,13 @@ $route['register']['POST'] = 'auth/RegisterController/register';
 $route['logout']['POST'] = 'auth/LogoutController/logout';
 
 // ADMIN DASHBOARD
-$route['admin/dashboard']['GET'] = 'admin/AdminController/index';
+$route['admin']['GET'] = 'admin/AdminController/index';
+
+// ADMIN CHANGE PASSWORD
+$route['admin/change-password']['GET'] = 'admin/AdminController/change_password';
+
+// ADMIN PRIVILEGES
+$route['admin/privileges']['GET'] = 'admin/AdminController/privileges';
 
 // ADMIN SETTING PERMISSIONS
 $route['admin/setting/permissions']['GET']= 'admin/AdminController/setting_permissions';
