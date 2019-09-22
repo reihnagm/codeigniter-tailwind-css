@@ -5,7 +5,7 @@
         <?php components('master_admin/sidebar') ?>
 
         <!-- CONTENT -->
-        <?php components('master_admin/content') ?>
+        <?php components('master_admin/permissions_user') ?>
 
     </div>
 </div>
