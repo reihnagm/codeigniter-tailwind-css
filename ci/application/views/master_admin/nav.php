@@ -66,8 +66,8 @@
             </a>
         </div>
         <div class="block">
-            <a href="javascript:void(0)" target="_blank" class="hover:text-pink-300 font-medium inline-block text-white my-3 mx-4">
-                <i class="fas fa-logout w-5"></i> Logout
+            <a href="<?php echo site_url('admin/logout') ?>" target="_blank" class="hover:text-pink-300 font-medium inline-block text-white my-3 mx-4">
+                <i class="fas fa-sign-out-alt w-5"></i> Logout
             </a>
         </div>
     </div>
