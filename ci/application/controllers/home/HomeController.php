@@ -18,7 +18,7 @@ class HomeController extends Master_Controller {
 
 	public function index()
 	{
-    
+		$this->User->get_data();
 
 		// RECURSIVE FUNCTION
 		$result = $this->factory(5);
