@@ -59,7 +59,7 @@
     </div>
 
 
-    <div id="child-nav-admin" class="absolute overflow-hidden bg-pink-500">
+    <div id="child-nav-admin" class="absolute overflow-hidden max-height-0 max-height-with-transition bg-pink-500">
         <div class="block">
             <a href="<?php echo site_url('admin/settings/privileges') ?>" target="_blank" class="hover:text-pink-300 font-medium inline-block text-white my-3 mx-4">
                 <i class="fas fa-user w-5"></i> Profile
@@ -71,4 +71,5 @@
             </a>
         </div>
     </div>
+
 </div>

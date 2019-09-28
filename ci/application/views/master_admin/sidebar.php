@@ -38,7 +38,6 @@
                 </a>
             </div> -->
 
-
             <!-- <div id="child-settings-admin" class="overflow-hidden bg-pink-600">
                 <div class="block">
                     <a href="<?php echo site_url('admin/settings/privileges') ?>" target="_blank" class="hover:text-pink-300 font-medium inline-block text-white my-1 py-1 mx-4">
@@ -51,6 +50,8 @@
                     </a>
                 </div>
             </div> -->
+
+
 
             <a href="<?php echo site_url('/') ?>" target="_blank" class="inline-block items-center px-2 -mx-2 py-1 hover:text-pink-300 font-medium text-white">
                 <i class="fas fa-home w-8"></i>Back to Front Page
