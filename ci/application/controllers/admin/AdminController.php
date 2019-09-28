@@ -58,21 +58,22 @@ class AdminController extends Master_Controller
 
 		if(!empty($search))
 		{
-			$this->db->select("a.first_name, a.last_name, a.username, a.age, a.gender, a.email");
-			$this->db->from("tbl_users a");
-			$this->db->like("lowercase(a.first_name)", $search);
-			$this->db->like("lowercase(a.last_name)", $search);
-			$this->db->like("lowercase(a.username)", $search);
-			$this->db->like("lowercase(a.age)", $search);
-			$this->db->like("lowercase(a.gender)", $search);
-			$this->db->like("lowercase(a.email)", $search);
+
+			$sql = "SELECT a.first_name, a.last_name, a.username, a.email, a.age, a.gender
+			FROM tbl_users a
+			WHERE a.first_name LIKE '%{$search}%'
+			OR a.last_name LIKE '%{$search}%'
+			OR a.username LIKE '%{$search}%'
+			OR a.email LIKE '%{$search}%'
+			OR CAST(a.age as TEXT) LIKE '{$search}%'
+			OR a.gender LIKE '%{$search}%'";
 
 			if ($length > 0)
 			{
 				$this->db->limit($length, $start);
 			}
 
-			$users = $this->db->get();
+			$users = $this->db->query($sql)->result();
 		}
 		else
 		{
@@ -84,12 +85,12 @@ class AdminController extends Master_Controller
 			    $this->db->limit($length, $start);
 			}
 
-			$users = $this->db->get();
+			$users = $this->db->get()->result();
 		}
 
 		$data = [];
 
-		foreach($users->result() as $user):
+		foreach($users as $user):
 			$row['first_name'] = $user->first_name;
 			$row['last_name'] = $user->last_name;
 			$row['username'] = $user->username;
@@ -110,27 +111,21 @@ class AdminController extends Master_Controller
 
 	private function total_user_datatables()
 	{
-		$start = $this->input->get("start");
-		$length = $this->input->get("length");
-		$search = $this->input->get("search")["value"];
+		$search = $this->input->get("search");
 
 		if(!empty($search))
 		{
-			$this->db->select("a.first_name, a.last_name, a.username, a.age, a.gender, a.email");
-			$this->db->from("tbl_users a");
-			$this->db->like("lowercase(a.first_name)", $search);
-			$this->db->like("lowercase(a.last_name)", $search);
-			$this->db->like("lowercase(a.username)", $search);
-			$this->db->like("lowercase(a.age)", $search);
-			$this->db->like("lowercase(a.gender)", $search);
-			$this->db->like("lowercase(a.email)", $search);
+			$sql = "SELECT COUNT(*)
+			FROM tbl_users a
+			WHERE a.first_name LIKE '%{$search}%'
+			OR a.last_name LIKE '%{$search}%'
+			OR a.username LIKE '%{$search}%'
+			OR a.email LIKE '%{$search}%'
+			OR CAST(a.age as TEXT) LIKE '{$search}%'
+			OR a.gender LIKE '%{$search}%'";
 
-			if ($length > 0)
-			{
-				$this->db->limit($length, $start);
-			}
-
-			return $this->db->count_all_results();
+			$test = $this->db->query($sql);
+			dd($test);
 		}
 		else
 		{
@@ -143,27 +138,21 @@ class AdminController extends Master_Controller
 
 	private function filtered_user_datatables()
 	{
-		$start = $this->input->get("start");
-		$length = $this->input->get("length");
-		$search = $this->input->get("search")["value"];
+		$search = $this->input->get("search");
 
 		if(!empty($search))
 		{
-			$this->db->select("a.first_name, a.last_name, a.username, a.age, a.gender, a.email");
-			$this->db->from("tbl_users a");
-			$this->db->like("lowercase(a.first_name)", $search);
-			$this->db->like("lowercase(a.last_name)", $search);
-			$this->db->like("lowercase(a.username)", $search);
-			$this->db->like("lowercase(a.age)", $search);
-			$this->db->like("lowercase(a.gender)", $search);
-			$this->db->like("lowercase(a.email)", $search);
+			$sql = "SELECT COUNT(*)
+			FROM tbl_users a
+			WHERE a.first_name LIKE '%{$search}%'
+			OR a.last_name LIKE '%{$search}%'
+			OR a.username LIKE '%{$search}%'
+			OR a.email LIKE '%{$search}%'
+			OR CAST(a.age as TEXT) LIKE '{$search}%'
+			OR a.gender LIKE '%{$search}%'";
 
-			if ($length > 0)
-			{
-				$this->db->limit($length, $start);
-			}
-
-			return $this->db->count_all_results();
+			$test = $this->db->query($sql);
+			dd($test);
 		}
 		else
 		{
