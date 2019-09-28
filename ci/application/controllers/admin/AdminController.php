@@ -111,7 +111,7 @@ class AdminController extends Master_Controller
 
 	private function total_user_datatables()
 	{
-		$search = $this->input->get("search");
+		$search = $this->input->get("search")["value"];
 
 		if(!empty($search))
 		{
@@ -124,8 +124,7 @@ class AdminController extends Master_Controller
 			OR CAST(a.age as TEXT) LIKE '{$search}%'
 			OR a.gender LIKE '%{$search}%'";
 
-			$test = $this->db->query($sql);
-			dd($test);
+			return $this->db->query($sql)->row_array()["count"];
 		}
 		else
 		{
@@ -138,7 +137,7 @@ class AdminController extends Master_Controller
 
 	private function filtered_user_datatables()
 	{
-		$search = $this->input->get("search");
+		$search = $this->input->get("search")["value"];
 
 		if(!empty($search))
 		{
@@ -151,8 +150,7 @@ class AdminController extends Master_Controller
 			OR CAST(a.age as TEXT) LIKE '{$search}%'
 			OR a.gender LIKE '%{$search}%'";
 
-			$test = $this->db->query($sql);
-			dd($test);
+			return $this->db->query($sql)->row_array()["count"];
 		}
 		else
 		{
