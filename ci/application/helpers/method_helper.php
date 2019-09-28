@@ -38,7 +38,7 @@ function get_menus_admin()
                         </a>
                     </div>';
 
-        $CI->db->select("a.name child_name, a.href child_href");
+        $CI->db->select("a.name child_name, a.href child_href, a.icon child_icon");
         $CI->db->from("tbl_app_admin_menu a");
         $CI->db->join("tbl_app_admin_menu_group b", "a.admin_menu_group_id = b.id", "inner");
         $CI->db->where("a.admin_menu_group_id", $menu_parent->parent_id);
@@ -46,9 +46,9 @@ function get_menus_admin()
         $menus_child = $CI->db->get()->result();
 
         foreach ($menus_child as $menu_child):
-            $temp .=    '<div class="block">
-                            <a href="'.$menu_child->child_href.'" target="_blank" class="hover:text-pink-300 font-medium inline-block text-white my-1 py-1 mx-4">
-                                <i class="fas fa-sticky-note w-5"></i> '.$menu_child->child_name.'
+            $temp .=    '<div id="content-admin-dropdown-'.$index_parent.'" class="overflow-hidden bg-pink-600">
+                            <a href="admin/'.$menu_child->child_href.'" target="_blank" class="hover:text-pink-300 font-medium inline-block text-white my-1 py-1 mx-4">
+                                <i class="'.$menu_child->child_icon.' w-5"></i> '.$menu_child->child_name.'
                             </a>
                         </div>';
         endforeach;
