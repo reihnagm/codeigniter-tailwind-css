@@ -4,10 +4,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class AdminController extends Master_Controller
 {
 
+	public function __construct()
+	{
+		parent::__construct();
+	}
+
 	public function index()
 	{
+		$data['navigation'] = get_menus_admin();
+
 		$this->load->view('master_admin/header');
-		$this->load->view('admin/index');
+		$this->load->view('admin/index', $data);
 		$this->load->view('master_admin/footer');
 	}
 

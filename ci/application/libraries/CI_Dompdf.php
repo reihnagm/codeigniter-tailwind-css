@@ -1,42 +1,20 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-require_once ('dompdf/lib/html5lib/Parser.php');
-require_once ('dompdf/lib/php-font-lib/src/FontLib/Autoloader.php');
-require_once ('dompdf/lib/php-svg-lib/src/autoload.php');
-require_once ('dompdf/src/Autoloader.php');
+use Dompdf\Dompdf;
 
 class CI_Dompdf
 {
 
-    private $html;
-    private $path;
-    private $filename;
-    private $paper_size;
-    private $orientation;
+    public $html; // or use var
+    public $path; // or use var
+    public $filename; // or use var
+    public $paper_size; // or use var
+    public $orientation; // or use var
 
-    function __construct($params = [])
+    function __construct()
     {
         $this->CI =& get_instance();
-
-        if (count($params) > 0)
-        {
-            $this->initialize($params);
-        }
     }
-
-    function initialize($params)
-	{
-		if (count($params) > 0)
-        {
-            foreach ($params as $key => $value)
-            {
-                if (isset($this->$key))
-                {
-                    $this->$key = $value;
-                }
-            }
-        }
-	}
 
 	function html($html = NULL)
 	{
@@ -59,10 +37,8 @@ class CI_Dompdf
         $this->orientation = $orientation;
 	}
 
-
 	function create($mode = 'download')
 	{
-
    		if (is_null($this->html)) {
 			show_error("HTML is not set");
 		}
@@ -87,7 +63,8 @@ class CI_Dompdf
         $dompdf->set_option('defaultFont', 'Helvetica');
 	    $dompdf->render();
 
-	    if($mode == 'save') {
+	    if($mode == 'save')
+        {
 
     	    $this->CI->load->helper('file');
 
@@ -100,20 +77,20 @@ class CI_Dompdf
 				show_error("PDF could not be written to the path");
 		    }
 
-		    }
+		}
+        else
+        {
+
+			if($dompdf->stream($this->filename))
+            {
+				return TRUE;
+			}
             else
             {
+				show_error("PDF could not be streamed");
+			}
 
-    			if($dompdf->stream($this->filename))
-                {
-    				return TRUE;
-    			}
-                else
-                {
-    				show_error("PDF could not be streamed");
-    			}
-
-	       }
+        }
 	}
 
 }

@@ -1,7 +1,13 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class HomeController extends Master_Controller {
+class HomeController extends Master_Controller
+{
+
+	public function __construct()
+	{
+		parent::__construct();
+	}
 
 	// RECURSIVE FUNCTION
 	public function factory($num)
@@ -18,8 +24,6 @@ class HomeController extends Master_Controller {
 
 	public function index()
 	{
-		$this->User->get_data();
-
 		// RECURSIVE FUNCTION
 		$result = $this->factory(5);
 		// die(var_dump($result));
