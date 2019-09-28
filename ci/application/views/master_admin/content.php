@@ -5,14 +5,16 @@
             <thead>
                 <tr>
                     <th class="text-sm font-semibold text-gray-700 p-2 bg-gray-100">No</th>
-                    <th class="text-sm font-semibold text-gray-700 p-2 bg-gray-100">Name</th>
+                    <th class="text-sm font-semibold text-gray-700 p-2 bg-gray-100">First Name</th>
+                    <th class="text-sm font-semibold text-gray-700 p-2 bg-gray-100">Last Name</th>
+                    <th class="text-sm font-semibold text-gray-700 p-2 bg-gray-100">Age</th>
+                    <th class="text-sm font-semibold text-gray-700 p-2 bg-gray-100">Gender</th>
+                    <th class="text-sm font-semibold text-gray-700 p-2 bg-gray-100">Username</th>
                     <th class="text-sm font-semibold text-gray-700 p-2 bg-gray-100">Email</th>
-                    <th class="text-sm font-semibold text-gray-700 p-2 bg-gray-100">Permission</th>
-                    <th class="text-sm font-semibold text-gray-700 p-2 bg-gray-100">Action</th>
                 </tr>
             </thead>
             <tbody class="align-baseline">
-                <tr>
+                <!-- <tr>
                     <td>1</td>
                     <td>Reihan Agam</td>
                     <td>reihanagam7@gmail.com</td>
@@ -25,7 +27,7 @@
                             <i class="fa fa-trash w-8"></i>
                         </a>
                     </td>
-                </tr>
+                </tr> -->
             </tbody>
         </table>
     </div>

@@ -12,30 +12,32 @@ $(function() {
             type: "GET"
         },
         columns: [{
-            data: "no",
-            searchable: false,
-            orderable: false,
-            render: function(data, type, row, meta)
-            {
-                return meta.row + meta.settings._iDisplayStart + 1;
-            }
+                data: "no",
+                searchable: false,
+                orderable: false,
+                render: function(data, type, row, meta)
+                {
+                    return meta.row + meta.settings._iDisplayStart + 1
+                }
             },
             {
-                data:
+                data: "first_name"
             },
             {
-                data:
+                data: "last_name"
             },
             {
-                data:
+                data: "age"
             },
             {
-                data:
+                data: "gender"
             },
             {
-                data:
-            }
-            ]
+                data: "username"
+            },
+            {
+                data: "email"
+            }]
     });
 
     let svg1 = $("#svg-1");
@@ -43,10 +45,6 @@ $(function() {
     let svg3 = $("#svg-3");
 
     let count_admin_group_menu = $("[name='count_admin_group_menu'").val();
-
-    let child_nav_admin = document.getElementById("child-nav-admin");
-
-    let chevron_right_nav = $("#chevron-right-nav");
 
     for (var i = 0; i <= count_admin_group_menu; i++)
     {
@@ -69,6 +67,8 @@ $(function() {
         });
     }
 
+    let child_nav_admin = document.getElementById("child-nav-admin");
+    let chevron_right_nav = $("#chevron-right-nav");
 
     $(document).on("click", "#btn-nav-admin", function() {
         if(child_nav_admin.style.maxHeight)
