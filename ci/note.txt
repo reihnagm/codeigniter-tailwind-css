@@ -1,0 +1,1 @@
+- use Postgre SQL in Codeigniter, table case sensitive must be lowecase typing
