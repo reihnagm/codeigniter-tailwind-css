@@ -1,8 +1,41 @@
 $(function() {
 
-    $('#all-users-datatable').DataTable({
+    $('#all-users-datatables').DataTable({
         dom: '"<"flex items-center"<"flex-grow items-center w-2/4"l><"flex flex-grow items-center w-2/4 justify-end"f>><"w-full"rt><"flex items-center"<"flex-grow items-center w-2/4"i><"flex flex-grow items-center w-2/4 justify-end"p>>',
         responsive: true,
+        serverSide: true,
+        processing: true,
+        ajax:
+        {
+            url: "admin/all-users-datatables",
+            dataType: "JSON",
+            type: "GET"
+        },
+        columns: [{
+            data: "no",
+            searchable: false,
+            orderable: false,
+            render: function(data, type, row, meta)
+            {
+                return meta.row + meta.settings._iDisplayStart + 1;
+            }
+            },
+            {
+                data:
+            },
+            {
+                data:
+            },
+            {
+                data:
+            },
+            {
+                data:
+            },
+            {
+                data:
+            }
+            ]
     });
 
     let svg1 = $("#svg-1");
@@ -12,8 +45,6 @@ $(function() {
     let count_admin_group_menu = $("[name='count_admin_group_menu'").val();
 
     let child_nav_admin = document.getElementById("child-nav-admin");
-
-
 
     let chevron_right_nav = $("#chevron-right-nav");
 

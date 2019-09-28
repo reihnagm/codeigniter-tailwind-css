@@ -39,6 +39,11 @@ class AdminController extends Master_Controller
         $this->load->view('master_admin/footer');
     }
 
+	public function user_datatables()
+	{
+		
+	}
+
     public function logout()
     {
         session_destroy();

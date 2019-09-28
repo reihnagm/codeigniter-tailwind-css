@@ -13,6 +13,9 @@ $route['logout']['POST'] = 'auth/LogoutController/logout';
 // ADMIN
 $route['admin']['GET'] = 'admin/AdminController/index';
 
+// ADMIN DATATABLES
+$route['admin/all-users-datatables']['GET'] = 'admin/AdminController/user_datatables';
+
 // ADMIN PERMISSIONS / USER
 $route['admin/permissions/user']['GET'] = 'admin/AdminController/permissions_user';
 
