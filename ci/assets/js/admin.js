@@ -8,43 +8,30 @@ $(function() {
     let svg1 = $("#svg-1");
     let svg2 = $("#svg-2");
     let svg3 = $("#svg-3");
-    let child_permissions_admin = document.getElementById("child-permissions-admin");
-    let child_settings_admin = document.getElementById("child-settings-admin");
+
+    let content_admin_dropdown = document.getElementById("content-admin-dropdown-1");
     let child_nav_admin = document.getElementById("child-nav-admin");
 
     let chevron_right_permissions = $("#chevron-right-permissions");
     let chevron_right_settings = $("#chevron-right-settings");
     let chevron_right_nav = $("#chevron-right-nav");
 
-    $(document).on("click", "#btn-settings-admin", function() {
-        if(child_settings_admin.style.maxHeight)
+    $(document).on("click", "#btn-admin-dropdown-1", function() {
+        if(content_admin_dropdown.style.maxHeight)
         {
             chevron_right_settings.removeClass("fa-chevron-down");
             chevron_right_settings.addClass("fa-chevron-right");
-            child_settings_admin.style.maxHeight = null;
+            content_admin_dropdown.style.maxHeight = null;
         }
         else
         {
             chevron_right_settings.removeClass("fa-chevron-right");
             chevron_right_settings.addClass("fa-chevron-down");
-            child_settings_admin.style.maxHeight =  child_settings_admin.scrollHeight + "px";
+            content_admin_dropdown.style.maxHeight =  content_admin_dropdown.scrollHeight + "px";
         }
     });
 
-    $(document).on("click", "#btn-permissions-admin", function() {
-        if(child_permissions_admin.style.maxHeight)
-        {
-            chevron_right_permissions.removeClass("fa-chevron-down");
-            chevron_right_permissions.addClass("fa-chevron-right");
-            child_permissions_admin.style.maxHeight = null;
-        }
-        else
-        {
-            chevron_right_permissions.removeClass("fa-chevron-right");
-            chevron_right_permissions.addClass("fa-chevron-down");
-            child_permissions_admin.style.maxHeight =  child_permissions_admin.scrollHeight + "px";
-        }
-    });
+
 
     $(document).on("click", "#btn-nav-admin", function() {
         if(child_nav_admin.style.maxHeight)

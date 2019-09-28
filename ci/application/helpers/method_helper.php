@@ -45,13 +45,17 @@ function get_menus_admin()
         $CI->db->order_by("a.admin_menu_group_id desc");
         $menus_child = $CI->db->get()->result();
 
+        $temp .= '<div id="content-admin-dropdown-'.$index_parent.'" class="overflow-hidden bg-pink-600">';
+
         foreach ($menus_child as $menu_child):
-            $temp .=    '<div id="content-admin-dropdown-'.$index_parent.'" class="overflow-hidden bg-pink-600">
-                            <a href="admin/'.$menu_child->child_href.'" target="_blank" class="hover:text-pink-300 font-medium inline-block text-white my-1 py-1 mx-4">
-                                <i class="'.$menu_child->child_icon.' w-5"></i> '.$menu_child->child_name.'
-                            </a>
-                        </div>';
+            $temp .=        '<div>
+                                <a href="admin/'.$menu_child->child_href.'" target="_blank" class="hover:text-pink-300 font-medium inline-block text-white my-1 py-1 mx-4">
+                                    <i class="'.$menu_child->child_icon.' w-5"></i> '.$menu_child->child_name.'
+                                </a>
+                            </div>';
         endforeach;
+
+        $temp .= '</div>';
 
     endforeach;
 

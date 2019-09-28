@@ -8,7 +8,6 @@
                 </a>
             </div>
 
-
             <?php echo $data; ?>
 
             <!-- <div class="block">

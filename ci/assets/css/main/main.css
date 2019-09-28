@@ -1,11 +1,3 @@
-#child-settings-admin,
-#child-permissions-admin,
-#child-nav-admin
-{
-    max-height: 0;
-    transition: max-height 0.2s ease-out;
-}
-
 #child-nav-admin
 {
     top: 100%;
