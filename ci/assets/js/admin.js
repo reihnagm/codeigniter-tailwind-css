@@ -1,4 +1,10 @@
 $(function() {
+
+    $('#all-users-datatable').DataTable({
+        dom: '"<"flex items-center"<"flex-grow items-center w-2/4"l><"flex flex-grow items-center w-2/4 justify-end"f>><"w-full"rt><"flex items-center"<"flex-grow items-center w-2/4"i><"flex flex-grow items-center w-2/4 justify-end"p>>',
+        responsive: true,
+    });
+
     let svg1 = $("#svg-1");
     let svg2 = $("#svg-2");
     let svg3 = $("#svg-3");
@@ -91,4 +97,9 @@ $(function() {
             svg3.addClass("hidden");
         }
     });
+
+
+
+
+
 });
