@@ -1,3 +1,5 @@
+<input type="hidden" name="count_admin_group_menu" value="<?php echo get_menus_admin_count(); ?>">
+
 <div id="sidebar" class="bg-pink-500 w-1/4">
     <nav id="nav-admin" class="px-6 pt-6 overflow-y-auto text-base">
         <div class="mb-10">

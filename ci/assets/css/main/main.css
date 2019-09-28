@@ -1,3 +1,13 @@
+.max-height-0
+{
+    max-height: 0;
+}
+
+.max-height-with-transition
+{
+    transition: max-height 0.2s ease-in-out;
+}
+
 #child-nav-admin
 {
     top: 100%;

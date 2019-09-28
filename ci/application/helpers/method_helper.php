@@ -13,6 +13,22 @@ function dd($data)
 }
 
 
+function get_menus_admin_count()
+{
+    $CI =& get_instance();
+    $CI->load->database();
+
+    $CI->db->distinct();
+    $CI->db->select("a.name parent_name, a.icon parent_icon, a.id parent_id");
+    $CI->db->from("tbl_app_admin_menu_group a");
+    $CI->db->join("tbl_app_admin_menu b",
+    "a.id = b.admin_menu_group_id","inner");
+    $CI->db->order_by("a.id");
+    $count = $CI->db->count_all_results();
+
+    return $count;
+}
+
 function get_menus_admin()
 {
     $CI =& get_instance();
@@ -45,10 +61,10 @@ function get_menus_admin()
         $CI->db->order_by("a.admin_menu_group_id desc");
         $menus_child = $CI->db->get()->result();
 
-        $temp .= '<div id="content-admin-dropdown-'.$index_parent.'" class="overflow-hidden bg-pink-600">';
+        $temp .= '<div id="content-admin-dropdown-'.$index_parent.'" class="overflow-hidden max-height-0 max-height-with-transition bg-pink-600">';
 
         foreach ($menus_child as $menu_child):
-            $temp .=        '<div>
+            $temp .=        '<div class="block">
                                 <a href="admin/'.$menu_child->child_href.'" target="_blank" class="hover:text-pink-300 font-medium inline-block text-white my-1 py-1 mx-4">
                                     <i class="'.$menu_child->child_icon.' w-5"></i> '.$menu_child->child_name.'
                                 </a>
