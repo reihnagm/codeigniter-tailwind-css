@@ -1,1 +1,2 @@
 - use Postgre SQL in Codeigniter, table case sensitive must be lowecase typing
+- Tips: use Backend or ServerSide to manipulate data, if use frontend to manipulate could be lagging or crash.    

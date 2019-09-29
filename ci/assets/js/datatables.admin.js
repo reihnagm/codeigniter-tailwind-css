@@ -69,11 +69,11 @@ $(function() {
         for (let i = 0; i <= count_user_datatables; i++)
         {
             $(document).on("click", "#edit-user-datatables-"+i, function(){
-
+                
             });
 
             $(document).on("click", "#destroy-user-datatables-"+i, function(){
-                
+
             });
         }
 });

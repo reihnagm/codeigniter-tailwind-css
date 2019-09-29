@@ -127,6 +127,11 @@ class AdminController extends Master_Controller
 		]);
 	}
 
+	private function ()
+	{
+
+	}
+
 	private function total_user_datatables()
 	{
 		$search = $this->input->get("search")["value"];

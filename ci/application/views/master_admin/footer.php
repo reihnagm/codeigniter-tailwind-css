@@ -16,5 +16,8 @@
     <!-- ADMIN DATATABLES JS -->
     <script src="<?php echo base_url('assets/js/datatables.admin.js') ?>"></script>
 
+    <!-- ADMIN MODAL -->
+    <script src="<?php echo base_url('assets/js/modal.admin.js') ?>"></script>
+
     </body>
 </html>

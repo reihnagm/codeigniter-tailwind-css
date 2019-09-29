@@ -8,6 +8,17 @@
     transition: max-height 0.2s ease-in-out;
 }
 
+.modal
+{
+    transition: opacity 0.25s ease;
+}
+
+body.modal-active
+{
+    overflow-x: hidden;
+    overflow-y: visible !important;
+}
+
 .wrapper-loader
 {
     top: 0;
