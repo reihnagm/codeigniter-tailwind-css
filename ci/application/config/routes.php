@@ -23,6 +23,9 @@ $route['admin/change-password']['GET'] = 'admin/AdminController/change_password'
 $route['admin/privileges']['GET'] = 'admin/AdminController/privileges';
 
 
+// ADMIN EDIT DATATABLES
+$route['admin/edit-user-datatables'] = 'admin/AdminController/edit_user_datatables';
+
 $route['default_controller'] = 'home/HomeController';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

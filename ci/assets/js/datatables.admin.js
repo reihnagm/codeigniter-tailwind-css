@@ -67,5 +67,12 @@ $(function() {
 
 function edit_user_datatables(id)
 {
-    
+    $.get('admin/edit-user-datatables', { id: id })
+    .done(function(data) {
+
+    })
+}
+
+function update_user_dataables(id)
+{
 }
