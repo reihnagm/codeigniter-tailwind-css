@@ -107,6 +107,13 @@ class AdminController extends Master_Controller
 			$row['created_at'] = date("M jS, Y", strtotime($user->created_at));
 			$row['updated_at'] = date("M jS, Y", strtotime($user->updated_at));
 
+			$row['option'] = 	'<a href="javascript:void(0)" class="hover:text-pink-300">
+									<i class="fas fa-edit w-8"></i>
+								</a>
+								<a href="javascript:void(0)" class="hover:text-pink-300">
+									<i class="fa fa-trash w-8"></i>
+								</a>';
+
 			$data[] = $row;
 		endforeach;
 
