@@ -5,6 +5,9 @@
         <div class="loader"></div>
     </div>
 
+    <!-- COUNT USER DATATABLES -->
+    <input type="hidden" name="count_user_datatables" value="<?php echo get_user_datatables_count(); ?>">
+
     <div class="markdown mt-24 mb-6 px-6 max-w-3xl">
         <table id="all-users-datatables" class="w-full text-left table-collapse">
             <thead>
@@ -23,7 +26,7 @@
             </thead>
             <tbody class="align-baseline">
                 <!-- <tr>
-                    
+
                     <td class="p-2 border-t border-gray-300 text-xs whitespace-nowrap">
                         <a href="javascript:void(0)" class="hover:text-pink-300">
                             <i class="fas fa-edit w-8"></i>

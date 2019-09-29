@@ -63,7 +63,7 @@ class AdminController extends Master_Controller
 		if(!empty($search))
 		{
 
-			$sql = "SELECT a.first_name, a.last_name, a.username, a.email, a.age, a.gender, a.created_at, a.updated_at
+			$sql = "SELECT a.id, a.first_name, a.last_name, a.username, a.email, a.age, a.gender, a.created_at, a.updated_at
 			FROM tbl_users a
 			WHERE a.first_name LIKE '%{$search}%'
 			OR a.last_name LIKE '%{$search}%'
@@ -81,7 +81,7 @@ class AdminController extends Master_Controller
 		}
 		else
 		{
-			$this->db->select("a.first_name, a.last_name, a.username, a.age, a.gender, a.email, a.created_at, a.updated_at");
+			$this->db->select("a.id, a.first_name, a.last_name, a.username, a.age, a.gender, a.email, a.created_at, a.updated_at");
 			$this->db->from("tbl_users a");
 
 			if ($length > 0)
@@ -97,6 +97,7 @@ class AdminController extends Master_Controller
 		$index = 1;
 
 		foreach($users as $user):
+
 			$row['no'] = $index++;
 			$row['first_name'] = $user->first_name;
 			$row['last_name'] = $user->last_name;
@@ -108,13 +109,14 @@ class AdminController extends Master_Controller
 			$row['updated_at'] = date("M jS, Y", strtotime($user->updated_at));
 
 			$row['option'] = 	'<a href="javascript:void(0)" class="hover:text-pink-300">
-									<i class="fas fa-edit w-8"></i>
+									<i id="edit-user-datatables-'.$user->id.'" class="fas fa-edit w-8"></i>
 								</a>
 								<a href="javascript:void(0)" class="hover:text-pink-300">
-									<i class="fa fa-trash w-8"></i>
+									<i id="destroy-user-datatables-'.$user->id.'" class="fa fa-trash w-8"></i>
 								</a>';
 
 			$data[] = $row;
+
 		endforeach;
 
 		echo json_encode([
@@ -144,7 +146,7 @@ class AdminController extends Master_Controller
 		}
 		else
 		{
-			$this->db->select("a.first_name, a.last_name, a.username, a.age, a.gender, a.email, a.created_at, a.updated_at");
+			$this->db->select("a.id, a.first_name, a.last_name, a.username, a.age, a.gender, a.email, a.created_at, a.updated_at");
 			$this->db->from("tbl_users a");
 
 			return $this->db->count_all_results();
@@ -170,7 +172,7 @@ class AdminController extends Master_Controller
 		}
 		else
 		{
-			$this->db->select("a.first_name, a.last_name, a.username, a.age, a.gender, a.email, a.created_at, a.updated_at");
+			$this->db->select("a.id, a.first_name, a.last_name, a.username, a.age, a.gender, a.email, a.created_at, a.updated_at");
 			$this->db->from("tbl_users a");
 
 			return $this->db->count_all_results();

@@ -4,7 +4,7 @@ $(function() {
     let svg2 = $("#svg-2");
     let svg3 = $("#svg-3");
 
-    let count_admin_group_menu = $("[name='count_admin_group_menu'").val();
+    let count_admin_group_menu = $("[name='count_admin_group_menu']").val();
 
     for (var i = 0; i <= count_admin_group_menu; i++)
     {

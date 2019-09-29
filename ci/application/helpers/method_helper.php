@@ -29,6 +29,19 @@ function get_menus_admin_count()
     return $count;
 }
 
+function get_user_datatables_count()
+{
+    $CI =& get_instance();
+    $CI->load->database();
+
+    $CI->db->select("*");
+    $CI->db->from("tbl_users");
+
+    $count = $CI->db->count_all_results();
+
+    return $count;
+}
+
 function get_menus_admin()
 {
     $CI =& get_instance();
