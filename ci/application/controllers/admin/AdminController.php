@@ -109,10 +109,10 @@ class AdminController extends Master_Controller
 			$row['updated_at'] = date("M jS, Y", strtotime($user->updated_at));
 
 			$row['option'] = 	'<a href="javascript:void(0)" class="hover:text-pink-300">
-									<i id="edit-user-datatables-'.$user->id.'" class="fas fa-edit w-8"></i>
+									<i onclick="edit_user_datatables('.$user->id.')" id="edit-user-datatables-'.$user->id.'" class="fas fa-edit w-8"></i>
 								</a>
 								<a href="javascript:void(0)" class="hover:text-pink-300">
-									<i id="destroy-user-datatables-'.$user->id.'" class="fa fa-trash w-8"></i>
+									<i onclick="destroy_user_datatables('.$user->id.')" id="destroy-user-datatables-'.$user->id.'" class="fa fa-trash w-8"></i>
 								</a>';
 
 			$data[] = $row;
@@ -126,12 +126,7 @@ class AdminController extends Master_Controller
 			"data" => $data
 		]);
 	}
-
-	private function ()
-	{
-
-	}
-
+	
 	private function total_user_datatables()
 	{
 		$search = $this->input->get("search")["value"];
