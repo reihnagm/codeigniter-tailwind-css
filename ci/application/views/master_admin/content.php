@@ -16,6 +16,8 @@
                     <th class="text-sm font-semibold text-gray-700 p-2 bg-gray-100">Gender</th>
                     <th class="text-sm font-semibold text-gray-700 p-2 bg-gray-100">Username</th>
                     <th class="text-sm font-semibold text-gray-700 p-2 bg-gray-100">Email</th>
+                    <th class="text-sm font-semibold text-gray-700 p-2 bg-gray-100">Join Date</th>
+                    <th class="text-sm font-semibold text-gray-700 p-2 bg-gray-100">Update Date</th>
                 </tr>
             </thead>
             <tbody class="align-baseline">

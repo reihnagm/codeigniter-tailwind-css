@@ -50,7 +50,9 @@ class AdminController extends Master_Controller
 			2 => "username",
 			3 => "age",
 			4 => "gender",
-			5 => "email"
+			5 => "email",
+			6 => "created_at",
+			7 => "updated_at"
  		];
 
 		$draw = $this->input->get("draw");
@@ -61,7 +63,7 @@ class AdminController extends Master_Controller
 		if(!empty($search))
 		{
 
-			$sql = "SELECT a.first_name, a.last_name, a.username, a.email, a.age, a.gender
+			$sql = "SELECT a.first_name, a.last_name, a.username, a.email, a.age, a.gender, a.created_at, a.updated_at
 			FROM tbl_users a
 			WHERE a.first_name LIKE '%{$search}%'
 			OR a.last_name LIKE '%{$search}%'
@@ -79,7 +81,7 @@ class AdminController extends Master_Controller
 		}
 		else
 		{
-			$this->db->select("a.first_name, a.last_name, a.username, a.age, a.gender, a.email");
+			$this->db->select("a.first_name, a.last_name, a.username, a.age, a.gender, a.email, a.created_at, a.updated_at");
 			$this->db->from("tbl_users a");
 
 			if ($length > 0)
@@ -92,13 +94,18 @@ class AdminController extends Master_Controller
 
 		$data = [];
 
+		$index = 1;
+
 		foreach($users as $user):
+			$row['no'] = $index++;
 			$row['first_name'] = $user->first_name;
 			$row['last_name'] = $user->last_name;
 			$row['username'] = $user->username;
 			$row['age'] = $user->age;
 			$row['gender'] = $user->gender;
 			$row['email'] = $user->email;
+			$row['created_at'] = $user->created_at;
+			$row['updated_at'] = $user->updated_at;
 
 			$data[] = $row;
 		endforeach;
@@ -130,7 +137,7 @@ class AdminController extends Master_Controller
 		}
 		else
 		{
-			$this->db->select("a.first_name, a.last_name, a.username, a.age, a.gender, a.email");
+			$this->db->select("a.first_name, a.last_name, a.username, a.age, a.gender, a.email, a.created_at, a.updated_at");
 			$this->db->from("tbl_users a");
 
 			return $this->db->count_all_results();
@@ -156,7 +163,7 @@ class AdminController extends Master_Controller
 		}
 		else
 		{
-			$this->db->select("a.first_name, a.last_name, a.username, a.age, a.gender, a.email");
+			$this->db->select("a.first_name, a.last_name, a.username, a.age, a.gender, a.email, a.created_at, a.updated_at");
 			$this->db->from("tbl_users a");
 
 			return $this->db->count_all_results();

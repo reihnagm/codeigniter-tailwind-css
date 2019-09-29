@@ -14,10 +14,6 @@ $(function() {
                     data: "no",
                     searchable: false,
                     orderable: false,
-                    render: function(data, type, row, meta)
-                    {
-                        return meta.row + meta.settings._iDisplayStart + 1
-                    }
                 },
                 {
                     data: "first_name"
@@ -36,7 +32,14 @@ $(function() {
                 },
                 {
                     data: "email"
-                }]
+                },
+                {
+                    data: "created_at",
+                },
+                {
+                    data: "updated_at"
+                }
+            ]
         }).on('processing.dt', function(e, settings, processing) {
             $(".wrapper-loader").css('display', processing ? 'block' : 'none');
             $(".loader").css('display', processing ? 'block' : 'none');

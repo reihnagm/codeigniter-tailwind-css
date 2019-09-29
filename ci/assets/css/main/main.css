@@ -36,7 +36,7 @@
     display: block;
     width: 0;
     height: 0;
-    border: 30px solid #ed64a6;
+    border: 30px solid #e5e57f;
     border-radius: 50%;
     border-right-color: transparent;
     position: absolute;
@@ -47,7 +47,7 @@
 
 .loader:after
 {
-    border-color: #ed64a6;
+    border-color: #e5e57f;
     border-top-color: transparent;
     border-right-color: transparent;
     animation: bottomchomp 1s ease-in-out infinite, movechomp 3s linear infinite;
