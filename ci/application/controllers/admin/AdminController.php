@@ -104,8 +104,8 @@ class AdminController extends Master_Controller
 			$row['age'] = $user->age;
 			$row['gender'] = $user->gender;
 			$row['email'] = $user->email;
-			$row['created_at'] = $user->created_at;
-			$row['updated_at'] = $user->updated_at;
+			$row['created_at'] = date("M jS, Y", strtotime($user->created_at));
+			$row['updated_at'] = date("M jS, Y", strtotime($user->updated_at));
 
 			$data[] = $row;
 		endforeach;
