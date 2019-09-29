@@ -1,5 +1,10 @@
 <div class="min-h-screen w-3/4">
 
+    <!-- LOADER PAC-MAN ^_^ -->
+    <div class="wrapper-loader fixed">
+        <div class="loader"></div>
+    </div>
+
     <div class="markdown mt-24 mb-6 px-6 max-w-3xl">
         <table id="all-users-datatables" class="w-full text-left table-collapse">
             <thead>

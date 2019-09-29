@@ -13,5 +13,8 @@
     <!-- ADMIN JS -->
     <script src="<?php echo base_url('assets/js/admin.js') ?>"></script>
 
+    <!-- ADMIN DATATABLES JS -->
+    <script src="<?php echo base_url('assets/js/datatables.admin.js') ?>"></script>
+
     </body>
 </html>

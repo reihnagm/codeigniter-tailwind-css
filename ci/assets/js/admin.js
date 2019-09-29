@@ -1,45 +1,5 @@
 $(function() {
 
-    $('#all-users-datatables').DataTable({
-        dom: '"<"flex items-center"<"flex-grow items-center w-2/4"l><"flex flex-grow items-center w-2/4 justify-end"f>><"w-full"rt><"flex items-center"<"flex-grow items-center w-2/4"i><"flex flex-grow items-center w-2/4 justify-end"p>>',
-        responsive: true,
-        serverSide: true,
-        processing: true,
-        ajax:
-        {
-            url: "admin/all-users-datatables",
-            dataType: "JSON",
-            type: "GET"
-        },
-        columns: [{
-                data: "no",
-                searchable: false,
-                orderable: false,
-                render: function(data, type, row, meta)
-                {
-                    return meta.row + meta.settings._iDisplayStart + 1
-                }
-            },
-            {
-                data: "first_name"
-            },
-            {
-                data: "last_name"
-            },
-            {
-                data: "age"
-            },
-            {
-                data: "gender"
-            },
-            {
-                data: "username"
-            },
-            {
-                data: "email"
-            }]
-    });
-
     let svg1 = $("#svg-1");
     let svg2 = $("#svg-2");
     let svg3 = $("#svg-3");
