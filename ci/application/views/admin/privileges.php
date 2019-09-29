@@ -2,7 +2,7 @@
     <div class="flex -mx-6">
 
         <!-- SIDEBAR -->
-        <?php components('master_admin/sidebar') ?>
+        <?php components('master_admin/sidebar', $navigation) ?>
 
         <!-- CHANGE PASSWORD -->
         <?php components('master_admin/privileges') ?>

@@ -16,14 +16,11 @@ $route['admin']['GET'] = 'admin/AdminController/index';
 // ADMIN DATATABLES
 $route['admin/all-users-datatables']['GET'] = 'admin/AdminController/user_datatables';
 
-// ADMIN PERMISSIONS / USER
-$route['admin/permissions/user']['GET'] = 'admin/AdminController/permissions_user';
-
 // ADMIN SETTINGS / CHANGE PASSWORD
-$route['admin/settings/change-password']['GET'] = 'admin/AdminController/change_password';
+$route['admin/change-password']['GET'] = 'admin/AdminController/change_password';
 
 // ADMIN SETTINGS / PRIVILEGES
-$route['admin/settings/privileges']['GET'] = 'admin/AdminController/privileges';
+$route['admin/privileges']['GET'] = 'admin/AdminController/privileges';
 
 
 $route['default_controller'] = 'home/HomeController';

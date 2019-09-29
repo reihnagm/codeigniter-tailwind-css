@@ -4,31 +4,33 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class AdminController extends Master_Controller
 {
 
+	public $get_menus_admin = [];
+
 	public function __construct()
 	{
 		parent::__construct();
+
+		$this->get_menus_admin["navigation"] = get_menus_admin();
 	}
 
 	public function index()
 	{
-		$data['navigation'] = get_menus_admin();
-
 		$this->load->view('master_admin/header');
-		$this->load->view('admin/index', $data);
+		$this->load->view('admin/index', $this->get_menus_admin);
 		$this->load->view('master_admin/footer');
 	}
 
     public function change_password()
     {
         $this->load->view('master_admin/header');
-		$this->load->view('admin/change_password');
+		$this->load->view('admin/change_password', $this->get_menus_admin);
         $this->load->view('master_admin/footer');
     }
 
     public function privileges()
     {
         $this->load->view('master_admin/header');
-        $this->load->view('admin/privileges');
+        $this->load->view('admin/privileges', $this->get_menus_admin);
         $this->load->view('master_admin/footer');
     }
 
