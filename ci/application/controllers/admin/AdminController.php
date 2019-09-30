@@ -132,10 +132,12 @@ class AdminController extends Master_Controller
 	{
 		$id = $this->input->get("id");
 
-		$this->db->select("a.id, a.first_name, a.last_name, a.username, a.age, a.gender, a.email, a.created_at, a.updated_at");
+		$this->db->select("a.id, a.first_name, a.last_name, a.username, a.email, a.gender,  a.age, a.created_at, a.updated_at");
 		$this->db->from("tbl_users a");
 		$this->db->where("a.id", $id);
 		$user = $this->db->get()->row_array();
+
+		$key = array_keys($user);
 
 		$temp =
 		'<div class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center">
@@ -150,7 +152,7 @@ class AdminController extends Master_Controller
 					<span class="text-sm">(Esc)</span>
 				</div>
 
-				<div class="modal-content py-4 text-left px-6">
+				<div class="modal-content py-4 text-left px-6 w-full">
 
 					<div class="flex justify-end items-center pb-3">
 						<div onclick="close_modal();" class="cursor-pointer z-50">
@@ -160,6 +162,67 @@ class AdminController extends Master_Controller
 						</div>
 					</div>
 
+					<div class="flex flex items-center">
+						<div class="w-1/2">
+							<div class="mb-4">
+							 	<label class="block text-gray-700 text-sm font-bold mb-2" for="'.$key[0].'">
+							   		'.$key[0].'
+							 	</label>
+							 	<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="'.$key[0].'" type="text" placeholder="'.$key[0].'" value="'.$user['id'].'" disabled>
+						   	</div>
+
+							<div class="mb-4">
+							 	<label class="block text-gray-700 text-sm font-bold mb-2" for="'.$key[1].'">
+							   		'.$key[1].'
+							 	</label>
+							 	<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="'.$key[1].'" type="text" placeholder="'.$key[1].'" value="'.$user['first_name'].'">
+						   	</div>
+
+							<div class="mb-4">
+							 	<label class="block text-gray-700 text-sm font-bold mb-2" for="'.$key[2].'">
+							   		'.$key[2].'
+							 	</label>
+							 	<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="'.$key[1].'" type="text" placeholder="'.$key[1].'" value="'.$user['last_name'].'">
+						   	</div>
+
+							<div class="mb-4">
+							 	<label class="block text-gray-700 text-sm font-bold mb-2" for="'.$key[3].'">
+							   		'.$key[3].'
+							 	</label>
+							 	<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="'.$key[3].'" type="text" placeholder="'.$key[3].'" value="'.$user['username'].'">
+						   	</div>
+						</div>
+
+						<div class="w-1/2">
+							<div class="mb-4">
+							 	<label class="block text-gray-700 text-sm font-bold mb-2" for="'.$key[4].'">
+							   		'.$key[4].'
+							 	</label>
+							 	<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="'.$key[4].'" type="text" placeholder="'.$key[4].'" value="'.$user['email'].'">
+						   	</div>
+
+							<div class="mb-4">
+							 	<label class="block text-gray-700 text-sm font-bold mb-2" for="'.$key[5].'">
+							   		'.$key[5].'
+							 	</label>
+							 	<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="'.$key[5].'" type="text" placeholder="'.$key[5].'" value="'.$user['gender'].'">
+						   	</div>
+
+							<div class="mb-4">
+							 	<label class="block text-gray-700 text-sm font-bold mb-2" for="'.$key[6].'">
+							   		'.$key[6].'
+							 	</label>
+							 	<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="'.$key[6].'" type="text" placeholder="'.$key[6].'" value="'.$user['age'].'">
+						   	</div>
+
+							<div class="mb-4">
+							 	<label class="block text-gray-700 text-sm font-bold mb-2" for="'.$key[7].'">
+							   		'.$key[7].'
+							 	</label>
+							 	<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="'.$key[7].'" type="text" placeholder="'.$key[7].'" value="'.$user['created_at'].'">
+						   	</div>
+						</div>
+					</div>
 
 					<div class="flex justify-end pt-2">
 						<button class="px-2 py-2 bg-pink-500 rounded-lg text-white hover:text-pink-300 mr-2">Submit</button>
