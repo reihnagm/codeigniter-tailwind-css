@@ -37,22 +37,10 @@
                         data: "last_name"
                     },
                     {
-                        data: "age"
-                    },
-                    {
-                        data: "gender"
-                    },
-                    {
                         data: "username"
                     },
                     {
                         data: "email"
-                    },
-                    {
-                        data: "created_at",
-                    },
-                    {
-                        data: "updated_at"
                     },
                     {
                         data: "option"

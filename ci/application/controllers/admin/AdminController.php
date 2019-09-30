@@ -50,21 +50,17 @@ class AdminController extends Master_Controller
 			1 => "first_name",
 			2 => "last_name",
 			3 => "username",
-			4 => "age",
-		 	5 => "gender",
-			6 => "email",
-			7 => "created_at",
-			8 => "updated_at"
+			4 => "email"
  		];
 
-		$draw = $this->input->get("draw");
-		$start = $this->input->get("start");
+		$draw 	= $this->input->get("draw");
+		$start 	= $this->input->get("start");
 		$length = $this->input->get("length");
 		$search = $this->input->get("search")["value"];
 
 		if(!empty($search))
 		{
-			$sql = "SELECT a.id, a.first_name, a.last_name, a.username, a.email, a.age, a.gender, a.created_at, a.updated_at
+			$sql = "SELECT a.id, a.first_name, a.last_name, a.username, a.email
 			FROM tbl_users a
 			WHERE a.first_name LIKE '%{$search}%'
 			OR a.last_name LIKE '%{$search}%'
@@ -82,7 +78,7 @@ class AdminController extends Master_Controller
 		}
 		else
 		{
-			$this->db->select("a.id, a.first_name, a.last_name, a.username, a.age, a.gender, a.email, a.created_at, a.updated_at");
+			$this->db->select("a.id, a.first_name, a.last_name, a.username, a.email");
 			$this->db->from("tbl_users a");
 
 			if ($length > 0)
@@ -103,11 +99,9 @@ class AdminController extends Master_Controller
 			$row['first_name'] = $user->first_name;
 			$row['last_name'] = $user->last_name;
 			$row['username'] = $user->username;
-			$row['age'] = $user->age;
-			$row['gender'] = $user->gender;
 			$row['email'] = $user->email;
-			$row['created_at'] = date("M jS, Y", strtotime($user->created_at));
-			$row['updated_at'] = date("M jS, Y", strtotime($user->updated_at));
+			// $row['created_at'] = date("M jS, Y", strtotime($user->created_at));
+			// $row['updated_at'] = date("M jS, Y", strtotime($user->updated_at));
 
 			$row['option'] =  	'<a href="javascript:void(0)" class="hover:text-pink-300">
 									<i onclick="edit_user_datatables('.$user->id.')" id="edit-user-datatables-'.$user->id.'" class="fas fa-edit w-8"></i>
@@ -259,7 +253,7 @@ class AdminController extends Master_Controller
 		}
 		else
 		{
-			$this->db->select("a.id, a.first_name, a.last_name, a.username, a.age, a.gender, a.email, a.created_at, a.updated_at");
+			$this->db->select("a.id, a.first_name, a.last_name, a.username, a.email");
 			$this->db->from("tbl_users a");
 
 			return $this->db->count_all_results();
@@ -285,7 +279,7 @@ class AdminController extends Master_Controller
 		}
 		else
 		{
-			$this->db->select("a.id, a.first_name, a.last_name, a.username, a.age, a.gender, a.email, a.created_at, a.updated_at");
+			$this->db->select("a.id, a.first_name, a.last_name, a.username, a.email");
 			$this->db->from("tbl_users a");
 
 			return $this->db->count_all_results();
