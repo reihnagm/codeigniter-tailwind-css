@@ -162,8 +162,8 @@ class AdminController extends Master_Controller
 						</div>
 					</div>
 
-					<div class="flex flex items-center">
-						<div class="w-1/2">
+					<div class="flex items-center">
+						<div class="w-1/2 px-3">
 							<div class="mb-4">
 							 	<label class="block text-gray-700 text-sm font-bold mb-2" for="'.$key[0].'">
 							   		'.$key[0].'
@@ -193,7 +193,7 @@ class AdminController extends Master_Controller
 						   	</div>
 						</div>
 
-						<div class="w-1/2">
+						<div class="w-1/2 px-3">
 							<div class="mb-4">
 							 	<label class="block text-gray-700 text-sm font-bold mb-2" for="'.$key[4].'">
 							   		'.$key[4].'
