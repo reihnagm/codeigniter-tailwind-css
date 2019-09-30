@@ -1,5 +1,9 @@
 <div class="min-h-screen w-3/4">
 
+
+    <!-- WRAPPER MODAL -->
+    <div id="wrapper-modal"></div>
+
     <!-- LOADER PAC-MAN ^_^ -->
     <div class="wrapper-loader fixed">
         <div class="loader"></div>

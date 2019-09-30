@@ -3,7 +3,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class AdminController extends Master_Controller
 {
-
 	public $get_menus_admin = [];
 
 	public function __construct()
@@ -43,16 +42,19 @@ class AdminController extends Master_Controller
 
 	public function user_datatables()
 	{
+
+		// DEFINE COLUMN
 		$columns =
 		[
-			0 => "first_name",
-			1 => "last_name",
-			2 => "username",
-			3 => "age",
-			4 => "gender",
-			5 => "email",
-			6 => "created_at",
-			7 => "updated_at"
+			0 => "no",
+			1 => "first_name",
+			2 => "last_name",
+			3 => "username",
+			4 => "age",
+		 	5 => "gender",
+			6 => "email",
+			7 => "created_at",
+			8 => "updated_at"
  		];
 
 		$draw = $this->input->get("draw");
@@ -62,7 +64,6 @@ class AdminController extends Master_Controller
 
 		if(!empty($search))
 		{
-
 			$sql = "SELECT a.id, a.first_name, a.last_name, a.username, a.email, a.age, a.gender, a.created_at, a.updated_at
 			FROM tbl_users a
 			WHERE a.first_name LIKE '%{$search}%'
@@ -108,7 +109,7 @@ class AdminController extends Master_Controller
 			$row['created_at'] = date("M jS, Y", strtotime($user->created_at));
 			$row['updated_at'] = date("M jS, Y", strtotime($user->updated_at));
 
-			$row['option'] = 	'<a href="javascript:void(0)" class="hover:text-pink-300">
+			$row['option'] =  	'<a href="javascript:void(0)" class="hover:text-pink-300">
 									<i onclick="edit_user_datatables('.$user->id.')" id="edit-user-datatables-'.$user->id.'" class="fas fa-edit w-8"></i>
 								</a>
 								<a href="javascript:void(0)" class="hover:text-pink-300">
@@ -129,16 +130,20 @@ class AdminController extends Master_Controller
 
 	public function edit_user_datatables()
 	{
-
 		$id = $this->input->get("id");
 
+		$this->db->select("a.id, a.first_name, a.last_name, a.username, a.age, a.gender, a.email, a.created_at, a.updated_at");
+		$this->db->from("tbl_users a");
+		$this->db->where("a.id", $id);
+		$user = $this->db->get()->row_array();
+
 		$temp =
-		'<div class="modal-'.$id.' opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center">
+		'<div class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center">
 			<div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
 
 			<div class="modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
 
-				<div class="modal-close absolute top-0 right-0 cursor-pointer flex flex-col items-center mt-4 mr-4 text-white text-sm z-50">
+				<div onclick="close_modal();" class="modal-close absolute top-0 right-0 cursor-pointer flex flex-col items-center mt-4 mr-4 text-white text-sm z-50">
 					<svg class="fill-current text-white" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
 						<path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
 					</svg>
@@ -149,33 +154,27 @@ class AdminController extends Master_Controller
 
 					<div class="flex justify-between items-center pb-3">
 						<p class="text-2xl font-bold">Simple Modal!</p>
-						<div class="modal-close cursor-pointer z-50">
+						<div onclick="close_modal();" class="cursor-pointer z-50">
 							<svg class="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
 								<path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
 							</svg>
 						</div>
 					</div>
 
-					<p>Modal content can go here</p>
-					<p>...</p>
-					<p>...</p>
-					<p>...</p>
-					<p>...</p>
 
 					<div class="flex justify-end pt-2">
 							<button class="px-4 bg-transparent p-3 rounded-lg text-indigo-500 hover:bg-gray-100 hover:text-indigo-400 mr-2">Action</button>
-							<button class="modal-close px-4 bg-indigo-500 p-3 rounded-lg text-white hover:bg-indigo-400">Close</button>
+							<button onclick="close_modal();" class="px-4 bg-indigo-500 p-3 rounded-lg text-white hover:bg-indigo-400">Close</button>
 					</div>
 
 				</div>
 
 			</div>
 
-		</div>'
-
+		</div>';
 
 		echo json_encode([
-			"data" => $temp
+			"temp" => $temp
 		]);
 	}
 
@@ -237,5 +236,4 @@ class AdminController extends Master_Controller
 
         redirect('/', 'refresh');
     }
-
 }

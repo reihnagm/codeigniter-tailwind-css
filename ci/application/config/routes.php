@@ -13,15 +13,14 @@ $route['logout']['POST'] = 'auth/LogoutController/logout';
 // ADMIN
 $route['admin']['GET'] = 'admin/AdminController/index';
 
-// ADMIN DATATABLES
-$route['admin/all-users-datatables']['GET'] = 'admin/AdminController/user_datatables';
-
 // ADMIN SETTINGS / CHANGE PASSWORD
 $route['admin/change-password']['GET'] = 'admin/AdminController/change_password';
 
 // ADMIN SETTINGS / PRIVILEGES
 $route['admin/privileges']['GET'] = 'admin/AdminController/privileges';
 
+// ADMIN ALL USERS DATATABLES
+$route['admin/all-users-datatables']['GET'] = 'admin/AdminController/user_datatables';
 
 // ADMIN EDIT DATATABLES
 $route['admin/edit-user-datatables'] = 'admin/AdminController/edit_user_datatables';
