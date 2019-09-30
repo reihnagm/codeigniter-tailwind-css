@@ -133,6 +133,9 @@ class AdminController extends Master_Controller
 
 		$key = array_keys($user);
 
+		$male_selected = $user['gender'] == "Male" ? "selected" : "";
+		$female_selected = $user['gender'] == "Female" ? "selected" : "";
+
 		$temp =
 		'<div class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center">
 			<div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
@@ -177,7 +180,7 @@ class AdminController extends Master_Controller
 							 	<label class="block text-gray-700 text-sm font-bold mb-2" for="'.$key[2].'">
 							   		'.$key[2].'
 							 	</label>
-							 	<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="'.$key[1].'" type="text" placeholder="'.$key[1].'" value="'.$user['last_name'].'">
+							 	<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="'.$key[2].'" type="text" placeholder="'.$key[2].'" value="'.$user['last_name'].'">
 						   	</div>
 
 							<div class="mb-4">
@@ -202,9 +205,8 @@ class AdminController extends Master_Controller
 							 	</label>
 								<div class="relative">
 						        <select class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
-						          <option>New Mexico</option>
-						          <option>Missouri</option>
-						          <option>Texas</option>
+						          <option '.$male_selected.'>Male</option>
+						          <option '.$female_selected.'>Female</option>
 						        </select>
 						        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
 						          <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
@@ -245,6 +247,23 @@ class AdminController extends Master_Controller
 		]);
 	}
 
+
+	private function update_user_datatables($id)
+	{
+		$data =
+		[
+			"test1" => $first_name,
+			"test2" => $last_name,
+			"test3" => $
+		];
+
+		$this->db->trans_start();
+		$this->db->set($data);
+		$this->db->where('id', $id);
+		$this->db->update('tbl_users');
+		$this->db->trans_complete();
+	}
+
 	private function total_user_datatables()
 	{
 		$search = $this->input->get("search")["value"];
@@ -257,8 +276,8 @@ class AdminController extends Master_Controller
 			OR a.last_name LIKE '%{$search}%'
 			OR a.username LIKE '%{$search}%'
 			OR a.email LIKE '%{$search}%'
-			OR CAST(a.age as TEXT) LIKE '{$search}%'
-			OR a.gender LIKE '%{$search}%'";
+			-- OR CAST(a.age as TEXT) LIKE '{$search}%' IF YOU DESERVED USE COLUMN AGE
+			-- OR a.gender LIKE '%{$search}%'";
 
 			return $this->db->query($sql)->row_array()["count"];
 		}
@@ -283,8 +302,8 @@ class AdminController extends Master_Controller
 			OR a.last_name LIKE '%{$search}%'
 			OR a.username LIKE '%{$search}%'
 			OR a.email LIKE '%{$search}%'
-			OR CAST(a.age as TEXT) LIKE '{$search}%'
-			OR a.gender LIKE '%{$search}%'";
+			-- OR CAST(a.age as TEXT) LIKE '{$search}%' IN POSTGRE INT CANNOT BE SEARCH, CONVERT TO TEXT
+			-- OR a.gender LIKE '%{$search}%'";
 
 			return $this->db->query($sql)->row_array()["count"];
 		}
