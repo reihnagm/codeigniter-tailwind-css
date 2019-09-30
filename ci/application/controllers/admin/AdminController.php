@@ -162,8 +162,8 @@ class AdminController extends Master_Controller
 
 
 					<div class="flex justify-end pt-2">
-							<button class="px-2 py-2 bg-pink-500 rounded-lg text-white hover:text-pink-300 mr-2">Submit</button>
-							<button onclick="close_modal();" class="px-2 py-2 bg-pink-500 rounded-lg text-white hover:text-pink-300">Close</button>
+						<button class="px-2 py-2 bg-pink-500 rounded-lg text-white hover:text-pink-300 mr-2">Submit</button>
+						<button onclick="close_modal();" class="px-2 py-2 bg-pink-500 rounded-lg text-white hover:text-pink-300">Close</button>
 					</div>
 
 				</div>
