@@ -25,6 +25,9 @@ $route['admin/all-users-datatables']['GET'] = 'admin/AdminController/user_datata
 // ADMIN EDIT DATATABLES
 $route['admin/edit-user-datatables'] = 'admin/AdminController/edit_user_datatables';
 
+// ADMIN UPDATE DATATABLES
+$route['admin/update-user-datatables'] = 'admin/AdminController/update_user_datatables';
+
 $route['default_controller'] = 'home/HomeController';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

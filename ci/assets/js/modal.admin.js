@@ -9,8 +9,8 @@
         });
     }
 
-    const overlay = document.querySelector('.modal-overlay');
-    overlay.addEventListener('click', toggleModal);
+    // const overlay = document.querySelector('.modal-overlay');
+    // overlay.addEventListener('click', toggleModal);
 
     var closemodal = document.querySelectorAll('.modal-close');
 
@@ -25,7 +25,8 @@
 
         var isEscape = false;
 
-        if ("key" in evt) {
+        if ("key" in evt)
+        {
             isEscape = (evt.key === "Escape" || evt.key === "Esc");
         }
         else

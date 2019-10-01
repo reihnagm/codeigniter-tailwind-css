@@ -56,11 +56,23 @@
     {
         $.get('admin/edit-user-datatables', { id: id })
         .done(function(data) {
-            console.log(data);
             let data_parse = JSON.parse(data);
             $("#wrapper-modal").html(data_parse.temp);
             toggleModal();
         })
+    }
+
+    function submit_update_user_datatables()
+    {
+        // let form_update_user_datatables = $("#form-edit-user-datatables")[0];
+
+        // SERIALIZE HAS 2 METHOD
+        // SERIALIZE ARRAY
+        // SERIALIZE
+
+        $.post('admin/update-user-datatables', $("#form-edit-user-datatables").serialize(), function(data) {
+            console.log(data);
+        });
     }
 
     function close_modal()
