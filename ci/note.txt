@@ -19,4 +19,5 @@
         - $.get("your/url", { key:value }, function(data) {
             console.log(data)
         })
-    
+
+- Tips: prop("disabled" , true) only works in select option 

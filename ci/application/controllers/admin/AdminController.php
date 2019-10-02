@@ -231,7 +231,8 @@ class AdminController extends Master_Controller
 				</div>
 
 				<div class="flex justify-end my-6">
-					<button onclick="submit_update_user_datatables();" class="px-2 py-2 bg-pink-500 rounded-lg text-white hover:text-pink-300 mr-2">Submit</button>
+					<input type="submit" onclick="submit_update_user_datatables(this);" class="px-2 py-2 bg-pink-500 rounded-lg text-white hover:text-pink-300 mr-2" value="Submit">
+					<img id="loader" class="hidden" src="'.base_url('assets/loader/loader.gif').'" />
 					<button onclick="close_modal();" class="px-2 py-2 bg-pink-500 rounded-lg text-white hover:text-pink-300">Close</button>
 				</div>
 
@@ -274,9 +275,19 @@ class AdminController extends Master_Controller
 		$data_param = [];
 
 		if ($this->db->trans_status() === FALSE)
-			$data_param["success"] = FALSE;
+		{
+			$data_param["valid"] = FALSE;
+			$data_param["title"] = "Update error !";
+ 			$data_param["desc"]  = "Something Wrong !";
+			$data_param["type"]  = "error";
+		}
 		else
-			$data_param["success"] = TRUE;
+		{
+			$data_param["valid"] = TRUE;
+			$data_param["title"] = "Update Success !";
+			$data_param["desc"] = "Successfully !";
+			$data_param["type"] = "success";
+		}
 
 		echo json_encode($data_param);
 	}

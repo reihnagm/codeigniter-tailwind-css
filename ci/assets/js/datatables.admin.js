@@ -62,19 +62,31 @@
         })
     }
 
-    function submit_update_user_datatables()
+    function submit_update_user_datatables(evt)
     {
-        $.post('admin/update-user-datatables', $("#form-edit-user-datatables").serialize(), (data) => {
-            let data_parse = JSON.parse(data);
-            if(data_parse.success)
-            {
+        // $("#loader").removeClass("hidden");
+        $(this).attr("disabled", "disabled");
 
-            }
-            else
-            {
-                
-            }
-        });
+        // $.post('admin/update-user-datatables', $("#form-edit-user-datatables").serialize(), (data) => {
+        //     let data_parse = JSON.parse(data);
+        //     if(data_parse.valid)
+        //     {
+        //         Swal.fire(
+        //             data_parse.title,
+        //             data_parse.desc,
+        //             data_parse.type
+        //         )
+        //         close_modal();
+        //     }
+        //     else
+        //     {
+        //         Swal.fire(
+        //             data_parse.title,
+        //             data_parse.desc,
+        //             data_parse.type
+        //         )
+        //     }
+        // });
     }
 
     function close_modal()
@@ -82,13 +94,13 @@
         toggleModal();
     }
 
-    // $(document).keydown(function(event){
-    //     var key = (event.keyCode ? event.keyCode : event.which);
-    //     if (key == 27)
-    //     {
-    //         toggleModal();
-    //     }
-    // });
+    $(document).keydown(function(event){
+        var key = (event.keyCode ? event.keyCode : event.which);
+        if (key == 27)
+        {
+            toggleModal();
+        }
+    });
 
     function toggleModal ()
     {
