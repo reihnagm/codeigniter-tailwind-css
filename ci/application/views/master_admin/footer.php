@@ -19,5 +19,8 @@
     <!-- ADMIN MODAL -->
     <script src="<?php echo base_url('assets/js/modal.admin.js') ?>"></script>
 
+    <!-- SWEETALERT2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+
     </body>
 </html>

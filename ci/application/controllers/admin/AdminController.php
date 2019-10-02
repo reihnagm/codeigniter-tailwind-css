@@ -165,7 +165,7 @@ class AdminController extends Master_Controller
 						 		<label class="block text-gray-700 text-sm font-bold mb-2" for="'.$key[0].'">
 						   		'.$key[0].'
 						 		</label>
-						 		<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="'.$key[0].'" name="'.$key[0].'" type="text" placeholder="'.$key[0].'" value="'.$user['id'].'" disabled>
+						 		<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="'.$key[0].'" name="'.$key[0].'" type="text" placeholder="'.$key[0].'" value="'.$user['id'].'" readonly>
 					   		</div>
 
 							<div class="block mx-3">
@@ -179,14 +179,14 @@ class AdminController extends Master_Controller
 						 		<label class="block text-gray-700 text-sm font-bold mb-2" for="'.$key[2].'">
 						   		'.$key[2].'
 						 		</label>
-						 		<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="'.$key[2].'" type="text" placeholder="'.$key[2].'" value="'.$user['last_name'].'">
+						 		<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="'.$key[2].'" type="text" placeholder="'.$key[2].'" name="'.$key[2].'" value="'.$user['last_name'].'">
 					   		</div>
 
 							<div class="block mx-3">
 							 	<label class="block text-gray-700 text-sm font-bold mb-2" for="'.$key[3].'">
 						   		'.$key[3].'
 						 		</label>
-						 		<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="'.$key[3].'" type="text" placeholder="'.$key[3].'" value="'.$user['username'].'">
+						 		<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="'.$key[3].'" type="text" placeholder="'.$key[3].'" name="'.$key[3].'" value="'.$user['username'].'">
 					   		</div>
 						</div>
 
@@ -195,7 +195,7 @@ class AdminController extends Master_Controller
 							 	<label class="block text-gray-700 text-sm font-bold mb-2" for="'.$key[4].'">
 							   		'.$key[4].'
 							 	</label>
-							 	<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="'.$key[4].'" type="text" placeholder="'.$key[4].'" value="'.$user['email'].'">
+							 	<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="'.$key[4].'" type="text" placeholder="'.$key[4].'" name="'.$key[4].'" value="'.$user['email'].'">
 						   	</div>
 
 							<div class="block mx-3">
@@ -203,7 +203,7 @@ class AdminController extends Master_Controller
 							   		'.$key[5].'
 							 	</label>
 								<div class="relative">
-						        <select class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-2 px-3 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
+						        <select name="'.$key[5].'" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-2 px-3 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
 						          <option '.$male_selected.'>Male</option>
 						          <option '.$female_selected.'>Female</option>
 						        </select>
@@ -216,21 +216,21 @@ class AdminController extends Master_Controller
 							 	<label class="block text-gray-700 text-sm font-bold mb-2" for="'.$key[6].'">
 							   		'.$key[6].'
 							 	</label>
-							 	<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="'.$key[6].'" type="text" placeholder="'.$key[6].'" value="'.$user['age'].'">
+							 	<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="'.$key[6].'" type="text" placeholder="'.$key[6].'" name="'.$key[6].'" value="'.$user['age'].'">
 						   	</div>
 
 							<div class="block mx-3">
 							 	<label class="block text-gray-700 text-sm font-bold mb-2" for="'.$key[7].'">
 							   		'.$key[7].'
 							 	</label>
-							 	<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="'.$key[7].'" type="text" placeholder="'.$key[7].'" value="'.$user['created_at'].'">
+							 	<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="'.$key[7].'" type="text" placeholder="'.$key[7].'" name="'.$key[7].'" value="'.$user['created_at'].'">
 						   	</div>
 						</div>
 					</form>
 
 				</div>
 
-				<div class="flex justify-end pt-2">
+				<div class="flex justify-end my-6">
 					<button onclick="submit_update_user_datatables();" class="px-2 py-2 bg-pink-500 rounded-lg text-white hover:text-pink-300 mr-2">Submit</button>
 					<button onclick="close_modal();" class="px-2 py-2 bg-pink-500 rounded-lg text-white hover:text-pink-300">Close</button>
 				</div>
@@ -247,20 +247,22 @@ class AdminController extends Master_Controller
 
 	public function update_user_datatables()
 	{
+		$id  = $this->input->post("id");
 		$first_name = $this->input->post("first_name");
 		$last_name = $this->input->post("last_name");
 		$username = $this->input->post("username");
 		$email = $this->input->post("email");
-
-		echo '<pre>';
-		die(var_dump($_POST));
+		$age = $this->input->post("age");
+		$gender = $this->input->post("gender");
 
 		$data =
 		[
 			"first_name" => $first_name,
 			"last_name" => $last_name,
 			"username" => $username,
-			"email" => $email
+			"email" => $email,
+			"age" => $age,
+			"gender" => $gender
 		];
 
 		$this->db->trans_start();
@@ -268,6 +270,15 @@ class AdminController extends Master_Controller
 		$this->db->where('id', $id);
 		$this->db->update('tbl_users');
 		$this->db->trans_complete();
+
+		$data_param = [];
+
+		if ($this->db->trans_status() === FALSE)
+			$data_param["success"] = FALSE;
+		else
+			$data_param["success"] = TRUE;
+
+		echo json_encode($data_param);
 	}
 
 	private function total_user_datatables()

@@ -64,14 +64,16 @@
 
     function submit_update_user_datatables()
     {
-        // let form_update_user_datatables = $("#form-edit-user-datatables")[0];
+        $.post('admin/update-user-datatables', $("#form-edit-user-datatables").serialize(), (data) => {
+            let data_parse = JSON.parse(data);
+            if(data_parse.success)
+            {
 
-        // SERIALIZE HAS 2 METHOD
-        // SERIALIZE ARRAY
-        // SERIALIZE
-
-        $.post('admin/update-user-datatables', $("#form-edit-user-datatables").serialize(), function(data) {
-            console.log(data);
+            }
+            else
+            {
+                
+            }
         });
     }
 
@@ -80,13 +82,13 @@
         toggleModal();
     }
 
-    $(document).keydown(function(event){
-        var key = (event.keyCode ? event.keyCode : event.which);
-        if (key == 27)
-        {
-            toggleModal();
-        }
-    });
+    // $(document).keydown(function(event){
+    //     var key = (event.keyCode ? event.keyCode : event.which);
+    //     if (key == 27)
+    //     {
+    //         toggleModal();
+    //     }
+    // });
 
     function toggleModal ()
     {
