@@ -75,6 +75,7 @@
                         data_parse.desc,
                         data_parse.type
                     )
+                    location.reload();
                     close_modal();
                 }
                 else
