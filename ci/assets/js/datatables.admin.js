@@ -64,29 +64,37 @@
 
     function submit_update_user_datatables(evt)
     {
-        // $("#loader").removeClass("hidden");
-        $(this).attr("disabled", "disabled");
 
-        // $.post('admin/update-user-datatables', $("#form-edit-user-datatables").serialize(), (data) => {
-        //     let data_parse = JSON.parse(data);
-        //     if(data_parse.valid)
-        //     {
-        //         Swal.fire(
-        //             data_parse.title,
-        //             data_parse.desc,
-        //             data_parse.type
-        //         )
-        //         close_modal();
-        //     }
-        //     else
-        //     {
-        //         Swal.fire(
-        //             data_parse.title,
-        //             data_parse.desc,
-        //             data_parse.type
-        //         )
-        //     }
-        // });
+        setTimeout(() => {
+            $.post('admin/update-user-datatables', $("#form-edit-user-datatables").serialize(), (data) => {
+                let data_parse = JSON.parse(data);
+                if(data_parse.valid)
+                {
+                    Swal.fire(
+                        data_parse.title,
+                        data_parse.desc,
+                        data_parse.type
+                    )
+                    close_modal();
+                }
+                else
+                {
+                    Swal.fire(
+                        data_parse.title,
+                        data_parse.desc,
+                        data_parse.type
+                    )
+                }
+            });
+        }, 400);
+
+        evt.innerHTML = '<img src="../ci/assets/loader/loader.gif" style="width: 25px;">';
+        evt.classList.add("cursor-not-allowed");
+        evt.classList.add("opacity-50");
+        evt.classList.remove("hover:text-pink-300");
+        evt.disabled = true;
+
+
     }
 
     function close_modal()

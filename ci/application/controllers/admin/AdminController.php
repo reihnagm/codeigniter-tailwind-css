@@ -231,8 +231,7 @@ class AdminController extends Master_Controller
 				</div>
 
 				<div class="flex justify-end my-6">
-					<input type="submit" onclick="submit_update_user_datatables(this);" class="px-2 py-2 bg-pink-500 rounded-lg text-white hover:text-pink-300 mr-2" value="Submit">
-					<img id="loader" class="hidden" src="'.base_url('assets/loader/loader.gif').'" />
+					<button type="submit" onclick="submit_update_user_datatables(this);" class="px-2 py-2 bg-pink-500 rounded-lg text-white hover:text-pink-300 mr-2">Submit</button>
 					<button onclick="close_modal();" class="px-2 py-2 bg-pink-500 rounded-lg text-white hover:text-pink-300">Close</button>
 				</div>
 
