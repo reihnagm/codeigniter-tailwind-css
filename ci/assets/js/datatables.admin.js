@@ -103,7 +103,7 @@
             });
         }, 400);
 
-        evt.innerHTML = '<img src="../ci/assets/loader/loader.gif" style="width: 25px;">';
+        evt.innerHTML = '<img src="'+base_url+'assets/loader/loader.gif" style="width: 25px;">';
         evt.classList.add("cursor-not-allowed");
         evt.classList.add("opacity-50");
         evt.classList.remove("hover:text-pink-300");
