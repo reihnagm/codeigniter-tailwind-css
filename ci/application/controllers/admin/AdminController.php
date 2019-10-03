@@ -9,6 +9,13 @@ class AdminController extends Master_Controller
 	{
 		parent::__construct();
 
+		// $this->get_temp_privileges();
+
+		$browser = $this->agent->browser();
+		// 
+		// echo '<pre>';
+		// die(var_dump($browser));
+
 		$this->get_menus_admin["navigation"] = get_menus_admin();
 	}
 
@@ -291,6 +298,31 @@ class AdminController extends Master_Controller
 		echo json_encode($data_param);
 	}
 
+	public function destroy_user_datatables($id)
+	{
+		$this->db->trans_start();
+		$this->db->where('id', $id);
+		$this->db->delete('tbl_users');
+		$this->db->trans_complete();
+
+		$data_param = [];
+
+		if ($this->db->trans_status() === FALSE)
+		{
+			$data_param["valid"] = FALSE;
+			$data_param["title"] = "Update error !";
+ 			$data_param["desc"]  = "Something Wrong !";
+			$data_param["type"]  = "error";
+		}
+		else
+		{
+			$data_param["valid"] = TRUE;
+			$data_param["title"] = "Update Success !";
+			$data_param["desc"] = "Successfully !";
+			$data_param["type"] = "success";
+		}
+	}
+
 	private function total_user_datatables()
 	{
 		$search = $this->input->get("search")["value"];
@@ -349,4 +381,26 @@ class AdminController extends Master_Controller
 
         redirect('/', 'refresh');
     }
+
+	public function get_temp_privileges()
+	{
+		$count = 0;
+		$result = "";
+
+		$this->db->select("a.name admin_menu_name, b.name admin_menu_group_name");
+		$this->db->from("tbl_app_admin_menu a");
+		$this->db->join("tbl_app_admin_menu_group b",
+		"a.admin_menu_group_id = b.id", "inner");
+		$this->db->order_by("a.id", "DESC");
+		$privileges = $this->db->get()->result_object();
+
+		die(var_dump($privileges));
+
+		foreach ($privileges as $privilege):
+			$count++;
+
+
+		endforeach;
+
+	}
 }

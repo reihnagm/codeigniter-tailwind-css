@@ -1,3 +1,11 @@
+    // CHECKING BROWSER
+    const user_agent = $("[name=user_agent]").val();
+
+    // GETTING BASE URL
+    const base_url = $("[name=base_url]").val();
+
+    let url = user_agent == "Firefox" ? "all-user-datatables" : "admin/all-user-datatables";
+
     $(function() {
             $('#all-users-datatables').DataTable({
                 dom: '"<"flex items-center"<"flex-grow items-center w-2/4"l><"flex flex-grow items-center w-2/4 justify-end"f>><"w-full"rt><"flex items-center"<"flex-grow items-center w-2/4"i><"flex flex-grow items-center w-2/4 justify-end"p>>',
@@ -5,7 +13,7 @@
                 serverSide: true,
                 ajax:
                 {
-                    url: "admin/all-users-datatables",
+                    url: base_url + "admin/all-user-datatables",
                     dataType: "JSON",
                     type: "GET"
                 },
@@ -54,7 +62,9 @@
 
     function edit_user_datatables(id)
     {
-        $.get('admin/edit-user-datatables', { id: id })
+        let url = user_agent == "Firefox" ? "edit-user-datatables" : "admin/edit-user-datatables";
+
+        $.get(base_url + "admin/edit-user-datatables", { id: id })
         .done(function(data) {
             let data_parse = JSON.parse(data);
             $("#wrapper-modal").html(data_parse.temp);
@@ -62,11 +72,15 @@
         })
     }
 
+    function destroy_user_datatables(id)
+    {
+        console.log(id);
+    }
+
     function submit_update_user_datatables(evt)
     {
-
         setTimeout(() => {
-            $.post('admin/update-user-datatables', $("#form-edit-user-datatables").serialize(), (data) => {
+            $.post(base_url + "admin/update-user-datatables", $("#form-edit-user-datatables").serialize(), (data) => {
                 let data_parse = JSON.parse(data);
                 if(data_parse.valid)
                 {
@@ -94,8 +108,6 @@
         evt.classList.add("opacity-50");
         evt.classList.remove("hover:text-pink-300");
         evt.disabled = true;
-
-
     }
 
     function close_modal()

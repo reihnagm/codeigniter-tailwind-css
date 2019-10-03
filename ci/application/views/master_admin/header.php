@@ -18,6 +18,8 @@
         <link rel="stylesheet" href="<?php echo base_url('assets/css/datatables/custom.tailwindcss.css'); ?>">
         <!-- MAIN CSS -->
         <link rel="stylesheet" href="<?php echo base_url('assets/css/main/main.css') ?>">
+        <!--  -->
+        <link rel="stylesheet" href="<?php echo base_url('assets/css/pace/pace.css') ?>">
         <title>Codeigniter - Tailwind CSS</title>
     </head>
     <body>

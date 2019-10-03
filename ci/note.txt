@@ -20,4 +20,6 @@
             console.log(data)
         })
 
-- Tips: prop("disabled" , true) only works in select option 
+- Tips: prop("disabled" , true) only works in select option
+- Tips: Align is Horizontal if flex-col but is Vertical if flex-row
+- Tips: if url not found the problem maybe is user agent different 
