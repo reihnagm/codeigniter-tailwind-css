@@ -12,7 +12,7 @@ class AdminController extends Master_Controller
 		// $this->get_temp_privileges();
 
 		$browser = $this->agent->browser();
-		// 
+		//
 		// echo '<pre>';
 		// die(var_dump($browser));
 
@@ -59,6 +59,9 @@ class AdminController extends Master_Controller
 			3 => "username",
 			4 => "email"
  		];
+
+		echo '<pre>';
+		die(var_dump($_REQUEST));
 
 		$draw 	= $this->input->get("draw");
 		$start 	= $this->input->get("start");
@@ -298,8 +301,13 @@ class AdminController extends Master_Controller
 		echo json_encode($data_param);
 	}
 
-	public function destroy_user_datatables($id)
+	public function destroy_user_datatables()
 	{
+		$id = $this->input->post("id");
+
+		echo '<pre>';
+		die(var_dump($id));
+
 		$this->db->trans_start();
 		$this->db->where('id', $id);
 		$this->db->delete('tbl_users');

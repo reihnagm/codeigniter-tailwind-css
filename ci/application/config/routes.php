@@ -25,6 +25,9 @@ $route['admin/all-user-datatables']['GET'] = 'admin/AdminController/user_datatab
 // ADMIN EDIT DATATABLES
 $route['admin/edit-user-datatables'] = 'admin/AdminController/edit_user_datatables';
 
+// ADMIN DESTROY DATATABLES
+$route['admin/destroy-user-datatables'] = 'admin/AdminController/destroy_user_datatables';
+
 // ADMIN UPDATE DATATABLES
 $route['admin/update-user-datatables'] = 'admin/AdminController/update_user_datatables';
 
