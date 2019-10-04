@@ -3,40 +3,38 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class AdminController extends Master_Controller
 {
-	public $get_menus_admin = [];
+	public $data_param = [];
 
 	public function __construct()
 	{
 		parent::__construct();
 
-		// $this->get_temp_privileges();
+		$data = [
+			"get_temp_privileges" => $this->get_temp_privileges(),
+			"get_menus_admin" => get_menus_admin()
+		];
 
-		$browser = $this->agent->browser();
-		//
-		// echo '<pre>';
-		// die(var_dump($browser));
-
-		$this->get_menus_admin["navigation"] = get_menus_admin();
+		$this->data_param["data"] = $data;
 	}
 
 	public function index()
 	{
 		$this->load->view('master_admin/header');
-		$this->load->view('admin/index', $this->get_menus_admin);
+		$this->load->view('admin/index', $this->data_param);
 		$this->load->view('master_admin/footer');
 	}
 
     public function change_password()
     {
         $this->load->view('master_admin/header');
-		$this->load->view('admin/change_password', $this->get_menus_admin);
+		$this->load->view('admin/change_password', $this->data_param);
         $this->load->view('master_admin/footer');
     }
 
     public function privileges()
     {
         $this->load->view('master_admin/header');
-        $this->load->view('admin/privileges', $this->get_menus_admin);
+        $this->load->view('admin/privileges', $this->data_param);
         $this->load->view('master_admin/footer');
     }
 
@@ -405,6 +403,7 @@ class AdminController extends Master_Controller
 	{
 		$count = 0;
 		$temp = "";
+		$group_name = ""; // PREVENT DOUBLE DATA
 
 		$this->db->select("a.name admin_menu_name, b.name admin_menu_group_name");
 		$this->db->from("tbl_app_admin_menu a");
@@ -413,16 +412,84 @@ class AdminController extends Master_Controller
 		$this->db->order_by("a.id", "DESC");
 		$privileges = $this->db->get()->result_object();
 
-		die(var_dump($privileges));
-
 		foreach ($privileges as $privilege):
 			$count++;
 
-			$temp .="";
+			$temp .=
+			'<thead>';
 
+			if($group_name != $privilege->admin_menu_group_name)
+			{
+				$group_name = $privilege->admin_menu_group_name;
+				$temp .=
+				'<tr>
+					<th class="text-sm font-semibold text-grey-darker p-2 bg-grey-lightest">'.strtoupper($group_name).'</th>
+				</tr>';
+			}
+
+			$temp .=
+			'</thead>';
+
+			$temp .=
+			'<tbody class="align-baseline">';
+
+			$temp .=
+			'<tr>
+				<td class="p-2 border-t border-grey-light whitespace-no-wrap">'.$privilege->admin_menu_name.'</td>
+				<td class="p-2 border-t border-grey-light whitespace-no-wrap">
+					<div class="trigger-checkbox-1 flex cursor-pointer items-center">
+						<span class="inline-block px-3">Create</span>
+						<div class="bg-pink-500 shadow w-6 h-6 p-1 rounded">
+							<input type="checkbox" class="hidden" checked>
+							<svg id="svg-1" class="hidden w-4 h-4 text-white" viewBox="0 0 172 172">
+								<g fill="none" stroke-width="none" stroke-miterlimit="10" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode:normal"><path d="M0 172V0h172v172z"/><path d="M145.433 37.933L64.5 118.8658 33.7337 88.0996l-10.134 10.1341L64.5 139.1341l91.067-91.067z" fill="currentColor" stroke-width="1"/>
+								</g>
+							</svg>
+						</div>
+					</div>
+				</td>
+				<td class="p-2 border-t border-grey-light whitespace-no-wrap">
+					<div class="trigger-checkbox-1 flex cursor-pointer items-center">
+						<span class="inline-block px-3">Read</span>
+						<div class="bg-pink-500 shadow w-6 h-6 p-1 rounded">
+							<input type="checkbox" class="hidden" checked>
+							<svg id="svg-1" class="hidden w-4 h-4 text-white" viewBox="0 0 172 172">
+								<g fill="none" stroke-width="none" stroke-miterlimit="10" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode:normal"><path d="M0 172V0h172v172z"/><path d="M145.433 37.933L64.5 118.8658 33.7337 88.0996l-10.134 10.1341L64.5 139.1341l91.067-91.067z" fill="currentColor" stroke-width="1"/>
+								</g>
+							</svg>
+						</div>
+					</div>
+				</td>
+				<td class="p-2 border-t border-grey-light whitespace-no-wrap">
+					<div class="trigger-checkbox-1 flex cursor-pointer items-center">
+						<span class="inline-block px-3">Update</span>
+						<div class="bg-pink-500 shadow w-6 h-6 p-1 rounded">
+							<input type="checkbox" class="hidden" checked>
+							<svg id="svg-1" class="hidden w-4 h-4 text-white" viewBox="0 0 172 172">
+								<g fill="none" stroke-width="none" stroke-miterlimit="10" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode:normal"><path d="M0 172V0h172v172z"/><path d="M145.433 37.933L64.5 118.8658 33.7337 88.0996l-10.134 10.1341L64.5 139.1341l91.067-91.067z" fill="currentColor" stroke-width="1"/>
+								</g>
+							</svg>
+						</div>
+					</div>
+				</td>
+				<td class="p-2 border-t border-grey-light whitespace-no-wrap">
+					<div class="trigger-checkbox-1 flex cursor-pointer items-center">
+						<span class="inline-block px-3">Delete</span>
+						<div class="bg-pink-500 shadow w-6 h-6 p-1 rounded">
+							<input type="checkbox" class="hidden" checked>
+							<svg id="svg-1" class="hidden w-4 h-4 text-white" viewBox="0 0 172 172">
+								<g fill="none" stroke-width="none" stroke-miterlimit="10" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode:normal"><path d="M0 172V0h172v172z"/><path d="M145.433 37.933L64.5 118.8658 33.7337 88.0996l-10.134 10.1341L64.5 139.1341l91.067-91.067z" fill="currentColor" stroke-width="1"/>
+								</g>
+							</svg>
+						</div>
+					</div>
+				</td>
+			</tr>';
+
+			$temp .=
+			'</tbody>';
 		endforeach;
 
 		return $temp;
-
 	}
 }

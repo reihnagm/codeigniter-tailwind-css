@@ -10,7 +10,7 @@
                 </a>
             </div>
 
-            <?php echo $data; ?>
+            <?php echo $data["get_menus_admin"]; ?>
 
             <!-- <div class="block">
                 <a id="btn-admin-trigger-dropdown-1" href="javascript:void(0)" class="px-2 -mx-2 py-1 inline-block hover:text-pink-300 font-medium text-white">

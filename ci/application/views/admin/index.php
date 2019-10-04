@@ -8,7 +8,7 @@
     <div class="flex -mx-6">
 
         <!-- SIDEBAR -->
-        <?php components('master_admin/sidebar', $navigation) ?>
+        <?php components('master_admin/sidebar', $data) ?>
 
         <!-- CONTENT -->
         <?php components('master_admin/content') ?>
