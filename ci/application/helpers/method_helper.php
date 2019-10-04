@@ -59,12 +59,13 @@ function get_menus_admin()
 
     foreach ($menus_parent as $menu_parent):
         $index_parent++;
-        $temp .=    '<div class="block">
-                        <a id="btn-admin-dropdown-'.$index_parent.'" href="javascript:void(0)" class="px-2 -mx-2 py-1 inline-block hover:text-pink-300 font-medium text-white">
-                            <i class="'.$menu_parent->parent_icon.' w-8"></i> '.ucfirst($menu_parent->parent_name).'
-                            <i id="chevron-right-admin-dropdown-'.$index_parent.'" class="ml-5 fas fa-chevron-right"></i>
-                        </a>
-                    </div>';
+        $temp .=
+         '<div class="block">
+            <a id="btn-admin-dropdown-'.$index_parent.'" href="javascript:void(0)" class="px-2 -mx-2 py-1 inline-block hover:text-pink-300 font-medium text-white">
+                <i class="'.$menu_parent->parent_icon.' w-8"></i> '.ucfirst($menu_parent->parent_name).'
+                <i id="chevron-right-admin-dropdown-'.$index_parent.'" class="ml-5 fas fa-chevron-right"></i>
+            </a>
+        </div>';
 
         $CI->db->select("a.name child_name, a.href child_href, a.icon child_icon");
         $CI->db->from("tbl_app_admin_menu a");
@@ -73,19 +74,22 @@ function get_menus_admin()
         $CI->db->order_by("a.admin_menu_group_id desc");
         $menus_child = $CI->db->get()->result();
 
-        $temp .= '<div id="content-admin-dropdown-'.$index_parent.'" class="overflow-hidden max-height-0 max-height-with-transition bg-pink-600">';
+        $temp .=
+        '<div id="content-admin-dropdown-'.$index_parent.'" class="overflow-hidden max-height-0 max-height-with-transition bg-pink-600">';
 
         $url = base_url();
 
         foreach ($menus_child as $menu_child):
-            $temp .=    '<div class="block">
-                            <a href="'.$url.'admin/'.$menu_child->child_href.'" target="_blank" class="hover:text-pink-300 font-medium inline-block text-white my-1 py-1 mx-4">
-                                <i class="'.$menu_child->child_icon.' w-5"></i> '.ucfirst($menu_child->child_name).'
-                            </a>
-                        </div>';
+            $temp .=
+            '<div class="block">
+                <a href="'.$url.'admin/'.$menu_child->child_href.'" target="_blank" class="hover:text-pink-300 font-medium inline-block text-white my-1 py-1 mx-4">
+                    <i class="'.$menu_child->child_icon.' w-5"></i> '.ucfirst($menu_child->child_name).'
+                </a>
+            </div>';
         endforeach;
 
-        $temp .= '</div>';
+        $temp .=
+        '</div>';
 
     endforeach;
 

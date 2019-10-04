@@ -38,13 +38,6 @@ class AdminController extends Master_Controller
         $this->load->view('master_admin/footer');
     }
 
-    public function permissions_user()
-    {
-        $this->load->view('master_admin/header');
-        $this->load->view('admin/permissions_user');
-        $this->load->view('master_admin/footer');
-    }
-
 	public function user_datatables()
 	{
 		// echo '<pre>';
@@ -390,6 +383,13 @@ class AdminController extends Master_Controller
 
 			return $this->db->count_all_results();
 		}
+	}
+
+	public function user_read()
+	{
+		$this->load->view('master_admin/header');
+		$this->load->view('admin/user', $this->data_param);
+		$this->load->view('master_admin/footer');
 	}
 
     public function logout()
