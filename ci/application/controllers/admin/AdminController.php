@@ -404,7 +404,7 @@ class AdminController extends Master_Controller
 	public function get_temp_privileges()
 	{
 		$count = 0;
-		$result = "";
+		$temp = "";
 
 		$this->db->select("a.name admin_menu_name, b.name admin_menu_group_name");
 		$this->db->from("tbl_app_admin_menu a");
@@ -418,8 +418,11 @@ class AdminController extends Master_Controller
 		foreach ($privileges as $privilege):
 			$count++;
 
+			$temp .="";
 
 		endforeach;
+
+		return $temp;
 
 	}
 }

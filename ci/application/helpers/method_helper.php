@@ -12,7 +12,6 @@ function dd($data)
     die(var_dump($data));
 }
 
-
 function get_menus_admin_count()
 {
     $CI =& get_instance();
@@ -76,9 +75,11 @@ function get_menus_admin()
 
         $temp .= '<div id="content-admin-dropdown-'.$index_parent.'" class="overflow-hidden max-height-0 max-height-with-transition bg-pink-600">';
 
+        $url = base_url();
+
         foreach ($menus_child as $menu_child):
             $temp .=    '<div class="block">
-                            <a href="admin/'.$menu_child->child_href.'" target="_blank" class="hover:text-pink-300 font-medium inline-block text-white my-1 py-1 mx-4">
+                            <a href="'.$url.'admin/'.$menu_child->child_href.'" target="_blank" class="hover:text-pink-300 font-medium inline-block text-white my-1 py-1 mx-4">
                                 <i class="'.$menu_child->child_icon.' w-5"></i> '.ucfirst($menu_child->child_name).'
                             </a>
                         </div>';
