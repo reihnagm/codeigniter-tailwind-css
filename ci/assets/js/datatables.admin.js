@@ -7,7 +7,7 @@
     let url = user_agent == "Firefox" ? "all-user-datatables" : "admin/all-user-datatables";
 
     $(function() {
-        $('#all-users-datatables').DataTable({
+        let all_user_datatables = $('#all-user-datatables').DataTable({
             dom: '"<"flex items-center"<"flex-grow items-center w-2/4"l><"flex flex-grow items-center w-2/4 justify-end"f>><"w-full"rt><"flex items-center"<"flex-grow items-center w-2/4"i><"flex flex-grow items-center w-2/4 justify-end"p>>',
             responsive: true,
             serverSide: true,
@@ -34,9 +34,9 @@
             ],
             columns: [
                 {
-                    data: "no",
-                    searchable: false,
-                    orderable: false,
+                    data: "no"
+                    // searchable: false,
+                    // orderable: false,
                 },
                 {
                     data: "first_name"
@@ -57,7 +57,17 @@
         }).on('processing.dt', function(e, settings, processing) {
             $(".wrapper-loader").css('display', processing ? 'block' : 'none');
             $(".loader").css('display', processing ? 'block' : 'none');
-        });
+        })
+
+        all_user_datatables.on('order.dt search.dt', function() {
+            all_user_datatables.column(0, {
+                search: 'applied',
+                order: 'applied'
+            }).nodes().each(function(cell, i) {
+                cell.innerHTML = i + 1;
+            });
+        }).draw()
+
     });
 
     function edit_user_datatables(id)

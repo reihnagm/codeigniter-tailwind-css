@@ -12,7 +12,7 @@
     <input type="hidden" name="count_user_datatables" value="<?php echo get_user_datatables_count(); ?>">
 
     <div class="markdown mt-24 mb-6 px-6 max-w-3xl">
-        <table id="all-users-datatables" class="w-full text-left table-collapse">
+        <table id="all-user-datatables" class="w-full text-left table-collapse">
             <thead>
                 <tr>
                     <th class="text-sm font-semibold text-gray-700 p-2 bg-gray-100">No</th>

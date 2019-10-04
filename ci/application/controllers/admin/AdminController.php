@@ -49,6 +49,8 @@ class AdminController extends Master_Controller
 
 	public function user_datatables()
 	{
+		// echo '<pre>';
+		// die(var_dump($_REQUEST));
 
 		// DEFINE COLUMN
 		$columns =
@@ -60,8 +62,8 @@ class AdminController extends Master_Controller
 			4 => "email"
  		];
 
-		echo '<pre>';
-		die(var_dump($_REQUEST));
+		$order = $columns[$this->input->get('order')[0]["column"]];
+		$dir = $this->input->get('order')[0]["dir"];
 
 		$draw 	= $this->input->get("draw");
 		$start 	= $this->input->get("start");
@@ -90,6 +92,15 @@ class AdminController extends Master_Controller
 		{
 			$this->db->select("a.id, a.first_name, a.last_name, a.username, a.email");
 			$this->db->from("tbl_users a");
+
+			if($order == "no")
+			{
+				$this->db->order_by("a.id", $dir);
+			}
+			else
+			{
+				$this->db->order_by($order, $dir);
+			}
 
 			if ($length > 0)
 	        {
@@ -305,8 +316,8 @@ class AdminController extends Master_Controller
 	{
 		$id = $this->input->post("id");
 
-		echo '<pre>';
-		die(var_dump($id));
+		// echo '<pre>';
+		// die(var_dump($id));
 
 		$this->db->trans_start();
 		$this->db->where('id', $id);
