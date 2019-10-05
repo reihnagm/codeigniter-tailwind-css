@@ -1,3 +1,9 @@
+    <!-- CHECKING BROWSER -->
+    <input type="hidden" name="user_agent" value="<?php echo $this->agent->browser() ?>">
+
+    <!-- BASE URL -->
+    <input type="hidden" name="base_url" value="<?php echo base_url() ?>">
+
     <!-- JQUERY JS -->
     <script
     src="https://code.jquery.com/jquery-3.4.1.min.js"

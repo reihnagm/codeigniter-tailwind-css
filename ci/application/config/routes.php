@@ -34,6 +34,9 @@ $route['admin/destroy-user-datatables'] = 'admin/AdminController/destroy_user_da
 // ADMIN UPDATE DATATABLES
 $route['admin/update-user-datatables'] = 'admin/AdminController/update_user_datatables';
 
+// ADMIN SAVE PRIVILEGE
+$route['admin/save-privilege'] = 'admin/AdminController/save_privilege';
+
 $route['default_controller'] = 'home/HomeController';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

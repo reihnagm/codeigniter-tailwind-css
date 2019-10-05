@@ -407,6 +407,7 @@ class AdminController extends Master_Controller
 		$this->db->from("tbl_app_admin_menu a");
 		$this->db->join("tbl_app_admin_menu_group b",
 		"a.admin_menu_group_id = b.id", "inner");
+		$this->db->where('a.type', 'crud');
 		$this->db->order_by("a.id", "DESC");
 		$privileges = $this->db->get()->result_object();
 
@@ -438,7 +439,8 @@ class AdminController extends Master_Controller
 					<div class="flex cursor-pointer items-center">
 						<span class="inline-block px-3">Create</span>
 						<div onclick="checkbox_privilege_create('.$count.')" class="bg-pink-500 shadow w-6 h-6 p-1 rounded">
-							<input type="checkbox" class="hidden" checked>
+							<input type="hidden" class="hidden" name="subject_privilege_create_'.$count.'" value="'.$privilege->admin_menu_name.'">
+							<input type="checkbox" class="hidden" name="'.$privilege->admin_menu_name.'_privilege_create_'.$count.'">
 							<svg class="svg-privilege-create-'.$count.' hidden w-4 h-4 text-white" viewBox="0 0 172 172">
 								<g fill="none" stroke-width="none" stroke-miterlimit="10" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode:normal"><path d="M0 172V0h172v172z"/><path d="M145.433 37.933L64.5 118.8658 33.7337 88.0996l-10.134 10.1341L64.5 139.1341l91.067-91.067z" fill="currentColor" stroke-width="1"/>
 								</g>
@@ -447,10 +449,11 @@ class AdminController extends Master_Controller
 					</div>
 				</td>
 				<td class="p-2 border-t border-grey-light whitespace-no-wrap">
-					<div class="trigger-checkbox-1 flex cursor-pointer items-center">
+					<div class="flex cursor-pointer items-center">
 						<span class="inline-block px-3">Read</span>
 						<div onclick="checkbox_privilege_read('.$count.')" class="bg-pink-500 shadow w-6 h-6 p-1 rounded">
-							<input type="checkbox" class="hidden" checked>
+							<input type="hidden" class="hidden" name="subject_privilege_read_'.$count.'" value="'.$privilege->admin_menu_name.'">
+							<input type="checkbox" class="hidden" name="'.$privilege->admin_menu_name.'_privilege_read_'.$count.'">
 							<svg class="svg-privilege-read-'.$count.' hidden w-4 h-4 text-white" viewBox="0 0 172 172">
 								<g fill="none" stroke-width="none" stroke-miterlimit="10" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode:normal"><path d="M0 172V0h172v172z"/><path d="M145.433 37.933L64.5 118.8658 33.7337 88.0996l-10.134 10.1341L64.5 139.1341l91.067-91.067z" fill="currentColor" stroke-width="1"/>
 								</g>
@@ -459,10 +462,11 @@ class AdminController extends Master_Controller
 					</div>
 				</td>
 				<td class="p-2 border-t border-grey-light whitespace-no-wrap">
-					<div class="trigger-checkbox-1 flex cursor-pointer items-center">
+					<div class="flex cursor-pointer items-center">
 						<span class="inline-block px-3">Update</span>
 						<div onclick="checkbox_privilege_update('.$count.')" class="bg-pink-500 shadow w-6 h-6 p-1 rounded">
-							<input type="checkbox" class="hidden" checked>
+							<input type="hidden" class="hidden" name="subject_privilege_update_'.$count.'" value="'.$privilege->admin_menu_name.'">
+							<input type="checkbox" class="hidden" name="'.$privilege->admin_menu_name.'_privilege_update_'.$count.'">
 							<svg class="svg-privilege-update-'.$count.' hidden w-4 h-4 text-white" viewBox="0 0 172 172">
 								<g fill="none" stroke-width="none" stroke-miterlimit="10" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode:normal"><path d="M0 172V0h172v172z"/><path d="M145.433 37.933L64.5 118.8658 33.7337 88.0996l-10.134 10.1341L64.5 139.1341l91.067-91.067z" fill="currentColor" stroke-width="1"/>
 								</g>
@@ -471,10 +475,11 @@ class AdminController extends Master_Controller
 					</div>
 				</td>
 				<td class="p-2 border-t border-grey-light whitespace-no-wrap">
-					<div class="trigger-checkbox-1 flex cursor-pointer items-center">
+					<div class="flex cursor-pointer items-center">
 						<span class="inline-block px-3">Delete</span>
 						<div onclick="checkbox_privilege_destroy('.$count.')" class="bg-pink-500 shadow w-6 h-6 p-1 rounded">
-							<input type="checkbox" class="hidden" checked>
+							<input type="hidden" class="hidden" name="subject_privilege_destroy_'.$count.'" value="'.$privilege->admin_menu_name.'">
+							<input type="checkbox" class="hidden" name="'.$privilege->admin_menu_name.'_privilege_destroy_'.$count.'">
 							<svg class="svg-privilege-destroy-'.$count.' hidden w-4 h-4 text-white" viewBox="0 0 172 172">
 								<g fill="none" stroke-width="none" stroke-miterlimit="10" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode:normal"><path d="M0 172V0h172v172z"/><path d="M145.433 37.933L64.5 118.8658 33.7337 88.0996l-10.134 10.1341L64.5 139.1341l91.067-91.067z" fill="currentColor" stroke-width="1"/>
 								</g>
@@ -490,9 +495,25 @@ class AdminController extends Master_Controller
 
 		$temp =
 		'<table class="w-full text-left table-collapse">
-			'.$temp.'
-		</table>';
+			<form id="form-test">
+				'.$temp.'
+			</form>
+		</table>
+		<div class="w-full mt-3 mr-6 flex justify-end flex-grow -flex-shrink">
+			<a onclick="save_privilege()" href="javascript:void(0);" class="bg-pink-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">Simpan</a>
+		</div>';
 
 		return $temp;
+	}
+
+
+	function save_privilege()
+	{
+		$create  = $this->input->post('create');
+		$read 	 = $this->input->post('read');
+		$update  = $this->input->post('update');
+		$destroy = $this->input->post('destroy');
+
+
 	}
 }

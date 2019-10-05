@@ -40,25 +40,13 @@ $(function() {
             child_nav_admin.style.maxHeight =  child_nav_admin.scrollHeight + "px";
         }
     });
-
-    $(document).on("click", ".trigger-checkbox-3", function() {
-        if(svg.hasClass("hidden"))
-        {
-            svg.removeClass("hidden");
-            svg.addClass("block");
-        }
-        else
-        {
-            svg.removeClass("block");
-            svg.addClass("hidden");
-        }
-    });
-
 });
-
-
 function checkbox_privilege_create(id)
 {
+    let type = $("[name=subject_privilege_create_"+id+"]").val();
+
+    let checkbox_privilege_create = $("[name="+type+"_privilege_create_"+id+"]")
+
     let svg = $(".svg-privilege-create-"+id);
 
     if(svg.hasClass("hidden"))
@@ -74,6 +62,10 @@ function checkbox_privilege_create(id)
 }
 function checkbox_privilege_read(id)
 {
+    let type = $("[name=subject_privilege_read_"+id+"]").val();
+
+    let checkbox_privilege_read = $("[name="+type+"_privilege_read_"+id+"]")
+
     let svg = $(".svg-privilege-read-"+id);
 
     if(svg.hasClass("hidden"))
@@ -89,6 +81,10 @@ function checkbox_privilege_read(id)
 }
 function checkbox_privilege_update(id)
 {
+    let type = $("[name=subject_privilege_update_"+id+"]").val();
+
+    let checkbox_privilege_update = $("[name="+type+"_privilege_update_"+id+"]")
+
     let svg = $(".svg-privilege-update-"+id);
 
     if(svg.hasClass("hidden"))
@@ -104,6 +100,10 @@ function checkbox_privilege_update(id)
 }
 function checkbox_privilege_destroy(id)
 {
+    let type = $("[name=subject_privilege_destroy_"+id+"]").val();
+
+    let checkbox_privilege_destroy = $("[name="+type+"_privilege_destroy_"+id+"]")
+
     let svg = $(".svg-privilege-destroy-"+id);
 
     if(svg.hasClass("hidden"))
@@ -116,4 +116,20 @@ function checkbox_privilege_destroy(id)
         svg.removeClass("block");
         svg.addClass("hidden");
     }
+}
+function save_privilege()
+{
+    // GETTING BASE URL
+    const base_url = $("[name=base_url]").val();
+
+    $.post(base_url + "admin/save-privilege",
+    {
+        create: $("[name=privilege_create]").val(),
+        read: $("[name=privilege_read]").val(),
+        update: $("[name=privilege_update]").val(),
+        destroy: $("[name=privilege_destroy]").val()
+    }
+    ,   (data) => {
+            console.log(data);
+        });
 }
