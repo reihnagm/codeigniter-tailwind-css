@@ -1,9 +1,5 @@
 $(function() {
 
-    let svg1 = $("#svg-1");
-    let svg2 = $("#svg-2");
-    let svg3 = $("#svg-3");
-
     let count_admin_group_menu = $("[name='count_admin_group_menu']").val();
 
     for (var i = 0; i <= count_admin_group_menu; i++)
@@ -45,45 +41,79 @@ $(function() {
         }
     });
 
-    $(document).on("click", ".trigger-checkbox-1", function() {
-        if(svg1.hasClass("hidden"))
-        {
-            svg1.removeClass("hidden");
-            svg1.addClass("block");
-        }
-        else
-        {
-            svg1.removeClass("block");
-            svg1.addClass("hidden");
-        }
-    });
-    $(document).on("click", ".trigger-checkbox-2", function() {
-        if(svg2.hasClass("hidden"))
-        {
-            svg2.removeClass("hidden");
-            svg2.addClass("block");
-        }
-        else
-        {
-            svg2.removeClass("block");
-            svg2.addClass("hidden");
-        }
-    });
     $(document).on("click", ".trigger-checkbox-3", function() {
-        if(svg3.hasClass("hidden"))
+        if(svg.hasClass("hidden"))
         {
-            svg3.removeClass("hidden");
-            svg3.addClass("block");
+            svg.removeClass("hidden");
+            svg.addClass("block");
         }
         else
         {
-            svg3.removeClass("block");
-            svg3.addClass("hidden");
+            svg.removeClass("block");
+            svg.addClass("hidden");
         }
     });
-
-
-
-
 
 });
+
+
+function checkbox_privilege_create(id)
+{
+    let svg = $(".svg-privilege-create-"+id);
+
+    if(svg.hasClass("hidden"))
+    {
+        svg.removeClass("hidden");
+        svg.addClass("block");
+    }
+    else
+    {
+        svg.removeClass("block");
+        svg.addClass("hidden");
+    }
+}
+function checkbox_privilege_read(id)
+{
+    let svg = $(".svg-privilege-read-"+id);
+
+    if(svg.hasClass("hidden"))
+    {
+        svg.removeClass("hidden");
+        svg.addClass("block");
+    }
+    else
+    {
+        svg.removeClass("block");
+        svg.addClass("hidden");
+    }
+}
+function checkbox_privilege_update(id)
+{
+    let svg = $(".svg-privilege-update-"+id);
+
+    if(svg.hasClass("hidden"))
+    {
+        svg.removeClass("hidden");
+        svg.addClass("block");
+    }
+    else
+    {
+        svg.removeClass("block");
+        svg.addClass("hidden");
+    }
+}
+function checkbox_privilege_destroy(id)
+{
+    let svg = $(".svg-privilege-destroy-"+id);
+
+    if(svg.hasClass("hidden"))
+    {
+        svg.removeClass("hidden");
+        svg.addClass("block");
+    }
+    else
+    {
+        svg.removeClass("block");
+        svg.addClass("hidden");
+    }
+}
