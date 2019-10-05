@@ -10,7 +10,7 @@ class AdminController extends Master_Controller
 		parent::__construct();
 
 		$data = [
-			"get_temp_privileges" => $this->get_temp_privileges(),
+			"get_temp_privileges" => $this->get_temp_privilege(),
 			"get_menus_admin" => get_menus_admin()
 		];
 
@@ -31,17 +31,15 @@ class AdminController extends Master_Controller
         $this->load->view('master_admin/footer');
     }
 
-    public function privileges()
+    public function privilege()
     {
         $this->load->view('master_admin/header');
-        $this->load->view('admin/privileges', $this->data_param);
+        $this->load->view('admin/privilege', $this->data_param);
         $this->load->view('master_admin/footer');
     }
 
 	public function user_datatables()
 	{
-		// echo '<pre>';
-		// die(var_dump($_REQUEST));
 
 		// DEFINE COLUMN
 		$columns =
@@ -399,7 +397,7 @@ class AdminController extends Master_Controller
         redirect('/', 'refresh');
     }
 
-	public function get_temp_privileges()
+	public function get_temp_privilege()
 	{
 		$count = 0;
 		$temp = "";
@@ -489,6 +487,11 @@ class AdminController extends Master_Controller
 			$temp .=
 			'</tbody>';
 		endforeach;
+
+		$temp =
+		'<table class="w-full text-left table-collapse">
+			'.$temp.'
+		</table>';
 
 		return $temp;
 	}

@@ -17,7 +17,7 @@ $route['admin']['GET'] = 'admin/AdminController/index';
 $route['admin/change-password']['GET'] = 'admin/AdminController/change_password';
 
 // ADMIN SETTINGS / PRIVILEGES
-$route['admin/privileges']['GET'] = 'admin/AdminController/privileges';
+$route['admin/privilege']['GET'] = 'admin/AdminController/privilege';
 
 // ADMIN ALL USERS DATATABLES
 $route['admin/all-user-datatables']['GET'] = 'admin/AdminController/user_datatables';

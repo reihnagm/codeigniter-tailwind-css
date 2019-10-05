@@ -32,7 +32,7 @@
 
             <div class="w-1/4 pl-6 pr-6">
                 <div class="flex items-center">
-                    <a class="block mr-4" href="javascript:void(0)">Your Logo</a>
+                    <a class="block mr-4" href="<?php echo base_url(); ?>">Your Logo</a>
                 </div>
             </div>
 

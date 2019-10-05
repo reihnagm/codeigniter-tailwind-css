@@ -5,7 +5,7 @@
         <?php components('master_admin/sidebar', $data) ?>
 
         <!-- CHANGE PASSWORD -->
-        <?php components('master_admin/privileges', $data) ?>
+        <?php components('master_admin/privilege', $data) ?>
 
     </div>
 </div>

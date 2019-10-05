@@ -65,11 +65,13 @@ class ComposerStaticInitbce3f23c293a05266f078fedf9bafc73
         'aa53dcba601214d17ad405b7c291b7e8' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/operations/multiply.php',
         '75c79eb1b25749b05a47976f32b0d8a2' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/operations/divideby.php',
         '6ab8ad87a734f276a6bcd5a0fe1289be' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/operations/divideinto.php',
+        '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
     );
 
     public static $prefixLengthsPsr4 = array (
         'S' => 
         array (
+            'Symfony\\Polyfill\\Ctype\\' => 23,
             'Svg\\' => 4,
         ),
         'P' => 
@@ -87,6 +89,7 @@ class ComposerStaticInitbce3f23c293a05266f078fedf9bafc73
         ),
         'D' => 
         array (
+            'Dotenv\\' => 7,
             'Dompdf\\' => 7,
         ),
         'C' => 
@@ -96,6 +99,10 @@ class ComposerStaticInitbce3f23c293a05266f078fedf9bafc73
     );
 
     public static $prefixDirsPsr4 = array (
+        'Symfony\\Polyfill\\Ctype\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-ctype',
+        ),
         'Svg\\' => 
         array (
             0 => __DIR__ . '/..' . '/phenx/php-svg-lib/src/Svg',
@@ -116,6 +123,10 @@ class ComposerStaticInitbce3f23c293a05266f078fedf9bafc73
         array (
             0 => __DIR__ . '/..' . '/phenx/php-font-lib/src/FontLib',
         ),
+        'Dotenv\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/vlucas/phpdotenv/src',
+        ),
         'Dompdf\\' => 
         array (
             0 => __DIR__ . '/..' . '/dompdf/dompdf/src',
@@ -132,6 +143,13 @@ class ComposerStaticInitbce3f23c293a05266f078fedf9bafc73
             'Sabberworm\\CSS' => 
             array (
                 0 => __DIR__ . '/..' . '/sabberworm/php-css-parser/lib',
+            ),
+        ),
+        'P' => 
+        array (
+            'PhpOption\\' => 
+            array (
+                0 => __DIR__ . '/..' . '/phpoption/phpoption/src',
             ),
         ),
     );
