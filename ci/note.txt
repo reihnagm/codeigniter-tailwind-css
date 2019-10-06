@@ -23,4 +23,6 @@
 - Tips: prop("disabled" , true) only works in select option
 - Tips: Align is Horizontal if flex-col but is Vertical if flex-row
 - Tips: if url not found the problem maybe is user agent different
-- Tips: padding with background margin without background  
+- Tips: padding with background margin without background
+- Tips: if input type checkbox cannot reserved submit change to hidden
+- Tips: if error pgsql column doest not exists, delete column, and create new column

@@ -41,95 +41,91 @@ $(function() {
         }
     });
 });
-function checkbox_privilege_create(id)
+function checkbox_privilege_create(subject, id)
 {
-    let type = $("[name=subject_privilege_create_"+id+"]").val();
-
-    let checkbox_privilege_create = $("[name="+type+"_privilege_create_"+id+"]")
 
     let svg = $(".svg-privilege-create-"+id);
+    let checkbox_privilege_create = $("[name="+subject+"_privilege_create_"+id+"]");
 
     if(svg.hasClass("hidden"))
     {
+        checkbox_privilege_create.prop("checked", true)
+        checkbox_privilege_create.val(1);
         svg.removeClass("hidden");
         svg.addClass("block");
     }
     else
     {
+        checkbox_privilege_create.val(0);
         svg.removeClass("block");
         svg.addClass("hidden");
     }
 }
-function checkbox_privilege_read(id)
+function checkbox_privilege_read(subject, id)
 {
-    let type = $("[name=subject_privilege_read_"+id+"]").val();
-
-    let checkbox_privilege_read = $("[name="+type+"_privilege_read_"+id+"]")
-
     let svg = $(".svg-privilege-read-"+id);
+    let checkbox_privilege_read = $("[name="+subject+"_privilege_read_"+id+"]");
 
     if(svg.hasClass("hidden"))
     {
+        checkbox_privilege_read.prop("checked", true)
+        checkbox_privilege_read.val(1);
         svg.removeClass("hidden");
         svg.addClass("block");
     }
     else
     {
         svg.removeClass("block");
+        checkbox_privilege_read.val(0);
         svg.addClass("hidden");
     }
 }
-function checkbox_privilege_update(id)
+function checkbox_privilege_update(subject, id)
 {
-    let type = $("[name=subject_privilege_update_"+id+"]").val();
-
-    let checkbox_privilege_update = $("[name="+type+"_privilege_update_"+id+"]")
-
     let svg = $(".svg-privilege-update-"+id);
+    let checkbox_privilege_update = $("[name="+subject+"_privilege_update_"+id+"]");
 
     if(svg.hasClass("hidden"))
     {
+        checkbox_privilege_update.prop("checked", true)
+        checkbox_privilege_update.val(1);
         svg.removeClass("hidden");
         svg.addClass("block");
     }
     else
     {
+        checkbox_privilege_update.val(0);
         svg.removeClass("block");
         svg.addClass("hidden");
     }
 }
-function checkbox_privilege_destroy(id)
+function checkbox_privilege_destroy(subject, id)
 {
-    let type = $("[name=subject_privilege_destroy_"+id+"]").val();
-
-    let checkbox_privilege_destroy = $("[name="+type+"_privilege_destroy_"+id+"]")
-
     let svg = $(".svg-privilege-destroy-"+id);
+    let checkbox_privilege_destroy = $("[name="+subject+"_privilege_destroy_"+id+"]");
 
     if(svg.hasClass("hidden"))
     {
+        checkbox_privilege_destroy.prop("checked", true)
+        checkbox_privilege_destroy.val(1);
         svg.removeClass("hidden");
         svg.addClass("block");
     }
     else
     {
+        checkbox_privilege_destroy.val(0);
         svg.removeClass("block");
         svg.addClass("hidden");
     }
 }
-function save_privilege()
-{
-    // GETTING BASE URL
-    const base_url = $("[name=base_url]").val();
 
+$("#form-privilege").submit(function(e){
+    e.preventDefault();
     $.post(base_url + "admin/save-privilege",
     {
-        create: $("[name=privilege_create]").val(),
-        read: $("[name=privilege_read]").val(),
-        update: $("[name=privilege_update]").val(),
-        destroy: $("[name=privilege_destroy]").val()
+        data: $(this).serializeArray()
     }
     ,   (data) => {
             console.log(data);
         });
-}
+})

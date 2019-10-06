@@ -37,6 +37,12 @@ $route['admin/update-user-datatables'] = 'admin/AdminController/update_user_data
 // ADMIN SAVE PRIVILEGE
 $route['admin/save-privilege'] = 'admin/AdminController/save_privilege';
 
+// TEST
+$route['test'] = 'test/TestController/test';
+
+// TEST SUBMIT
+$route['test/submit'] = 'test/TestController/submit';
+
 $route['default_controller'] = 'home/HomeController';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
