@@ -506,27 +506,32 @@ class AdminController extends Master_Controller
 	}
 	function save_privilege()
 	{
-
-		$test = $this->partition($this->input->post('data'), 2);
-
-
-		// $count = $this->get_count_privilege();
+		$count = $this->get_count_privilege();
 
 		// for ($i = 0; $i < $count; $i++):
-		// 	foreach ($this->input->post('data') as $data):
-		// 		$menu_id = substr($data["name"], 1);
-		// 	endforeach;
-		// 	$datas =
-		// 	[
-		// 		"user_id" => 1,
-		// 		"menu_id" => 1,
-		// 		"priv_create" => 1,
-		// 		"priv_read" => 1,
-		// 		"priv_update" => 1,
-		// 		"priv_delete" => 1
-		// 	];
-		//
-		// 	$this->db->insert("tbl_privileges", $datas);
+
+		$array = [];
+
+		$menu_id = "";
+
+		foreach ($this->partition($this->input->post('data'), 2) as $data):
+			foreach ($data as $value) {
+				$menu_id = substr($value["name"], 1);
+			}
+			$datas =
+			[
+				"user_id" => 1,
+				"menu_id" =>  $menu_id,
+				"priv_create" => 1,
+				"priv_read" => 1,
+				"priv_update" => 1,
+				"priv_delete" => 1
+			];
+			$this->db->insert("tbl_privileges", $datas);
+		endforeach;
+
+
+
 		// endfor;
 
 
