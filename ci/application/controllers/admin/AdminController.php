@@ -447,7 +447,7 @@ class AdminController extends Master_Controller
 					<div class="flex cursor-pointer items-center">
 						<span class="inline-block px-3">Create</span>
 						<div onclick="checkbox_privilege_create('.$id.')" class="bg-pink-500 shadow w-6 h-6 p-1 rounded">
-							<input type="hidden" class="hidden" name="c'.$id.'">
+							<input type="hidden" class="hidden" name="c'.$id.'" value="0">
 							<svg class="svg-privilege-create-'.$id.' hidden w-4 h-4 text-white" viewBox="0 0 172 172">
 								<g fill="none" stroke-width="none" stroke-miterlimit="10" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode:normal"><path d="M0 172V0h172v172z"/><path d="M145.433 37.933L64.5 118.8658 33.7337 88.0996l-10.134 10.1341L64.5 139.1341l91.067-91.067z" fill="currentColor" stroke-width="1"/>
 								</g>
@@ -459,7 +459,7 @@ class AdminController extends Master_Controller
 					<div class="flex cursor-pointer items-center">
 						<span class="inline-block px-3">Read</span>
 						<div onclick="checkbox_privilege_read('.$id.')" class="bg-pink-500 shadow w-6 h-6 p-1 rounded">
-							<input type="hidden" class="hidden" name="r'.$id.'">
+							<input type="hidden" class="hidden" name="r'.$id.'" value="0">
 							<svg class="svg-privilege-read-'.$id.' hidden w-4 h-4 text-white" viewBox="0 0 172 172">
 								<g fill="none" stroke-width="none" stroke-miterlimit="10" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode:normal"><path d="M0 172V0h172v172z"/><path d="M145.433 37.933L64.5 118.8658 33.7337 88.0996l-10.134 10.1341L64.5 139.1341l91.067-91.067z" fill="currentColor" stroke-width="1"/>
 								</g>
@@ -471,7 +471,7 @@ class AdminController extends Master_Controller
 					<div class="flex cursor-pointer items-center">
 						<span class="inline-block px-3">Update</span>
 						<div onclick="checkbox_privilege_update('.$id.')" class="bg-pink-500 shadow w-6 h-6 p-1 rounded">
-							<input type="hidden" class="hidden" name="u'.$id.'">
+							<input type="hidden" class="hidden" name="u'.$id.'" value="0">
 							<svg class="svg-privilege-update-'.$id.' hidden w-4 h-4 text-white" viewBox="0 0 172 172">
 								<g fill="none" stroke-width="none" stroke-miterlimit="10" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode:normal"><path d="M0 172V0h172v172z"/><path d="M145.433 37.933L64.5 118.8658 33.7337 88.0996l-10.134 10.1341L64.5 139.1341l91.067-91.067z" fill="currentColor" stroke-width="1"/>
 								</g>
@@ -483,7 +483,7 @@ class AdminController extends Master_Controller
 					<div class="flex cursor-pointer items-center">
 						<span class="inline-block px-3">Delete</span>
 						<div onclick="checkbox_privilege_destroy('.$id.')" class="bg-pink-500 shadow w-6 h-6 p-1 rounded">
-							<input type="hidden" class="hidden" name="d'.$id.'">
+							<input type="hidden" class="hidden" name="d'.$id.'" value="0">
 							<svg class="svg-privilege-destroy-'.$id.' hidden w-4 h-4 text-white" viewBox="0 0 172 172">
 								<g fill="none" stroke-width="none" stroke-miterlimit="10" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode:normal"><path d="M0 172V0h172v172z"/><path d="M145.433 37.933L64.5 118.8658 33.7337 88.0996l-10.134 10.1341L64.5 139.1341l91.067-91.067z" fill="currentColor" stroke-width="1"/>
 								</g>
@@ -506,42 +506,43 @@ class AdminController extends Master_Controller
 	}
 	function save_privilege()
 	{
+
 		$count = $this->get_count_privilege();
 
-		// for ($i = 0; $i < $count; $i++):
-
+		$menu_id = "";
 		$array = [];
 
-		$menu_id = "";
+		foreach ($this->partition($this->input->post('data'), $count) as $data):
 
-		foreach ($this->partition($this->input->post('data'), 2) as $data):
-			foreach ($data as $value) {
+			foreach ($data as $value):
 				$menu_id = substr($value["name"], 1);
-			}
+				$array[$value['name']] = $value['value'];
+			endforeach;
+
+			// CONVERT INT TO ARRAY
+			// $num = array_map('intval', str_split((int) $value_));
+			// OUTPUT
+			// [0] => data
+			// [1] => data
+
+			// dd($array);
+
 			$datas =
 			[
-				"user_id" => 1,
-				"menu_id" =>  $menu_id,
-				"priv_create" => 1,
-				"priv_read" => 1,
-				"priv_update" => 1,
-				"priv_delete" => 1
+				"user_id" 	  => 1,
+				"menu_id" 	  => $menu_id,
+				"priv_create" => $array['c'.$menu_id] == "1" ? 1 : 0,
+				"priv_read"   => $array['r'.$menu_id] == "1" ? 1 : 0,
+				"priv_update" => $array['u'.$menu_id] == "1" ? 1 : 0,
+				"priv_delete" => $array['d'.$menu_id] == "1" ? 1 : 0
 			];
+
 			$this->db->insert("tbl_privileges", $datas);
 		endforeach;
-
-
-
-		// endfor;
-
-
-		// dd($datas);
-
-		// dd($menu_id);
 	}
 
 
-	public function partition( $list, $p )
+	public function partition($list, $p)
 	{
 	    $listlen = count($list);
 	    $partlen = floor($listlen / $p);
@@ -555,4 +556,5 @@ class AdminController extends Master_Controller
 	    endfor;
 	    return $partition;
 	}
+
 }

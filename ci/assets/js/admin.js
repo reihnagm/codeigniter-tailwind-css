@@ -121,12 +121,12 @@ function checkbox_privilege_destroy(id)
 $("#form-privilege").submit(function(e){
     e.preventDefault();
 
-    let unindexed_array = $(this).serializeArray();
-    let indexed_array = {};
-
-    $.map(unindexed_array, function(n, i){
-        indexed_array[n['name']] = n['value'];
-    });
+    // let unindexed_array = $(this).serializeArray();
+    // let indexed_array = {};
+    //
+    // $.map(unindexed_array, function(n, i){
+    //     indexed_array[n['name']] = n['value'];
+    // });
 
     // OUTPUT
     // (8) [{....}, {....}, {....}, {....}]
@@ -136,7 +136,7 @@ $("#form-privilege").submit(function(e){
 
     $.post(base_url + "admin/save-privilege",
     {
-        data: unindexed_array
+        data:  $(this).serializeArray()
     }
     ,   (data) => {
             console.log(data);
