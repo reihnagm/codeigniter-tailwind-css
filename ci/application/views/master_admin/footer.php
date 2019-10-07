@@ -29,9 +29,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 
     <!-- PACE -->
-    <script src="<?php echo base_url('assets/js/pace.min.js') ?>"  type="text/javascript">
-
-    </script>
+    <script src="<?php echo base_url('assets/js/pace.min.js') ?>"  type="text/javascript"></script>
 
     </body>
 </html>

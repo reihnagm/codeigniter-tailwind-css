@@ -512,7 +512,7 @@ class AdminController extends Master_Controller
 		$menu_id = "";
 		$array_key = [];
 
-		foreach ($this->partition($this->input->post('data'), $count) as $data):
+		foreach (partition($this->input->post('data'), $count) as $data):
 
 			foreach ($data as $value):
 				$menu_id = substr($value["name"], 1);

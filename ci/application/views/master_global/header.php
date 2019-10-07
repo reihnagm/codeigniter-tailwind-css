@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 	<head>
 		<meta charset="utf-8">
-		<title>Learn Tailwind CSS & Codeigniter</title>
+
 
 		<!-- TAILWIND CSS -->
 		<link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+		<title>Learn Codeigniter & Tailwind CSS</title>
 	</head>
 	<body>
 
