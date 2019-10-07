@@ -2,10 +2,11 @@
 <html lang="en" dir="ltr">
 	<head>
 		<meta charset="utf-8">
-
+		<!-- LEAFLET CSS -->
+		<link rel="stylesheet" href="<?php echo base_url('assets/leaflet/leaflet.css') ?>">
 
 		<!-- TAILWIND CSS -->
-		<link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css">
 		<title>Learn Codeigniter & Tailwind CSS</title>
 	</head>
 	<body>
