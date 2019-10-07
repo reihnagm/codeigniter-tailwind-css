@@ -1,4 +1,5 @@
-- use Postgre SQL in Codeigniter, table case sensitive must be lowecase typing
+- use Postgre SQL in Codeigniter, table case sensitive must be lowercase typing
+- automatically schemas public
 - Tips: use Backend or ServerSide to manipulate data, if use frontend to manipulate could be lagging or crash.
 - Tips: use Ajax in some any trick you can do it
         - $.ajax({
@@ -26,3 +27,4 @@
 - Tips: padding with background margin without background
 - Tips: if input type checkbox cannot reserved submit change to hidden
 - Tips: if error pgsql column doest not exists, delete column, and create new column
+- Tips: for handling if statement in foreach, problem is data (not incrementing) but getting last value or first value

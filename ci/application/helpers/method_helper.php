@@ -95,3 +95,19 @@ function get_menus_admin()
 
     return $temp;
 }
+
+
+function partition($list, $p)
+{
+    $listlen = count($list);
+    $partlen = floor($listlen / $p);
+    $partrem = $listlen % $p;
+    $partition = [];
+    $mark = 0;
+    for ($px = 0; $px < $p; $px++):
+        $incr = ($px < $partrem) ? $partlen + 1 : $partlen;
+        $partition[$px] = array_slice($list, $mark, $incr);
+        $mark += $incr;
+    endfor;
+    return $partition;
+}

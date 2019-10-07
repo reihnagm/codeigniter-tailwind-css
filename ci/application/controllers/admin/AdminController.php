@@ -510,13 +510,13 @@ class AdminController extends Master_Controller
 		$count = $this->get_count_privilege();
 
 		$menu_id = "";
-		$array = [];
+		$array_key = [];
 
 		foreach ($this->partition($this->input->post('data'), $count) as $data):
 
 			foreach ($data as $value):
 				$menu_id = substr($value["name"], 1);
-				$array[$value['name']] = $value['value'];
+				$array_key[$value['name']] = $value['value'];
 			endforeach;
 
 			// CONVERT INT TO ARRAY
@@ -525,36 +525,66 @@ class AdminController extends Master_Controller
 			// [0] => data
 			// [1] => data
 
-			// dd($array);
+			$check_privilege = (int) $this->check_privilege();
+
+			if($check_privilege > (int) 0)
+			{
+				// UPDATE
+				$this->db->set("user_id", 2);
+				$this->db->set("priv_create", $array_key['c'.$menu_id] == "1" ? 1 : 0);
+				$this->db->set("priv_read",   $array_key['r'.$menu_id] == "1" ? 1 : 0);
+				$this->db->set("priv_update", $array_key['u'.$menu_id] == "1" ? 1 : 0);
+				$this->db->set("priv_delete", $array_key['d'.$menu_id] == "1" ? 1 : 0);
+				$this->db->where('menu_id', $menu_id);
+				$this->db->update('tbl_privileges');
+			}
+			else
+			{
+				// INSERT
+				$this->insert_privilege();
+			}
+
+		endforeach;
+	}
+
+	private function check_privilege()
+	{
+		$this->db->from("tbl_privileges");
+		$result = $this->db->get()->num_rows();
+		return $result;
+	}
+
+	private function insert_privilege()
+	{
+		$count = $this->get_count_privilege();
+
+		$menu_id = "";
+		$array_key = [];
+
+		foreach (partition($this->input->post('data'), $count) as $data):
+
+			foreach ($data as $value):
+				$menu_id = substr($value["name"], 1);
+				$array_key[$value['name']] = $value['value'];
+			endforeach;
+
+			// CONVERT INT TO ARRAY
+			// $num = array_map('intval', str_split((int) $value_));
+			// OUTPUT
+			// [0] => data
+			// [1] => data
 
 			$datas =
 			[
 				"user_id" 	  => 1,
 				"menu_id" 	  => $menu_id,
-				"priv_create" => $array['c'.$menu_id] == "1" ? 1 : 0,
-				"priv_read"   => $array['r'.$menu_id] == "1" ? 1 : 0,
-				"priv_update" => $array['u'.$menu_id] == "1" ? 1 : 0,
-				"priv_delete" => $array['d'.$menu_id] == "1" ? 1 : 0
+				"priv_create" => $array_key['c'.$menu_id] == "1" ? 1 : 0,
+				"priv_read"   => $array_key['r'.$menu_id] == "1" ? 1 : 0,
+				"priv_update" => $array_key['u'.$menu_id] == "1" ? 1 : 0,
+				"priv_delete" => $array_key['d'.$menu_id] == "1" ? 1 : 0
 			];
-
 			$this->db->insert("tbl_privileges", $datas);
 		endforeach;
+
 	}
-
-
-	public function partition($list, $p)
-	{
-	    $listlen = count($list);
-	    $partlen = floor($listlen / $p);
-	    $partrem = $listlen % $p;
-	    $partition = [];
-	    $mark = 0;
-	    for ($px = 0; $px < $p; $px++):
-	        $incr = ($px < $partrem) ? $partlen + 1 : $partlen;
-	        $partition[$px] = array_slice($list, $mark, $incr);
-	        $mark += $incr;
-	    endfor;
-	    return $partition;
-	}
-
 }
