@@ -2,8 +2,14 @@
 <html lang="en" dir="ltr">
 	<head>
 		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta http:equiv="x-ua-compatible" content="ie=edge">
+
 		<!-- LEAFLET CSS -->
-		<link rel="stylesheet" href="<?php echo base_url('assets/leaflet/leaflet.css') ?>">
+		<link rel="stylesheet" href="<?php echo base_url('assets/leaflet/leaflet.css'); ?>">
+
+		<!-- DATERANGEPICKER -->
+		<link rel="stylesheet" href="<?php echo base_url('assets/datetimepicker/daterangepicker.css') ?>">
 
 		<!-- TAILWIND CSS -->
 		<link rel="stylesheet" href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css">

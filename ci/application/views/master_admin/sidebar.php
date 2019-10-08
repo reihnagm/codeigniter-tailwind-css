@@ -5,7 +5,7 @@
         <div class="mb-10">
 
             <div class="block">
-                <a href="javascript:void(0)" class="px-2 -mx-2 py-1 inline-block hover:text-pink-300 font-medium text-white">
+                <a href="<?php echo base_url('admin'); ?>" class="px-2 -mx-2 py-1 inline-block hover:text-pink-300 font-medium text-white">
                     <i class="fas fa-tachometer-alt w-8"></i>Dashboard
                 </a>
             </div>

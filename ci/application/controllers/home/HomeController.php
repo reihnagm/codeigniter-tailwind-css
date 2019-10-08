@@ -11,7 +11,7 @@ class HomeController extends Master_Controller
 	// RECURSIVE FUNCTION
 	public function factory($num)
 	{
-		if($num == 1){
+		if($num == 1)
 			return $num;
 		else
 			return $num * $this->factory($num-1);
@@ -22,7 +22,7 @@ class HomeController extends Master_Controller
 		// RECURSIVE FUNCTION
 		$result = $this->factory(5);
 		// EXPECTED OUTPUT : (int) 120
-
+		
 		$this->load->view('master_global/header');
 		$this->load->view('home');
 		$this->load->view('master_global/footer');

@@ -6,6 +6,8 @@
 
     let url = user_agent == "Firefox" ? "all-user-datatables" : "admin/all-user-datatables";
 
+    var called_properties_global;
+
     $(function() {
         let all_user_datatables = $('#all-user-datatables').DataTable({
             dom: '"<"flex items-center"<"flex-grow items-center w-2/4"l><"flex flex-grow items-center w-2/4 justify-end"f>><"w-full"rt><"flex items-center"<"flex-grow items-center w-2/4"i><"flex flex-grow items-center w-2/4 justify-end"p>>',
@@ -34,9 +36,9 @@
             ],
             columns: [
                 {
-                    data: "no"
-                    // searchable: false,
-                    // orderable: false,
+                    data: "no",
+                    searchable: false,
+                    orderable: false,
                 },
                 {
                     data: "first_name"
@@ -49,6 +51,9 @@
                 },
                 {
                     data: "email"
+                },
+                {
+                    data: "created_at"
                 },
                 {
                     data: "option"
@@ -68,6 +73,11 @@
             });
         }).draw()
 
+        called_properties_global = function()
+        {
+            
+        }
+
     });
 
     function edit_user_datatables(id)
@@ -78,9 +88,11 @@
         .done(function(data) {
             let data_parse = JSON.parse(data);
             $("#wrapper-modal").html(data_parse.temp);
+            called_properties_global();
             toggleModal();
         })
     }
+
 
     function destroy_user_datatables(id)
     {

@@ -1,5 +1,9 @@
 $(function() {
 
+
+    //
+    // // DATERANGEPICKER
+    
     let count_admin_group_menu = $("[name='count_admin_group_menu']").val();
 
     for (var i = 0; i <= count_admin_group_menu; i++)
@@ -117,6 +121,7 @@ function checkbox_privilege_destroy(id)
         svg.addClass("hidden");
     }
 }
+
 
 $("#form-privilege").submit(function(e){
     e.preventDefault();

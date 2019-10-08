@@ -48,7 +48,8 @@ class AdminController extends Master_Controller
 			1 => "first_name",
 			2 => "last_name",
 			3 => "username",
-			4 => "email"
+			4 => "email",
+			5 => "created_at"
  		];
 
 		$order = $columns[$this->input->get('order')[0]["column"]];
@@ -61,7 +62,7 @@ class AdminController extends Master_Controller
 
 		if(!empty($search))
 		{
-			$sql = "SELECT a.id, a.first_name, a.last_name, a.username, a.email
+			$sql = "SELECT a.id, a.first_name, a.last_name, a.username, a.email, a.created_at
 			FROM tbl_users a
 			WHERE a.first_name LIKE '%{$search}%'
 			OR a.last_name LIKE '%{$search}%'
@@ -79,7 +80,7 @@ class AdminController extends Master_Controller
 		}
 		else
 		{
-			$this->db->select("a.id, a.first_name, a.last_name, a.username, a.email");
+			$this->db->select("a.id, a.first_name, a.last_name, a.username, a.email, a.created_at");
 			$this->db->from("tbl_users a");
 
 			if($order == "no")
@@ -110,7 +111,7 @@ class AdminController extends Master_Controller
 			$row['last_name'] = $user->last_name;
 			$row['username'] = $user->username;
 			$row['email'] = $user->email;
-			// $row['created_at'] = date("M jS, Y", strtotime($user->created_at));
+			$row['created_at'] = date("M jS, Y", strtotime($user->created_at));
 			// $row['updated_at'] = date("M jS, Y", strtotime($user->updated_at));
 
 			$row['option'] =  	'<a href="javascript:void(0)" class="hover:text-pink-300">
@@ -145,6 +146,10 @@ class AdminController extends Master_Controller
 
 		$male_selected = $user['gender'] == "Male" ? "selected" : "";
 		$female_selected = $user['gender'] == "Female" ? "selected" : "";
+
+		$exp_created_at = str_replace('-', '/', $user['created_at']);
+
+		$created_at = $exp_created_at;
 
 		$temp =
 		'<div class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center">
@@ -233,7 +238,7 @@ class AdminController extends Master_Controller
 							 	<label class="block text-gray-700 text-sm font-bold mb-2" for="'.$key[7].'">
 							   		'.$key[7].'
 							 	</label>
-							 	<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="'.$key[7].'" type="text" placeholder="'.$key[7].'" name="'.$key[7].'" value="'.$user['created_at'].'">
+							 	<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="'.$key[7].'" type="text" placeholder="'.$key[7].'" name="'.$key[7].'" value="'.$created_at.'">
 						   	</div>
 						</div>
 					</form>
@@ -415,86 +420,78 @@ class AdminController extends Master_Controller
 		$this->db->join("tbl_app_admin_menu_group b",
 		"a.admin_menu_group_id = b.id", "inner");
 		$this->db->where('a.type', 'crud');
-		$this->db->order_by("a.id", "DESC");
 		$privileges = $this->db->get()->result_object();
 
 		foreach ($privileges as $privilege):
-			$temp .=
-			'<thead>';
 
-			if($group_name != $privilege->admin_menu_group_name)
-			{
+			if($group_name != $privilege->admin_menu_group_name):
 				$group_name = $privilege->admin_menu_group_name;
 				$temp .=
-				'<tr>
-					<th class="text-sm font-semibold text-grey-darker p-2 bg-grey-lightest">'.strtoupper($group_name).'</th>
-				</tr>';
-			}
+				'<thead>
+					<tr>
+						<th class="text-sm font-semibold text-grey-darker p-2 bg-grey-lightest">'.strtoupper($group_name).'</th>
+					</tr>
+				</thead>';
+			endif;
 
-			$temp .=
-			'</thead>';
-
-			$temp .=
-			'<tbody class="align-baseline">';
-
-			$name = "'$privilege->admin_menu_name'"; // STRING ""
+			$name_string = "'$privilege->admin_menu_name'"; // STRING ""
+			$name = "$privilege->admin_menu_name";
 			$id  = "$privilege->admin_menu_id";
 
 			$temp .=
-			'<tr>
-				<td class="p-2 border-t border-grey-light whitespace-no-wrap">'.$privilege->admin_menu_name.'</td>
-				<td class="p-2 border-t border-grey-light whitespace-no-wrap">
-					<div class="flex cursor-pointer items-center">
-						<span class="inline-block px-3">Create</span>
-						<div onclick="checkbox_privilege_create('.$id.')" class="bg-pink-500 shadow w-6 h-6 p-1 rounded">
-							<input type="hidden" class="hidden" name="c'.$id.'" value="0">
-							<svg class="svg-privilege-create-'.$id.' hidden w-4 h-4 text-white" viewBox="0 0 172 172">
-								<g fill="none" stroke-width="none" stroke-miterlimit="10" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode:normal"><path d="M0 172V0h172v172z"/><path d="M145.433 37.933L64.5 118.8658 33.7337 88.0996l-10.134 10.1341L64.5 139.1341l91.067-91.067z" fill="currentColor" stroke-width="1"/>
-								</g>
-							</svg>
+			'<tbody class="align-baseline">
+				<tr>
+					<td class="p-2 border-t border-grey-light whitespace-no-wrap">'.$name.'</td>
+					<td class="p-2 border-t border-grey-light whitespace-no-wrap">
+						<div class="flex cursor-pointer items-center">
+							<span class="inline-block px-3">Create</span>
+							<div onclick="checkbox_privilege_create('.$id.')" class="bg-pink-500 shadow w-6 h-6 p-1 rounded">
+								<input type="hidden" class="hidden" name="c'.$id.'" value="0">
+								<svg class="svg-privilege-create-'.$id.' hidden w-4 h-4 text-white" viewBox="0 0 172 172">
+									<g fill="none" stroke-width="none" stroke-miterlimit="10" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode:normal"><path d="M0 172V0h172v172z"/><path d="M145.433 37.933L64.5 118.8658 33.7337 88.0996l-10.134 10.1341L64.5 139.1341l91.067-91.067z" fill="currentColor" stroke-width="1"/>
+									</g>
+								</svg>
+							</div>
 						</div>
-					</div>
-				</td>
-				<td class="p-2 border-t border-grey-light whitespace-no-wrap">
-					<div class="flex cursor-pointer items-center">
-						<span class="inline-block px-3">Read</span>
-						<div onclick="checkbox_privilege_read('.$id.')" class="bg-pink-500 shadow w-6 h-6 p-1 rounded">
-							<input type="hidden" class="hidden" name="r'.$id.'" value="0">
-							<svg class="svg-privilege-read-'.$id.' hidden w-4 h-4 text-white" viewBox="0 0 172 172">
-								<g fill="none" stroke-width="none" stroke-miterlimit="10" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode:normal"><path d="M0 172V0h172v172z"/><path d="M145.433 37.933L64.5 118.8658 33.7337 88.0996l-10.134 10.1341L64.5 139.1341l91.067-91.067z" fill="currentColor" stroke-width="1"/>
-								</g>
-							</svg>
+					</td>
+					<td class="p-2 border-t border-grey-light whitespace-no-wrap">
+						<div class="flex cursor-pointer items-center">
+							<span class="inline-block px-3">Read</span>
+							<div onclick="checkbox_privilege_read('.$id.')" class="bg-pink-500 shadow w-6 h-6 p-1 rounded">
+								<input type="hidden" class="hidden" name="r'.$id.'" value="0">
+								<svg class="svg-privilege-read-'.$id.' hidden w-4 h-4 text-white" viewBox="0 0 172 172">
+									<g fill="none" stroke-width="none" stroke-miterlimit="10" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode:normal"><path d="M0 172V0h172v172z"/><path d="M145.433 37.933L64.5 118.8658 33.7337 88.0996l-10.134 10.1341L64.5 139.1341l91.067-91.067z" fill="currentColor" stroke-width="1"/>
+									</g>
+								</svg>
+							</div>
 						</div>
-					</div>
-				</td>
-				<td class="p-2 border-t border-grey-light whitespace-no-wrap">
-					<div class="flex cursor-pointer items-center">
-						<span class="inline-block px-3">Update</span>
-						<div onclick="checkbox_privilege_update('.$id.')" class="bg-pink-500 shadow w-6 h-6 p-1 rounded">
-							<input type="hidden" class="hidden" name="u'.$id.'" value="0">
-							<svg class="svg-privilege-update-'.$id.' hidden w-4 h-4 text-white" viewBox="0 0 172 172">
-								<g fill="none" stroke-width="none" stroke-miterlimit="10" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode:normal"><path d="M0 172V0h172v172z"/><path d="M145.433 37.933L64.5 118.8658 33.7337 88.0996l-10.134 10.1341L64.5 139.1341l91.067-91.067z" fill="currentColor" stroke-width="1"/>
-								</g>
-							</svg>
+					</td>
+					<td class="p-2 border-t border-grey-light whitespace-no-wrap">
+						<div class="flex cursor-pointer items-center">
+							<span class="inline-block px-3">Update</span>
+							<div onclick="checkbox_privilege_update('.$id.')" class="bg-pink-500 shadow w-6 h-6 p-1 rounded">
+								<input type="hidden" class="hidden" name="u'.$id.'" value="0">
+								<svg class="svg-privilege-update-'.$id.' hidden w-4 h-4 text-white" viewBox="0 0 172 172">
+									<g fill="none" stroke-width="none" stroke-miterlimit="10" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode:normal"><path d="M0 172V0h172v172z"/><path d="M145.433 37.933L64.5 118.8658 33.7337 88.0996l-10.134 10.1341L64.5 139.1341l91.067-91.067z" fill="currentColor" stroke-width="1"/>
+									</g>
+								</svg>
+							</div>
 						</div>
-					</div>
-				</td>
-				<td class="p-2 border-t border-grey-light whitespace-no-wrap">
-					<div class="flex cursor-pointer items-center">
-						<span class="inline-block px-3">Delete</span>
-						<div onclick="checkbox_privilege_destroy('.$id.')" class="bg-pink-500 shadow w-6 h-6 p-1 rounded">
-							<input type="hidden" class="hidden" name="d'.$id.'" value="0">
-							<svg class="svg-privilege-destroy-'.$id.' hidden w-4 h-4 text-white" viewBox="0 0 172 172">
-								<g fill="none" stroke-width="none" stroke-miterlimit="10" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode:normal"><path d="M0 172V0h172v172z"/><path d="M145.433 37.933L64.5 118.8658 33.7337 88.0996l-10.134 10.1341L64.5 139.1341l91.067-91.067z" fill="currentColor" stroke-width="1"/>
-								</g>
-							</svg>
+					</td>
+					<td class="p-2 border-t border-grey-light whitespace-no-wrap">
+						<div class="flex cursor-pointer items-center">
+							<span class="inline-block px-3">Delete</span>
+							<div onclick="checkbox_privilege_destroy('.$id.')" class="bg-pink-500 shadow w-6 h-6 p-1 rounded">
+								<input type="hidden" class="hidden" name="d'.$id.'" value="0">
+								<svg class="svg-privilege-destroy-'.$id.' hidden w-4 h-4 text-white" viewBox="0 0 172 172">
+									<g fill="none" stroke-width="none" stroke-miterlimit="10" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode:normal"><path d="M0 172V0h172v172z"/><path d="M145.433 37.933L64.5 118.8658 33.7337 88.0996l-10.134 10.1341L64.5 139.1341l91.067-91.067z" fill="currentColor" stroke-width="1"/>
+									</g>
+								</svg>
+							</div>
 						</div>
-					</div>
-				</td>
-			</tr>';
-
-			$temp .=
-			'</tbody>';
+					</td>
+				</tr>
+			</tbody>';
 		endforeach;
 
 		$temp =
@@ -506,7 +503,6 @@ class AdminController extends Master_Controller
 	}
 	function save_privilege()
 	{
-
 		$count = $this->get_count_privilege();
 
 		$menu_id = "";
@@ -525,12 +521,13 @@ class AdminController extends Master_Controller
 			// [0] => data
 			// [1] => data
 
-			$check_privilege = (int) $this->check_privilege();
+			$this->db->from("tbl_privileges");
+			$this->db->where("menu_id", $menu_id);
 
-			if($check_privilege > (int) 0)
+			if($this->db->get()->num_rows() > 0)
 			{
 				// UPDATE
-				$this->db->set("user_id", 2);
+				$this->db->set("user_id", 1);
 				$this->db->set("priv_create", $array_key['c'.$menu_id] == "1" ? 1 : 0);
 				$this->db->set("priv_read",   $array_key['r'.$menu_id] == "1" ? 1 : 0);
 				$this->db->set("priv_update", $array_key['u'.$menu_id] == "1" ? 1 : 0);
@@ -541,17 +538,20 @@ class AdminController extends Master_Controller
 			else
 			{
 				// INSERT
-				$this->insert_privilege();
+				$datas =
+				[
+					"user_id" 	  => 1,
+					"menu_id" 	  => $menu_id,
+					"priv_create" => $array_key['c'.$menu_id] == "1" ? 1 : 0,
+					"priv_read"   => $array_key['r'.$menu_id] == "1" ? 1 : 0,
+					"priv_update" => $array_key['u'.$menu_id] == "1" ? 1 : 0,
+					"priv_delete" => $array_key['d'.$menu_id] == "1" ? 1 : 0
+				];
+				$this->db->insert("tbl_privileges", $datas);
+				// $this->insert_privilege();
 			}
 
 		endforeach;
-	}
-
-	private function check_privilege()
-	{
-		$this->db->from("tbl_privileges");
-		$result = $this->db->get()->num_rows();
-		return $result;
 	}
 
 	private function insert_privilege()
@@ -585,6 +585,5 @@ class AdminController extends Master_Controller
 			];
 			$this->db->insert("tbl_privileges", $datas);
 		endforeach;
-
 	}
 }

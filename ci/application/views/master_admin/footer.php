@@ -19,6 +19,12 @@
     <!-- ADMIN JS -->
     <script src="<?php echo base_url('assets/js/admin.js') ?>"></script>
 
+    <!-- MOMENT JS -->
+    <script src="<?php echo base_url('assets/datetimepicker/moment.min.js') ?>"></script>
+
+    <!-- DATERANGEPICKER JS -->
+    <script src="<?php echo base_url('assets/datetimepicker/daterangepicker.js') ?>"></script>
+
     <!-- ADMIN DATATABLES JS -->
     <script src="<?php echo base_url('assets/js/datatables.admin.js') ?>"></script>
 

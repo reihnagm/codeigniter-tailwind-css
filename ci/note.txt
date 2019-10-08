@@ -28,3 +28,16 @@
 - Tips: if input type checkbox cannot reserved submit change to hidden
 - Tips: if error pgsql column doest not exists, delete column, and create new column
 - Tips: for handling if statement in foreach, problem is data (not incrementing) but getting last value or first value
+- Tips: in $(document).ready(function() {
+
+}) or $(function() {
+
+})
+use global variable e.g
+var foo
+$(function() {
+    foo = function() {
+
+    }
+})
+foo()
