@@ -75,7 +75,16 @@
 
         called_properties_global = function()
         {
-            
+            const updated_at = $("#updated_at").val();
+
+            $("#updated_at").daterangepicker({
+                singleDatePicker: true,
+                showDropdowns: true,
+                startDate: moment(updated_at, 'YYYY/MM/DD'),
+                locale: {
+                    format: 'YYYY/MM/DD'
+                }
+            });
         }
 
     });
@@ -92,7 +101,6 @@
             toggleModal();
         })
     }
-
 
     function destroy_user_datatables(id)
     {
@@ -122,37 +130,51 @@
         })
     }
 
+    function validate_update_user_datatables()
+    {
+        if($("#first_name").val() === '' || $("#last_name").val() == '')
+        {
+            alert('test');
+            return false;
+        }
+    }
+
     function submit_update_user_datatables(evt)
     {
-        setTimeout(() => {
-            $.post(base_url + "admin/update-user-datatables", $("#form-edit-user-datatables").serialize(), (data) => {
-                let data_parse = JSON.parse(data);
-                if(data_parse.valid)
-                {
-                    Swal.fire(
-                        data_parse.title,
-                        data_parse.desc,
-                        data_parse.type
-                    )
-                    location.reload();
-                    close_modal();
-                }
-                else
-                {
-                    Swal.fire(
-                        data_parse.title,
-                        data_parse.desc,
-                        data_parse.type
-                    )
-                }
-            });
-        }, 400);
 
-        evt.innerHTML = '<img src="'+base_url+'assets/loader/loader.gif" style="width: 25px;">';
-        evt.classList.add("cursor-not-allowed");
-        evt.classList.add("opacity-50");
-        evt.classList.remove("hover:text-pink-300");
-        evt.disabled = true;
+        if(validate_update_user_datatables())
+        {
+            setTimeout(() => {
+                $.post(base_url + "admin/update-user-datatables", $("#form-edit-user-datatables").serialize(), (data) => {
+                    let data_parse = JSON.parse(data);
+                    if(data_parse.valid)
+                    {
+                        Swal.fire(
+                            data_parse.title,
+                            data_parse.desc,
+                            data_parse.type
+                        )
+                        location.reload();
+
+                        evt.innerHTML = '<img src="'+base_url+'assets/loader/loader.gif" style="width: 25px;">';
+                        evt.classList.add("cursor-not-allowed");
+                        evt.classList.add("opacity-50");
+                        evt.classList.remove("hover:text-pink-300");
+                        evt.disabled = true;
+                        
+                        close_modal();
+                    }
+                    else
+                    {
+                        Swal.fire(
+                            data_parse.title,
+                            data_parse.desc,
+                            data_parse.type
+                        )
+                    }
+                });
+            }, 400);
+        }
     }
 
     function close_modal()

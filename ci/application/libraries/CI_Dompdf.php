@@ -39,19 +39,23 @@ class CI_Dompdf
 
 	function create($mode = 'download')
 	{
-   		if (is_null($this->html)) {
+   		if (is_null($this->html))
+        {
 			show_error("HTML is not set");
 		}
 
-   		if (is_null($this->path)) {
+   		if (is_null($this->path))
+        {
 			show_error("Path is not set");
 		}
 
-   		if (is_null($this->paper_size)) {
+   		if (is_null($this->paper_size))
+        {
 			show_error("Paper size not set");
 		}
 
-		if (is_null($this->orientation)) {
+		if (is_null($this->orientation))
+        {
 			show_error("Orientation not set");
 		}
 
@@ -65,7 +69,6 @@ class CI_Dompdf
 
 	    if($mode == 'save')
         {
-
     	    $this->CI->load->helper('file');
 
     	    if(file_put_contents($this->path.$this->filename, $dompdf->output()))
@@ -76,11 +79,9 @@ class CI_Dompdf
             {
 				show_error("PDF could not be written to the path");
 		    }
-
 		}
         else
         {
-
 			if($dompdf->stream($this->filename))
             {
 				return TRUE;
@@ -89,7 +90,6 @@ class CI_Dompdf
             {
 				show_error("PDF could not be streamed");
 			}
-
         }
 	}
 

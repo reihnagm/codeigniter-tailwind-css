@@ -28,14 +28,17 @@
     <!-- ADMIN DATATABLES JS -->
     <script src="<?php echo base_url('assets/js/datatables.admin.js') ?>"></script>
 
-    <!-- ADMIN MODAL -->
+    <!-- ADMIN MODAL JS-->
     <script src="<?php echo base_url('assets/js/modal.admin.js') ?>"></script>
 
     <!-- SWEETALERT2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 
-    <!-- PACE -->
-    <script src="<?php echo base_url('assets/js/pace.min.js') ?>"  type="text/javascript"></script>
+    <!-- PARSLY JS -->
+    <script src="<?php echo base_url('assets/parsley/parsley.min.js') ?>"></script>
+
+    <!-- PACE JS -->
+    <script src="<?php echo base_url('assets/js/pace.min.js') ?>"></script>
 
     </body>
 </html>

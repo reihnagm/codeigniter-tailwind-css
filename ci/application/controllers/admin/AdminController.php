@@ -147,9 +147,11 @@ class AdminController extends Master_Controller
 		$male_selected = $user['gender'] == "Male" ? "selected" : "";
 		$female_selected = $user['gender'] == "Female" ? "selected" : "";
 
-		$exp_created_at = str_replace('-', '/', $user['created_at']);
+		$replace_created_at = str_replace('-', '/', $user['created_at']);
+		$replace_updated_at = str_replace('-', '/', $user['updated_at']);
 
-		$created_at = $exp_created_at;
+		$created_at = $replace_created_at;
+		$updated_at = $replace_updated_at;
 
 		$temp =
 		'<div class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center">
@@ -187,7 +189,7 @@ class AdminController extends Master_Controller
 						 		<label class="block text-gray-700 text-sm font-bold mb-2" for="'.$key[1].'">
 						   		'.$key[1].'
 						 		</label>
-						 		<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="'.$key[1].'" name="'.$key[1].'" type="text" placeholder="'.$key[1].'" value="'.$user['first_name'].'">
+						 		<input data-parsley-required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="'.$key[1].'" name="'.$key[1].'" type="text" placeholder="'.$key[1].'" value="'.$user['first_name'].'">
 					   		</div>
 
 							<div class="block mx-3">
@@ -238,7 +240,14 @@ class AdminController extends Master_Controller
 							 	<label class="block text-gray-700 text-sm font-bold mb-2" for="'.$key[7].'">
 							   		'.$key[7].'
 							 	</label>
-							 	<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="'.$key[7].'" type="text" placeholder="'.$key[7].'" name="'.$key[7].'" value="'.$created_at.'">
+							 	<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="'.$key[7].'" type="text" placeholder="'.$key[7].'" name="'.$key[7].'" value="'.$created_at.'" disabled>
+						   	</div>
+
+							<div class="block mx-3">
+							 	<label class="block text-gray-700 text-sm font-bold mb-2" for="'.$key[8].'">
+							   		'.$key[8].'
+							 	</label>
+							 	<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="'.$key[8].'" type="text" placeholder="'.$key[8].'" name="'.$key[8].'" value="'.$updated_at.'">
 						   	</div>
 						</div>
 					</form>
@@ -269,6 +278,7 @@ class AdminController extends Master_Controller
 		$email = $this->input->post("email");
 		$age = $this->input->post("age");
 		$gender = $this->input->post("gender");
+		$updated_at = $this->input->post("updated_at");
 
 		$data =
 		[
@@ -277,7 +287,8 @@ class AdminController extends Master_Controller
 			"username" => $username,
 			"email" => $email,
 			"age" => $age,
-			"gender" => $gender
+			"gender" => $gender,
+			"updated_at" => $updated_at
 		];
 
 		$this->db->trans_start();
