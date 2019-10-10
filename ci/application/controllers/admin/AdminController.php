@@ -274,16 +274,17 @@ class AdminController extends Master_Controller
 
 					</form>
 
+					<div class="flex flex-wrap overflow-hidden w-full justify-end my-6">
+						<div class="w-1/3">
+							<button id="submit_update_user_datatables" type="submit" onclick="submit_update_user_datatables();" class="w-1/6 px-2 py-2 bg-pink-500 rounded-lg text-white hover:text-pink-300 mr-2">Submit</button>
+
+							<button onclick="close_modal();" class="w-1/6 px-2 py-2 bg-pink-500 rounded-lg text-white hover:text-pink-300">Close</button>
+						</div>
+					</div>
+
+
 				</div>
 
-				<div class="flex flex-wrap overflow-hidden justify-start my-6">
-
-					<button id="submit_update_user_datatables" type="submit" onclick="submit_update_user_datatables();" class=" px-2 py-2 bg-pink-500 rounded-lg text-white hover:text-pink-300 mr-2">Submit</button>
-
-
-					<button onclick="close_modal();" class="w-1/4 px-2 py-2 bg-pink-500 rounded-lg text-white hover:text-pink-300">Close</button>
-
-				</div>
 
 			</div>
 
