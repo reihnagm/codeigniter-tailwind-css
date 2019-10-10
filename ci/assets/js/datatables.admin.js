@@ -132,21 +132,30 @@
 
     function validate_update_user_datatables()
     {
-        if($("#first_name").val() === '' || $("#last_name").val() == '')
+        if($("#first_name").val() === '' || $("#last_name").val() === '' || $("#username").val() === '')
         {
             alert('test');
             return false;
         }
+
+        $("#submit_update_user_datatables").text('');
+        $("#submit_update_user_datatables").append('<img src="'+base_url+'assets/loader/loader.gif" style="width: 25px; display: block; margin: 0 auto;">');
+        $("#submit_update_user_datatables").addClass("cursor-not-allowed");
+        $("#submit_update_user_datatables").addClass("opacity-50");
+        $("#submit_update_user_datatables").removeClass("hover:text-pink-300");
+        $("#submit_update_user_datatables").prop("disabled",true);
+
+        return true;
     }
 
     function submit_update_user_datatables(evt)
     {
-
         if(validate_update_user_datatables())
         {
             setTimeout(() => {
+                var event_copy = evt;
                 $.post(base_url + "admin/update-user-datatables", $("#form-edit-user-datatables").serialize(), (data) => {
-                    let data_parse = JSON.parse(data);
+                    const data_parse = JSON.parse(data);
                     if(data_parse.valid)
                     {
                         Swal.fire(
@@ -155,13 +164,6 @@
                             data_parse.type
                         )
                         location.reload();
-
-                        evt.innerHTML = '<img src="'+base_url+'assets/loader/loader.gif" style="width: 25px;">';
-                        evt.classList.add("cursor-not-allowed");
-                        evt.classList.add("opacity-50");
-                        evt.classList.remove("hover:text-pink-300");
-                        evt.disabled = true;
-                        
                         close_modal();
                     }
                     else

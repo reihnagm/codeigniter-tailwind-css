@@ -2,17 +2,14 @@
 {
     max-height: 0;
 }
-
 .max-height-with-transition
 {
     transition: max-height 0.2s ease-in-out;
 }
-
 .modal
 {
     transition: opacity 0.25s ease;
 }
-
 body.modal-active
 {
     overflow-x: hidden;
@@ -28,7 +25,6 @@ body.modal-active
     height: 100%;
     background: rgba(255,255,255,0.2);
 }
-
 .loader
 {
     width: 500px;
