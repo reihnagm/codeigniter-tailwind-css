@@ -137,9 +137,9 @@ class AdminController extends Master_Controller
 	{
 		$id = $this->input->get("id");
 
-		$this->db->select("a.id, a.first_name, a.last_name, a.username, a.email, a.gender,  a.age, a.created_at, a.updated_at");
+		$this->db->select("a.id, a.first_name, a.last_name, a.username, a.email, a.gender,  a.age, a.created_at, a.updated_at, a.avatar");
 		$this->db->from("tbl_users a");
-		$this->db->where("a.id", $id);
+		$this->db->where("a.id", "$id");
 		$user = $this->db->get()->row_array();
 
 		$key = array_keys($user);
@@ -152,6 +152,7 @@ class AdminController extends Master_Controller
 
 		$created_at = $replace_created_at;
 		$updated_at = $replace_updated_at;
+		$avatar = $user['avatar'];
 
 		// <div>
 		// 	<div class="block mx-3">
@@ -217,9 +218,6 @@ class AdminController extends Master_Controller
 								<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="'.$key[3].'" type="text" placeholder="'.$key[3].'" name="'.$key[3].'" value="'.$user['username'].'">
 							</div>
 
-
-
-
 						</div>
 
 						<div class="w-1/3 overflow-hidden my-5 px-5">
@@ -257,9 +255,8 @@ class AdminController extends Master_Controller
 								<label class="block text-gray-700 text-sm font-bold mb-2" for="'.$key[7].'">
 									'.$key[7].'
 								</label>
-								<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="'.$key[7].'" type="text" placeholder="'.$key[7].'" name="'.$key[7].'" value="'.$user['age'].'">
+								<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="'.$key[7].'" type="text" placeholder="'.$key[7].'" name="'.$key[7].'" value="'.$created_at.'">
 							</div>
-
 
 						</div>
 
@@ -268,7 +265,16 @@ class AdminController extends Master_Controller
 								<label class="block text-gray-700 text-sm font-bold mb-2" for="'.$key[8].'">
 									'.$key[8].'
 								</label>
-								<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="'.$key[8].'" type="text" placeholder="'.$key[8].'" name="'.$key[8].'" value="'.$created_at.'" disabled>
+								<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="'.$key[8].'" type="text" placeholder="'.$key[8].'" name="'.$key[8].'" value="'.$updated_at.'" disabled>
+							</div>
+
+							<div class="block my-5 mx-3">
+								<label class="block text-gray-700 text-sm font-bold mb-2" for="'.$key[9].'">
+									'.$key[9].'
+								</label>
+								<div class="bg-gray-400">
+									<img class="h-40 w-full object-cover" src="'.$avatar.'">
+								</div>
 							</div>
 						</div>
 
@@ -294,76 +300,6 @@ class AdminController extends Master_Controller
 			"temp" => $temp
 		]);
 	}
-
-	// <div class="w-1/3 overflow-hidden">
-	// 	<div class="block mx-3">
-	// 		<label class="block text-gray-700 text-sm font-bold mb-2" for="'.$key[0].'">
-	// 		'.$key[0].'
-	// 		</label>
-	// 		<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="'.$key[0].'" name="'.$key[0].'" type="text" placeholder="'.$key[0].'" value="'.$user['id'].'" readonly>
-	// 	</div>
-	//
-	// 	<div class="block mx-3">
-	// 		<label class="block text-gray-700 text-sm font-bold mb-2" for="'.$key[1].'">
-	// 		'.$key[1].'
-	// 		</label>
-	// 		<input data-parsley-required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="'.$key[1].'" name="'.$key[1].'" type="text" placeholder="'.$key[1].'" value="'.$user['first_name'].'">
-	// 	</div>
-	//
-	// 	<div class="block mx-3">
-	// 		<label class="block text-gray-700 text-sm font-bold mb-2" for="'.$key[2].'">
-	// 		'.$key[2].'
-	// 		</label>
-	// 		<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="'.$key[2].'" type="text" placeholder="'.$key[2].'" name="'.$key[2].'" value="'.$user['last_name'].'">
-	// 	</div>
-	//
-	// 	<div class="block mx-3">
-	// 		<label class="block text-gray-700 text-sm font-bold mb-2" for="'.$key[3].'">
-	// 		'.$key[3].'
-	// 		</label>
-	// 		<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="'.$key[3].'" type="text" placeholder="'.$key[3].'" name="'.$key[3].'" value="'.$user['username'].'">
-	// 	</div>
-	// </div>
-	// <div class="w-1/3 overflow-hidden">
-	// 	<div class="block mx-3">
-	// 		<label class="block text-gray-700 text-sm font-bold mb-2" for="'.$key[4].'">
-	// 			'.$key[4].'
-	// 		</label>
-	// 		<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="'.$key[4].'" type="text" placeholder="'.$key[4].'" name="'.$key[4].'" value="'.$user['email'].'">
-	// 	</div>
-	//
-	// 	<div class="block mx-3">
-	// 		<label class="block text-gray-700 text-sm font-bold mb-2" for="'.$key[5].'">
-	// 			'.$key[5].'
-	// 		</label>
-	// 		<div class="relative">
-	// 		<select name="'.$key[5].'" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-2 px-3 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
-	// 		  <option '.$male_selected.'>Male</option>
-	// 		  <option '.$female_selected.'>Female</option>
-	// 		</select>
-	// 		<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-	// 		  <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
-	// 		</div>
-	// 	</div>
-	//
-	// 	<div class="block mx-3">
-	// 		<label class="block text-gray-700 text-sm font-bold mb-2" for="'.$key[6].'">
-	// 			'.$key[6].'
-	// 		</label>
-	// 		<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="'.$key[6].'" type="text" placeholder="'.$key[6].'" name="'.$key[6].'" value="'.$user['age'].'">
-	// 	</div>
-	//
-	// 	<div class="block mx-3">
-	// 		<label class="block text-gray-700 text-sm font-bold mb-2" for="'.$key[7].'">
-	// 			'.$key[7].'
-	// 		</label>
-	// 		<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="'.$key[7].'" type="text" placeholder="'.$key[7].'" name="'.$key[7].'" value="'.$created_at.'" disabled>
-	// 	</div>
-	// </div>
-	// <div class="w-1/3 overflow-hidden">
-	// 	<p>test</p>
-	// </div>
-
 
 	public function update_user_datatables()
 	{
