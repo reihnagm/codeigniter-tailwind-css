@@ -273,7 +273,7 @@ class AdminController extends Master_Controller
 									'.$key[9].'
 								</label>
 								<div class="bg-gray-400">
-									<img class="h-40 w-full object-cover" src="'.$avatar.'">
+									<img class="h-40 w-full object-contain" src="'.$avatar.'">
 								</div>
 							</div>
 						</div>
@@ -310,7 +310,7 @@ class AdminController extends Master_Controller
 		$email = $this->input->post("email");
 		$age = $this->input->post("age");
 		$gender = $this->input->post("gender");
-		$updated_at = $this->input->post("updated_at");
+		$updated_at =  Date('Y-m-d');
 
 		$data =
 		[
