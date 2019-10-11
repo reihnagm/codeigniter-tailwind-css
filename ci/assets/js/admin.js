@@ -40,7 +40,9 @@ $(function() {
             child_nav_admin.style.maxHeight =  child_nav_admin.scrollHeight + "px";
         }
     });
+
 });
+
 function checkbox_privilege_create(id)
 {
     let svg = $(".svg-privilege-create-"+id);
@@ -117,7 +119,6 @@ function checkbox_privilege_destroy(id)
         svg.addClass("hidden");
     }
 }
-
 
 $("#form-privilege").submit(function(e){
     e.preventDefault();

@@ -86,6 +86,9 @@
                     format: 'YYYY/MM/DD'
                 }
             });
+
+
+            $(".daterangepicker").addClass("custom-movement");
         }
 
     });

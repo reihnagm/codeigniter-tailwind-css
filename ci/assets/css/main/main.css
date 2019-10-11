@@ -6,10 +6,10 @@
 {
     transition: max-height 0.2s ease-in-out;
 }
-#created_at .daterangepicker
+.daterangepicker.custom-movement
 {
     position: absolute !important;
-    top: 50% !important;
+    top: 60% !important;
     left: 50% !important;
 }
 .modal
