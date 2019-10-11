@@ -75,13 +75,14 @@
 
         called_properties_global = function()
         {
-            const updated_at = $("#updated_at").val();
+            const created_at = $("#created_at").val();
 
-            $("#updated_at").daterangepicker({
+            $("#created_at").daterangepicker({
                 singleDatePicker: true,
                 showDropdowns: true,
-                startDate: moment(updated_at, 'YYYY/MM/DD'),
-                locale: {
+                startDate: moment(created_at, 'YYYY/MM/DD'),
+                locale:
+                {
                     format: 'YYYY/MM/DD'
                 }
             });

@@ -152,6 +152,9 @@ class AdminController extends Master_Controller
 
 		$created_at = $replace_created_at;
 		$updated_at = $replace_updated_at;
+
+		$updated_at = date('M-D-d-Y', strtotime($updated_at));
+
 		$avatar = $user['avatar'];
 
 		// <div>

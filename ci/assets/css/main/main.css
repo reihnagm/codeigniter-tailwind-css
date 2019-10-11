@@ -6,6 +6,12 @@
 {
     transition: max-height 0.2s ease-in-out;
 }
+#created_at .daterangepicker
+{
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+}
 .modal
 {
     transition: opacity 0.25s ease;
