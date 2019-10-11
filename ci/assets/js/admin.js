@@ -42,6 +42,7 @@ $(function() {
     });
 
 });
+ 
 
 function checkbox_privilege_create(id)
 {

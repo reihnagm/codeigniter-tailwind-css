@@ -1,206 +1,242 @@
-    // CHECKING BROWSER
-    const user_agent = $("[name=user_agent]").val();
+// CHECKING BROWSER
+const user_agent = $("[name=user_agent]").val();
 
-    // GETTING BASE URL
-    const base_url = $("[name=base_url]").val();
+// GETTING BASE URL
+const base_url = $("[name=base_url]").val();
 
-    let url = user_agent == "Firefox" ? "all-user-datatables" : "admin/all-user-datatables";
+let url = user_agent == "Firefox" ? "all-user-datatables" : "admin/all-user-datatables";
 
-    var called_properties_global;
+var called_properties_global;
 
-    $(function() {
-        let all_user_datatables = $('#all-user-datatables').DataTable({
-            dom: '"<"flex items-center"<"flex-grow items-center w-2/4"l><"flex flex-grow items-center w-2/4 justify-end"f>><"w-full"rt><"flex items-center"<"flex-grow items-center w-2/4"i><"flex flex-grow items-center w-2/4 justify-end"p>>',
-            responsive: true,
-            serverSide: true,
-            ajax:
+$(function() {
+    let all_user_datatables = $('#all-user-datatables').DataTable({
+        dom: '"<"flex items-center"<"flex-grow items-center w-2/4"l><"flex flex-grow items-center w-2/4 justify-end"f>><"w-full"rt><"flex items-center"<"flex-grow items-center w-2/4"i><"flex flex-grow items-center w-2/4 justify-end"p>>',
+        responsive: true,
+        serverSide: true,
+        ajax:
+        {
+            url: base_url + "admin/all-user-datatables",
+            dataType: "JSON",
+            type: "GET"
+        },
+        columnDefs: [
             {
-                url: base_url + "admin/all-user-datatables",
-                dataType: "JSON",
-                type: "GET"
+                targets: "_all",
+                createdCell: function (td, cellData, rowData, row, col)
+                {
+                    $(td).css("color", "#2b6cb0")
+                    $(td).css("whitespace", "pre")
+                    $(td).css("font-size", ".75rem")
+                    $(td).css("padding", ".5rem")
+                    $(td).css("border-color", "#edf2f7")
+                    $(td).css("border-top-width", "1px")
+                    $(td).css("font-family", "Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace")
+                }
+            }
+        ],
+        columns: [
+            {
+                data: "no",
+                searchable: false,
+                orderable: false,
             },
-            columnDefs: [
-                {
-                    targets: "_all",
-                    createdCell: function (td, cellData, rowData, row, col)
-                    {
-                        $(td).css("color", "#2b6cb0")
-                        $(td).css("whitespace", "pre")
-                        $(td).css("font-size", ".75rem")
-                        $(td).css("padding", ".5rem")
-                        $(td).css("border-color", "#edf2f7")
-                        $(td).css("border-top-width", "1px")
-                        $(td).css("font-family", "Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace")
-                    }
-                }
-            ],
-            columns: [
-                {
-                    data: "no",
-                    searchable: false,
-                    orderable: false,
-                },
-                {
-                    data: "first_name"
-                },
-                {
-                    data: "last_name"
-                },
-                {
-                    data: "username"
-                },
-                {
-                    data: "email"
-                },
-                {
-                    data: "created_at"
-                },
-                {
-                    data: "option"
-                }
-            ]
-        }).on('processing.dt', function(e, settings, processing) {
-            $(".wrapper-loader").css('display', processing ? 'block' : 'none');
-            $(".loader").css('display', processing ? 'block' : 'none');
-        })
-
-        all_user_datatables.on('order.dt search.dt', function() {
-            all_user_datatables.column(0, {
-                search: 'applied',
-                order: 'applied'
-            }).nodes().each(function(cell, i) {
-                cell.innerHTML = i + 1;
-            });
-        }).draw()
-
-        called_properties_global = function()
-        {
-            const created_at = $("#created_at").val();
-
-            $("#created_at").daterangepicker({
-                singleDatePicker: true,
-                showDropdowns: true,
-                startDate: moment(created_at, 'YYYY/MM/DD'),
-                locale:
-                {
-                    format: 'YYYY/MM/DD'
-                }
-            });
-
-
-            $(".daterangepicker").addClass("custom-movement");
-        }
-
-    });
-
-    function edit_user_datatables(id)
-    {
-        let url = user_agent == "Firefox" ? "edit-user-datatables" : "admin/edit-user-datatables";
-
-        $.get(base_url + "admin/edit-user-datatables", { id: id })
-        .done(function(data) {
-            let data_parse = JSON.parse(data);
-            $("#wrapper-modal").html(data_parse.temp);
-            called_properties_global();
-            toggleModal();
-        })
-    }
-
-    function destroy_user_datatables(id)
-    {
-        $.post(base_url + "admin/destroy-user-datatables", { id : id})
-        .done(function(data) {
-            let data_parse = JSON.parse(data);
-            if(data_parse.valid)
             {
-                Swal.fire(
-                    data_parse.title,
-                    data_parse.desc,
-                    data_parse.type
-                )
-                location.reload();
-                close_modal();
-            }
-            else
+                data: "first_name"
+            },
             {
-                Swal.fire(
-                    data_parse.title,
-                    data_parse.desc,
-                    data_parse.type
-                )
+                data: "last_name"
+            },
+            {
+                data: "username"
+            },
+            {
+                data: "email"
+            },
+            {
+                data: "created_at"
+            },
+            {
+                data: "option"
             }
+        ]
+    }).on('processing.dt', function(e, settings, processing) {
+        $(".wrapper-loader").css('display', processing ? 'block' : 'none');
+        $(".loader").css('display', processing ? 'block' : 'none');
+    })
 
-            toggleModal();
-        })
+    all_user_datatables.on('order.dt search.dt', function() {
+        all_user_datatables.column(0, {
+            search: 'applied',
+            order: 'applied'
+        }).nodes().each(function(cell, i) {
+            cell.innerHTML = i + 1;
+        });
+    }).draw()
+
+    called_properties_global = function()
+    {
+        const created_at = $("#created_at").val();
+
+        $("#created_at").daterangepicker({
+            singleDatePicker: true,
+            showDropdowns: true,
+            startDate: moment(created_at, 'YYYY/MM/DD'),
+            locale:
+            {
+                format: 'YYYY/MM/DD'
+            }
+        });
+
+
+        $(".daterangepicker").addClass("custom-movement");
     }
 
-    function validate_update_user_datatables()
-    {
-        if($("#first_name").val() === '' || $("#last_name").val() === '' || $("#username").val() === '')
+});
+
+function edit_user_datatables(id)
+{
+    let url = user_agent == "Firefox" ? "edit-user-datatables" : "admin/edit-user-datatables";
+
+    $.get(base_url + "admin/edit-user-datatables", { id: id })
+    .done(function(data) {
+        let data_parse = JSON.parse(data);
+        $("#wrapper-modal").html(data_parse.temp);
+        called_properties_global();
+        toggleModal();
+    })
+}
+
+function destroy_user_datatables(id)
+{
+    $.post(base_url + "admin/destroy-user-datatables", { id : id})
+    .done(function(data) {
+        let data_parse = JSON.parse(data);
+        if(data_parse.valid)
         {
-            alert('test');
-            return false;
+            Swal.fire(
+                data_parse.title,
+                data_parse.desc,
+                data_parse.type
+            )
+            location.reload();
+            close_modal();
+        }
+        else
+        {
+            Swal.fire(
+                data_parse.title,
+                data_parse.desc,
+                data_parse.type
+            )
         }
 
-        $("#submit_update_user_datatables").text('');
-        $("#submit_update_user_datatables").append('<img src="'+base_url+'assets/loader/loader.gif" style="width: 25px; display: block; margin: 0 auto;">');
-        $("#submit_update_user_datatables").addClass("cursor-not-allowed");
-        $("#submit_update_user_datatables").addClass("opacity-50");
-        $("#submit_update_user_datatables").removeClass("hover:text-pink-300");
-        $("#submit_update_user_datatables").prop("disabled",true);
+        toggleModal();
+    })
+}
 
-        return true;
-    }
-
-    function submit_update_user_datatables(evt)
+function validate_update_user_datatables()
+{
+    if($("#first_name").val() === '' || $("#last_name").val() === '' || $("#username").val() === '')
     {
-        if(validate_update_user_datatables())
-        {
-            setTimeout(() => {
-                var event_copy = evt;
-                $.post(base_url + "admin/update-user-datatables", $("#form-edit-user-datatables").serialize(), (data) => {
-                    const data_parse = JSON.parse(data);
-                    if(data_parse.valid)
-                    {
-                        Swal.fire(
-                            data_parse.title,
-                            data_parse.desc,
-                            data_parse.type
-                        )
-                        location.reload();
-                        close_modal();
-                    }
-                    else
-                    {
-                        Swal.fire(
-                            data_parse.title,
-                            data_parse.desc,
-                            data_parse.type
-                        )
-                    }
-                });
-            }, 400);
-        }
+        alert('test');
+        return false;
     }
 
-    function close_modal()
+    $("#submit_update_user_datatables").text('');
+    $("#submit_update_user_datatables").append('<img src="'+base_url+'assets/loader/loader.gif" style="width: 25px; display: block; margin: 0 auto;">');
+    $("#submit_update_user_datatables").addClass("cursor-not-allowed");
+    $("#submit_update_user_datatables").addClass("opacity-50");
+    $("#submit_update_user_datatables").removeClass("hover:text-pink-300");
+    $("#submit_update_user_datatables").prop("disabled",true);
+
+    return true;
+}
+
+function submit_update_user_datatables(evt)
+{
+    if(validate_update_user_datatables())
+    {
+        setTimeout(() => {
+            var event_copy = evt;
+            $.post(base_url + "admin/update-user-datatables", $("#form-edit-user-datatables").serialize(), (data) => {
+                const data_parse = JSON.parse(data);
+                if(data_parse.valid)
+                {
+                    Swal.fire(
+                        data_parse.title,
+                        data_parse.desc,
+                        data_parse.type
+                    )
+                    location.reload();
+                    close_modal();
+                }
+                else
+                {
+                    Swal.fire(
+                        data_parse.title,
+                        data_parse.desc,
+                        data_parse.type
+                    )
+                }
+            });
+        }, 400);
+    }
+}
+
+function close_modal()
+{
+    toggleModal();
+}
+
+$(document).keydown(function(event){
+    var key = (event.keyCode ? event.keyCode : event.which);
+    if (key == 27)
     {
         toggleModal();
     }
+});
 
-    $(document).keydown(function(event){
-        var key = (event.keyCode ? event.keyCode : event.which);
-        if (key == 27)
-        {
-            toggleModal();
-        }
-    });
+$(document).on("click", "#avatar-trigger", function() {
+    $("#avatar").trigger("click");
+});
 
-    function toggleModal ()
+$(document).on("change","#avatar", function() {
+    const file = $(this).val();
+    // "C:/fakepath/file"
+    const parts = file.split('.');
+    // ["C:\\fakepath\\pp","jpg"]
+    const ext = parts[parts.length - 1];
+    // jpg, png
+    if(is_allowed_ext(ext))
     {
-        const body = document.querySelector('body')
-        const modal = document.querySelector('.modal')
-        modal.classList.toggle('opacity-0')
-        modal.classList.toggle('pointer-events-none')
-        body.classList.toggle('modal-active')
+        const avatar = $("#avatar")[0].files[0];
+        const form = new FormData();
+        form.append("avatar", avatar);
     }
+    else
+    {
+
+    }
+});
+
+function is_allowed_ext(ext)
+{
+    switch (ext)
+    {
+        case 'jpg':
+        case 'jpeg':
+        case 'png':
+        case 'gif':
+        return true;
+    }
+    return false;
+}
+
+function toggleModal ()
+{
+    const body = document.querySelector('body')
+    const modal = document.querySelector('.modal')
+    modal.classList.toggle('opacity-0')
+    modal.classList.toggle('pointer-events-none')
+    body.classList.toggle('modal-active')
+}

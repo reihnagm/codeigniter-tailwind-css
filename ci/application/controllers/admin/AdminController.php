@@ -275,8 +275,11 @@ class AdminController extends Master_Controller
 								<label class="block text-gray-700 text-sm font-bold mb-2" for="'.$key[9].'">
 									'.$key[9].'
 								</label>
-								<div class="bg-gray-400">
-									<img class="h-40 w-full object-contain" src="'.$avatar.'">
+								<div class="bg-gray-400 hover:bg-gray-500 cursor-pointer">
+									<form id="form-'.$key[9].'" enctype="mulitpart/form-data">
+										<input id="'.$key[9].'" type="file" class="hidden" name="'.$key[9].'" >
+										<img id="'.$key[9].'-trigger" class="h-40 w-full object-contain" src="'.$avatar.'">
+									</form>
 								</div>
 							</div>
 						</div>
