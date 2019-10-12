@@ -8,11 +8,11 @@ class AuthController extends Master_Controller
     {
         parent::__construct();
     }
-    public function login()
+    public function sign_in()
     {
 
         dd('test');
-        
+
         if($this->user_model->is_logged_in())
         {
             redirect('profile');
@@ -30,7 +30,7 @@ class AuthController extends Master_Controller
         unset($_SESSION['user_id'], $_SESSION['logged_in'] );
         redirect('profile');
     }
-    public function register()
+    public function sign_up()
     {
         $this->user_model->__insert();
         $this->send_email_verification($this->input->post('email'), $_SESSION['token']);

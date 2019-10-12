@@ -1,6 +1,7 @@
-<div class="flex justify-center mt-20">
-    <div class="w-full max-w-xs">
-        <form action="<?php echo base_url(); ?>login" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+<div class="flex flex-wrap overflow-hidden justify-center mt-20">
+    <div class="w-1/3 overflow-hidden">
+
+        <form action="<?php echo base_url() ?>sign-in" method="post" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
                     Email
@@ -16,21 +17,28 @@
             </div>
 
             <div class="flex items-center justify-between">
-                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
                     Sign In
                 </button>
                 <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#">
                     Forgot Password?
                 </a>
             </div>
+
+            <a href="<?php echo base_url() ?>sign-up-page" class="mt-4 text-right text-sm block align-baseline font-bold text-blue-500 hover:text-blue-800">
+                Register
+            </a>
+
         </form>
+
 
         <p class="text-center text-gray-500 text-xs">
             &copy; 2019 Codeigniter - Tailwind CSS. All rights reserved.
         </p>
+
     </div>
 </div>
 
-<!-- <div class="w-2/4">
+<div class="w-2/4">
     <div id="map" style="height: 600px;"></div>
-</div> -->
+</div>

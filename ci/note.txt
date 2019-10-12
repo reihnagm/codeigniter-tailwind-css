@@ -28,7 +28,7 @@
 - Tips: if input type checkbox cannot reserved submit change to hidden
 - Tips: if error pgsql column doest not exists, delete column, and create new column
 - Tips: for handling if statement in foreach, problem is data (not incrementing) but getting last value or first value
-- Tips: mkdir() invalid path solution
+- Tips: if button cannot submit, change type="button" to type="submit"
 - Tips: in $(document).ready(function() {
 
 }) or $(function() {

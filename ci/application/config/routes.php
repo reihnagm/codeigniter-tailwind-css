@@ -2,10 +2,13 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 // LOGIN
-$route['login']['POST'] = 'auth/AuthController/login';
+$route['sign-in']['POST'] = 'auth/AuthController/sign_in';
 
 // REGISTER
-$route['register']['POST'] = 'auth/AuthController/register';
+$route['sign-up']['POST'] = 'auth/AuthController/sign_up';
+
+// REGISTER PAGE
+$route['sign-up-page']['POST'] = 'auth/AuthController/sign_up_page';
 
 // LOGOUT
 $route['logout']['POST'] = 'auth/AuthController/logout';
