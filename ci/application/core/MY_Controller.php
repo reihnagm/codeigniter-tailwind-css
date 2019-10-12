@@ -3,7 +3,8 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class Master_Controller extends CI_Controller {
+class Master_Controller extends CI_Controller
+ {
 
     public function __construct()
     {

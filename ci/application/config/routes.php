@@ -2,13 +2,19 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 // LOGIN
-$route['login']['POST'] = 'auth/LoginController/login';
+$route['login']['POST'] = 'auth/AuthController/login';
 
 // REGISTER
-$route['register']['POST'] = 'auth/RegisterController/register';
+$route['register']['POST'] = 'auth/AuthController/register';
 
 // LOGOUT
-$route['logout']['POST'] = 'auth/LogoutController/logout';
+$route['logout']['POST'] = 'auth/AuthController/logout';
+
+// VERIFY
+$route['verify/(:any)/(:any)'] = 'auth/AuthController/$1/$1';
+
+// PROFILE
+$route['profile'] = 'user/UserController/profile';
 
 // ADMIN
 $route['admin']['GET'] = 'admin/AdminController/index';
