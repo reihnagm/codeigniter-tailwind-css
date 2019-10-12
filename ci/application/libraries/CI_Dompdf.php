@@ -4,7 +4,6 @@ use Dompdf\Dompdf;
 
 class CI_Dompdf
 {
-
     public $html; // or use var
     public $path; // or use var
     public $filename; // or use var
@@ -62,9 +61,11 @@ class CI_Dompdf
 		Dompdf\Autoloader::register();
 
 	    $dompdf = new Dompdf\Dompdf();
+        $dompdf->set_option('enable_html5_parser', true);
+        $dompdf->set_option('defaultFont', 'Helvetica');
 	    $dompdf->load_html($this->html);
 	    $dompdf->set_paper($this->paper_size, $this->orientation);
-        $dompdf->set_option('defaultFont', 'Helvetica');
+
 	    $dompdf->render();
 
 	    if($mode == 'save')
@@ -92,5 +93,4 @@ class CI_Dompdf
 			}
         }
 	}
-
 }
