@@ -10,9 +10,6 @@ class AuthController extends Master_Controller
     }
     public function sign_in()
     {
-
-        dd('test');
-
         if($this->user_model->is_logged_in())
         {
             redirect('profile');
@@ -34,6 +31,12 @@ class AuthController extends Master_Controller
     {
         $this->user_model->__insert();
         $this->send_email_verification($this->input->post('email'), $_SESSION['token']);
+    }
+    public function sign_up_page()
+    {
+        $this->load->view("master_global/header");
+        $this->load->view("auth/sign_up_page");
+        $this->load->view("master_global/footer");
     }
     private function send_email_verification($email, $token)
     {

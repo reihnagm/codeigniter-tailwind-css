@@ -7,6 +7,9 @@
     integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
     crossorigin="anonymous"></script>
 
+    <!-- AUTH -->
+    <script src="<?php echo base_url('assets/js/auth.js') ?>"></script>
+
     <!-- DATERANGEPICKER JS -->
     <script src="<?php echo base_url('assets/datetimepicker/daterangepicker.js') ?>"></script>
 
@@ -17,7 +20,7 @@
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 
     <!-- LEAFLET JS -->
-    <script src="<?php echo base_url('assets/leaflet/leaflet.js'); ?>"></script>
+    <!-- <script src="<?php echo base_url('assets/leaflet/leaflet.js'); ?>"></script> -->
 
     <!-- COMMON JS -->
     <script src="<?php echo base_url('assets/js/common.js'); ?>"></script>

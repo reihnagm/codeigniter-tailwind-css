@@ -8,7 +8,7 @@ $route['sign-in']['POST'] = 'auth/AuthController/sign_in';
 $route['sign-up']['POST'] = 'auth/AuthController/sign_up';
 
 // REGISTER PAGE
-$route['sign-up-page']['POST'] = 'auth/AuthController/sign_up_page';
+$route['sign-up-page']['GET'] = 'auth/AuthController/sign_up_page';
 
 // LOGOUT
 $route['logout']['POST'] = 'auth/AuthController/logout';

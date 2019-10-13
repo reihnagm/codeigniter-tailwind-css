@@ -23,12 +23,13 @@
 
 - Tips: prop("disabled", true) only works in select option
 - Tips: Align is Horizontal if flex-col but is Vertical if flex-row
-- Tips: if url not found the problem maybe is user agent different
+- Tips: if url not found the problem maybe is user agent different e.g "url1/param1" or "url1"
 - Tips: padding with background margin without background
 - Tips: if input type checkbox cannot reserved submit change to hidden
 - Tips: if error pgsql column doest not exists, delete column, and create new column
 - Tips: for handling if statement in foreach, problem is data (not incrementing) but getting last value or first value
 - Tips: if button cannot submit, change type="button" to type="submit"
+- Tips: isset check empty or not session
 - Tips: in $(document).ready(function() {
 
 }) or $(function() {
@@ -38,7 +39,10 @@ use global variable e.g
 var foo
 $(function() {
     foo = function() {
-
+        Tips - if use onclick other same type e.g onchange, oninput etc, its no work
+        use $(document).on("click", "#id", function() {
+            its work
+        })
     }
 })
 foo()

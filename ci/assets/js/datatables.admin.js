@@ -6,7 +6,7 @@ const base_url = $("[name=base_url]").val();
 
 let url = user_agent == "Firefox" ? "all-user-datatables" : "admin/all-user-datatables";
 
-var called_properties_global;
+var global_func;
 
 $(function() {
     let all_user_datatables = $('#all-user-datatables').DataTable({
@@ -73,7 +73,7 @@ $(function() {
         });
     }).draw()
 
-    called_properties_global = function()
+    global_func = function()
     {
         const created_at = $("#created_at").val();
 
@@ -86,7 +86,6 @@ $(function() {
                 format: 'YYYY/MM/DD'
             }
         });
-
 
         $(".daterangepicker").addClass("custom-movement");
     }

@@ -29,17 +29,18 @@
 
 		    <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
 		        <div class="text-sm lg:flex-grow">
-		            <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
-		            	Docs
-		            </a>
-		            <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
-		            	Examples
-		            </a>
-		            <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white">
-		            	Blog
+					<?php if(isset($_SESSION['logged_in'])): ?>
+			            <a href="<?php echo site_url() ?>sign-out" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+							Sign Out
+			            </a>
+					<?php else: ?>
+						<a href="<?php echo site_url() ?>" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+					   	 	Sign In
+					    </a>
+					<?php endif; ?>
+		            <a href="<?php echo site_url() ?>sign-up-page" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+		            	Sign Up
 		            </a>
 		        </div>
 		    </div>
 		</nav>
-
-	
