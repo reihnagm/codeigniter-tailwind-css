@@ -100,7 +100,7 @@ function edit_user_datatables(id)
     .done(function(data) {
         let data_parse = JSON.parse(data);
         $("#wrapper-modal").html(data_parse.temp);
-        called_properties_global();
+        global_func();
         toggleModal();
     })
 }
