@@ -13,6 +13,9 @@ $route['sign-up-page']['GET'] = 'auth/AuthController/sign_up_page';
 // LOGOUT
 $route['logout']['POST'] = 'auth/AuthController/logout';
 
+// FORGOT PASSWORD
+$route['forgot-password']['GET'] = 'auth/AuthController/forgot-password';
+
 // VERIFY
 $route['verify/(:any)/(:any)'] = 'auth/AuthController/$1/$1';
 

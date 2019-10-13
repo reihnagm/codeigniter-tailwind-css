@@ -31,10 +31,10 @@
             </div>
 
             <div class="flex items-center justify-between">
-                <button onclick="sign_up(this)" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                <button id="form-submit-sign-up" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                     Sign Up
                 </button>
-                <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="<?php site_url(); ?>forgot-password">
+                <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="<?php site_url(); ?>forgot-password-page">
                     Forgot Password?
                 </a>
             </div>

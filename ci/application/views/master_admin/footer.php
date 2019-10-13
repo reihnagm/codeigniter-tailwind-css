@@ -2,7 +2,7 @@
     <input type="hidden" name="user_agent" value="<?php echo $this->agent->browser() ?>">
 
     <!-- BASE URL -->
-    <input type="hidden" name="base_url" value="<?php echo base_url() ?>">
+    <input type="hidden" name="site_url" value="<?php echo site_url() ?>">
 
     <!-- JQUERY JS -->
     <script

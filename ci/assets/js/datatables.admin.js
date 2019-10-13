@@ -2,9 +2,9 @@
 const user_agent = $("[name=user_agent]").val();
 
 // GETTING BASE URL
-const base_url = $("[name=base_url]").val();
+const site_url = $("[name=site_url]").val();
 
-let url = user_agent == "Firefox" ? "all-user-datatables" : "admin/all-user-datatables";
+// let url = user_agent == "Firefox" ? "all-user-datatables" : "admin/all-user-datatables";
 
 var global_func;
 
@@ -15,7 +15,7 @@ $(function() {
         serverSide: true,
         ajax:
         {
-            url: base_url + "admin/all-user-datatables",
+            url: site_url + "admin/all-user-datatables",
             dataType: "JSON",
             type: "GET"
         },
@@ -96,7 +96,7 @@ function edit_user_datatables(id)
 {
     let url = user_agent == "Firefox" ? "edit-user-datatables" : "admin/edit-user-datatables";
 
-    $.get(base_url + "admin/edit-user-datatables", { id: id })
+    $.get(site_url + "admin/edit-user-datatables", { id: id })
     .done(function(data) {
         let data_parse = JSON.parse(data);
         $("#wrapper-modal").html(data_parse.temp);
@@ -107,7 +107,7 @@ function edit_user_datatables(id)
 
 function destroy_user_datatables(id)
 {
-    $.post(base_url + "admin/destroy-user-datatables", { id : id})
+    $.post(site_url + "admin/destroy-user-datatables", { id : id})
     .done(function(data) {
         let data_parse = JSON.parse(data);
         if(data_parse.valid)
@@ -142,7 +142,7 @@ function validate_update_user_datatables()
     }
 
     $("#submit_update_user_datatables").text('');
-    $("#submit_update_user_datatables").append('<img src="'+base_url+'assets/loader/loader.gif" style="width: 25px; display: block; margin: 0 auto;">');
+    $("#submit_update_user_datatables").append('<img src="'+site_url+'assets/loader/loader.gif" style="width: 25px; display: block; margin: 0 auto;">');
     $("#submit_update_user_datatables").addClass("cursor-not-allowed");
     $("#submit_update_user_datatables").addClass("opacity-50");
     $("#submit_update_user_datatables").removeClass("hover:text-pink-300");
@@ -157,7 +157,7 @@ function submit_update_user_datatables(evt)
     {
         setTimeout(() => {
             var event_copy = evt;
-            $.post(base_url + "admin/update-user-datatables", $("#form-edit-user-datatables").serialize(), (data) => {
+            $.post(site_url + "admin/update-user-datatables", $("#form-edit-user-datatables").serialize(), (data) => {
                 const data_parse = JSON.parse(data);
                 if(data_parse.valid)
                 {
