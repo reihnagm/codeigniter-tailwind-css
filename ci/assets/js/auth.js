@@ -14,18 +14,20 @@ var sign_up;
 
         sign_up = function()
         {
-            alert('sign up');
+
         }
     });
 
 })(jQuery);
 
-function sign_in()
+function sign_in(event)
 {
+    event.preventDefault();
     sign_in();
 }
 
-function sign_up()
+function sign_up(event)
 {
+    event.preventDefault();
     sign_up();
 }
