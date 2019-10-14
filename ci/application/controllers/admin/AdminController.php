@@ -40,7 +40,6 @@ class AdminController extends Master_Controller
 
 	public function user_datatables()
 	{
-
 		// DEFINE COLUMN
 		$columns =
 		[

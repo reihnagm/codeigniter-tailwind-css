@@ -34,17 +34,29 @@ var site_url = $("[name=site_url]").val();
             }
         });
 
-        $("#form-submit-sign-up").parsley().on('field:validated', function() {
-        }).on('form:submit', function() {
-            return false;
-        });
+        $('#form-sign-up').parsley().on('form:validate', function (formInstance) {
+            var ok = formInstance.isValid({group: 'block1', force: true}) || formInstance.isValid({group: 'block2', force: true});
+
+            if (ok)
+                formInstance.validationResult = false;
+                $.post(site_url + "sign-up", $("#form-sign-up").serialize(), function(data) {
+                    console.log(data);
+               });
+
+            if (!ok)
+                formInstance.validationResult = false;
+         });
+        // $.post(site_url + "sign-up", $("#form-sign-up").serialize(), function(data) {
+        //     console.log(data);
+        // });
+
         // $(document).on("click", "#form-submit-sign-up", function(evt) {
         //     evt.preventDefault();
         //
-        //
-        //     $.post(site_url + "sign-up", $("#form-sign-up").serialize(), function(data) {
-        //         console.log(data);
-        //     });
+        //     console.log('test');
+            // $.post(site_url + "sign-up", $("#form-sign-up").serialize(), function(data) {
+            //     console.log(data);
+            // });
         // });
     });
 })(jQuery);
