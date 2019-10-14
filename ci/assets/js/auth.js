@@ -4,6 +4,16 @@ var site_url = $("[name=site_url]").val();
     'use strict';
     $(function() {
 
+        window.Parsley.addValidator('usernameRegex', {
+            validateString: function(value) {
+                return /(?=.*[_])(?=.*[a-z_])(?=.*[_])(?=.{8,})/.test(value)
+            },
+            messages:
+            {
+                en: 'Invalid Email Format ! e.g johndoe@gmail.com'
+            }
+        });
+
         window.Parsley.addValidator('emailRegex', {
             validateString: function(value) {
                 return /[a-zA-Z0-9_]+@[a-zA-Z]+\.(com|net|org)$/.test(value)
