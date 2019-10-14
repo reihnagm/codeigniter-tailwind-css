@@ -50,6 +50,14 @@ class AuthController extends Master_Controller
     }
     public function verify($email, $token)
     {
-        
+        $user = $this->User_model->get_user('email', $email);
+
+        if(!$user)
+            die('Email not Exists !');
+
+        if($user['token'] !== $token)
+            die('Token not Match !');
+
+        $this->User_model->update_role($user['id'], 1);
     }
 }

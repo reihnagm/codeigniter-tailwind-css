@@ -22,6 +22,30 @@ class User_model extends MY_Model
 
         parent::__insert('tbl_users', $data);
     }
+    public function get_user($key, $value)
+    {
+        $query = parent::__get_where('tbl_users', [$key => $value]);
+
+        if(!empty($query->row_array()))
+        {
+            return $query->row_array();
+        }
+
+        return false;
+    }
+    public function update_role($user_id, $role_id)
+    {
+        $data = [
+            "is_verified" => $role_id
+        ];
+
+        $where =
+        [
+            "id" => $user_id,
+        ];
+
+        parent::__update('tbl_users', $where, $data);
+    }
     public function is_logged_in()
     {
 
