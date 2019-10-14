@@ -34,8 +34,6 @@ var site_url = $("[name=site_url]").val();
             }
         });
 
-
-
         $("#form-submit-sign-up").parsley().on('field:validated', function() {
         }).on('form:submit', function() {
             return false;
