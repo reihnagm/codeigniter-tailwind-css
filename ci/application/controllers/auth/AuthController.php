@@ -30,7 +30,7 @@ class AuthController extends Master_Controller
     public function sign_up()
     {
         $this->User_model->insert_user();
-        // $this->send_email_verification($this->input->post('email'), $_SESSION['token']);
+        $this->send_email_verification($this->input->post('email'), $_SESSION['token']);
     }
     public function sign_up_page()
     {
@@ -44,7 +44,7 @@ class AuthController extends Master_Controller
         $this->email->to($email);
         $this->email->subject("registration application local");
         $this->email->message("Click Button for Confirmation Regisration
-            <a href=".base_url()."/verify/$email/$token>Confirmation Email</a>");
+            <a href=".base_url()."verify/$email/$token>Confirmation Email</a>");
         $this->email->set_mailtype('html');
         $this->email->send();
     }
