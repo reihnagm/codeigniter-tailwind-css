@@ -6,11 +6,11 @@ var site_url = $("[name=site_url]").val();
 
         window.Parsley.addValidator('usernameRegex', {
             validateString: function(value) {
-                return /(?=.*[_])(?=.*[a-z_])(?=.*[_])(?=.{8,})/.test(value)
+                return /^(?=.*[a-z])(?!.*[-@!#\$%\^&\*])(?=.*[_])(?=.{8,12})/.test(value)
             },
             messages:
             {
-                en: 'Invalid Email Format ! e.g johndoe@gmail.com'
+                en: 'Invalid Username Format ! e.g johndoe_ <br> Maximum 12 Character'
             }
         });
 
@@ -30,7 +30,7 @@ var site_url = $("[name=site_url]").val();
             },
             messages:
             {
-                en:'string must contain at least 1 lowercase alphabetical <br> string must contain at least 1 uppercase alphabetical <br> string must contain at least 1 numeric <br> string must contain at least one special character <br> string must be eight or longer'
+                en:'character must contain at least 1 lowercase alphabetical <br> character must contain at least 1 uppercase alphabetical <br> character must contain at least 1 numeric <br> character must contain at least one special character <br> character must be eight or longer'
             }
         });
 
