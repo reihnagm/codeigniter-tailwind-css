@@ -48,4 +48,8 @@ class AuthController extends Master_Controller
         $this->email->set_mailtype('html');
         $this->email->send();
     }
+    public function verify($email, $token)
+    {
+        
+    }
 }

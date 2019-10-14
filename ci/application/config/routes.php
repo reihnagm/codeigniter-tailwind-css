@@ -17,7 +17,7 @@ $route['logout']['POST'] = 'auth/AuthController/logout';
 $route['forgot-password']['GET'] = 'auth/AuthController/forgot-password';
 
 // VERIFY
-$route['verify/(:any)/(:any)'] = 'auth/AuthController/$1/$1';
+$route['verify/(:any)/(:any)'] = 'auth/AuthController/verify/$1/$1';
 
 // PROFILE
 $route['profile'] = 'user/UserController/profile';
