@@ -1,6 +1,6 @@
 <?php
 
-class User_model extends CI_model
+class User_model extends MY_Model
 {
     public function __construct()
     {
@@ -12,12 +12,15 @@ class User_model extends CI_model
 
         $data =
         [
+            'first_name' => $this->input->post("first_name"),
+            'last_name' => $this->input->post("last_name"),
+            'username' => $this->input->post("username"),
             'email' => $this->input->post("email"),
             'password' => password_hash($this->input->post("password"), PASSWORD_DEFAULT),
             'token' => $_SESSION["token"]
         ];
 
-        parent::__insert($data);
+        parent::__insert('tbl_users', $data);
     }
     public function is_logged_in()
     {

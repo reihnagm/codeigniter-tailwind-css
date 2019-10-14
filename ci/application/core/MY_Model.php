@@ -6,8 +6,8 @@ class MY_Model extends CI_Model
     {
         parent::__construct();
     }
-    public function __insert($table)
+    public function __insert($table, $data)
     {
-        $this->db->insert($data);
+        $this->db->insert($table, $data);
     }
 }

@@ -30,6 +30,7 @@
 - Tips: for handling if statement in foreach, problem is data (not incrementing) but getting last value or first value
 - Tips: if button cannot submit, change type="button" to type="submit"
 - Tips: isset check empty or not session
+- Tips: dont return false in form, but use e.preventDefault() 
 - Tips: in $(document).ready(function() {
 
 }) or $(function() {

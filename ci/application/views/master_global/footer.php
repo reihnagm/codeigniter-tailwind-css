@@ -1,5 +1,5 @@
-    <!-- BASE URL -->
-    <input type="hidden" name="base_url" value="<?php echo base_url() ?>">
+    <!-- SITE URL -->
+    <input type="hidden" name="site_url" value="<?php echo site_url() ?>">
 
     <!-- JQUERY JS -->
     <script
@@ -7,7 +7,13 @@
     integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
     crossorigin="anonymous"></script>
 
-    <!-- AUTH -->
+    <!-- PARSLEY JS -->
+    <script src="<?php echo base_url('assets/parsley/parsley.min.js') ?>"></script>
+
+    <!-- PARSLEY EN JS -->
+    <script src="<?php echo base_url('assets/parsley/en.js') ?>"></script>
+
+    <!-- AUTH JS -->
     <script src="<?php echo base_url('assets/js/auth.js') ?>"></script>
 
     <!-- DATERANGEPICKER JS -->
