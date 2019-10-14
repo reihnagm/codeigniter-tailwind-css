@@ -14,6 +14,17 @@ var site_url = $("[name=site_url]").val();
             }
         });
 
+        window.Parsley.addValidator('passwordRegex', {
+            validateString: function(value) {
+                return /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/.test(value)
+            },
+            messages:
+            {
+                en:'string must contain at least 1 lowercase alphabetical <br> string must contain at least 1 uppercase alphabetical <br> string must contain at least 1 numeric <br> string must contain at least one special character <br> string must be eight or longer'
+            }
+        });
+
+
 
         $("#form-submit-sign-up").parsley().on('field:validated', function() {
         }).on('form:submit', function() {
