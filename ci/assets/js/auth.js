@@ -46,6 +46,8 @@ var site_url = $("[name=site_url]").val();
                     $("#form-submit-sign-up").append('<img src="'+site_url+'assets/loader/loader.gif" style="width: 25px; display: block; margin: 0 auto;">');
                     $("#form-submit-sign-up").addClass("cursor-not-allowed");
                     $("#form-submit-sign-up").addClass("opacity-50");
+                    $("#form-submit-sign-up").removeClass("hover:bg-blue-700");
+                    $("#form-submit-sign-up").prop("disabled", true);
                 });
             }
        });
