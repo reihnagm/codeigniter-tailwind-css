@@ -29,8 +29,9 @@ class AuthController extends Master_Controller
     }
     public function sign_up()
     {
-        $this->User_model->insert_user();
-        $this->send_email_verification($this->input->post('email'), $_SESSION['token']);
+        die('test');
+        // $this->User_model->insert_user();
+        // $this->send_email_verification($this->input->post('email'), $_SESSION['token']);
     }
     public function sign_up_page()
     {
@@ -50,7 +51,7 @@ class AuthController extends Master_Controller
     }
     public function verify($email, $token)
     {
-        $user = $this->User_model->get_user('email', $email);
+        $user = $this->User_model->get_user_based_on_email('email', $email);
 
         if(!$user)
             die('Email not Exists !');
@@ -59,5 +60,7 @@ class AuthController extends Master_Controller
             die('Token not Match !');
 
         $this->User_model->update_role($user['id'], 1);
+
+        redirect('profile');
     }
 }

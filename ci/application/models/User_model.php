@@ -22,7 +22,7 @@ class User_model extends MY_Model
 
         parent::__insert('tbl_users', $data);
     }
-    public function get_user($key, $value)
+    public function get_user_based_on_email($key, $value)
     {
         $query = parent::__get_where('tbl_users', [$key => $value]);
 

@@ -34,29 +34,22 @@ var site_url = $("[name=site_url]").val();
             }
         });
 
-        $('#form-sign-up').parsley().on('form:validate', function (formInstance) {
-            var ok = formInstance.isValid({group: 'block1', force: true}) || formInstance.isValid({group: 'block2', force: true});
+        $("#form-sign-up").on('submit', function(e){
+            e.preventDefault();
 
-            if (ok)
-                formInstance.validationResult = false;
+            $(this).parsley().validate();
+
+            if ($(this).parsley().isValid())
+            {
                 $.post(site_url + "sign-up", $("#form-sign-up").serialize(), function(data) {
-                    console.log(data);
-               });
+                    $("#form-submit-sign-up").text('');
+                    $("#form-submit-sign-up").append('<img src="'+site_url+'assets/loader/loader.gif" style="width: 25px; display: block; margin: 0 auto;">');
+                    $("#form-submit-sign-up").addClass("cursor-not-allowed");
+                    $("#form-submit-sign-up").addClass("opacity-50");
+                });
+            }
+       });
 
-            if (!ok)
-                formInstance.validationResult = false;
-         });
-        // $.post(site_url + "sign-up", $("#form-sign-up").serialize(), function(data) {
-        //     console.log(data);
-        // });
 
-        // $(document).on("click", "#form-submit-sign-up", function(evt) {
-        //     evt.preventDefault();
-        //
-        //     console.log('test');
-            // $.post(site_url + "sign-up", $("#form-sign-up").serialize(), function(data) {
-            //     console.log(data);
-            // });
-        // });
     });
 })(jQuery);
