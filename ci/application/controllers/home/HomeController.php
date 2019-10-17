@@ -7,7 +7,6 @@ class HomeController extends Master_Controller
 	{
 		parent::__construct();
 	}
-
 	// RECURSIVE FUNCTION
 	public function factory($num)
 	{
@@ -16,16 +15,16 @@ class HomeController extends Master_Controller
 		else
 			return $num * $this->factory($num-1);
 	}
-
-	public function index()
+	public function recursive()
 	{
 		// RECURSIVE FUNCTION
 		$result = $this->factory(5);
 		// EXPECTED OUTPUT : (int) 120
-		
+	}
+	public function index()
+	{
 		$this->load->view('master_global/header');
-		$this->load->view('home');
+		$this->load->view('home_page');
 		$this->load->view('master_global/footer');
 	}
-
 }

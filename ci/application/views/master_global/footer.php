@@ -1,20 +1,8 @@
-    <!-- SITE URL -->
-    <input type="hidden" name="site_url" value="<?php echo site_url() ?>">
-
-    <!-- JQUERY JS -->
-    <script
-    src="https://code.jquery.com/jquery-3.4.1.min.js"
-    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-    crossorigin="anonymous"></script>
-
     <!-- PARSLEY JS -->
     <script src="<?php echo base_url('assets/parsley/parsley.min.js') ?>"></script>
 
     <!-- PARSLEY EN JS -->
     <script src="<?php echo base_url('assets/parsley/en.js') ?>"></script>
-
-    <!-- AUTH JS -->
-    <script src="<?php echo base_url('assets/js/auth.js') ?>"></script>
 
     <!-- DATERANGEPICKER JS -->
     <script src="<?php echo base_url('assets/datetimepicker/daterangepicker.js') ?>"></script>

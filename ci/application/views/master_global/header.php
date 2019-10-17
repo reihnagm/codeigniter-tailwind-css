@@ -13,6 +13,13 @@
 
 		<!-- TAILWIND CSS -->
 		<link rel="stylesheet" href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css">
+
+		<!-- SITE URL -->
+		<input type="hidden" name="site_url" value="<?php echo site_url() ?>">
+
+		<!-- JQUERY JS -->
+		<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
 		<title>Codeigniter - Tailwind CSS</title>
 	</head>
 	<body>
