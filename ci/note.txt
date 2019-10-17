@@ -29,7 +29,7 @@
 - Tips: if error pgsql column doest not exists, delete column, and create new column
 - Tips: for handling if statement in foreach, problem is data (not incrementing) but getting last value or first value
 - Tips: if button cannot submit, change type="button" to type="submit"
-- Tips: isset check empty or not session
+- Tips: isset check empty or not in session
 - Tips: dont return false in form, but use e.preventDefault()
 - Tips: in $(document).ready(function() {
 
@@ -51,4 +51,4 @@ foo()
 - Tips: if you have email verification when click button confirmation would be getting error
         "The URI you submitted has disallowed characters."
         to fix it go application/config/config.php and add symbol @
-        $config['permitted_uri_chars'] = 'a-z 0-9~%.:_\-@'; 
+        $config['permitted_uri_chars'] = 'a-z 0-9~%.:_\-@';
