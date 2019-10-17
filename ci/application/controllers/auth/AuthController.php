@@ -63,4 +63,44 @@ class AuthController extends Master_Controller
 
         redirect('profile');
     }
+    public function check_reserved_username()
+    {
+        $username = $this->input->post("username");
+        $check_reserved_username = $this->User_model->check_reserved_username($username);
+
+        $data = [];
+
+        if($check_reserved_username)
+        {
+            $data["title"] = "Username Already Exists !";
+            $data["desc"] = "Please change your Username and Try Again !";
+            $data["type"] = "error";
+            $data["status"] = TRUE;
+        }
+        else
+        {
+            $data["status"] = FALSE;
+        }
+        echo json_encode($data);
+    }
+    public function check_reserved_email()
+    {
+        $email = $this->input->post("email");
+        $check_reserved_email = $this->User_model->check_reserved_email($email);
+
+        $data = [];
+
+        if($check_reserved_email)
+        {
+            $data["title"] = "Email Already Exists !";
+            $data["desc"] = "Please change your Email and Try Again !";
+            $data["type"] = "error";
+            $data["status"] = TRUE;
+        }
+        else
+        {
+            $data["status"] = FALSE;
+        }
+        echo json_encode($data);
+    }
 }

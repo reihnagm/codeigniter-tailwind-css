@@ -43,16 +43,50 @@ var site_url = $("[name=site_url]").val();
         }).on('field:success', function() {
             let el = this.$element[0].id
             $('#'+el).addClass("border-green-500");
-            $('#'+el).parent().find(".form-field").hide(800);
+            $('#'+el).parent().find(".form-field").hide(250);
             $('#'+el).parent().find(".form-field").addClass("opacity-0");
             $('#'+el).parent().find(".form-field").addClass("invisible");
         }).on('field:error', function() {
             let el = this.$element[0].id
             $('#'+el).parent().find(".form-field").removeClass("invisible");
             $('#'+el).parent().find(".form-field").addClass("visible");
-            $('#'+el).parent().find(".form-field").show(800);
-            $('#'+el).parent().find(".form-field").animate({opacity: 1.0}, 800);
+            $('#'+el).parent().find(".form-field").show(250);
+            $('#'+el).parent().find(".form-field").animate({opacity: 1.0}, 250);
             $('#'+el).removeClass("border-green-500");
+
+            // $(".parsley-usernameRegex").hide().show(250);
+            // $(".parsley-emailRegex").hide().show(250);
+            // $(".parsley-passwordRegex").hide().show(250);
+        })
+
+        $(document).on("keyup", "#username", function() {
+            $.post(site_url + 'check-reserved-username', {"username" : $(this).val() }, function(data) {
+                const data_parse = JSON.parse(data)
+                if(data_parse.status)
+                {
+                    Swal.fire(
+                        data_parse.title,
+                        data_parse.desc,
+                        data_parse.type
+                    )
+                    $("#username").val("");
+                }
+            });
+        });
+
+        $(document).on("keyup", "#email", function() {
+            $.post(site_url + 'check-reserved-email', {"email" : $(this).val() }, function(data) {
+                const data_parse = JSON.parse(data)
+                if(data_parse.status)
+                {
+                    Swal.fire(
+                        data_parse.title,
+                        data_parse.desc,
+                        data_parse.type
+                    )
+                    $("#email").val("");
+                }
+            });
         });
 
         $("#form-sign-up").on('submit', function(e){

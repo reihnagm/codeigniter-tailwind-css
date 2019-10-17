@@ -14,13 +14,19 @@ $route['sign-up-page']['GET'] = 'auth/AuthController/sign_up_page';
 $route['logout']['POST'] = 'auth/AuthController/logout';
 
 // FORGOT PASSWORD
-$route['forgot-password']['GET'] = 'auth/AuthController/forgot-password';
+$route['forgot-password']['GET'] = 'auth/AuthController/forgot_password';
 
 // VERIFY
 $route['verify/(:any)/(:any)'] = 'auth/AuthController/verify/$1/$2';
 
 // PROFILE
 $route['profile'] = 'user/UserController/profile';
+
+// CHECK RESERVED USERNAME
+$route['check-reserved-username']['POST'] = 'auth/AuthController/check_reserved_username';
+
+// CHECK RESERVED EMAIL
+$route['check-reserved-email']['POST'] = 'auth/AuthController/check_reserved_email';
 
 // ADMIN
 $route['admin']['GET'] = 'admin/AdminController/index';

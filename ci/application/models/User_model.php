@@ -46,6 +46,28 @@ class User_model extends MY_Model
 
         parent::__update('tbl_users', $where, $data);
     }
+    public function check_reserved_username($username)
+    {
+        $this->db->from("tbl_users");
+        $this->db->where("username", $username);
+        $user = $this->db->get();
+
+        if($user->num_rows())
+        {
+            return TRUE;
+        }
+    }
+    public function check_reserved_email($email)
+    {
+        $this->db->from("tbl_users");
+        $this->db->where("email", $email);
+        $user = $this->db->get();
+
+        if($user->num_rows())
+        {
+            return TRUE;
+        }
+    }
     public function is_logged_in()
     {
 
