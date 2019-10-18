@@ -42,14 +42,14 @@ class AuthController extends Master_Controller
             $session_user = $this->session->userdata();
 
             $login['logged_in'] = TRUE;
-            $login['title'] = 'Successfully!';
+            $login['title'] = 'Successfully !';
             $login['desc'] = '';
             $login['type'] = 'success';
         }
         else
         {
             $login['logged_in'] = FALSE;
-            $login['title'] = 'Oops ! Something Error When Attempting Login !';
+            $login['title'] = 'Oops !';
             $login['desc'] = 'Please check your e-mail and password and try again !';
             $login['type'] = 'error';
         }

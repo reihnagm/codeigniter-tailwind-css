@@ -30,6 +30,8 @@
 - Tips: for handling if statement in foreach, problem is data (not incrementing) but getting last value or first value
 - Tips: if button cannot submit, change type="button" to type="submit"
 - Tips: isset check empty or not in session
+- Tips: if you want to submit in form, use this $("#form") and in submit $("#form").submit()
+- Tips: if you want data json parse and do not wont use every when use ajax, use this $.ajaxSetup({ dataType: json})  
 - Tips: dont return false in form, but use e.preventDefault()
 - Tips: in $(document).ready(function() {
 

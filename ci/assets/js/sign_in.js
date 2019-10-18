@@ -75,14 +75,12 @@ const site_url = $("[name=site_url]").val();
 
                 $.post(site_url + 'sign-in', { email: $('#email-sign-in').val(), password: $('#password-sign-in').val()  }, function(data)
                 {
-                    const data_parse = JSON.parse(data);
-
-                    if(data_parse.logged_in)
+                    if(data.logged_in)
                     {
                         Swal.fire(
-                            data_parse.title,
-                            data_parse.desc,
-                            data_parse.type
+                            data.title,
+                            data.desc,
+                            data.type
                         )
                         $("#form-submit-sign-in").text('Sign In');
                         $("#form-submit-sign-in").removeClass("cursor-not-allowed");
@@ -93,9 +91,9 @@ const site_url = $("[name=site_url]").val();
                     else
                     {
                         Swal.fire(
-                            data_parse.title,
-                            data_parse.desc,
-                            data_parse.type
+                            data.title,
+                            data.desc,
+                            data.type
                         )
                         $("#form-submit-sign-in").text('Sign In');
                         $("#form-submit-sign-in").removeClass("cursor-not-allowed");
@@ -106,7 +104,6 @@ const site_url = $("[name=site_url]").val();
                 });
             }
         });
-
 
     });
 })(jQuery);

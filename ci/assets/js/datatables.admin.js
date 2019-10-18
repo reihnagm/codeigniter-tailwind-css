@@ -98,8 +98,7 @@ function edit_user_datatables(id)
 
     $.get(site_url + "admin/edit-user-datatables", { id: id })
     .done(function(data) {
-        let data_parse = JSON.parse(data);
-        $("#wrapper-modal").html(data_parse.temp);
+        $("#wrapper-modal").html(data.temp);
         global_func();
         toggleModal();
     })
@@ -109,13 +108,13 @@ function destroy_user_datatables(id)
 {
     $.post(site_url + "admin/destroy-user-datatables", { id : id})
     .done(function(data) {
-        let data_parse = JSON.parse(data);
-        if(data_parse.valid)
+
+        if(data.valid)
         {
             Swal.fire(
-                data_parse.title,
-                data_parse.desc,
-                data_parse.type
+                data.title,
+                data.desc,
+                data.type
             )
             location.reload();
             close_modal();
@@ -123,9 +122,9 @@ function destroy_user_datatables(id)
         else
         {
             Swal.fire(
-                data_parse.title,
-                data_parse.desc,
-                data_parse.type
+                data.title,
+                data.desc,
+                data.type
             )
         }
 
@@ -156,15 +155,13 @@ function submit_update_user_datatables(evt)
     if(validate_update_user_datatables())
     {
         setTimeout(() => {
-            var event_copy = evt;
             $.post(site_url + "admin/update-user-datatables", $("#form-edit-user-datatables").serialize(), (data) => {
-                const data_parse = JSON.parse(data);
-                if(data_parse.valid)
+                if(data.valid)
                 {
                     Swal.fire(
-                        data_parse.title,
-                        data_parse.desc,
-                        data_parse.type
+                        data.title,
+                        data.desc,
+                        data.type
                     )
                     location.reload();
                     close_modal();
@@ -172,9 +169,9 @@ function submit_update_user_datatables(evt)
                 else
                 {
                     Swal.fire(
-                        data_parse.title,
-                        data_parse.desc,
-                        data_parse.type
+                        data.title,
+                        data.desc,
+                        data.type
                     )
                 }
             });
