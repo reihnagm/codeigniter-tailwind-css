@@ -22,7 +22,7 @@ class User_model extends MY_Model
 
         parent::__insert('tbl_users', $data);
     }
-    public function get_user_based_on_email($key, $value)
+    public function get_user($key, $value)
     {
         $query = parent::__get_where('tbl_users', [$key => $value]);
 
@@ -68,17 +68,12 @@ class User_model extends MY_Model
             return TRUE;
         }
     }
-    public function is_logged_in()
+    public function check_login($email, $password)
     {
-        $email = $this->input->post("email");
-        $password = $this->input->post("password");
+        $input_email = $this->get_user('email', $email)['email'];
+        $password_hash = $this->get_user('email', $email)['password'];
 
-        dd($email);
-
-        $this->db->from("tbl_users");
-        $this->db->where("email", $email);
-        $this->db->where("password", $password);
-
-        $check_logged_in = $this->db->get();
+        if($input_email == $email && password_verify($password, $password_hash)) return TRUE;
+        return FALSE;
     }
 }

@@ -60,24 +60,42 @@ const site_url = $("[name=site_url]").val();
             $('.parsley-emailRegex').hide().show(250);
         });
 
-        $("#form-submit-sign-in").submit(function(e) {
+
+        $("#form-sign-in").submit(function(e) {
+            e.preventDefault();
 
             if($(this).parsley().isValid())
             {
+                $("#form-submit-sign-in").text('');
+                $("#form-submit-sign-in").append('<img src="'+site_url+'assets/loader/loader.gif" style="width: 25px; display: block; margin: 0 auto;">');
+                $("#form-submit-sign-in").addClass("cursor-not-allowed");
+                $("#form-submit-sign-in").addClass("opacity-50");
+                $("#form-submit-sign-in").removeClass("hover:bg-blue-700");
+                $("#form-submit-sign-in").prop("disabled", true);
 
-                $.post(site_url + 'sign-in', { email: $('#email-sign-in').val(), password: $('password-sign-in')  }, function(data)
+                $.post(site_url + 'sign-in', { email: $('#email-sign-in').val(), password: $('#password-sign-in').val()  }, function(data)
                 {
-                    console.log(data);
-                });
+                    const data_parse = JSON.parse(data);
 
-                // $("#form-submit-sign-in").text('');
-                // $("#form-submit-sign-in").append('<img src="'+site_url+'assets/loader/loader.gif" style="width: 25px; display: block; margin: 0 auto;">');
-                // $("#form-submit-sign-in").addClass("cursor-not-allowed");
-                // $("#form-submit-sign-in").addClass("opacity-50");
-                // $("#form-submit-sign-in").removeClass("hover:bg-blue-700");
-                // $("#form-submit-sign-in").prop("disabled", true);
+                    if(data_parse.logged_in)
+                    {
+                        $("#form-submit-sign-in").text('Sign In');
+                        $("#form-submit-sign-in").removeClass("cursor-not-allowed");
+                        $("#form-submit-sign-in").removeClass("opacity-50");
+                        $("#form-submit-sign-in").addClass("hover:bg-blue-700");
+                        $("#form-submit-sign-in").prop("disabled", false);
+                    }
+                    else
+                    {
+                        $("#form-submit-sign-in").text('Sign In');
+                        $("#form-submit-sign-in").removeClass("cursor-not-allowed");
+                        $("#form-submit-sign-in").removeClass("opacity-50");
+                        $("#form-submit-sign-in").addClass("hover:bg-blue-700");
+                        $("#form-submit-sign-in").prop("disabled", false);
+                    }
+                });
             }
-        })
+        });
 
 
     });

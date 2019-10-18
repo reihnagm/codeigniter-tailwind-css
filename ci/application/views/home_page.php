@@ -17,7 +17,7 @@
             </div>
 
             <div class="flex items-center justify-between">
-                <button id="form-submit-sign-in" class="bg-blue-500 hover:bg-blue-700  w-1/3 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                <button id="form-submit-sign-in" class="bg-blue-500 hover:bg-blue-700  w-1/3 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                     Sign In
                 </button>
                 <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#">

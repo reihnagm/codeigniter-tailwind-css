@@ -8,24 +8,47 @@ class AuthController extends Master_Controller
     {
         parent::__construct();
     }
-    public function sign_in()
-    {
-        if($this->user_model->is_logged_in())
-        {
-            redirect('profile');
-        }
-        $user = $this->user_model->get_user('email', $this->input->post('email'));
-
-        $_SESSION['user_id'] = $user['id'];
-        $_SESSION['logged_in'] = true;
-
-        redirect('profile');
-    }
     public function logout()
     {
         // OR session_destroy()
-        unset($_SESSION['user_id'], $_SESSION['logged_in'] );
+        unset($_SESSION['logged_in'] );
         redirect('profile');
+    }
+    public function sign_in()
+    {
+        $login = [];
+
+        $check_login = $this->User_model->check_login($this->input->post("email"), $this->input->post("password"));
+
+        if($check_login)
+        {
+            $user = $this->User_model->get_user('email', $this->input->post('email'));
+
+            $data =
+            [
+                "avatar"     => $user["avatar"],
+                "first_name" => $user['first_name'],
+                "last_name"  => $user['last_name'],
+                "username"   => $user["username"],
+                "email"      => $user["email"],
+                "age"        => $user["age"],
+                "gender"     => $user["gender"],
+                "created_at" => $user["created_at"],
+                "updated_at" => $user["updated_at"]
+            ];
+
+            $this->session->set_userdata("logged_in", $data);
+
+            $session_user = $this->session->userdata();
+
+            $login['logged_in'] = TRUE;
+        }
+        else
+        {
+            $login['logged_in'] = FALSE;
+        }
+
+        echo json_encode($login);
     }
     public function sign_up()
     {
@@ -101,5 +124,15 @@ class AuthController extends Master_Controller
             $data["status"] = FALSE;
         }
         echo json_encode($data);
+    }
+    public function check_is_verified_email($email)
+    {
+        $user = $this->user_model->get_user('email', $email);
+        if($user['is_verified'] == 0)
+        {
+            return FALSE;
+        }
+
+        return TRUE;
     }
 }
