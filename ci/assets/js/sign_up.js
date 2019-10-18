@@ -3,6 +3,7 @@ const site_url = $("[name=site_url]").val();
 (function ($) {
     'use strict';
     $(function() {
+
         window.Parsley.addValidator('usernameRegex', {
             validateString: function(value) {
                 return /^(?=.*[a-z])(?!.*[\s-@!#\$%\^&\*])(?=.*[_])(?=.{8,12})/.test(value)
@@ -173,5 +174,6 @@ const site_url = $("[name=site_url]").val();
                 }
             });
         });
+
     });
 })(jQuery);

@@ -29,7 +29,6 @@ class AuthController extends Master_Controller
     }
     public function sign_up()
     {
-        die('test');
         $this->User_model->insert_user();
         $this->send_email_verification($this->input->post('email'), $_SESSION['token']);
     }

@@ -70,6 +70,15 @@ class User_model extends MY_Model
     }
     public function is_logged_in()
     {
+        $email = $this->input->post("email");
+        $password = $this->input->post("password");
 
+        dd($email);
+
+        $this->db->from("tbl_users");
+        $this->db->where("email", $email);
+        $this->db->where("password", $password);
+
+        $check_logged_in = $this->db->get();
     }
 }
