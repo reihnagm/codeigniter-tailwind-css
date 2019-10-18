@@ -1,3 +1,6 @@
+    <!-- NPROGRESS JS -->
+    <script src="<?php echo base_url('assets/js/nprogress.js') ?>"></script>
+
     <!-- PARSLEY JS -->
     <script src="<?php echo base_url('assets/parsley/parsley.min.js') ?>"></script>
 
@@ -5,10 +8,10 @@
     <script src="<?php echo base_url('assets/parsley/en.js') ?>"></script>
 
     <!-- DATERANGEPICKER JS -->
-    <script src="<?php echo base_url('assets/datetimepicker/daterangepicker.js') ?>"></script>
+    <script src="<?php echo base_url('assets/daterangepicker/daterangepicker.js') ?>"></script>
 
     <!-- MOMENT JS -->
-    <script src="<?php echo base_url('assets/datetimepicker/moment.min.js') ?>"></script>
+    <script src="<?php echo base_url('assets/daterangepicker/moment.min.js') ?>"></script>
 
     <!-- DATATABLES JS -->
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
@@ -18,9 +21,6 @@
 
     <!-- LEAFLET JS -->
     <!-- <script src="<?php echo base_url('assets/leaflet/leaflet.js'); ?>"></script> -->
-
-    <!-- COMMON JS -->
-    <script src="<?php echo base_url('assets/js/common.js'); ?>"></script>
 
     </body>
 </html>

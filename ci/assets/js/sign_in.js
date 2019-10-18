@@ -66,6 +66,9 @@ const site_url = $("[name=site_url]").val();
 
             if($(this).parsley().isValid())
             {
+
+                NProgress.start();
+
                 $("#form-submit-sign-in").text('');
                 $("#form-submit-sign-in").append('<img src="'+site_url+'assets/loader/loader.gif" style="width: 25px; display: block; margin: 0 auto;">');
                 $("#form-submit-sign-in").addClass("cursor-not-allowed");
@@ -82,6 +85,7 @@ const site_url = $("[name=site_url]").val();
                             data.desc,
                             data.type
                         )
+                        NProgress.done();
                         $("#form-submit-sign-in").text('Sign In');
                         $("#form-submit-sign-in").removeClass("cursor-not-allowed");
                         $("#form-submit-sign-in").removeClass("opacity-50");
@@ -95,6 +99,7 @@ const site_url = $("[name=site_url]").val();
                             data.desc,
                             data.type
                         )
+                        NProgress.done();
                         $("#form-submit-sign-in").text('Sign In');
                         $("#form-submit-sign-in").removeClass("cursor-not-allowed");
                         $("#form-submit-sign-in").removeClass("opacity-50");

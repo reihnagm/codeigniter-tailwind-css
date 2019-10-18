@@ -54,6 +54,9 @@ class AdminController extends Master_Controller
 		$order = $columns[$this->input->get('order')[0]["column"]];
 		$dir = $this->input->get('order')[0]["dir"];
 
+		echo '<pre>';
+		die(var_dump($order));
+
 		$draw 	= $this->input->get("draw");
 		$start 	= $this->input->get("start");
 		$length = $this->input->get("length");
