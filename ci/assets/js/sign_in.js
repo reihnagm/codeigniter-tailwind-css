@@ -79,6 +79,11 @@ const site_url = $("[name=site_url]").val();
 
                     if(data_parse.logged_in)
                     {
+                        Swal.fire(
+                            data_parse.title,
+                            data_parse.desc,
+                            data_parse.type
+                        )
                         $("#form-submit-sign-in").text('Sign In');
                         $("#form-submit-sign-in").removeClass("cursor-not-allowed");
                         $("#form-submit-sign-in").removeClass("opacity-50");
@@ -87,6 +92,11 @@ const site_url = $("[name=site_url]").val();
                     }
                     else
                     {
+                        Swal.fire(
+                            data_parse.title,
+                            data_parse.desc,
+                            data_parse.type
+                        )
                         $("#form-submit-sign-in").text('Sign In');
                         $("#form-submit-sign-in").removeClass("cursor-not-allowed");
                         $("#form-submit-sign-in").removeClass("opacity-50");
