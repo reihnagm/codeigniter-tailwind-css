@@ -24,6 +24,19 @@
         <link rel="stylesheet" href="<?php echo base_url('assets/css/main/main.css') ?>">
         <!-- PACE CSS -->
         <link rel="stylesheet" href="<?php echo base_url('assets/css/pace/pace.css') ?>">
+        <!-- SITE URL -->
+		<input type="hidden" name="site_url" value="<?php echo site_url() ?>">
+        <!-- CHECKING BROWSER -->
+        <input type="hidden" name="user_agent" value="<?php echo $this->agent->browser() ?>">
+		<!-- JQUERY JS -->
+		<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+		<script>
+			$.ajaxSetup({
+				dataType: 'json'
+			});
+		</script>
+
         <title>Codeigniter - Tailwind CSS</title>
     </head>
     <body>
