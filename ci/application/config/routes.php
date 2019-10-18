@@ -10,6 +10,9 @@ $route['sign-up']['POST'] = 'auth/AuthController/sign_up';
 // REGISTER PAGE
 $route['sign-up-page']['GET'] = 'auth/AuthController/sign_up_page';
 
+// PROFILE
+$route['user/(:any)/profile']['GET'] = 'user/UserController/profile/$1';
+
 // LOGOUT
 $route['logout']['POST'] = 'auth/AuthController/logout';
 

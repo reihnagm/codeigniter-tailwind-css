@@ -6,7 +6,7 @@ function components($view, $data = [])
 }
 
 // DEBUGGING ERROR
-function dd($data)
+function dd($data = [])
 {
     echo '<pre>';
     die(var_dump($data));

@@ -43,6 +43,9 @@
 			            <a href="<?php echo site_url() ?>sign-out" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
 							Sign Out
 			            </a>
+						<a href="<?php echo site_url() ?>user/<?php echo $_SESSION['logged_in']['username']. $_SESSION['logged_in']['id']; ?>/profile" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+					   	 	Profile
+					    </a>
 					<?php else: ?>
 						<a href="<?php echo site_url() ?>" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
 					   	 	Sign In
