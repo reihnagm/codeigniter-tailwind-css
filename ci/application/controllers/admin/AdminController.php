@@ -439,7 +439,7 @@ class AdminController extends Master_Controller
 	public function user_read()
 	{
 		$this->load->view('master_admin/header');
-		$this->load->view('admin/user', $this->data_param);
+		$this->load->view('admin/user', $this->data);
 		$this->load->view('master_admin/footer');
 	}
 
