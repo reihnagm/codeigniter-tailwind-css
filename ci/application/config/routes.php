@@ -4,6 +4,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 // LOGIN
 $route['sign-in']['POST'] = 'auth/AuthController/sign_in';
 
+// LOGOUT
+$route['sign-out']['POST'] = 'auth/AuthController/sign_out';
+
 // REGISTER
 $route['sign-up']['POST'] = 'auth/AuthController/sign_up';
 

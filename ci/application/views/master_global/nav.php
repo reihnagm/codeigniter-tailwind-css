@@ -17,9 +17,12 @@
             </a>
         <?php endif; ?>
         <?php if(isset($_SESSION['logged_in'])): ?>
-            <a href="<?php echo site_url() ?>sign-out" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+            <a id="sign-out" href="javascript:void(0);" class="block inline-block mt-0 text-teal-200 hover:text-white mr-4">
                 Sign Out
             </a>
         <?php endif; ?>
     </div>
 </nav>
+
+<!-- SIGN OUT -->
+<script src="<?php echo base_url('assets/js/sign_out.js'); ?>"></script>

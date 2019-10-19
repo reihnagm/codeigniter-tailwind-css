@@ -35,21 +35,12 @@ class AuthController extends Master_Controller
 
             $this->session->set_userdata("logged_in", $data);
 
-            if($this->session->has_userdata("logged_in"))
-            {
-                $login["has_session"] = TRUE;
-            }
-            else
-            {
-                $login["has_session"] = FALSE;
-            }
-
             $session_user = $this->session->userdata();
 
             $login['logged_in'] = TRUE;
             $login['id'] = $user['id'];
             $login['username'] = $user['username'];
-            $login['title'] = 'Successfully !';
+            $login['title'] = 'Successfully Login !';
             $login['desc'] = '';
             $login['type'] = 'success';
         }
@@ -78,6 +69,8 @@ class AuthController extends Master_Controller
     {
         // OR session_destroy()
         $this->session->unset_userdata("logged_in");
+        $data["logout"] = TRUE;
+        echo json_encode($data);
     }
     private function send_email_verification($email, $token)
     {

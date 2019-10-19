@@ -1,5 +1,3 @@
-const site_url = $("[name=site_url]").val();
-
 (function ($) {
     'use strict';
     $(function() {
@@ -67,16 +65,17 @@ const site_url = $("[name=site_url]").val();
             if($(this).parsley().isValid())
             {
 
+                NProgress.configure({ showSpinner: false });
                 NProgress.start();
 
                 $("#form-submit-sign-in").text('');
-                $("#form-submit-sign-in").append('<img src="'+site_url+'assets/loader/loader.gif" style="width: 25px; display: block; margin: 0 auto;">');
+                $("#form-submit-sign-in").append('<img src="'+$("[name=site_url]").val()+'assets/loader/loader.gif" style="width: 25px; display: block; margin: 0 auto;">');
                 $("#form-submit-sign-in").addClass("cursor-not-allowed");
                 $("#form-submit-sign-in").addClass("opacity-50");
                 $("#form-submit-sign-in").removeClass("hover:bg-blue-700");
                 $("#form-submit-sign-in").prop("disabled", true);
 
-                $.post(site_url + 'sign-in', { email: $('#email-sign-in').val(), password: $('#password-sign-in').val()  }, function(data)
+                $.post($("[name=site_url]").val() + 'sign-in', { email: $('#email-sign-in').val(), password: $('#password-sign-in').val()  }, function(data)
                 {
                     if(data.logged_in)
                     {
@@ -86,7 +85,7 @@ const site_url = $("[name=site_url]").val();
                             data.type
                         )
                         NProgress.done();
-                        location.href = site_url + "user/" + data.username + data.id + "/profile";
+                        location.href =  $("[name=site_url]").val()  + "user/" + data.username + data.id + "/profile";
                         $("#form-submit-sign-in").text('Sign In');
                         $("#form-submit-sign-in").removeClass("cursor-not-allowed");
                         $("#form-submit-sign-in").removeClass("opacity-50");
@@ -106,15 +105,6 @@ const site_url = $("[name=site_url]").val();
                         $("#form-submit-sign-in").removeClass("opacity-50");
                         $("#form-submit-sign-in").addClass("hover:bg-blue-700");
                         $("#form-submit-sign-in").prop("disabled", false);
-                    }
-
-                    if(data.has_session)
-                    {
-                        location.href = site_url + "user/" + data.username + data.id + "/profile";
-                    }
-                    else
-                    {
-                        location.href = site_url;
                     }
                 });
             }
