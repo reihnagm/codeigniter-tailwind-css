@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class AdminController extends Master_Controller
 {
-	public $data_param = [];
+	public $data = [];
 
 	public function __construct()
 	{
@@ -14,27 +14,27 @@ class AdminController extends Master_Controller
 			"get_menus_admin" => get_menus_admin()
 		];
 
-		$this->data_param["data"] = $data;
+		$this->data["data"] = $data;
 	}
 
 	public function index()
 	{
 		$this->load->view('master_admin/header');
-		$this->load->view('admin/index', $this->data_param);
+		$this->load->view('admin/index', $this->data);
 		$this->load->view('master_admin/footer');
 	}
 
     public function change_password()
     {
         $this->load->view('master_admin/header');
-		$this->load->view('admin/change_password', $this->data_param);
+		$this->load->view('admin/change_password', $this->data);
         $this->load->view('master_admin/footer');
     }
 
     public function privilege()
     {
         $this->load->view('master_admin/header');
-        $this->load->view('admin/privilege', $this->data_param);
+        $this->load->view('admin/privilege', $this->data);
         $this->load->view('master_admin/footer');
     }
 
@@ -53,9 +53,6 @@ class AdminController extends Master_Controller
 
 		$order = $columns[$this->input->get('order')[0]["column"]];
 		$dir = $this->input->get('order')[0]["dir"];
-
-		echo '<pre>';
-		die(var_dump($order));
 
 		$draw 	= $this->input->get("draw");
 		$start 	= $this->input->get("start");

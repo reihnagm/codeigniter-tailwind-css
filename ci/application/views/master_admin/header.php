@@ -17,13 +17,13 @@
         <!-- DATATABLES RESPONSIVE CSS -->
         <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css">
         <!-- DATATABLES CUSTOM TAILWIND CSS -->
-        <link rel="stylesheet" href="<?php echo base_url('assets/css/datatables/custom.tailwindcss.css'); ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/css/custom.tailwindcss.css'); ?>">
         <!-- DATERANGEPICKER -->
-        <link rel="stylesheet" href="<?php echo base_url('assets/datetimepicker/daterangepicker.css') ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/daterangepicker/daterangepicker.css') ?>">
         <!-- MAIN CSS -->
-        <link rel="stylesheet" href="<?php echo base_url('assets/css/main/main.css') ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/css/main.css') ?>">
         <!-- PACE CSS -->
-        <link rel="stylesheet" href="<?php echo base_url('assets/css/pace/pace.css') ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/css/pace.css') ?>">
         <!-- SITE URL -->
 		<input type="hidden" name="site_url" value="<?php echo site_url() ?>">
         <!-- CHECKING BROWSER -->

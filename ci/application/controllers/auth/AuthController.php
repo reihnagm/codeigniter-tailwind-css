@@ -12,8 +12,6 @@ class AuthController extends Master_Controller
     {
         $login = [];
 
-
-
         $check_login = $this->User->check_login($this->input->post("email"), $this->input->post("password"));
 
         if($check_login)
@@ -45,7 +43,7 @@ class AuthController extends Master_Controller
             {
                 $login["has_session"] = FALSE;
             }
-            
+
             $session_user = $this->session->userdata();
 
             $login['logged_in'] = TRUE;

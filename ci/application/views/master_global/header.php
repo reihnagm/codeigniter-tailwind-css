@@ -21,6 +21,8 @@
 			$.ajaxSetup({
 				dataType: 'json'
 			});
+
+			NProgress.configure({ showSpinner: false })
 		</script>
 
 		<title>Codeigniter - Tailwind CSS</title>
