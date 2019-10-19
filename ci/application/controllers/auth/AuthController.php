@@ -8,21 +8,18 @@ class AuthController extends Master_Controller
     {
         parent::__construct();
     }
-    public function logout()
-    {
-        // OR session_destroy()
-        unset($_SESSION['logged_in'] );
-        redirect('profile');
-    }
     public function sign_in()
     {
         $login = [];
 
-        $check_login = $this->User_model->check_login($this->input->post("email"), $this->input->post("password"));
+
+
+        $check_login = $this->User->check_login($this->input->post("email"), $this->input->post("password"));
 
         if($check_login)
         {
-            $user = $this->User_model->get_user('email', $this->input->post('email'));
+
+            $user = $this->User->get_user('email', $this->input->post('email'));
 
             $data =
             [
@@ -40,9 +37,20 @@ class AuthController extends Master_Controller
 
             $this->session->set_userdata("logged_in", $data);
 
+            if($this->session->has_userdata("logged_in"))
+            {
+                $login["has_session"] = TRUE;
+            }
+            else
+            {
+                $login["has_session"] = FALSE;
+            }
+            
             $session_user = $this->session->userdata();
 
             $login['logged_in'] = TRUE;
+            $login['id'] = $user['id'];
+            $login['username'] = $user['username'];
             $login['title'] = 'Successfully !';
             $login['desc'] = '';
             $login['type'] = 'success';
@@ -59,7 +67,7 @@ class AuthController extends Master_Controller
     }
     public function sign_up()
     {
-        $this->User_model->insert_user();
+        $this->User->insert_user();
         $this->send_email_verification($this->input->post('email'), $_SESSION['token']);
     }
     public function sign_up_page()
@@ -67,6 +75,11 @@ class AuthController extends Master_Controller
         $this->load->view("master_global/header");
         $this->load->view("auth/sign_up_page");
         $this->load->view("master_global/footer");
+    }
+    public function sign_out()
+    {
+        // OR session_destroy()
+        $this->session->unset_userdata("logged_in");
     }
     private function send_email_verification($email, $token)
     {
@@ -80,7 +93,7 @@ class AuthController extends Master_Controller
     }
     public function verify($email, $token)
     {
-        $user = $this->User_model->get_user_based_on_email('email', $email);
+        $user = $this->User->get_user('email', $email);
 
         if(!$user)
             die('Email not Exists !');
@@ -88,14 +101,14 @@ class AuthController extends Master_Controller
         if($user['token'] !== $token)
             die('Token not Match !');
 
-        $this->User_model->update_role($user['id'], 1);
+        $this->User->update_role($user['id'], 1);
 
         redirect('profile');
     }
     public function check_reserved_username()
     {
         $username = $this->input->post("username");
-        $check_reserved_username = $this->User_model->check_reserved_username($username);
+        $check_reserved_username = $this->User->check_reserved_username($username);
 
         $data = [];
 
@@ -115,7 +128,7 @@ class AuthController extends Master_Controller
     public function check_reserved_email()
     {
         $email = $this->input->post("email");
-        $check_reserved_email = $this->User_model->check_reserved_email($email);
+        $check_reserved_email = $this->User->check_reserved_email($email);
 
         $data = [];
 
@@ -134,7 +147,7 @@ class AuthController extends Master_Controller
     }
     public function check_is_verified_email($email)
     {
-        $user = $this->user_model->get_user('email', $email);
+        $user = $this->User->get_user('email', $email);
         if($user['is_verified'] == 0)
         {
             return FALSE;

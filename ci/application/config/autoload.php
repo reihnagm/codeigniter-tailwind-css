@@ -8,4 +8,4 @@ $autoload['drivers']   = ['session'];
 $autoload['helper']    = ['url', 'method_helper', 'string', 'form'];
 $autoload['config']    = [];
 $autoload['language']  = [];
-$autoload['model']     = ['User_model'];
+$autoload['model']     = ['User'];

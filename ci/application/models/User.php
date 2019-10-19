@@ -1,10 +1,16 @@
 <?php
 
-class User_model extends MY_Model
+class User extends MY_Model
 {
     public function __construct()
     {
         parent::__construct();
+    }
+    public function get_user_profile($id)
+    {
+        $this->db->from("tbl_users");
+        $this->db->where("CONCAT(username,id)", $id);
+        return $this->db->get()->row();
     }
     public function insert_user()
     {

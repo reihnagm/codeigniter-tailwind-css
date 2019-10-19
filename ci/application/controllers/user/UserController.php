@@ -9,6 +9,7 @@ class UserController extends Master_Controller
     }
     public function profile($id)
     {
+        $user = $this->User->get_user_profile($id);
 
     }
 }
