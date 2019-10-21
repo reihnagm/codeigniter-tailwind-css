@@ -9,6 +9,11 @@ class UserController extends Master_Controller
     }
     public function profile($id)
     {
+        if(empty($this->session->has_userdata("logged_in")))
+        {
+            die('User not Exists !');
+        }
+
         $user = $this->User->get_user_profile($id);
         $data = [];
         $data["avatar"]     = $user->avatar;

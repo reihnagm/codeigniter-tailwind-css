@@ -16,6 +16,9 @@ class User extends MY_Model
     {
         $_SESSION["token"] = random_string("alnum", 18);
 
+        // created_ at gaada
+        // updated_at juga
+
         $data =
         [
             'first_name' => $this->input->post("first_name"),

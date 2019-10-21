@@ -9,13 +9,13 @@
             <p class="text-2xl text-center block px-2 -mx-2 py-2">
                 <?php echo ucfirst($first_name); ?>
                 <?php echo ucfirst($last_name); ?>
-                 <i class="fas fa-edit w-8"></i>
+                 <i class="fas fa-edit w-8 cursor-pointer hover:text-pink-300"></i>
             </p>
             <?php if(!empty($age)): ?>
                 <span class="block text-center"> years <?php echo $age; ?> old</span>
             <?php endif; ?>
 
-            <p class="text-xl text-center block px-2 -mx-2 py-2"><i class="fas fa-envelope-square w-8"></i> <?php echo $email; ?> <i class="fas fa-edit w-8"></i> </p>
+            <p class="text-xl text-center block px-2 -mx-2 py-2"><i class="fas fa-envelope-square w-8"></i> <?php echo $email; ?> <i class="fas fa-edit w-8 cursor-pointer hover:text-pink-300"></i> </p>
 
         </div>
     </div>
