@@ -54,6 +54,8 @@ class AdminController extends Master_Controller
 		$order = $columns[$this->input->get('order')[0]["column"]];
 		$dir = $this->input->get('order')[0]["dir"];
 
+		dd($this->input->get('order'));
+
 		$draw 	= $this->input->get("draw");
 		$start 	= $this->input->get("start");
 		$length = $this->input->get("length");
@@ -61,21 +63,33 @@ class AdminController extends Master_Controller
 
 		if(!empty($search))
 		{
-			$sql = "SELECT a.id, a.first_name, a.last_name, a.username, a.email, a.created_at
-			FROM tbl_users a
-			WHERE a.first_name LIKE '%{$search}%'
-			OR a.last_name LIKE '%{$search}%'
-			OR a.username LIKE '%{$search}%'
-			OR a.email LIKE '%{$search}%'
-			OR CAST(a.age as TEXT) LIKE '{$search}%'
-			OR a.gender LIKE '%{$search}%'";
+
+			$this->db->select("a.id, a.first_name, a.last_name, a.username, a.email, a.created_at");
+			$this->db->from("tbl_users a");
+			$this->db->like("a.first_name", $search);
+			$this->db->or_like("a.last_name", $search);
+			$this->db->or_like("a.username", $search);
+			$this->db->or_like("a.email", $search);
+			$this->db->or_like("CAST(a.email as TEXT)", $search);
+			$this->db->or_like("a.gender", $search);
+
+			// RAW QUERY
+			// $sql = "SELECT a.id, a.first_name, a.last_name, a.username, a.email, a.created_at
+			// FROM tbl_users a
+			// WHERE a.first_name LIKE '%{$search}%'
+			// OR a.last_name LIKE '%{$search}%'
+			// OR a.username LIKE '%{$search}%'
+			// OR a.email LIKE '%{$search}%'
+			// OR CAST(a.age as TEXT) LIKE '{$search}%'
+			// OR a.gender LIKE '%{$search}%'";
 
 			if ($length > 0)
-			{
 				$this->db->limit($length, $start);
-			}
 
-			$users = $this->db->query($sql)->result();
+			// RAW QUERY
+			// $users = $this->db->query($sql)->result();
+
+			$users = $this->db->get()->result();
 		}
 		else
 		{
@@ -83,18 +97,14 @@ class AdminController extends Master_Controller
 			$this->db->from("tbl_users a");
 
 			if($order == "no")
-			{
 				$this->db->order_by("a.id", $dir);
-			}
 			else
-			{
 				$this->db->order_by($order, $dir);
-			}
+
 
 			if ($length > 0)
-	        {
 			    $this->db->limit($length, $start);
-			}
+
 
 			$users = $this->db->get()->result();
 		}
@@ -104,6 +114,8 @@ class AdminController extends Master_Controller
 		$index = 1;
 
 		foreach($users as $user):
+
+			$row = [];
 
 			$row['no'] = $index++;
 			$row['first_name'] = $user->first_name;

@@ -1,3 +1,6 @@
+    <!-- MAIN JS -->
+    <script src="<?php echo base_url('assets/js/main.js') ?>"></script>
+
     <!-- NPROGRESS JS -->
     <script src="<?php echo base_url('assets/js/nprogress.js') ?>"></script>
 
