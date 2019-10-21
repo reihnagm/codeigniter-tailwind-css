@@ -54,8 +54,6 @@ class AdminController extends Master_Controller
 		$order = $columns[$this->input->get('order')[0]["column"]];
 		$dir = $this->input->get('order')[0]["dir"];
 
-		dd($this->input->get('order'));
-
 		$draw 	= $this->input->get("draw");
 		$start 	= $this->input->get("start");
 		$length = $this->input->get("length");
@@ -96,10 +94,10 @@ class AdminController extends Master_Controller
 			$this->db->select("a.id, a.first_name, a.last_name, a.username, a.email, a.created_at");
 			$this->db->from("tbl_users a");
 
-			if($order == "no")
+			if($order)
 				$this->db->order_by("a.id", $dir);
 			else
-				$this->db->order_by($order, $dir);
+				$this->db->order_by($order, 'DESC');
 
 
 			if ($length > 0)

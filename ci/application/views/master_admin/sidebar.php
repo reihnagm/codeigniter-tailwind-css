@@ -12,7 +12,7 @@
 
             <?php echo $data["get_menus_admin"]; ?>
 
-            <a  href="<?php echo base_url(); ?>" class="inline-block items-center px-2 -mx-2 py-1 hover:text-pink-300 font-medium text-white">
+            <a  href="<?php echo base_url(); ?>" class="inline-block px-2 -mx-2 py-1 hover:text-pink-300 font-medium text-white">
                 <i class="fas fa-home w-8"></i>Back to Front Page
             </a>
 
