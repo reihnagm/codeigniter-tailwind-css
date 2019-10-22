@@ -9,7 +9,7 @@ class UserController extends Master_Controller
     }
     public function profile($id)
     {
-        if(empty($this->session->has_userdata("logged_in")))
+        if(empty($this->session->has_userdata("login")))
         {
             die('User not Exists !');
         }

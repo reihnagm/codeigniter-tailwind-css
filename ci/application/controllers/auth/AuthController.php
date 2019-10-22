@@ -10,13 +10,12 @@ class AuthController extends Master_Controller
     }
     public function sign_in()
     {
-        $login = [];
+        $msg = [];
 
         $check_login = $this->User->check_login($this->input->post("email"), $this->input->post("password"));
 
         if($check_login)
         {
-
             $user = $this->User->get_user('email', $this->input->post('email'));
 
             $data =
@@ -33,31 +32,36 @@ class AuthController extends Master_Controller
                 "updated_at" => $user["updated_at"]
             ];
 
-            $this->session->set_userdata("logged_in", $data);
+            $this->session->set_userdata("login", $data);
 
-            $session_user = $this->session->userdata();
-
-            $login['logged_in'] = TRUE;
-            $login['id'] = $user['id'];
-            $login['username'] = $user['username'];
-            $login['title'] = 'Successfully Login !';
-            $login['desc'] = '';
-            $login['type'] = 'success';
+            $msg['login'] = TRUE;
+            $msg['id'] = $user['id'];
+            $msg['username'] = $user['username'];
+            $msg['title'] = 'Successfully Login !';
+            $msg['desc'] = '';
+            $msg['type'] = 'success';
         }
         else
         {
-            $login['logged_in'] = FALSE;
-            $login['title'] = 'Oops !';
-            $login['desc'] = 'Please check your e-mail and password and try again !';
-            $login['type'] = 'error';
+            $msg['login'] = FALSE;
+            $msg['title'] = 'Oops !';
+            $msg['desc'] = 'Please check your e-mail and password and try again !';
+            $msg['type'] = 'error';
         }
 
-        echo json_encode($login);
+        echo json_encode($msg);
     }
     public function sign_up()
     {
+        $msg = [];
         $this->User->insert_user();
         $this->send_email_verification($this->input->post('email'), $_SESSION['token']);
+
+        $msg["title"] = "Verify Account !";
+        $msg["desc"] = "Please check your email to verify account !";
+        $msg["type"] = "warning";
+
+        echo json_encode($msg);
     }
     public function sign_up_page()
     {
@@ -68,8 +72,9 @@ class AuthController extends Master_Controller
     public function sign_out()
     {
         // OR session_destroy()
-        $this->session->unset_userdata("logged_in");
-        $data["logout"] = TRUE;
+        $msg = [];
+        $this->session->unset_userdata("login");
+        $msg["logout"] = TRUE;
         echo json_encode($data);
     }
     private function send_email_verification($email, $token)
@@ -86,6 +91,22 @@ class AuthController extends Master_Controller
     {
         $user = $this->User->get_user('email', $email);
 
+        $data =
+        [
+            "id"         => $user["id"],
+            "avatar"     => $user["avatar"],
+            "first_name" => $user['first_name'],
+            "last_name"  => $user['last_name'],
+            "username"   => $user["username"],
+            "email"      => $user["email"],
+            "age"        => $user["age"],
+            "gender"     => $user["gender"],
+            "created_at" => $user["created_at"],
+            "updated_at" => $user["updated_at"]
+        ];
+
+        $this->session->set_userdata("login", $data);
+
         if(!$user)
             die('Email not Exists !');
 
@@ -94,47 +115,49 @@ class AuthController extends Master_Controller
 
         $this->User->update_role($user['id'], 1);
 
-        redirect('profile');
+        redirect('user/'.$user['username'].$user['id'].'/profile');
     }
     public function check_reserved_username()
     {
+        $msg = [];
+
         $username = $this->input->post("username");
         $check_reserved_username = $this->User->check_reserved_username($username);
 
-        $data = [];
-
         if($check_reserved_username)
         {
-            $data["title"] = "Username Already Exists !";
-            $data["desc"] = "Please change your Username and Try Again !";
-            $data["type"] = "error";
-            $data["status"] = TRUE;
+            $msg["title"] = "Username Already Exists !";
+            $msg["desc"] = "Please change your Username and Try Again !";
+            $msg["type"] = "error";
+            $msg["status"] = TRUE;
         }
         else
         {
-            $data["status"] = FALSE;
+            $msg["status"] = FALSE;
         }
-        echo json_encode($data);
+
+        echo json_encode($msg);
     }
     public function check_reserved_email()
     {
+        $msg = [];
+
         $email = $this->input->post("email");
         $check_reserved_email = $this->User->check_reserved_email($email);
 
-        $data = [];
-
-        if($check_reserved_email)
+                if($check_reserved_email)
         {
-            $data["title"] = "Email Already Exists !";
-            $data["desc"] = "Please change your Email and Try Again !";
-            $data["type"] = "error";
-            $data["status"] = TRUE;
+            $msg["title"] = "Email Already Exists !";
+            $msg["desc"] = "Please change your Email and Try Again !";
+            $msg["type"] = "error";
+            $msg["status"] = TRUE;
         }
         else
         {
-            $data["status"] = FALSE;
+            $msg["status"] = FALSE;
         }
-        echo json_encode($data);
+
+        echo json_encode($msg);
     }
     public function check_is_verified_email($email)
     {

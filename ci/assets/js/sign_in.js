@@ -64,7 +64,6 @@
 
             if($(this).parsley().isValid())
             {
-
                 NProgress.configure({ showSpinner: false });
                 NProgress.start();
 
@@ -77,7 +76,7 @@
 
                 $.post($("[name=site_url]").val() + 'sign-in', { email: $('#email-sign-in').val(), password: $('#password-sign-in').val()  }, function(data)
                 {
-                    if(data.logged_in)
+                    if(data.login)
                     {
                         Swal.fire(
                             data.title,

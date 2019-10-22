@@ -138,6 +138,7 @@
                 $("#form-submit-sign-up").removeClass("hover:bg-blue-700");
                 $("#form-submit-sign-up").prop("disabled", true);
 
+                NProgress.configure({ showSpinner: false });
                 NProgress.start();
 
                 $.post($("[name=site_url]").val() + "sign-up", $("#form-sign-up").serialize(), function(data) {
@@ -147,7 +148,13 @@
                         data.desc,
                         data.type
                     )
-                    location.reload();
+                    $("#form-submit-sign-up").text('Sign Up');
+                    $("#form-submit-sign-up").removeClass("cursor-not-allowed");
+                    $("#form-submit-sign-up").removeClass("opacity-50");
+                    $("#form-submit-sign-up").addClass("hover:bg-blue-700");
+                    $("#form-submit-sign-up").prop("disabled", false);
+
+                    $("#form-sign-up").trigger("reset");
                 });
             }
        });
