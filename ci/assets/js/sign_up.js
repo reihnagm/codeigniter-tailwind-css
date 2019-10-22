@@ -1,5 +1,3 @@
-const site_url = $("[name=site_url]").val();
-
 (function ($) {
     'use strict';
     $(function() {
@@ -134,41 +132,47 @@ const site_url = $("[name=site_url]").val();
             if ($(this).parsley().isValid())
             {
                 $("#form-submit-sign-up").text('');
-                $("#form-submit-sign-up").append('<img src="'+site_url+'assets/loader/loader.gif" style="width: 25px; display: block; margin: 0 auto;">');
+                $("#form-submit-sign-up").append('<img src="'+$("[name=site_url]").val()+'assets/loader/loader.gif" style="width: 25px; display: block; margin: 0 auto;">');
                 $("#form-submit-sign-up").addClass("cursor-not-allowed");
                 $("#form-submit-sign-up").addClass("opacity-50");
                 $("#form-submit-sign-up").removeClass("hover:bg-blue-700");
                 $("#form-submit-sign-up").prop("disabled", true);
 
-                $.post(site_url + "sign-up", $("#form-sign-up").serialize(), function(data) {
+                NProgress.start();
 
+                $.post($("[name=site_url]").val() + "sign-up", $("#form-sign-up").serialize(), function(data) {
+                    NProgress.done();
+                    Swal.fire(
+                        data.title,
+                        data.desc,
+                        data.type
+                    )
+                    location.reload();
                 });
             }
        });
 
         $(document).on("keyup", "#username-sign-up", function() {
-            $.post(site_url + 'check-reserved-username', {"username" : $(this).val() }, function(data) {
-                const data_parse = JSON.parse(data)
-                if(data_parse.status)
+            $.post($("[name=site_url]").val() + 'check-reserved-username', {"username" : $(this).val() }, function(data) {
+                if(data.status)
                 {
                     Swal.fire(
-                        data_parse.title,
-                        data_parse.desc,
-                        data_parse.type
+                        data.title,
+                        data.desc,
+                        data.type
                     )
                     $("#username-sign-up").val("");
                 }
             });
         });
         $(document).on("keyup", "#email-sign-up", function() {
-            $.post(site_url + 'check-reserved-email', {"email" : $(this).val() }, function(data) {
-                const data_parse = JSON.parse(data)
-                if(data_parse.status)
+            $.post($("[name=site_url]").val() + 'check-reserved-email', {"email" : $(this).val() }, function(data) {
+                if(data.status)
                 {
                     Swal.fire(
-                        data_parse.title,
-                        data_parse.desc,
-                        data_parse.type
+                        data.title,
+                        data.desc,
+                        data.type
                     )
                     $("#email-sign-up").val("");
                 }

@@ -16,9 +16,6 @@ class User extends MY_Model
     {
         $_SESSION["token"] = random_string("alnum", 18);
 
-        // created_ at gaada
-        // updated_at juga
-
         $data =
         [
             'first_name' => $this->input->post("first_name"),
@@ -26,7 +23,9 @@ class User extends MY_Model
             'username' => $this->input->post("username"),
             'email' => $this->input->post("email"),
             'password' => password_hash($this->input->post("password"), PASSWORD_DEFAULT),
-            'token' => $_SESSION["token"]
+            'token' => $_SESSION["token"],
+            'created_at' => Date('Y/m/d'),
+            'updated_at' => Date('Y/m/d')
         ];
 
         parent::__insert('tbl_users', $data);
