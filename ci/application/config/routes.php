@@ -23,10 +23,10 @@ $route['logout']['POST'] = 'auth/AuthController/logout';
 $route['forgot-password']['GET'] = 'auth/AuthController/forgot_password';
 
 // VERIFY
-$route['verify/(:any)/(:any)'] = 'auth/AuthController/verify/$1/$2';
+$route['verify/(:any)/(:any)']['GET'] = 'auth/AuthController/verify/$1/$2';
 
 // PROFILE
-$route['profile'] = 'user/UserController/profile';
+$route['profile']['GET'] = 'user/UserController/profile';
 
 // CHECK RESERVED USERNAME
 $route['check-reserved-username']['POST'] = 'auth/AuthController/check_reserved_username';

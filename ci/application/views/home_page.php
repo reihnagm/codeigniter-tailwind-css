@@ -1,4 +1,4 @@
-<?php if(isset($_SESSION['logged_in'])):  ?>
+<?php if(isset($_SESSION['login'])):  ?>
 <?php else: ?>
     <div class="flex flex-wrap overflow-hidden justify-center mt-20">
         <div class="w-1/3 overflow-hidden">
