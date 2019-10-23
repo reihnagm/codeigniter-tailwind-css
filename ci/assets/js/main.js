@@ -11,7 +11,6 @@
                 NProgress.done();
             }, 900)
         });
-
         $(document).on("click", "#profile", function(e) {
             e.preventDefault();
             NProgress.configure({ showSpinner: false });
@@ -21,7 +20,6 @@
                 NProgress.done();
             }, 900);
         });
-
         $(document).on("click", "#sign-in-btn", function(e) {
             e.preventDefault();
             NProgress.configure({ showSpinner: false });
@@ -31,7 +29,6 @@
                 NProgress.done();
             }, 900);
         });
-
         $(document).on("click", "#sign-up-btn", function(e) {
             e.preventDefault();
             NProgress.configure({ showSpinner: false });
@@ -41,6 +38,10 @@
                 NProgress.done();
             }, 900);
         });
+
+        $(document).on("click", "#verify", function() {
+            alert('test');
+        })
 
     });
 })(jQuery);

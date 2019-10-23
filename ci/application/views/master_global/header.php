@@ -30,3 +30,9 @@
 	<body>
 
 		<?php include_once 'nav.php'; ?>
+
+		<?php if($this->session->has_userdata("login")): ?>
+			<input type="hidden" name="session_username" value="<?php echo $this->session->get_userdata('login')['login']['username'] ?>">
+			<input type="hidden" name="session_id" value="<?php echo $this->session->get_userdata('login')['login']['id'] ?>">
+			<input type="hidden" name="session_email" value="<?php echo $this->session->get_userdata('login')['login']['email'] ?>">
+		<?php endif; ?>

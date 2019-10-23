@@ -396,28 +396,10 @@ class AdminController extends Master_Controller
 
 	private function total_user_datatables()
 	{
-		$search = $this->input->get("search")["value"];
+		$this->db->select("a.id, a.first_name, a.last_name, a.username, a.email");
+		$this->db->from("tbl_users a");
 
-		if(!empty($search))
-		{
-			$sql = "SELECT COUNT(*)
-			FROM tbl_users a
-			WHERE a.first_name LIKE '%{$search}%'
-			OR a.last_name LIKE '%{$search}%'
-			OR a.username LIKE '%{$search}%'
-			OR a.email LIKE '%{$search}%'
-			-- OR CAST(a.age as TEXT) LIKE '{$search}%' IF YOU DESERVED USE COLUMN AGE
-			-- OR a.gender LIKE '%{$search}%'";
-
-			return $this->db->query($sql)->row_array()["count"];
-		}
-		else
-		{
-			$this->db->select("a.id, a.first_name, a.last_name, a.username, a.email");
-			$this->db->from("tbl_users a");
-
-			return $this->db->count_all_results();
-		}
+		return $this->db->count_all_results();
 	}
 
 	private function filtered_user_datatables()

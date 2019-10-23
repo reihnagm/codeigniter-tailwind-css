@@ -5,8 +5,6 @@
 
     <div class="w-full flex overflow-hidden flex-grow justify-end items-center w-auto">
         <?php if(isset($_SESSION['login'])): ?>
-            <input type="hidden" name="session_username" value="<?php echo $_SESSION['login']['username'] ?>">
-            <input type="hidden" name="session_id" value="<?php echo $_SESSION['login']['id'] ?>">
             <a id="profile" href="javascript:void(0);" class="block bg-pink-400 rounded-full p-2 text-white hover:bg-pink-500 mr-4">
                 Profile
             </a>

@@ -57,8 +57,8 @@ class AuthController extends Master_Controller
         $this->User->insert_user();
         $this->send_email_verification($this->input->post('email'), $_SESSION['token']);
 
-        $msg["title"] = "Verify Account !";
-        $msg["desc"] = "Please check your email to verify account !";
+        $msg["title"] = "Verify your Account !";
+        $msg["desc"] = "Please check your Email to Verify Account !";
         $msg["type"] = "warning";
 
         echo json_encode($msg);
@@ -71,7 +71,7 @@ class AuthController extends Master_Controller
     }
     public function sign_out()
     {
-        // OR session_destroy()
+        // OR SESSION_DESTROY()
         $msg = [];
         $this->session->unset_userdata("login");
         $msg["logout"] = TRUE;
@@ -89,6 +89,8 @@ class AuthController extends Master_Controller
     }
     public function verify($email, $token)
     {
+        $msg = [];
+
         $user = $this->User->get_user('email', $email);
 
         $data =
@@ -114,6 +116,8 @@ class AuthController extends Master_Controller
             die('Token not Match !');
 
         $this->User->update_role($user['id'], 1);
+
+        $this->session->set_flashdata("msg", "test");
 
         redirect('user/'.$user['username'].$user['id'].'/profile');
     }
@@ -145,7 +149,7 @@ class AuthController extends Master_Controller
         $email = $this->input->post("email");
         $check_reserved_email = $this->User->check_reserved_email($email);
 
-                if($check_reserved_email)
+        if($check_reserved_email)
         {
             $msg["title"] = "Email Already Exists !";
             $msg["desc"] = "Please change your Email and Try Again !";
