@@ -8,7 +8,10 @@ const site_url = $("[name=site_url]").val();
 
 var global_func;
 
-$(function() {
+(function ($) {
+    'use strict';
+    $(function() {
+
     let all_user_datatables = $('#all-user-datatables').DataTable({
         dom: '"<"flex items-center"<"flex-grow items-center w-2/4"l><"flex flex-grow items-center w-2/4 justify-end"f>><"w-full"rt><"flex items-center"<"flex-grow items-center w-2/4"i><"flex flex-grow items-center w-2/4 justify-end"p>>',
         responsive: true,
@@ -90,7 +93,8 @@ $(function() {
         $(".daterangepicker").addClass("custom-movement");
     }
 
-});
+    });
+})(jQuery);
 
 function edit_user_datatables(id)
 {

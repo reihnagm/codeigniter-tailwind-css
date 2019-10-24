@@ -65,6 +65,11 @@ class AuthController extends Master_Controller
     }
     public function sign_up_page()
     {
+        if($this->session->has_userdata('login'))
+        {
+            redirect('user/'.$_SESSION['login']['username'].$_SESSION['login']['id'].'/profile');
+        }
+
         $this->load->view("master_global/header");
         $this->load->view("auth/sign_up_page");
         $this->load->view("master_global/footer");
