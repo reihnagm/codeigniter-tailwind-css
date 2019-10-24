@@ -41,6 +41,18 @@ class User extends MY_Model
 
         return false;
     }
+    public function update_avatar($avatar, $user_id)
+    {
+        $data = [
+            "avatar" => $avatar
+        ];
+
+        $where = [
+            "id" => $user_id
+        ];
+
+        parent::__update('tbl_users', $where, $data);
+    }
     public function update_role($user_id, $role_id)
     {
         $data = [

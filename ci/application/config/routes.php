@@ -28,6 +28,9 @@ $route['verify/(:any)/(:any)']['GET'] = 'auth/AuthController/verify/$1/$2';
 // PROFILE
 $route['profile']['GET'] = 'user/UserController/profile';
 
+// AVATAR
+$route['update-user-avatar'] = 'user/UserController/update_user_avatar';
+
 // CHECK RESERVED USERNAME
 $route['check-reserved-username']['POST'] = 'auth/AuthController/check_reserved_username';
 
