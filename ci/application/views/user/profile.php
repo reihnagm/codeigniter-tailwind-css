@@ -21,9 +21,21 @@
                 <i class="fas fa-edit w-8 cursor-pointer hover:text-pink-300"></i>
             </p>
 
-            <?php if($this->session->flashdata("msg")): ?>
-                <p>test</p>
-            <?php endif; ?>
         </div>
     </div>
 </div>
+
+
+<script type="text/javascript">
+    <?php if($this->session->flashdata("msg_verified")): ?>
+        const title       = '<?php echo $this->session->flashdata("msg_verified")["title"]; ?>'
+        const description = '<?php echo $this->session->flashdata("msg_verified")["description"]; ?>'
+        const type        = '<?php echo $this->session->flashdata("msg_verified")["type"]; ?>'
+
+        Swal.fire(
+            title,
+            description,
+            type
+        )
+    <?php endif; ?>
+</script>

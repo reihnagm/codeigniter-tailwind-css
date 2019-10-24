@@ -18,6 +18,8 @@
 		<input type="hidden" name="site_url" value="<?php echo site_url() ?>">
 		<!-- JQUERY JS -->
 		<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+		<!-- SWEETALERT2 -->
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 
 		<script>
 			$.ajaxSetup({

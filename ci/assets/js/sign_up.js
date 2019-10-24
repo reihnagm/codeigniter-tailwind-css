@@ -172,7 +172,33 @@
                 }
             });
         });
+        $(document).on("input", "#username-sign-up", function() {
+            $.post($("[name=site_url]").val() + 'check-reserved-username', {"username" : $(this).val() }, function(data) {
+                if(data.status)
+                {
+                    Swal.fire(
+                        data.title,
+                        data.desc,
+                        data.type
+                    )
+                    $("#username-sign-up").val("");
+                }
+            });
+        });
         $(document).on("keyup", "#email-sign-up", function() {
+            $.post($("[name=site_url]").val() + 'check-reserved-email', {"email" : $(this).val() }, function(data) {
+                if(data.status)
+                {
+                    Swal.fire(
+                        data.title,
+                        data.desc,
+                        data.type
+                    )
+                    $("#email-sign-up").val("");
+                }
+            });
+        });
+        $(document).on("input", "#email-sign-up", function() {
             $.post($("[name=site_url]").val() + 'check-reserved-email', {"email" : $(this).val() }, function(data) {
                 if(data.status)
                 {

@@ -117,7 +117,11 @@ class AuthController extends Master_Controller
 
         $this->User->update_role($user['id'], 1);
 
-        $this->session->set_flashdata("msg", "test");
+        $msg["title"] = "Verified !";
+        $msg["description"] = "your Account has been Verified Now !";
+        $msg["type"] = "success";
+
+        $this->session->set_flashdata("msg_verified", $msg);
 
         redirect('user/'.$user['username'].$user['id'].'/profile');
     }
