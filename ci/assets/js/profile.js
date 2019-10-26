@@ -14,6 +14,7 @@ $(document).on("change","#avatar", function() {
     if(is_allowed_ext(ext))
     {
         const avatar = $("#avatar")[0].files[0];
+        const unique_img = new Date().getTime()
 
         // OPTION
         const wrapper = document.getElementById('wrapper');
@@ -29,12 +30,12 @@ $(document).on("change","#avatar", function() {
             cache: false,
             async: false,
             success: function(data) {
-                console.log(data);
-                // Swal.fire(
-                //     data.title,
-                //     data.description,
-                //     data.type
-                // )
+                $('#avatar-trigger').attr('src', $("[name=site_url]").val() + 'assets/avatar/' + data.avatar + "?" + unique_img);
+                Swal.fire(
+                    data.title,
+                    data.description,
+                    data.type
+                )
             },
             error: function(data) {
                 console.log(data);

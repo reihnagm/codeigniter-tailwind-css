@@ -36,8 +36,10 @@ class UserController extends Master_Controller
         $user_id = $_SESSION['login']['id'];
         $user_name = $_SESSION['login']['username'];
 
-        // $x = explode('.', $filename); .
-        // $extension = strtolower(end($x)); -- png | jpg | jpeg
+        $filename = $_FILES['avatar']['name'];
+
+        $x = explode('.', $filename); // .
+        $extension = strtolower(end($x)); // -- png | jpg | jpeg
 
         $config['upload_path']      = './assets/avatar/';
         $config['allowed_types']    = 'gif|jpg|jpeg|png';
@@ -51,21 +53,18 @@ class UserController extends Master_Controller
 
         $data = $this->upload->data();
 
-
-        dd($data);
-
         if (!$this->upload->do_upload("avatar"))
         {
             $msg["title"] = "Failed Uploading Avatar !";
             $msg["description"] =  "Oops something went wrong !";
             $msg["type"] = "error";
-            $msg["avatar"] = $data["file_name"]; 
         }
         else
         {
             $msg["title"] = "Successfully Uploading Avatar !";
             $msg["description"] = "Your avatar has been changed !";
             $msg["type"] = "success";
+            $msg["avatar"] = $data["file_name"].'.'.$extension;
         }
 
         echo json_encode($msg);
