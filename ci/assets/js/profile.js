@@ -15,20 +15,26 @@ $(document).on("change","#avatar", function() {
     {
         const avatar = $("#avatar")[0].files[0];
 
+        // OPTION
+        const wrapper = document.getElementById('wrapper');
         const form = new FormData();
         form.append("avatar", avatar);
 
         $.ajax({
             url: $("[name=site_url]").val() + "/update-user-avatar",
-            data: form,
+            type: "POST",
+            data: new FormData(wrapper),
             processData: false,
             contentType: false,
+            cache: false,
+            async: false,
             success: function(data) {
-                Swal.fire(
-                    data.title,
-                    data.description,
-                    data.type
-                )
+                console.log(data);
+                // Swal.fire(
+                //     data.title,
+                //     data.description,
+                //     data.type
+                // )
             },
             error: function(data) {
                 console.log(data);

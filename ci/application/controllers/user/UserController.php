@@ -33,30 +33,61 @@ class UserController extends Master_Controller
     {
         $msg = [];
 
-        $avatar = $_FILES['avatar'];
-
         $user_id = $_SESSION['login']['id'];
+        $user_name = $_SESSION['login']['username'];
 
-        $config['upload_path']   = './uploads/images/';
-        $config['allowed_types'] = 'gif|jpg|png';
-        $config['file_name']     = $avatar['name'];
-        $config['overwrite']     = TRUE;
-        $config['max_size']      = 1024; // 1MB
+        // $x = explode('.', $filename); .
+        // $extension = strtolower(end($x)); -- png | jpg | jpeg
+
+        $config['upload_path']      = './assets/avatar/';
+        $config['allowed_types']    = 'gif|jpg|jpeg|png';
+        $config['file_name']        = '('.date('y-m-d').')-avatar-'.$user_name;
+        $config['file_ext_tolower'] = TRUE;
+        $config['overwrite']        = TRUE;
+        $config['mod_mime_fix']     = TRUE;
+        $config['max_size']         = 1024; // 1MB
 
         $this->upload->initialize($config);
 
         $data = $this->upload->data();
 
+
         dd($data);
 
-        // $config['max_width']     = '1024';
-        // $config['max_height']    = '768';
+        if (!$this->upload->do_upload("avatar"))
+        {
+            $msg["title"] = "Failed Uploading Avatar !";
+            $msg["description"] =  "Oops something went wrong !";
+            $msg["type"] = "error";
+            $msg["avatar"] = $data["file_name"]; 
+        }
+        else
+        {
+            $msg["title"] = "Successfully Uploading Avatar !";
+            $msg["description"] = "Your avatar has been changed !";
+            $msg["type"] = "success";
+        }
 
+        echo json_encode($msg);
 
+        // move_uploaded_file($_FILES['avatar']['tmp_name'], $data['full_path']);
 
-        //
+        // dd($data['file_path']);
+
+        // $file_name = $data["file_name"];
+
         // $user = $this->User->update_avatar($avatar, $user_id);
-        //
+
+        // if($this->upload->do_upload($avatar))
+        // {
+        //     return $this->upload->data("file_name");
+        // }
+
+        // if($this->upload->do_upload($file_name))
+        // {
+        //     dd('test');
+        // }
+
         // if(empty($user))
         // {
         //     $msg["title"] = "Successfully Updated !";

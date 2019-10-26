@@ -2,14 +2,12 @@
     <div class="container mx-auto overflow-hidden">
 
         <div class="relative">
-          <img src="https://images.unsplash.com/photo-1459262838948-3e2de6c1ec80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80" class="object-cover h-64 w-full cursor-pointer hover:opacity-75">
+            <img src="https://images.unsplash.com/photo-1459262838948-3e2de6c1ec80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80" class="object-cover h-64 w-full cursor-pointer hover:opacity-75">
 
-          <img id="avatar-trigger" src="https://images.unsplash.com/photo-1459262838948-3e2de6c1ec80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80" class="absolute border-dashed border-4 border-pink-500 cursor-pointer hover:opacity-75 left-0 right-0 block mx-auto rounded-full h-48 w-48" style="top: 50%;">
-          <form method="post" enctype="multipart/form-data">
+            <img id="avatar-trigger" src="https://images.unsplash.com/photo-1459262838948-3e2de6c1ec80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80" class="absolute border-dashed border-4 border-pink-500 cursor-pointer hover:opacity-75 left-0 right-0 block mx-auto rounded-full h-48 w-48" style="top: 50%;">
+            <form id="wrapper">
                 <input id="avatar" type="file" class="hidden" name="avatar">
-                <input type="hidden" class="hidden" name="processData">
-                <input type="hidden" class="hidden" name="contentType">
-          </form>
+            </form>
         </div>
 
         <div class="py-20">
