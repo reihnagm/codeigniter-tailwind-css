@@ -31,7 +31,7 @@
 - Tips: if button cannot submit, change type="button" to type="submit"
 - Tips: isset check empty or not in session
 - Tips: if you want to submit in form, use this $("#form") and in submit $("#form").submit()
-- Tips: if you want data json parse and do not wont use every when use ajax, use this $.ajaxSetup({ dataType: json})  
+- Tips: if you want data json parse and do not wont use every when use ajax, use this $.ajaxSetup({ dataType: json})
 - Tips: dont return false in form, but use e.preventDefault()
 - Tips: in $(document).ready(function() {
 
@@ -54,3 +54,7 @@ foo()
         "The URI you submitted has disallowed characters."
         to fix it go application/config/config.php and add symbol @
         $config['permitted_uri_chars'] = 'a-z 0-9~%.:_\-@';
+- Tips: if you want to get html dom object
+        use  - const el = $('#el')[0];
+        do'nt use  - const el = $('#el');
+- Tips: if you want upload image use ajax and want to use bar loading, properties async: false, don't use

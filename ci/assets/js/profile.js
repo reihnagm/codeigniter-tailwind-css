@@ -17,25 +17,49 @@ $(document).on("change","#avatar", function() {
         const unique_img = new Date().getTime()
 
         // OPTION
-        const wrapper = document.getElementById('wrapper');
-        const form = new FormData();
-        form.append("avatar", avatar);
+        const form_avatar = $("#form-avatar")[0];
+        // const form = new FormData();
+        // form.append("avatar", avatar);
 
         $.ajax({
+            xhr: function() {
+                var xhr = $.ajaxSettings.xhr();
+
+                xhr.addEventListener("progress", function(evt) {
+                    var percent_complete = evt.loaded / evt.total;
+                    percent_complete = parseInt(percent_complete * 100);
+                    console.log(percent_complete);
+                }, false);
+
+                return xhr;
+            },
             url: $("[name=site_url]").val() + "/update-user-avatar",
             type: "POST",
-            data: new FormData(wrapper),
+            data: new FormData(form_avatar),
             processData: false,
             contentType: false,
             cache: false,
-            async: false,
+            // async: false,
             success: function(data) {
-                $('#avatar-trigger').attr('src', $("[name=site_url]").val() + 'assets/avatar/' + data.avatar + "?" + unique_img);
-                Swal.fire(
-                    data.title,
-                    data.description,
-                    data.type
-                )
+
+                if(data.type)
+                {
+                    Swal.fire(
+                        data.title,
+                        data.description,
+                        data.type
+                    )
+                    $('#avatar-trigger').attr('src', $("[name=site_url]").val() + 'assets/avatar/' + data.avatar + '?' + unique_img);
+                }
+                else
+                {
+                    Swal.fire(
+                        data.title,
+                        data.description,
+                        data.type
+                    )
+                }
+
             },
             error: function(data) {
                 console.log(data);

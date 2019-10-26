@@ -38,7 +38,7 @@ class UserController extends Master_Controller
 
         $filename = $_FILES['avatar']['name'];
 
-        $x = explode('.', $filename); // .
+        $x = explode('.', $filename);
         $extension = strtolower(end($x)); // -- png | jpg | jpeg
 
         $config['upload_path']      = './assets/avatar/';
@@ -56,7 +56,7 @@ class UserController extends Master_Controller
         if (!$this->upload->do_upload("avatar"))
         {
             $msg["title"] = "Failed Uploading Avatar !";
-            $msg["description"] =  "Oops something went wrong !";
+            $msg["description"] = $this->upload->display_errors();
             $msg["type"] = "error";
         }
         else
@@ -65,6 +65,9 @@ class UserController extends Master_Controller
             $msg["description"] = "Your avatar has been changed !";
             $msg["type"] = "success";
             $msg["avatar"] = $data["file_name"].'.'.$extension;
+
+            // UPDATE AVATAR TO DATABASE
+            $this->User->update_avatar($data["file_name"].'.'.$extension, $user_id);
         }
 
         echo json_encode($msg);
@@ -75,8 +78,6 @@ class UserController extends Master_Controller
 
         // $file_name = $data["file_name"];
 
-        // $user = $this->User->update_avatar($avatar, $user_id);
-
         // if($this->upload->do_upload($avatar))
         // {
         //     return $this->upload->data("file_name");
@@ -86,21 +87,5 @@ class UserController extends Master_Controller
         // {
         //     dd('test');
         // }
-
-        // if(empty($user))
-        // {
-        //     $msg["title"] = "Successfully Updated !";
-        //     $msg["description"] = "Avatar has been Updated !";
-        //     $msg["type"] = "success";
-        //     // move_uploaded_file(base_url('assets/images'), $avatar);
-        // }
-        // else
-        // {
-        //     $msg["title"] = "Oops Something wrong !";
-        //     $msg["description"] = "Please try again !";
-        //     $msg["type"] = "error";
-        // }
-        //
-        // echo json_encode($msg);
     }
 }
