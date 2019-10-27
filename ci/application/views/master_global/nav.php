@@ -1,6 +1,6 @@
 <nav class="flex overflow-hidden items-center justify-between p-6" style="background-image: url(<?php echo base_url('assets/nav.png'); ?>); background-repeat: no-repeat;">
     <div class="flex overflow-hidden items-center flex-shrink-0 text-white mr-6">
-        <a id="logo" href="javascript:void(0);" class="block font-semibold text-xl tracking-tight bg-pink-500 p-2 rounded-full  hover:bg-pink-400">Codeigniter - Tailwind CSS</a>
+        <a id="logo" href="javascript:void(0);" class="text-gray-700 font-semibold text-xl tracking-tight">Codeigniter - Tailwind CSS</a>
     </div>
 
     <div class="w-full flex overflow-hidden flex-grow justify-end items-center w-auto">

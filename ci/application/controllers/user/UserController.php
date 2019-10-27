@@ -15,6 +15,7 @@ class UserController extends Master_Controller
         }
         $user = $this->User->get_user_profile($id);
         $data = [];
+        $data["banner"]     = $user->banner;
         $data["avatar"]     = $user->avatar;
         $data["first_name"] = $user->first_name;
         $data["last_name"]  = $user->last_name;
