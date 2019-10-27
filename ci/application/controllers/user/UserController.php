@@ -11,7 +11,7 @@ class UserController extends Master_Controller
     {
         if(empty($this->session->has_userdata("login")))
         {
-            die('User not Exists !');
+            redirect('/');
         }
         $user = $this->User->get_user_profile($id);
         $data = [];
@@ -39,11 +39,11 @@ class UserController extends Master_Controller
         $filename = $_FILES['avatar']['name'];
 
         $x = explode('.', $filename);
-        $extension = strtolower(end($x)); // -- png | jpg | jpeg
+        $extension = strtolower(end($x)); // png | jpg | jpeg
 
         $config['upload_path']      = './assets/avatar/';
         $config['allowed_types']    = 'gif|jpg|jpeg|png';
-        $config['file_name']        = '('.date('y-m-d').')-avatar-'.$user_name;
+        $config['file_name']        = 'avatar-'.$user_name;
         $config['file_ext_tolower'] = TRUE;
         $config['overwrite']        = TRUE;
         $config['mod_mime_fix']     = TRUE;
@@ -71,21 +71,5 @@ class UserController extends Master_Controller
         }
 
         echo json_encode($msg);
-
-        // move_uploaded_file($_FILES['avatar']['tmp_name'], $data['full_path']);
-
-        // dd($data['file_path']);
-
-        // $file_name = $data["file_name"];
-
-        // if($this->upload->do_upload($avatar))
-        // {
-        //     return $this->upload->data("file_name");
-        // }
-
-        // if($this->upload->do_upload($file_name))
-        // {
-        //     dd('test');
-        // }
     }
 }

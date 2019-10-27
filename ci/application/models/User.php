@@ -48,7 +48,8 @@ class User extends MY_Model
         ];
 
         $where = [
-            "id" => $user_id
+            "id" => $user_id,
+            "updated_at" => Date('Y/m/d')
         ];
 
         parent::__update('tbl_users', $where, $data);
