@@ -44,12 +44,12 @@ class User extends MY_Model
     public function update_avatar($avatar, $user_id)
     {
         $data = [
-            "avatar" => $avatar
+            "avatar" => $avatar,
+            "updated_at" => Date('Y/m/d')
         ];
 
         $where = [
-            "id" => $user_id,
-            "updated_at" => Date('Y/m/d')
+            "id" => $user_id
         ];
 
         parent::__update('tbl_users', $where, $data);

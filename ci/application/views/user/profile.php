@@ -3,7 +3,11 @@
 
         <div class="relative">
             <!-- BANNER -->
+            
             <img src="https://images.unsplash.com/photo-1459262838948-3e2de6c1ec80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80" class="object-cover h-64 w-full cursor-pointer hover:opacity-75">
+
+
+
             <!-- AVATAR -->
             <?php if ($avatar): ?>
                 <img id="avatar-trigger" src="<?php echo base_url('assets/avatar/'.$avatar); ?>" class="absolute border-dashed border-4 border-pink-500 cursor-pointer hover:opacity-75 left-0 right-0 block mx-auto rounded-full h-48 w-48" style="top: 50%;">
@@ -32,7 +36,7 @@
                 <i class="fas fa-edit w-8 cursor-pointer hover:text-pink-400"></i>
             </p>
 
-            <div class="flex flex-wrap overflow-hidden justify-center my-4">
+            <div class="flex overflow-hidden justify-center my-4">
                 <div class="w-1/6 mx-3">
                     <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
                         Provinces
