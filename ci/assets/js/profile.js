@@ -11,10 +11,10 @@
         });
 
         $(document).on("change", "#provinces", function() {
-            $.get($(["name=site_url"]).val() + "get-regencies", function(data){
-                console.log(data)
+            $.get($("[name=site_url]").val() + "get-regencies", { province_id : $(this).val() },function(data){
+                $("#container-regencies").html(data);
             });
-        })
+        });
 
         $(document).on("change","#avatar", function() {
             const unique = new Date().getTime();

@@ -40,6 +40,28 @@ function provinces()
 
     return $temp;
 }
+function regencies($province_id)
+{
+    $CI = __db();
+    $CI->db->from("regencies");
+    $CI->db->where("province_id", $province_id);
+
+    $regencies = $CI->db->get()->result();
+
+    $temp = '<label class=" block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                Regencies
+            </label>
+            <select id="provinces" class="block rounded appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 my-3">
+            ';
+
+    foreach ($regencies as $regencie):
+        $temp .= '<option value="'.$regencie->id.'">'.$regencie->name.'</option>';
+    endforeach;
+
+    $temp .='</select>';
+
+    echo json_encode($temp);
+}
 function get_menus_admin_count()
 {
     $CI = __db();

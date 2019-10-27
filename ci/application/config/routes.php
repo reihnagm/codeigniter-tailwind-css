@@ -25,6 +25,9 @@ $route['forgot-password']['GET'] = 'auth/AuthController/forgot_password';
 // VERIFY
 $route['verify/(:any)/(:any)']['GET'] = 'auth/AuthController/verify/$1/$2';
 
+// ADMINISTRATION
+$route['get-regencies']['GET'] = 'user/UserController/get_regencies';
+
 // PROFILE
 $route['profile']['GET'] = 'user/UserController/profile';
 

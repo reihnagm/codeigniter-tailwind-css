@@ -33,6 +33,10 @@ class UserController extends Master_Controller
         $this->load->view("user/profile", $data);
         $this->load->view("master_global/footer");
     }
+    public function get_regencies()
+    {
+        regencies($this->input->get("province_id"));
+    }
     public function update_user_avatar()
     {
         $msg = [];
