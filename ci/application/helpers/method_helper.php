@@ -1,22 +1,48 @@
 <?php
 
+// COMPONENTS
 function components($view, $data = [])
 {
     require_once APPPATH.'views/'.$view.'.php';
 }
-
 // DEBUGGING ERROR
 function dd($data = [])
 {
     echo '<pre>';
     die(var_dump($data));
 }
-
-function get_menus_admin_count()
+// LOAD INSTANCE DATABASE
+function __db()
 {
     $CI =& get_instance();
     $CI->load->database();
 
+    return $CI;
+}
+function provinces()
+{
+    $CI = __db();
+    $CI->db->from("provinces");
+
+    $provinces =  $CI->db->get()->result();
+
+    $temp = '<label class=" block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                Provinces
+            </label>
+            <select id="provinces" class="block rounded appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 my-3">
+            ';
+
+    foreach ($provinces as $province):
+        $temp .= '<option value="'.$province->id.'">'.$province->name.'</option>';
+    endforeach;
+
+    $temp .='</select>';
+
+    return $temp;
+}
+function get_menus_admin_count()
+{
+    $CI = __db();
     $CI->db->distinct();
     $CI->db->select("a.name parent_name, a.icon parent_icon, a.id parent_id");
     $CI->db->from("tbl_app_admin_menu_group a");
@@ -27,11 +53,9 @@ function get_menus_admin_count()
 
     return $count;
 }
-
 function get_user_datatables_count()
 {
-    $CI =& get_instance();
-    $CI->load->database();
+    $CI = __db();
 
     $CI->db->select("*");
     $CI->db->from("tbl_users");
@@ -43,8 +67,7 @@ function get_user_datatables_count()
 
 function get_menus_admin()
 {
-    $CI =& get_instance();
-    $CI->load->database();
+    $CI = __db();
 
     $CI->db->distinct();
     $CI->db->select("a.name parent_name, a.icon parent_icon, a.id parent_id");

@@ -38,14 +38,8 @@
 
         <div class="flex overflow-hidden justify-center my-4">
             <div class="w-1/6 mx-3">
-                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
-                    Provinces
-                 </label>
-                <select class="block rounded appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 my-3">
-                    <option>New Mexico</option>
-                    <option>Missouri</option>
-                    <option>Texas</option>
-                </select>
+                <?php echo $provinces; ?>
+                
                 <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
                     Regencies
                 </label>

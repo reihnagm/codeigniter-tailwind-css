@@ -9,6 +9,8 @@ class UserController extends Master_Controller
     }
     public function profile($id)
     {
+        $provinces = provinces();
+
         if(empty($this->session->has_userdata("login")))
         {
             redirect('/');
@@ -25,6 +27,7 @@ class UserController extends Master_Controller
         $data["gender"]     = $user->gender;
         $data["created_at"] = $user->created_at;
         $data["updated_at"] = $user->updated_at;
+        $data["provinces"]  = $provinces;
 
         $this->load->view("master_global/header");
         $this->load->view("user/profile", $data);
