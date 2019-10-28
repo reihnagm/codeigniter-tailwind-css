@@ -41,36 +41,20 @@
                 <div id="container-provinces">
                     <?php echo $provinces; ?>
                 </div>
-                <div id="container-regencies">
+                <div id="container-districts">
+                    <?php echo $districts; ?>
                     <!-- LOAD FROM AJAX -->
                 </div>
-
-                <!-- <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
-                    Regencies
-                </label>
-                <select class="block rounded appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
-                    <option>New Mexico</option>
-                    <option>Missouri</option>
-                    <option>Texas</option>
-                </select> -->
             </div>
             <div class="w-1/6 mx-3">
-                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
-                    Districts
-                </label>
-                <select class="block rounded appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 my-3">
-                    <option>New Mexico</option>
-                    <option>Missouri</option>
-                    <option>Texas</option>
-                </select>
-                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
-                    Villages
-                </label>
-                <select class="block rounded appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
-                    <option>New Mexico</option>
-                    <option>Missouri</option>
-                    <option>Texas</option>
-                </select>
+                <div id="container-regencies">
+                    <?php echo $regencies; ?>
+                    <!-- LOAD FROM AJAX -->
+                </div>
+                <div id="container-villages">
+                    <?php echo $villages; ?>
+                    <!-- LOAD FROM AJAX -->
+                </div>
             </div>
         </div>
 

@@ -11,10 +11,16 @@
         });
 
         $(document).on("change", "#provinces", function() {
-            $.get($("[name=site_url]").val() + "get-regencies", { province_id : $(this).val() },function(data){
-                $("#container-regencies").html(data);
-            });
+            regencies($(this).val());
         });
+
+        $(document).on("change", "#regencies", function() {
+            districts($(this).val());
+        })
+
+        $(document).on("change", "#districts", function() {
+            villages($(this).val());
+        })
 
         $(document).on("change","#avatar", function() {
             const unique = new Date().getTime();
@@ -92,6 +98,24 @@
 })(jQuery);
 
 
+function regencies(province_id)
+{
+    $.get($("[name=site_url]").val() + "get-regencies", { province_id : province_id },function(data){
+        $("#container-regencies").html(data);
+    });
+}
+function districts(regency_id)
+{
+    $.get($("[name=site_url]").val() + "get-districts", { regency_id : regency_id },function(data){
+        $("#container-districts").html(data);
+    });
+}
+function villages(district_id)
+{
+    $.get($("[name=site_url]").val() + "get-villages", { district_id : district_id },function(data){
+        $("#container-villages").html(data);
+    });
+}
 function is_allowed_ext(ext)
 {
     switch (ext)

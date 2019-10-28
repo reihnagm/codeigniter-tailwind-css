@@ -9,8 +9,6 @@ class UserController extends Master_Controller
     }
     public function profile($id)
     {
-        $provinces = provinces();
-
         if(empty($this->session->has_userdata("login")))
         {
             redirect('/');
@@ -27,7 +25,12 @@ class UserController extends Master_Controller
         $data["gender"]     = $user->gender;
         $data["created_at"] = $user->created_at;
         $data["updated_at"] = $user->updated_at;
-        $data["provinces"]  = $provinces;
+
+        // DATA ADMINISTRATION
+        $data["provinces"]  = provinces();
+        $data["regencies"]  = get_regencies();
+        $data["districts"]  = get_districts();
+        $data["villages"]   = get_villages();
 
         $this->load->view("master_global/header");
         $this->load->view("user/profile", $data);
@@ -36,6 +39,14 @@ class UserController extends Master_Controller
     public function get_regencies()
     {
         regencies($this->input->get("province_id"));
+    }
+    public function get_districts()
+    {
+        districts($this->input->get("regency_id"));
+    }
+    public function get_villages()
+    {
+        villages($this->input->get("district_id"));
     }
     public function update_user_avatar()
     {

@@ -27,6 +27,8 @@ $route['verify/(:any)/(:any)']['GET'] = 'auth/AuthController/verify/$1/$2';
 
 // ADMINISTRATION
 $route['get-regencies']['GET'] = 'user/UserController/get_regencies';
+$route['get-districts']['GET'] = 'user/UserController/get_districts';
+$route['get-villages']['GET']  = 'user/UserController/get_villages';
 
 // PROFILE
 $route['profile']['GET'] = 'user/UserController/profile';

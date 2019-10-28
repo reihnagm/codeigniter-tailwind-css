@@ -48,10 +48,10 @@ function regencies($province_id)
 
     $regencies = $CI->db->get()->result();
 
-    $temp = '<label class=" block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+    $temp = '<label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                 Regencies
             </label>
-            <select id="provinces" class="block rounded appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 my-3">
+            <select id="regencies" class="block rounded appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 my-3">
             ';
 
     foreach ($regencies as $regencie):
@@ -61,6 +61,116 @@ function regencies($province_id)
     $temp .='</select>';
 
     echo json_encode($temp);
+}
+function districts($regency_id)
+{
+    $CI = __db();
+    $CI->db->from("districts");
+    $CI->db->where("regency_id", $regency_id);
+
+    $districts = $CI->db->get()->result();
+
+    $temp = '<label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                Districts
+            </label>
+            <select id="districts" class="block rounded appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 my-3">
+            ';
+
+    foreach ($districts as $district):
+        $temp .= '<option value="'.$district->id.'">'.$district->name.'</option>';
+    endforeach;
+
+    $temp .='</select>';
+
+    echo json_encode($temp);
+}
+function villages($district_id)
+{
+    $CI = __db();
+    $CI->db->from("villages");
+    $CI->db->where("district_id", $district_id);
+
+    $villages = $CI->db->get()->result();
+
+    $temp = '<label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                Villages
+            </label>
+            <select id="villages" class="block rounded appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 my-3">
+            ';
+
+    foreach ($villages as $village):
+        $temp .= '<option value="'.$village->id.'">'.$village->name.'</option>';
+    endforeach;
+
+    $temp .='</select>';
+
+    echo json_encode($temp);
+}
+function get_regencies()
+{
+    $CI = __db();
+    $CI->db->from("regencies");
+    $CI->db->where("province_id", "11");
+
+    $regencies = $CI->db->get()->result();
+
+    $temp = '<label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                Regencies
+            </label>
+            <select id="regencies" class="block rounded appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 my-3">
+            ';
+
+    foreach ($regencies as $regencie):
+        $temp .= '<option value="'.$regencie->id.'">'.$regencie->name.'</option>';
+    endforeach;
+
+    $temp .='</select>';
+
+    return $temp;
+}
+function get_districts()
+{
+    $CI = __db();
+    $CI->db->from("districts");
+    $CI->db->where("regency_id", "1101");
+
+    $districts = $CI->db->get()->result();
+
+    $temp = '<label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                Districts
+            </label>
+            <select id="districts" class="block rounded appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 my-3">
+            ';
+
+    foreach ($districts as $district):
+        $temp .= '<option value="'.$district->id.'">'.$district->name.'</option>';
+    endforeach;
+
+    $temp .='</select>';
+
+    return $temp;
+}
+function get_villages()
+{
+    $CI = __db();
+    $CI->db->from("villages");
+    $CI->db->where("district_id", "1101010");
+
+    $villages = $CI->db->get()->result();
+
+    $temp = '<label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                Villages
+            </label>
+            <select id="villages" class="block rounded appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 my-3">
+            ';
+
+    foreach ($villages as $village):
+        $temp .= '<option value="'.$village->id.'">'.$village->name.'</option>';
+    endforeach;
+
+    $temp .='</select>';
+
+    return $temp;
 }
 function get_menus_admin_count()
 {
