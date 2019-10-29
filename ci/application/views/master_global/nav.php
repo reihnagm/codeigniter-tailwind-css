@@ -5,19 +5,19 @@
 
     <div class="w-full flex overflow-hidden flex-grow justify-end items-center w-auto">
         <?php if(isset($_SESSION['login'])): ?>
-            <a id="profile" href="javascript:void(0);" class="text-white mr-4">
+            <a id="profile" href="javascript:void(0);" class="text-white hover:text-gray-300 mr-4">
                 Profile
             </a>
         <?php else: ?>
-            <a id="sign-in-btn" class="cursor-pointer text-white mr-4">
+            <a id="sign-in-btn" class="cursor-pointer text-white hover:text-gray-300 mr-4">
                 Sign In
             </a>
-            <a id="sign-up-btn" class="cursor-pointer text-white mr-4">
+            <a id="sign-up-btn" class="cursor-pointer text-white hover:text-gray-300 mr-4">
                 Sign Up
             </a>
         <?php endif; ?>
         <?php if(isset($_SESSION['login'])): ?>
-            <a id="sign-out" href="javascript:void(0);" class="text-white mr-4">
+            <a id="sign-out" href="javascript:void(0);" class="text-white hover:text-gray-300 mr-4">
                 Sign Out
             </a>
         <?php endif; ?>

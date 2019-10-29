@@ -33,8 +33,11 @@ $route['get-villages']['GET']  = 'user/UserController/get_villages';
 // PROFILE
 $route['profile']['GET'] = 'user/UserController/profile';
 
+// BANNER
+$route['update-user-banner']['POST'] = 'user/UserController/update_user_banner';
+
 // AVATAR
-$route['update-user-avatar'] = 'user/UserController/update_user_avatar';
+$route['update-user-avatar']['POST'] = 'user/UserController/update_user_avatar';
 
 // CHECK RESERVED USERNAME
 $route['check-reserved-username']['POST'] = 'auth/AuthController/check_reserved_username';

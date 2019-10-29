@@ -41,6 +41,19 @@ class User extends MY_Model
 
         return false;
     }
+    public function update_banner($avatar, $user_id)
+    {
+        $data = [
+            "banner" => $avatar,
+            "updated_at" => Date('Y/m/d')
+        ];
+
+        $where = [
+            "id" => $user_id
+        ];
+
+        parent::__update('tbl_users', $where, $data);
+    }
     public function update_avatar($avatar, $user_id)
     {
         $data = [

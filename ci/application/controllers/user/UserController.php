@@ -91,4 +91,47 @@ class UserController extends Master_Controller
 
         echo json_encode($msg);
     }
+    public function update_user_banner()
+    {
+        $msg = [];
+
+        $user_id = $_SESSION['login']['id'];
+        $user_name = $_SESSION['login']['username'];
+
+        $filename = $_FILES['banner']['name'];
+
+        $x = explode('.', $filename);
+        $extension = strtolower(end($x)); // png | jpg | jpeg
+
+        $config['upload_path']      = './assets/banner/';
+        $config['allowed_types']    = 'gif|jpg|jpeg|png';
+        $config['file_name']        = 'banner-'.$user_name;
+        $config['file_ext_tolower'] = TRUE;
+        $config['overwrite']        = TRUE;
+        $config['mod_mime_fix']     = TRUE;
+        $config['max_size']         = 2048; // 1MB
+
+        $this->upload->initialize($config);
+
+        $data = $this->upload->data();
+
+        if (!$this->upload->do_upload("banner"))
+        {
+            $msg["title"] = "Failed Uploading Banner !";
+            $msg["description"] = $this->upload->display_errors();
+            $msg["type"] = "error";
+        }
+        else
+        {
+            $msg["title"] = "Successfully Uploading Banner !";
+            $msg["description"] = "Your banner has been changed !";
+            $msg["type"] = "success";
+            $msg["banner"] = $data["file_name"].'.'.$extension;
+
+            // UPDATE AVATAR TO DATABASE
+            $this->User->update_banner($data["file_name"].'.'.$extension, $user_id);
+        }
+
+        echo json_encode($msg);
+    }
 }
