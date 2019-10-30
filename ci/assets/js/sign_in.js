@@ -68,7 +68,7 @@
                 NProgress.start();
 
                 $("#form-submit-sign-in").text('');
-                $("#form-submit-sign-in").append('<img src="'+$("[name=site_url]").val()+'assets/loader/loader.gif" style="width: 25px; display: block; margin: 0 auto;">');
+                $("#form-submit-sign-in").append('<img src="'+$("[name=site_url]").val()+'assets/loader/loader-2.gif" style="width: 25px; display: block; margin: 0 auto;">');
                 $("#form-submit-sign-in").addClass("cursor-not-allowed");
                 $("#form-submit-sign-in").addClass("opacity-50");
                 $("#form-submit-sign-in").removeClass("hover:bg-blue-700");

@@ -80,7 +80,7 @@ class AuthController extends Master_Controller
         $msg = [];
         $this->session->unset_userdata("login");
         $msg["logout"] = TRUE;
-        echo json_encode($data);
+        echo json_encode($msg);
     }
     private function send_email_verification($email, $token)
     {
@@ -111,7 +111,6 @@ class AuthController extends Master_Controller
             "created_at" => $user["created_at"],
             "updated_at" => $user["updated_at"]
         ];
-
         $this->session->set_userdata("login", $data);
 
         if(!$user)

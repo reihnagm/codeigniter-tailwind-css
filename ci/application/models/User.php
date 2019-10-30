@@ -110,4 +110,17 @@ class User extends MY_Model
         if($input_email == $email && password_verify($password, $password_hash)) return TRUE;
         return FALSE;
     }
+    public function update_address($village_id, $user_id)
+    {
+        $data = [
+            'village_id' => $village_id
+        ];
+
+        $where =
+        [
+            'id' => $user_id
+        ];
+
+        parent::__update('tbl_users', $where, $data);
+    }
 }

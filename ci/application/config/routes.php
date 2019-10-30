@@ -30,6 +30,9 @@ $route['get-regencies']['GET'] = 'user/UserController/get_regencies';
 $route['get-districts']['GET'] = 'user/UserController/get_districts';
 $route['get-villages']['GET']  = 'user/UserController/get_villages';
 
+// SAVE ADDRESS
+$route['save-address']['POST'] = 'user/UserController/save_address';
+
 // PROFILE
 $route['profile']['GET'] = 'user/UserController/profile';
 

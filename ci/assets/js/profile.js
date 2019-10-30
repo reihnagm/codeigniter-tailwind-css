@@ -14,6 +14,24 @@
         $("#villages").addClass("opacity-50");
         $("#villages").addClass("cursor-not-allowed");
 
+        $("#save-address").click(function() {
+            $.ajax({
+                url: $("[name=site_url]").val() + 'save-address',
+                method: "POST",
+                data:
+                {
+                    villages_id: $("#villages").val()
+                },
+                success: function(data)
+                {
+                    console.log(data);
+                },
+                error: function(data)
+                {
+                    console.log(data);
+                }
+            });
+        });
 
         $(document).on("click", "#banner-trigger", function() {
             $("#banner").trigger("click");

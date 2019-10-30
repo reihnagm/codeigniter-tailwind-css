@@ -34,7 +34,7 @@
             <i class="fas fa-birthday-cake w-8 cursor-pointer hover:text-gray-600"></i> <p class="text-2xl text-center px-2 -mx-2 py-2"> years <?php echo $age; ?> old</p>
         <?php else:  ?>
             <span class="block text-center px-2 mx-2 py-2">
-                <i class="fas fa-birthday-cake w-8 cursor-pointer hover:text-gray-600"></i>
+                <i class="fas fa-birthday-cake w-8"></i>
                 <i class="fas fa-edit w-8 cursor-pointer hover:text-gray-600"></i>
             </span>
         <?php endif; ?>
@@ -43,7 +43,7 @@
             <i class="fas fa-envelope-square w-8"></i> <?php echo $email; ?>
             <i class="fas fa-edit w-8 cursor-pointer hover:text-gray-600"></i>
         </p>
-        
+
         <div class="rounded shadow-lg w-1/2 mx-auto">
             <div class="px-3 py-3">
                 <div class="flex overflow-hidden justify-center my-4">
@@ -68,7 +68,7 @@
                     </div>
                 </div>
                 <div class="text-right">
-                    <button class="bg-gray-700 hover:bg-gray-600 text-white font-bold py-2 px-4 m-4 rounded-full text-right">
+                    <button id="save-address" class="bg-gray-700 hover:bg-gray-600 text-white font-bold py-2 px-4 m-4 rounded-full text-right">
                         Save Address
                     </button>
                 </div>
@@ -77,8 +77,6 @@
 
     </div>
 </div>
-
-
 
 <script type="text/javascript">
     <?php if($this->session->flashdata("msg_verified")): ?>

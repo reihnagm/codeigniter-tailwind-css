@@ -134,4 +134,9 @@ class UserController extends Master_Controller
 
         echo json_encode($msg);
     }
+    public function save_address()
+    {
+        $user_id = $this->session->get_userdata("login")["id"];
+        $this->User->update_address($this->input->post('villages_id'));
+    }
 }
