@@ -44,37 +44,43 @@
             <i class="fas fa-edit w-8 cursor-pointer hover:text-gray-600"></i>
         </p>
 
-        <div class="rounded shadow-lg w-1/2 mx-auto">
-            <div class="px-3 py-3">
-                <div class="flex overflow-hidden justify-center my-4">
-                    <div class="mx-3">
-                        <div id="container-provinces">
-                            <?php echo $provinces; ?>
+        <?php if($village_id): ?>
+            <?php
+                $address = display_villages($village_id);
+            ?>
+                <p><?php echo $address->name_province; ?></p>
+        <?php else: ?>
+            <div class="rounded shadow-lg w-1/2 mx-auto">
+                <div class="px-3 py-3">
+                    <div class="flex overflow-hidden justify-center my-4">
+                        <div class="mx-3">
+                            <div id="container-provinces">
+                                <?php echo $provinces; ?>
+                            </div>
+                            <div id="container-districts">
+                                <?php echo $districts; ?>
+                                <!-- LOAD FROM AJAX -->
+                            </div>
                         </div>
-                        <div id="container-districts">
-                            <?php echo $districts; ?>
-                            <!-- LOAD FROM AJAX -->
+                        <div class="mx-3">
+                            <div id="container-regencies">
+                                <?php echo $regencies; ?>
+                                <!-- LOAD FROM AJAX -->
+                            </div>
+                            <div id="container-villages">
+                                <?php echo $villages; ?>
+                                <!-- LOAD FROM AJAX -->
+                            </div>
                         </div>
                     </div>
-                    <div class="mx-3">
-                        <div id="container-regencies">
-                            <?php echo $regencies; ?>
-                            <!-- LOAD FROM AJAX -->
-                        </div>
-                        <div id="container-villages">
-                            <?php echo $villages; ?>
-                            <!-- LOAD FROM AJAX -->
-                        </div>
+                    <div class="text-right">
+                        <button id="save-address" class="bg-gray-700 hover:bg-gray-600 text-white font-bold py-2 px-4 m-4 rounded-full text-right">
+                            Save Address
+                        </button>
                     </div>
-                </div>
-                <div class="text-right">
-                    <button id="save-address" class="bg-gray-700 hover:bg-gray-600 text-white font-bold py-2 px-4 m-4 rounded-full text-right">
-                        Save Address
-                    </button>
                 </div>
             </div>
-        </div>
-
+        <?php endif; ?>
     </div>
 </div>
 

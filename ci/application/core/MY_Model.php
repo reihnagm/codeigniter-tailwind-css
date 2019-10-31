@@ -16,7 +16,9 @@ class MY_Model extends CI_Model
     }
     public function __update($table, $where, $data)
     {
+        $this->db->trans_start();
         $this->db->where($where);
         $this->db->update($table, $data);
+        $this->db->trans_complete();
     }
 }

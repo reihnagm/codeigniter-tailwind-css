@@ -23,6 +23,7 @@ class UserController extends Master_Controller
         $data["email"]      = $user->email;
         $data["age"]        = $user->age;
         $data["gender"]     = $user->gender;
+        $data["village_id"] = $user->village_id;
         $data["created_at"] = $user->created_at;
         $data["updated_at"] = $user->updated_at;
 
@@ -74,14 +75,14 @@ class UserController extends Master_Controller
 
         if (!$this->upload->do_upload("avatar"))
         {
-            $msg["title"] = "Failed Uploading Avatar !";
+            $msg["title"] = "Failed !";
             $msg["description"] = $this->upload->display_errors();
             $msg["type"] = "error";
         }
         else
         {
-            $msg["title"] = "Successfully Uploading Avatar !";
-            $msg["description"] = "Your avatar has been changed !";
+            $msg["title"] = "Successfully !";
+            $msg["description"] = "Avatar has been changed !";
             $msg["type"] = "success";
             $msg["avatar"] = $data["file_name"].'.'.$extension;
 
@@ -117,14 +118,14 @@ class UserController extends Master_Controller
 
         if (!$this->upload->do_upload("banner"))
         {
-            $msg["title"] = "Failed Uploading Banner !";
+            $msg["title"] = "Failed !";
             $msg["description"] = $this->upload->display_errors();
             $msg["type"] = "error";
         }
         else
         {
-            $msg["title"] = "Successfully Uploading Banner !";
-            $msg["description"] = "Your banner has been changed !";
+            $msg["title"] = "Successfully !";
+            $msg["description"] = "Banner has been changed !";
             $msg["type"] = "success";
             $msg["banner"] = $data["file_name"].'.'.$extension;
 
@@ -136,7 +137,25 @@ class UserController extends Master_Controller
     }
     public function save_address()
     {
-        $user_id = $this->session->get_userdata("login")["id"];
-        $this->User->update_address($this->input->post('villages_id'));
+        $msg = [];
+        $save_address = $this->User->save_address($this->input->post('villages_id'), $this->session->userdata("login")["id"]);
+
+        if ($this->db->trans_status() === FALSE)
+        {
+            $this->db->trans_rollback();
+            $msg["title"] = "Failed !";
+            $msg["description"] = "Oops something wrong !";
+            $msg["type"] = "error";
+        }
+        else
+        {
+            $this->db->trans_commit();
+            $msg["title"] = "Successfully !";
+            $msg["description"] = "Address has been changed !";
+            $msg["type"] = "success";
+        }
+
+        echo json_encode($msg);
     }
+
 }

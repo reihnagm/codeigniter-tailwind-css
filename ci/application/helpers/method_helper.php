@@ -19,6 +19,24 @@ function __db()
 
     return $CI;
 }
+function display_villages($village_id)
+{
+    $CI = __db();
+
+    $CI->db->select("a.name name_village, b.name name_districts, c.name name_regencies, d.name name_province");
+    $CI->db->from("villages a");
+    $CI->db->join("districts b",
+    "a.district_id = b.id");
+    $CI->db->join("regencies c",
+    "b.regency_id = c.id");
+    $CI->db->join("provinces d",
+    "c.province_id = d.id");
+    $CI->db->where("a.id", $village_id);
+
+    $result = $CI->db->get()->row();
+
+    return $result;
+}
 function provinces()
 {
     $CI = __db();

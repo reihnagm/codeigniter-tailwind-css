@@ -1,7 +1,6 @@
 (function ($) {
     'use strict';
     $(function() {
-
         // DISABLED WHEN NOT TRIGGERED
         $("#regencies").prop("disabled", true);
         $("#districts").prop("disabled", true);
@@ -25,10 +24,20 @@
                 success: function(data)
                 {
                     console.log(data);
+                    Swal.fire(
+                        data.title,
+                        data.description,
+                        data.type
+                    )
                 },
                 error: function(data)
                 {
                     console.log(data);
+                    Swal.fire(
+                        data.title,
+                        data.description,
+                        data.type
+                    )
                 }
             });
         });
@@ -212,7 +221,6 @@
 
     });
 })(jQuery);
-
 
 function regencies(province_id)
 {
