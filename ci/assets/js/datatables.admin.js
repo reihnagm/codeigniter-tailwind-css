@@ -234,9 +234,15 @@ function is_allowed_ext(ext)
 
 function toggleModal ()
 {
-    const body = document.querySelector('body')
-    const modal = document.querySelector('.modal')
-    modal.classList.toggle('opacity-0')
-    modal.classList.toggle('pointer-events-none')
-    body.classList.toggle('modal-active')
+    // const body = document.querySelector('body');
+    // const modal = document.querySelector('.modal');
+    const body = $("body");
+    const modal = $(".modal");
+
+    modal.toggleClass("opacity-0");
+    modal.toggleClass("pointer-events-none");
+    body.toggleClass("modal-active");
+    // modal.classList.toggle('opacity-0');
+    // modal.classList.toggle('pointer-events-none');
+    // body.classList.toggle('modal-active');
 }

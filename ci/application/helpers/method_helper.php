@@ -23,7 +23,7 @@ function display_villages($village_id)
 {
     $CI = __db();
 
-    $CI->db->select("a.name name_village, b.name name_districts, c.name name_regencies, d.name name_province");
+    $CI->db->select("a.name name_village, b.name name_district, c.name name_regency, d.name name_province");
     $CI->db->from("villages a");
     $CI->db->join("districts b",
     "a.district_id = b.id");

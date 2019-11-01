@@ -27,7 +27,7 @@
         <p class="text-2xl text-center px-2 -mx-2 py-2">
             <?php echo ucfirst($first_name); ?>
             <?php echo ucfirst($last_name); ?>
-            <i class="fas fa-edit w-8 cursor-pointer hover:text-gray-600"></i>
+            <i id="edit-name" class="fas fa-edit w-8 cursor-pointer hover:text-gray-600"></i>
         </p>
 
         <?php if(!empty($age)): ?>
@@ -48,7 +48,14 @@
             <?php
                 $address = display_villages($village_id);
             ?>
-                <p><?php echo $address->name_province; ?></p>
+                <p class="text-xl text-center px-2 -mx-2 py-2">
+                    <i class="fas fa-address-card w-8"></i>
+                    <?php echo ucwords(strtolower($address->name_province)); ?>,
+                    <?php echo ucwords(strtolower($address->name_district)); ?>,
+                    <?php echo ucwords(strtolower($address->name_regency)); ?>,
+                    <?php echo ucwords(strtolower($address->name_village)); ?>
+                    <i class="fas fa-edit w-8 cursor-pointer hover:text-gray-600"></i>
+                </p>
         <?php else: ?>
             <div class="rounded shadow-lg w-1/2 mx-auto">
                 <div class="px-3 py-3">
@@ -81,6 +88,9 @@
                 </div>
             </div>
         <?php endif; ?>
+
+
+
     </div>
 </div>
 
