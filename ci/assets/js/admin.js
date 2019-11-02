@@ -140,7 +140,7 @@
         // 1: {name: "", value: ""}
         // 2: {name: "", value: ""}
 
-        $.post(base_url + "admin/save-privilege",
+        $.post($("[name=site_url]").val() + "admin/save-privilege",
         {
             data:  $(this).serializeArray()
         }

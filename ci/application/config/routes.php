@@ -60,6 +60,9 @@ $route['admin/privilege']['GET'] = 'admin/AdminController/privilege';
 // ADMIN ALL USERS DATATABLES
 $route['admin/all-user-datatables']['GET'] = 'admin/AdminController/user_datatables';
 
+// ADMIN ALL PRIVILEGE DATATABLES
+$route['admin/all-user-privilege-datatables']['GET'] = 'admin/AdminController/user_privilege_datatables';
+
 // ADMIN READ USER
 $route['admin/user']['GET'] = 'admin/AdminController/user_read';
 

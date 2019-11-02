@@ -1,5 +1,4 @@
 <div class="min-h-screen w-3/4">
-
     <!-- WRAPPER MODAL -->
     <div id="wrapper-modal"></div>
 

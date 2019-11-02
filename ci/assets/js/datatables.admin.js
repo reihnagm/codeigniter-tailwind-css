@@ -1,8 +1,8 @@
 // CHECKING BROWSER
 const user_agent = $("[name=user_agent]").val();
 
-// GETTING BASE URL
-const site_url = $("[name=site_url]").val();
+// // GETTING BASE URL
+// const site_url = $("[name=site_url]").val();
 
 // let url = user_agent == "Firefox" ? "all-user-datatables" : "admin/all-user-datatables";
 
@@ -12,13 +12,13 @@ var global_func;
     'use strict';
     $(function() {
 
-    let all_user_datatables = $('#all-user-datatables').DataTable({
+    const user_datatables = $('#all-user-datatables').DataTable({
         dom: '"<"flex items-center"<"flex-grow items-center w-2/4"l><"flex flex-grow items-center w-2/4 justify-end"f>><"w-full"rt><"flex items-center"<"flex-grow items-center w-2/4"i><"flex flex-grow items-center w-2/4 justify-end"p>>',
         responsive: true,
         serverSide: true,
         ajax:
         {
-            url: site_url + "admin/all-user-datatables",
+            url: $("[name=site_url]").val() + "admin/all-user-datatables",
             dataType: "JSON",
             type: "GET"
         },
@@ -67,8 +67,65 @@ var global_func;
         $(".loader").css('display', processing ? 'block' : 'none');
     })
 
-    all_user_datatables.on('order.dt search.dt', function() {
-        all_user_datatables.column(0, {
+    user_datatables.on('order.dt search.dt', function() {
+        user_datatables.column(0, {
+            search: 'applied',
+            order: 'applied'
+        }).nodes().each(function(cell, i) {
+            cell.innerHTML = i + 1;
+        });
+    }).draw()
+
+    const user_privilege_datatables = $("#all-user-privilege-datatables").DataTable({
+        dom: '"<"flex items-center"<"flex-grow items-center w-2/4"l><"flex flex-grow items-center w-2/4 justify-end"f>><"w-full"rt><"flex items-center"<"flex-grow items-center w-2/4"i><"flex flex-grow items-center w-2/4 justify-end"p>>',
+        responsive: true,
+        serverSide: true,
+        ajax: {
+            url: $("[name=site_url]").val() + "admin/all-user-privilege-datatables",
+            dataType: "JSON",
+            type: "GET"
+        },
+        columnDefs: [
+            {
+                targets: "_all",
+                createdCell: function (td, cellData, rowData, row, col)
+                {
+                    $(td).css("color", "#2b6cb0")
+                    $(td).css("whitespace", "pre")
+                    $(td).css("font-size", ".75rem")
+                    $(td).css("padding", ".5rem")
+                    $(td).css("border-color", "#edf2f7")
+                    $(td).css("border-top-width", "1px")
+                    $(td).css("font-family", "Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace")
+                }
+            }
+        ],
+        columns: [
+            {
+                data: "no",
+                searchable: false,
+                orderable: false,
+            },
+            {
+                data: "username"
+            },
+            {
+                data: "email"
+            },
+            {
+                data: "name"
+            },
+            {
+                data: "option"
+            }
+        ]
+    }).on('processing.dt', function(e, settings, processing) {
+        $(".wrapper-loader").css('display', processing ? 'block' : 'none');
+        $(".loader").css("display", processing ? 'block' : 'none');
+    })
+
+    user_privilege_datatables.on('order.dt search.dt', function() {
+        user_privilege_datatables.column(0, {
             search: 'applied',
             order: 'applied'
         }).nodes().each(function(cell, i) {
@@ -100,7 +157,7 @@ function edit_user_datatables(id)
 {
     let url = user_agent == "Firefox" ? "edit-user-datatables" : "admin/edit-user-datatables";
 
-    $.get(site_url + "admin/edit-user-datatables", { id: id })
+    $.get($(["name=site_url"]).val() + "admin/edit-user-datatables", { id: id })
     .done(function(data) {
         $("#wrapper-modal").html(data.temp);
         global_func();
@@ -110,30 +167,30 @@ function edit_user_datatables(id)
 
 function destroy_user_datatables(id)
 {
-    $.post(site_url + "admin/destroy-user-datatables", { id : id})
-    .done(function(data) {
+    $.post($(["name=site_url"]).val() + "admin/destroy-user-datatables", { id : id})
+        .done(function(data) {
 
-        if(data.valid)
-        {
-            Swal.fire(
-                data.title,
-                data.desc,
-                data.type
-            )
-            location.reload();
-            close_modal();
-        }
-        else
-        {
-            Swal.fire(
-                data.title,
-                data.desc,
-                data.type
-            )
-        }
+            if(data.valid)
+            {
+                Swal.fire(
+                    data.title,
+                    data.desc,
+                    data.type
+                )
+                location.reload();
+                close_modal();
+            }
+            else
+            {
+                Swal.fire(
+                    data.title,
+                    data.desc,
+                    data.type
+                )
+            }
 
-        toggleModal();
-    })
+            toggleModal();
+        })
 }
 
 function validate_update_user_datatables()
@@ -159,7 +216,7 @@ function submit_update_user_datatables(evt)
     if(validate_update_user_datatables())
     {
         setTimeout(() => {
-            $.post(site_url + "admin/update-user-datatables", $("#form-edit-user-datatables").serialize(), (data) => {
+            $.post($(["name=site_url"]).val() + "admin/update-user-datatables", $("#form-edit-user-datatables").serialize(), (data) => {
                 if(data.valid)
                 {
                     Swal.fire(

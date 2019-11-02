@@ -97,7 +97,7 @@ class AdminController extends Master_Controller
 			if($order)
 				$this->db->order_by("a.id", $dir);
 			else
-				$this->db->order_by($order, 'DESC');
+				$this->db->order_by($order, "DESC");
 
 
 			if ($length > 0)
@@ -141,7 +141,118 @@ class AdminController extends Master_Controller
 			"data" => $data
 		]);
 	}
+	public function user_privilege_datatables()
+	{
+		// DEFINE COLUMN
+		$columns =
+		[
+			0 => "no",
+			1 => "username",
+			2 => "email",
+			3 => "name",
+		];
 
+		$order = $columns[$this->input->get('order')[0]["column"]];
+		$dir = $this->input->get('order')[0]["dir"];
+
+		$draw 	= $this->input->get("draw");
+		$start 	= $this->input->get("start");
+		$length = $this->input->get("length");
+		$search = $this->input->get("search")["value"];
+
+		if(!empty($search))
+		{
+			$this->db->select("a.id, a.username, a.email, b.name");
+			$this->db->from("tbl_users a");
+			$this->db->join("tbl_roles b", "a.role_id = b.id");
+			$this->db->like("a.username", $search);
+			$this->db->or_like("a.email", $search);
+			$this->db->or_like("b.name", $search);
+
+			if ($length > 0)
+				$this->db->limit($length, $start);
+
+			$users = $this->db->get()->result();
+		}
+		else
+		{
+			$this->db->select("a.id, a.username, a.email, b.name");
+			$this->db->from("tbl_users a");
+			$this->db->join("tbl_roles b", "a.role_id = b.id");
+
+			if($order)
+				$this->db->order_by("a.id", $dir);
+			else
+				$this->db->order_by($order, "DESC");
+
+			if ($length > 0)
+				$this->db->limit($length, $start);
+
+			$users = $this->db->get()->result();
+		}
+
+		$data = [];
+
+		$index = 1;
+
+		foreach($users as $user):
+
+			$row = [];
+
+			$row['no'] = $index++;
+			$row['username'] = $user->username;
+			$row['email'] = $user->email;
+			$row['name'] = $user->name;
+
+			$row['option'] =  	'<a href="javascript:void(0)" class="hover:text-pink-300">
+									<i onclick="edit_user_privilege_datatables('.$user->id.')" id="edit-user-datatables-'.$user->id.'" class="fas fa-edit w-8"></i>
+								</a>
+								<a href="javascript:void(0)" class="hover:text-pink-300">
+									<i onclick="destroy_user_privelege_datatables('.$user->id.')" id="destroy-user-datatables-'.$user->id.'" class="fa fa-trash w-8"></i>
+								</a>';
+
+			$data[] = $row;
+
+		endforeach;
+
+		echo json_encode([
+			"draw" => $draw,
+			"recordsTotal" => $this->total_user_privilege_datatables(),
+			"recordsFiltered" => $this->filtered_user_privilege_datatables(),
+			"data" => $data
+		]);
+	}
+	private function total_user_privilege_datatables()
+	{
+		$this->db->select("a.id, a.first_name, a.last_name, a.username, a.email");
+		$this->db->from("tbl_users a");
+
+		return $this->db->count_all_results();
+	}
+	private function filtered_user_privilege_datatables()
+	{
+		$search = $this->input->get("search")["value"];
+
+		if(!empty($search))
+		{
+			$sql = "SELECT COUNT(*)
+			FROM tbl_users a
+			INNER JOIN tbl_roles b
+			WHERE a.username LIKE '%{$search}%'
+			OR a.username LIKE '%{$search}%'
+			OR b.name LIKE '%{$search}%'";
+
+			return $this->db->query($sql)->row_array()["count"];
+		}
+		else
+		{
+			$this->db->select("a.id, a.username, a.email, b.name");
+			$this->db->from("tbl_users a");
+			$this->db->join("tbl_roles b", "a.role_id = b.id");
+
+			return $this->db->count_all_results();
+		}
+	}
 	public function edit_user_datatables()
 	{
 		$id = $this->input->get("id");
@@ -427,21 +538,18 @@ class AdminController extends Master_Controller
 			return $this->db->count_all_results();
 		}
 	}
-
 	public function user_read()
 	{
 		$this->load->view('master_admin/header');
 		$this->load->view('admin/user', $this->data);
 		$this->load->view('master_admin/footer');
 	}
-
     public function logout()
     {
         session_destroy();
 
         redirect('/', 'refresh');
     }
-
 	public function get_count_privilege()
 	{
 		$this->db->from("tbl_app_admin_menu");
