@@ -7,8 +7,9 @@
         <div class="loader"></div>
     </div>
 
-    <!-- COUNT USER PRIVILEGES DATATABLES -->
-    <input type="hidden" name="count_user_privileges_datatables" value="<?php echo get_user_datatables_count(); ?>">
+    <!-- COUNT USER PRIVILEGE DATATABLES -->
+    <input type="hidden" name="count_user_privilege_datatables"
+    value="<?php echo get_user_datatables_count(); ?>">
 
     <div class="markdown mt-24 mb-6 px-6 max-w-3xl">
         <table id="all-user-privilege-datatables" class="w-full text-left table-collapse">
@@ -24,4 +25,5 @@
             <tbody class="align-baseline"></tbody>
         </table>
     </div>
+
 </div>

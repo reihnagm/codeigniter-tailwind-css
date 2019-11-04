@@ -6,6 +6,15 @@ const user_agent = $("[name=user_agent]").val();
 
 // let url = user_agent == "Firefox" ? "all-user-datatables" : "admin/all-user-datatables";
 
+$(document)
+.on('turbolinks:click', function() {
+    NProgress.start();
+})
+.on('turbolinks:render', function() {
+    NProgress.done();
+    NProgress.remove(); 
+});
+
 var global_func;
 
 (function ($) {
@@ -155,19 +164,31 @@ var global_func;
 
 function edit_user_datatables(id)
 {
-    let url = user_agent == "Firefox" ? "edit-user-datatables" : "admin/edit-user-datatables";
+    // const url = user_agent == "Firefox" ? "edit-user-datatables" : "admin/edit-user-datatables";
 
-    $.get($(["name=site_url"]).val() + "admin/edit-user-datatables", { id: id })
-    .done(function(data) {
-        $("#wrapper-modal").html(data.temp);
-        global_func();
-        toggleModal();
-    })
+    $.get($("[name=site_url]").val() + "admin/edit-user-datatables", { id: id })
+        .done(function(data) {
+            $("#wrapper-modal").html(data.temp);
+            global_func();
+            toggleModal();
+        })
+}
+
+function edit_user_privilege_datatables(id)
+{
+    // const url = user_agent == "Firefox" ? "edit-user-datatables" : "admin/edit-user-datatables";
+
+    $.get($("[name=site_url]").val() + "admin/edit-user-privilege-datatables", { id: id })
+        .done(function(data) {
+            $("#wrapper-modal").html(data.temp);
+            global_func();
+            toggleModal();
+        })
 }
 
 function destroy_user_datatables(id)
 {
-    $.post($(["name=site_url"]).val() + "admin/destroy-user-datatables", { id : id})
+    $.post($("[name=site_url]").val() + "admin/destroy-user-datatables", { id : id })
         .done(function(data) {
 
             if(data.valid)
@@ -202,7 +223,7 @@ function validate_update_user_datatables()
     }
 
     $("#submit_update_user_datatables").text('');
-    $("#submit_update_user_datatables").append('<img src="'+site_url+'assets/loader/loader.gif" style="width: 25px; display: block; margin: 0 auto;">');
+    $("#submit_update_user_datatables").append('<img src="'+$(["name=site_url"]).val()+'assets/loader/loader.gif" style="width: 25px; display: block; margin: 0 auto;">');
     $("#submit_update_user_datatables").addClass("cursor-not-allowed");
     $("#submit_update_user_datatables").addClass("opacity-50");
     $("#submit_update_user_datatables").removeClass("hover:text-pink-300");
@@ -216,7 +237,7 @@ function submit_update_user_datatables(evt)
     if(validate_update_user_datatables())
     {
         setTimeout(() => {
-            $.post($(["name=site_url"]).val() + "admin/update-user-datatables", $("#form-edit-user-datatables").serialize(), (data) => {
+            $.post($("[name=site_url]").val() + "admin/update-user-datatables", $("#form-edit-user-datatables").serialize(), (data) => {
                 if(data.valid)
                 {
                     Swal.fire(
@@ -275,7 +296,9 @@ $(document).on("change","#avatar", function() {
 
     }
 });
-
+function show_user_privilege_datatables(user_id)
+{
+}
 function is_allowed_ext(ext)
 {
     switch (ext)
@@ -288,7 +311,6 @@ function is_allowed_ext(ext)
     }
     return false;
 }
-
 function toggleModal ()
 {
     // const body = document.querySelector('body');

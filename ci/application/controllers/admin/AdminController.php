@@ -61,7 +61,6 @@ class AdminController extends Master_Controller
 
 		if(!empty($search))
 		{
-
 			$this->db->select("a.id, a.first_name, a.last_name, a.username, a.email, a.created_at");
 			$this->db->from("tbl_users a");
 			$this->db->like("a.first_name", $search);
@@ -98,7 +97,6 @@ class AdminController extends Master_Controller
 				$this->db->order_by("a.id", $dir);
 			else
 				$this->db->order_by($order, "DESC");
-
 
 			if ($length > 0)
 			    $this->db->limit($length, $start);
@@ -209,6 +207,9 @@ class AdminController extends Master_Controller
 								</a>
 								<a href="javascript:void(0)" class="hover:text-pink-300">
 									<i onclick="destroy_user_privelege_datatables('.$user->id.')" id="destroy-user-datatables-'.$user->id.'" class="fa fa-trash w-8"></i>
+								</a>
+								<a href="'.site_url().'admin/show-privilege-user/'.$user->username.$user->id.'" class="hover:text-pink-300">
+									<i onclick="show_user_privilege_datatables('.$user->id.')" id="show-user-privilege-datatables" class="fas fa-eye w-8">
 								</a>';
 
 			$data[] = $row;
@@ -237,7 +238,7 @@ class AdminController extends Master_Controller
 		{
 			$sql = "SELECT COUNT(*)
 			FROM tbl_users a
-			INNER JOIN tbl_roles b
+			INNER JOIN tbl_roles b ON a.role_id = b.id
 			WHERE a.username LIKE '%{$search}%'
 			OR a.username LIKE '%{$search}%'
 			OR b.name LIKE '%{$search}%'";
@@ -426,7 +427,130 @@ class AdminController extends Master_Controller
 			"temp" => $temp
 		]);
 	}
+	public function edit_user_privilege_datatables()
+	{
+		$id = $this->input->get("id");
 
+		$this->db->select("a.id, a.username, a.email, b.name");
+		$this->db->from("tbl_users a");
+		$this->db->join("tbl_roles b","a.role_id = b.id");
+		$this->db->where("a.id", "$id");
+		$user = $this->db->get()->row();
+
+		$key = array_keys($user);
+
+		$temp =
+		'<div class="modal opacity-0 pointer-events-none z-50 fixed w-full h-full top-0 left-0 flex items-center justify-center">
+			<div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
+
+			<div class="modal-container bg-white w-11/12 mx-auto rounded shadow-lg z-50 overflow-y-auto">
+
+				<div onclick="close_modal();" class="modal-close absolute top-0 right-0 cursor-pointer flex flex-col items-center mt-4 mr-4 text-white text-sm z-50">
+					<svg class="fill-current text-white" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+						<path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
+					</svg>
+					<span class="text-sm">(Esc)</span>
+				</div>
+
+				<div class="modal-content py-4 text-left px-6 w-full">
+
+					<div class="flex justify-end items-center pb-3">
+						<div onclick="close_modal();" class="cursor-pointer z-50">
+							<svg class="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+								<path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
+							</svg>
+						</div>
+					</div>
+
+
+					<form class="flex flex-wrap overflow-hidden -mx-5" id="form-edit-user-datatables">
+						<div class="w-1/3 overflow-hidden my-5 px-5">
+
+							<div class="block mx-3">
+								<label class="block text-gray-700 text-sm font-bold mb-2" for="'.$key[0].'">
+									'.$key[0].'
+				 				</label>
+					 			<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="'.$key[0].'" name="'.$key[0].'" type="text" placeholder="'.$key[0].'" value="'.$user['id'].'" readonly>
+							</div>
+
+							<div class="block mx-3">
+								<label class="block text-gray-700 text-sm font-bold mb-2" for="'.$key[1].'">
+									'.$key[1].'
+						 		</label>
+					 			<input data-parsley-required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="'.$key[1].'" name="'.$key[1].'" type="text" placeholder="'.$key[1].'" value="'.$user['first_name'].'">
+							</div>
+
+							<div class="block mx-3">
+						 		<label class="block text-gray-700 text-sm font-bold mb-2" for="'.$key[2].'">
+					 				'.$key[2].'
+						 		</label>
+						 		<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="'.$key[2].'" type="text" placeholder="'.$key[2].'" name="'.$key[2].'" value="'.$user['last_name'].'">
+						 	</div>
+
+						</div>
+
+						<div class="w-1/3 overflow-hidden my-5 px-5">
+
+							<div class="block mx-3">
+								<label class="block text-gray-700 text-sm font-bold mb-2" for="'.$key[4].'">
+									'.$key[4].'
+								</label>
+								<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="'.$key[4].'" type="text" placeholder="'.$key[4].'" name="'.$key[4].'" value="'.$user['email'].'">
+							</div>
+
+							<div class="block mx-3">
+								<label class="block text-gray-700 text-sm font-bold mb-2" for="'.$key[5].'">
+									'.$key[5].'
+								</label>
+								<div class="relative">
+									<select name="'.$key[5].'" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-2 px-3 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
+									  <option '.$male_selected.'>Male</option>
+									  <option '.$female_selected.'>Female</option>
+									</select>
+									<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+									  <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+									</div>
+								</div>
+							</div>
+
+							<div class="block mx-3">
+								<label class="block text-gray-700 text-sm font-bold mb-2" for="'.$key[6].'">
+									'.$key[6].'
+								</label>
+								<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="'.$key[6].'" type="text" placeholder="'.$key[6].'" name="'.$key[6].'" value="'.$user['age'].'">
+							</div>
+
+							<div class="block mx-3">
+								<label class="block text-gray-700 text-sm font-bold mb-2" for="'.$key[7].'">
+									'.$key[7].'
+								</label>
+								<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="'.$key[7].'" type="text" placeholder="'.$key[7].'" name="'.$key[7].'" value="'.$created_at.'">
+							</div>
+
+						</div>
+
+					</form>
+
+					<div class="flex flex-wrap overflow-hidden w-full justify-end my-6">
+						<div class="flex justify-end w-1/2">
+							<button id="submit_update_user_privilege_datatables" type="submit" onclick="submit_update_user_privilege_datatables();" class="w-1/6 px-2 py-2 bg-pink-500 rounded-lg text-white hover:text-pink-300 mr-2">Submit</button>
+
+							<button onclick="close_modal();" class="w-1/6 px-2 py-2 bg-pink-500 rounded-lg text-white hover:text-pink-300">Close</button>
+						</div>
+					</div>
+
+
+				</div>
+
+
+			</div>
+
+		</div>';
+
+		echo json_encode([
+			"temp" => $temp
+		]);
+	}
 	public function update_user_datatables()
 	{
 		$id  = $this->input->post("id");
@@ -566,7 +690,7 @@ class AdminController extends Master_Controller
 		$this->db->select("a.name admin_menu_name, a.id admin_menu_id, b.name admin_menu_group_name");
 		$this->db->from("tbl_app_admin_menu a");
 		$this->db->join("tbl_app_admin_menu_group b",
-		"a.admin_menu_group_id = b.id", "inner");
+		"a.admin_menu_group_id = b.id");
 		$this->db->where('a.type', 'crud');
 		$privileges = $this->db->get()->result_object();
 
@@ -696,12 +820,24 @@ class AdminController extends Master_Controller
 					"priv_delete" => $array_key['d'.$menu_id] == "1" ? 1 : 0
 				];
 				$this->db->insert("tbl_privileges", $datas);
-				// $this->insert_privilege();
 			}
 
 		endforeach;
 	}
+	public function show_privilege_user($user_id)
+	{
+		$this->db->from("tbl_privileges a");
+		$this->db->join("tbl_users b", "a.user_id = b.id");
+		$this->db->where("CONCAT(b.username,a.id)", $user_id);
 
+		$data = $this->db->get()->row();
+
+		$this->data["data"] = $data;
+
+		$this->load->view("master_admin/header");
+        $this->load->view("admin/privilege_show", $data);
+        $this->load->view("master_admin/footer");
+	}
 	private function insert_privilege()
 	{
 		$count = $this->get_count_privilege();

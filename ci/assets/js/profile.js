@@ -43,7 +43,7 @@
         });
 
         $(document).on("click", "#edit-name", function(){
-            
+
         });
 
         $(document).on("click", "#banner-trigger", function() {

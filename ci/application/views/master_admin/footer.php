@@ -21,6 +21,9 @@
 
     <!-- SWEETALERT2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+    
+    <!-- NPROGRESS JS -->
+    <script src="<?php echo base_url('assets/js/nprogress.js') ?>"></script>
 
     <!-- PARSLY JS -->
     <script src="<?php echo base_url('assets/parsley/parsley.min.js') ?>"></script>
