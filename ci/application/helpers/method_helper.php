@@ -268,8 +268,100 @@ function get_menus_admin()
 
     return $temp;
 }
+function get_temp_privilege()
+{
+    $temp = "";
+    $group_name = ""; // PREVENT DOUBLE DATA
 
+    $CI = __db();
 
+    $CI->db->select("a.name admin_menu_name, a.id admin_menu_id, b.name admin_menu_group_name");
+    $CI->db->from("tbl_app_admin_menu a");
+    $CI->db->join("tbl_app_admin_menu_group b",
+    "a.admin_menu_group_id = b.id");
+    $CI->db->where('a.type', 'crud');
+    
+    $privileges = $CI->db->get()->result_object();
+
+    foreach ($privileges as $privilege):
+
+        if($group_name != $privilege->admin_menu_group_name):
+            $group_name = $privilege->admin_menu_group_name;
+            $temp .=
+            '<thead>
+                <tr>
+                    <th class="text-sm font-semibold text-grey-darker p-2 bg-grey-lightest">'.strtoupper($group_name).'</th>
+                </tr>
+            </thead>';
+        endif;
+
+        $name_string = "'$privilege->admin_menu_name'"; // STRING ""
+        $name = "$privilege->admin_menu_name";
+        $id  = "$privilege->admin_menu_id";
+
+        $temp .=
+        '<tbody class="align-baseline">
+            <tr>
+                <td class="p-2 border-t border-grey-light whitespace-no-wrap">'.$name.'</td>
+                <td class="p-2 border-t border-grey-light whitespace-no-wrap">
+                    <div class="flex cursor-pointer items-center">
+                        <span class="inline-block px-3">Create</span>
+                        <div onclick="checkbox_privilege_create('.$id.')" class="bg-pink-500 shadow w-6 h-6 p-1 rounded">
+                            <input type="hidden" class="hidden" name="c'.$id.'" value="0">
+                            <svg class="svg-privilege-create-'.$id.' hidden w-4 h-4 text-white" viewBox="0 0 172 172">
+                                <g fill="none" stroke-width="none" stroke-miterlimit="10" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode:normal"><path d="M0 172V0h172v172z"/><path d="M145.433 37.933L64.5 118.8658 33.7337 88.0996l-10.134 10.1341L64.5 139.1341l91.067-91.067z" fill="currentColor" stroke-width="1"/>
+                                </g>
+                            </svg>
+                        </div>
+                    </div>
+                </td>
+                <td class="p-2 border-t border-grey-light whitespace-no-wrap">
+                    <div class="flex cursor-pointer items-center">
+                        <span class="inline-block px-3">Read</span>
+                        <div onclick="checkbox_privilege_read('.$id.')" class="bg-pink-500 shadow w-6 h-6 p-1 rounded">
+                            <input type="hidden" class="hidden" name="r'.$id.'" value="0">
+                            <svg class="svg-privilege-read-'.$id.' hidden w-4 h-4 text-white" viewBox="0 0 172 172">
+                                <g fill="none" stroke-width="none" stroke-miterlimit="10" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode:normal"><path d="M0 172V0h172v172z"/><path d="M145.433 37.933L64.5 118.8658 33.7337 88.0996l-10.134 10.1341L64.5 139.1341l91.067-91.067z" fill="currentColor" stroke-width="1"/>
+                                </g>
+                            </svg>
+                        </div>
+                    </div>
+                </td>
+                <td class="p-2 border-t border-grey-light whitespace-no-wrap">
+                    <div class="flex cursor-pointer items-center">
+                        <span class="inline-block px-3">Update</span>
+                        <div onclick="checkbox_privilege_update('.$id.')" class="bg-pink-500 shadow w-6 h-6 p-1 rounded">
+                            <input type="hidden" class="hidden" name="u'.$id.'" value="0">
+                            <svg class="svg-privilege-update-'.$id.' hidden w-4 h-4 text-white" viewBox="0 0 172 172">
+                                <g fill="none" stroke-width="none" stroke-miterlimit="10" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode:normal"><path d="M0 172V0h172v172z"/><path d="M145.433 37.933L64.5 118.8658 33.7337 88.0996l-10.134 10.1341L64.5 139.1341l91.067-91.067z" fill="currentColor" stroke-width="1"/>
+                                </g>
+                            </svg>
+                        </div>
+                    </div>
+                </td>
+                <td class="p-2 border-t border-grey-light whitespace-no-wrap">
+                    <div class="flex cursor-pointer items-center">
+                        <span class="inline-block px-3">Delete</span>
+                        <div onclick="checkbox_privilege_destroy('.$id.')" class="bg-pink-500 shadow w-6 h-6 p-1 rounded">
+                            <input type="hidden" class="hidden" name="d'.$id.'" value="0">
+                            <svg class="svg-privilege-destroy-'.$id.' hidden w-4 h-4 text-white" viewBox="0 0 172 172">
+                                <g fill="none" stroke-width="none" stroke-miterlimit="10" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode:normal"><path d="M0 172V0h172v172z"/><path d="M145.433 37.933L64.5 118.8658 33.7337 88.0996l-10.134 10.1341L64.5 139.1341l91.067-91.067z" fill="currentColor" stroke-width="1"/>
+                                </g>
+                            </svg>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>';
+    endforeach;
+
+    $temp =
+    '<table class="w-full text-left table-collapse">
+        '.$temp.'
+    </table>';
+
+    return $temp;
+}
 function partition($list, $p)
 {
     $listlen = count($list);

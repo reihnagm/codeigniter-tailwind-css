@@ -2,12 +2,12 @@
     'use strict';
     $(function() {
 
-    const count_admin_group_menu = $("[name='count_admin_group_menu']").val();
+    const count_admin_group_menu = $("[name=count_admin_group_menu]").val();
 
     for (var i = 0; i <= count_admin_group_menu; i++)
     {
-        let content_admin_dropdown = document.getElementById("content-admin-dropdown-"+i);
-        let chevron_right_admin_dropdown = $("#chevron-right-admin-dropdown-"+i);
+        const content_admin_dropdown = document.getElementById("content-admin-dropdown-"+i);
+        const chevron_right_admin_dropdown = $("#chevron-right-admin-dropdown-"+i);
 
         $(document).on("click", "#btn-admin-dropdown-"+i, function() {
             if(content_admin_dropdown.style.maxHeight)

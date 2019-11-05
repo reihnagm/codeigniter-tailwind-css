@@ -3,41 +3,38 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class AdminController extends Master_Controller
 {
-	public $data = [];
+	var $data = []; // PUBLIC PROPERTY
 
 	public function __construct()
 	{
 		parent::__construct();
 
-		$data = [
-			"get_temp_privilege" => $this->get_temp_privilege(),
+		$data =
+		[
+			"get_temp_privilege" => get_temp_privilege(),
 			"get_menus_admin" => get_menus_admin()
 		];
 
 		$this->data["data"] = $data;
 	}
-
 	public function index()
 	{
 		$this->load->view('master_admin/header');
-		$this->load->view('admin/index', $this->data);
+		$this->load->view('admin/index');
 		$this->load->view('master_admin/footer');
 	}
-
     public function change_password()
     {
         $this->load->view('master_admin/header');
-		$this->load->view('admin/change_password', $this->data);
+		$this->load->view('admin/change_password');
         $this->load->view('master_admin/footer');
     }
-
     public function privilege()
     {
         $this->load->view('master_admin/header');
-        $this->load->view('admin/privilege', $this->data);
+        $this->load->view('admin/privilege');
         $this->load->view('master_admin/footer');
     }
-
 	public function user_datatables()
 	{
 		// DEFINE COLUMN
@@ -209,7 +206,7 @@ class AdminController extends Master_Controller
 									<i onclick="destroy_user_privelege_datatables('.$user->id.')" id="destroy-user-datatables-'.$user->id.'" class="fa fa-trash w-8"></i>
 								</a>
 								<a href="'.site_url().'admin/show-privilege-user/'.$user->username.$user->id.'" class="hover:text-pink-300">
-									<i onclick="show_user_privilege_datatables('.$user->id.')" id="show-user-privilege-datatables" class="fas fa-eye w-8">
+									<i id="show-user-privilege-datatables" class="fas fa-eye w-8">
 								</a>';
 
 			$data[] = $row;
@@ -603,9 +600,6 @@ class AdminController extends Master_Controller
 	{
 		$id = $this->input->post("id");
 
-		// echo '<pre>';
-		// die(var_dump($id));
-
 		$this->db->trans_start();
 		$this->db->where('id', $id);
 		$this->db->delete('tbl_users');
@@ -628,7 +622,6 @@ class AdminController extends Master_Controller
 			$data_param["type"] = "success";
 		}
 	}
-
 	private function total_user_datatables()
 	{
 		$this->db->select("a.id, a.first_name, a.last_name, a.username, a.email");
@@ -636,7 +629,6 @@ class AdminController extends Master_Controller
 
 		return $this->db->count_all_results();
 	}
-
 	private function filtered_user_datatables()
 	{
 		$search = $this->input->get("search")["value"];
@@ -680,99 +672,6 @@ class AdminController extends Master_Controller
 		$this->db->where("type", "crud");
 		return $this->db->count_all_results();
 	}
-
-	public function get_temp_privilege()
-	{
-		$count = 0;
-		$temp = "";
-		$group_name = ""; // PREVENT DOUBLE DATA
-
-		$this->db->select("a.name admin_menu_name, a.id admin_menu_id, b.name admin_menu_group_name");
-		$this->db->from("tbl_app_admin_menu a");
-		$this->db->join("tbl_app_admin_menu_group b",
-		"a.admin_menu_group_id = b.id");
-		$this->db->where('a.type', 'crud');
-		$privileges = $this->db->get()->result_object();
-
-		foreach ($privileges as $privilege):
-
-			if($group_name != $privilege->admin_menu_group_name):
-				$group_name = $privilege->admin_menu_group_name;
-				$temp .=
-				'<thead>
-					<tr>
-						<th class="text-sm font-semibold text-grey-darker p-2 bg-grey-lightest">'.strtoupper($group_name).'</th>
-					</tr>
-				</thead>';
-			endif;
-
-			$name_string = "'$privilege->admin_menu_name'"; // STRING ""
-			$name = "$privilege->admin_menu_name";
-			$id  = "$privilege->admin_menu_id";
-
-			$temp .=
-			'<tbody class="align-baseline">
-				<tr>
-					<td class="p-2 border-t border-grey-light whitespace-no-wrap">'.$name.'</td>
-					<td class="p-2 border-t border-grey-light whitespace-no-wrap">
-						<div class="flex cursor-pointer items-center">
-							<span class="inline-block px-3">Create</span>
-							<div onclick="checkbox_privilege_create('.$id.')" class="bg-pink-500 shadow w-6 h-6 p-1 rounded">
-								<input type="hidden" class="hidden" name="c'.$id.'" value="0">
-								<svg class="svg-privilege-create-'.$id.' hidden w-4 h-4 text-white" viewBox="0 0 172 172">
-									<g fill="none" stroke-width="none" stroke-miterlimit="10" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode:normal"><path d="M0 172V0h172v172z"/><path d="M145.433 37.933L64.5 118.8658 33.7337 88.0996l-10.134 10.1341L64.5 139.1341l91.067-91.067z" fill="currentColor" stroke-width="1"/>
-									</g>
-								</svg>
-							</div>
-						</div>
-					</td>
-					<td class="p-2 border-t border-grey-light whitespace-no-wrap">
-						<div class="flex cursor-pointer items-center">
-							<span class="inline-block px-3">Read</span>
-							<div onclick="checkbox_privilege_read('.$id.')" class="bg-pink-500 shadow w-6 h-6 p-1 rounded">
-								<input type="hidden" class="hidden" name="r'.$id.'" value="0">
-								<svg class="svg-privilege-read-'.$id.' hidden w-4 h-4 text-white" viewBox="0 0 172 172">
-									<g fill="none" stroke-width="none" stroke-miterlimit="10" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode:normal"><path d="M0 172V0h172v172z"/><path d="M145.433 37.933L64.5 118.8658 33.7337 88.0996l-10.134 10.1341L64.5 139.1341l91.067-91.067z" fill="currentColor" stroke-width="1"/>
-									</g>
-								</svg>
-							</div>
-						</div>
-					</td>
-					<td class="p-2 border-t border-grey-light whitespace-no-wrap">
-						<div class="flex cursor-pointer items-center">
-							<span class="inline-block px-3">Update</span>
-							<div onclick="checkbox_privilege_update('.$id.')" class="bg-pink-500 shadow w-6 h-6 p-1 rounded">
-								<input type="hidden" class="hidden" name="u'.$id.'" value="0">
-								<svg class="svg-privilege-update-'.$id.' hidden w-4 h-4 text-white" viewBox="0 0 172 172">
-									<g fill="none" stroke-width="none" stroke-miterlimit="10" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode:normal"><path d="M0 172V0h172v172z"/><path d="M145.433 37.933L64.5 118.8658 33.7337 88.0996l-10.134 10.1341L64.5 139.1341l91.067-91.067z" fill="currentColor" stroke-width="1"/>
-									</g>
-								</svg>
-							</div>
-						</div>
-					</td>
-					<td class="p-2 border-t border-grey-light whitespace-no-wrap">
-						<div class="flex cursor-pointer items-center">
-							<span class="inline-block px-3">Delete</span>
-							<div onclick="checkbox_privilege_destroy('.$id.')" class="bg-pink-500 shadow w-6 h-6 p-1 rounded">
-								<input type="hidden" class="hidden" name="d'.$id.'" value="0">
-								<svg class="svg-privilege-destroy-'.$id.' hidden w-4 h-4 text-white" viewBox="0 0 172 172">
-									<g fill="none" stroke-width="none" stroke-miterlimit="10" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode:normal"><path d="M0 172V0h172v172z"/><path d="M145.433 37.933L64.5 118.8658 33.7337 88.0996l-10.134 10.1341L64.5 139.1341l91.067-91.067z" fill="currentColor" stroke-width="1"/>
-									</g>
-								</svg>
-							</div>
-						</div>
-					</td>
-				</tr>
-			</tbody>';
-		endforeach;
-
-		$temp =
-		'<table class="w-full text-left table-collapse">
-			'.$temp.'
-		</table>';
-
-		return $temp;
-	}
 	function save_privilege()
 	{
 		$count = $this->get_count_privilege();
@@ -804,13 +703,13 @@ class AdminController extends Master_Controller
 				$this->db->set("priv_read",   $array_key['r'.$menu_id] == "1" ? 1 : 0);
 				$this->db->set("priv_update", $array_key['u'.$menu_id] == "1" ? 1 : 0);
 				$this->db->set("priv_delete", $array_key['d'.$menu_id] == "1" ? 1 : 0);
-				$this->db->where('menu_id', $menu_id);
-				$this->db->update('tbl_privileges');
+				$this->db->where("menu_id", $menu_id);
+				$this->db->update("tbl_privileges");
 			}
 			else
 			{
 				// INSERT
-				$datas =
+				$data =
 				[
 					"user_id" 	  => 1,
 					"menu_id" 	  => $menu_id,
@@ -819,7 +718,8 @@ class AdminController extends Master_Controller
 					"priv_update" => $array_key['u'.$menu_id] == "1" ? 1 : 0,
 					"priv_delete" => $array_key['d'.$menu_id] == "1" ? 1 : 0
 				];
-				$this->db->insert("tbl_privileges", $datas);
+
+				$this->db->insert("tbl_privileges", $data);
 			}
 
 		endforeach;
@@ -832,42 +732,53 @@ class AdminController extends Master_Controller
 
 		$data = $this->db->get()->row();
 
-		$this->data["data"] = $data;
+		$param_data = [];
+
+		$data_array =
+		[
+			"user_id" => $user_id,
+			"data_user_privilege" => $data
+		];
+
+		$param_data["data"] = $data_array;
 
 		$this->load->view("master_admin/header");
-        $this->load->view("admin/privilege_show", $data);
+        $this->load->view("admin/privilege_show", $param_data);
         $this->load->view("master_admin/footer");
 	}
-	private function insert_privilege()
-	{
-		$count = $this->get_count_privilege();
-
-		$menu_id = "";
-		$array_key = [];
-
-		foreach (partition($this->input->post('data'), $count) as $data):
-
-			foreach ($data as $value):
-				$menu_id = substr($value["name"], 1);
-				$array_key[$value['name']] = $value['value'];
-			endforeach;
-
-			// CONVERT INT TO ARRAY
-			// $num = array_map('intval', str_split((int) $value_));
-			// OUTPUT
-			// [0] => data
-			// [1] => data
-
-			$datas =
-			[
-				"user_id" 	  => 1,
-				"menu_id" 	  => $menu_id,
-				"priv_create" => $array_key['c'.$menu_id] == "1" ? 1 : 0,
-				"priv_read"   => $array_key['r'.$menu_id] == "1" ? 1 : 0,
-				"priv_update" => $array_key['u'.$menu_id] == "1" ? 1 : 0,
-				"priv_delete" => $array_key['d'.$menu_id] == "1" ? 1 : 0
-			];
-			$this->db->insert("tbl_privileges", $datas);
-		endforeach;
-	}
+	// private function insert_privilege()
+	// {
+	//
+	// 	// $user = $this->User->get_user_profile($this->input->post('user_id'));
+	//
+	// 	$count = $this->get_count_privilege();
+	//
+	// 	$menu_id = "";
+	// 	$array_key = [];
+	//
+	// 	foreach (partition($this->input->post('data'), $count) as $data):
+	//
+	// 		foreach ($data as $value):
+	// 			$menu_id = substr($value["name"], 1);
+	// 			$array_key[$value['name']] = $value['value'];
+	// 		endforeach;
+	//
+	// 		// CONVERT INT TO ARRAY
+	// 		// $num = array_map('intval', str_split((int) $value_));
+	// 		// OUTPUT
+	// 		// [0] => data
+	// 		// [1] => data
+	//
+	// 		$datas =
+	// 		[
+	// 			"user_id" 	  => 1,
+	// 			"menu_id" 	  => $menu_id,
+	// 			"priv_create" => $array_key['c'.$menu_id] == "1" ? 1 : 0,
+	// 			"priv_read"   => $array_key['r'.$menu_id] == "1" ? 1 : 0,
+	// 			"priv_update" => $array_key['u'.$menu_id] == "1" ? 1 : 0,
+	// 			"priv_delete" => $array_key['d'.$menu_id] == "1" ? 1 : 0
+	// 		];
+	// 		$this->db->insert("tbl_privileges", $datas);
+	// 	endforeach;
+	// }
 }
