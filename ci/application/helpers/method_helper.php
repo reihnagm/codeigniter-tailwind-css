@@ -275,12 +275,16 @@ function get_temp_privilege()
 
     $CI = __db();
 
-    $CI->db->select("a.name admin_menu_name, a.id admin_menu_id, b.name admin_menu_group_name");
+    $CI->db->select("a.name admin_menu_name, a.id admin_menu_id, b.name admin_menu_group_name, c.priv_read, c.priv_update, c.priv_create, c.priv_delete, d.username");
     $CI->db->from("tbl_app_admin_menu a");
     $CI->db->join("tbl_app_admin_menu_group b",
     "a.admin_menu_group_id = b.id");
+    $CI->db->join("tbl_privileges c",
+    "a.id = c.menu_id");
+    $CI->db->join("tbl_users d",
+    "c.user_id = d.id");
     $CI->db->where('a.type', 'crud');
-    
+
     $privileges = $CI->db->get()->result_object();
 
     foreach ($privileges as $privilege):
@@ -299,6 +303,14 @@ function get_temp_privilege()
         $name = "$privilege->admin_menu_name";
         $id  = "$privilege->admin_menu_id";
 
+        $priv_create_class   = $privilege->priv_create ? 'block' : 'hidden';
+        $priv_create_checked = $privilege->priv_create ? 'checked' : '';
+        $priv_create_value   = $privilege->priv_create ? 1 : 0;
+
+        $priv_read_class   = $privilege->priv_read ? 'block' : 'hidden';
+        $priv_read_checked = $privilege->priv_read ? 'checked' : '';
+        $priv_read_value   = $privilege->priv_read ? 1 : 0;
+
         $temp .=
         '<tbody class="align-baseline">
             <tr>
@@ -307,8 +319,8 @@ function get_temp_privilege()
                     <div class="flex cursor-pointer items-center">
                         <span class="inline-block px-3">Create</span>
                         <div onclick="checkbox_privilege_create('.$id.')" class="bg-pink-500 shadow w-6 h-6 p-1 rounded">
-                            <input type="hidden" class="hidden" name="c'.$id.'" value="0">
-                            <svg class="svg-privilege-create-'.$id.' hidden w-4 h-4 text-white" viewBox="0 0 172 172">
+                            <input type="hidden" class="hidden" name="c'.$id.'" value="'.$priv_create_value.'">
+                            <svg '.$priv_create_checked.' class="svg-privilege-create-'.$id.' '.$priv_create_class.' w-4 h-4 text-white" viewBox="0 0 172 172">
                                 <g fill="none" stroke-width="none" stroke-miterlimit="10" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode:normal"><path d="M0 172V0h172v172z"/><path d="M145.433 37.933L64.5 118.8658 33.7337 88.0996l-10.134 10.1341L64.5 139.1341l91.067-91.067z" fill="currentColor" stroke-width="1"/>
                                 </g>
                             </svg>
@@ -319,8 +331,8 @@ function get_temp_privilege()
                     <div class="flex cursor-pointer items-center">
                         <span class="inline-block px-3">Read</span>
                         <div onclick="checkbox_privilege_read('.$id.')" class="bg-pink-500 shadow w-6 h-6 p-1 rounded">
-                            <input type="hidden" class="hidden" name="r'.$id.'" value="0">
-                            <svg class="svg-privilege-read-'.$id.' hidden w-4 h-4 text-white" viewBox="0 0 172 172">
+                            <input type="hidden" class="hidden" name="r'.$id.'" value="'.$priv_read_value.'">
+                            <svg '.$priv_read_checked.' class="svg-privilege-read-'.$id.' '.$priv_read_class.' w-4 h-4 text-white" viewBox="0 0 172 172">
                                 <g fill="none" stroke-width="none" stroke-miterlimit="10" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode:normal"><path d="M0 172V0h172v172z"/><path d="M145.433 37.933L64.5 118.8658 33.7337 88.0996l-10.134 10.1341L64.5 139.1341l91.067-91.067z" fill="currentColor" stroke-width="1"/>
                                 </g>
                             </svg>

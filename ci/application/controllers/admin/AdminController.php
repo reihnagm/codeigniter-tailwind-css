@@ -672,7 +672,31 @@ class AdminController extends Master_Controller
 		$this->db->where("type", "crud");
 		return $this->db->count_all_results();
 	}
-	function save_privilege()
+	public function show_privilege_user($user_id)
+	{
+		$this->db->from("tbl_privileges a");
+		$this->db->join("tbl_users b", "a.user_id = b.id");
+		$this->db->where("CONCAT(b.username,a.id)", $user_id);
+
+		$data = $this->db->get()->row();
+
+		$user = $this->User->get_user_profile($user_id);
+
+		$param_data = [];
+
+		$data_array =
+		[
+			"user_id" => $user->id,
+			"data_user_privilege" => $data
+		];
+
+		$param_data["data"] = $data_array;
+
+		$this->load->view("master_admin/header");
+        $this->load->view("admin/privilege_show", $param_data);
+        $this->load->view("master_admin/footer");
+	}
+	function save_privilege($user_id)
 	{
 		$count = $this->get_count_privilege();
 
@@ -694,11 +718,12 @@ class AdminController extends Master_Controller
 
 			$this->db->from("tbl_privileges");
 			$this->db->where("menu_id", $menu_id);
+			$this->db->where("user_id", $user_id);
 
 			if($this->db->get()->num_rows() > 0)
 			{
 				// UPDATE
-				$this->db->set("user_id", 1);
+				$this->db->set("user_id", $user_id);
 				$this->db->set("priv_create", $array_key['c'.$menu_id] == "1" ? 1 : 0);
 				$this->db->set("priv_read",   $array_key['r'.$menu_id] == "1" ? 1 : 0);
 				$this->db->set("priv_update", $array_key['u'.$menu_id] == "1" ? 1 : 0);
@@ -711,7 +736,7 @@ class AdminController extends Master_Controller
 				// INSERT
 				$data =
 				[
-					"user_id" 	  => 1,
+					"user_id" 	  => $user_id,
 					"menu_id" 	  => $menu_id,
 					"priv_create" => $array_key['c'.$menu_id] == "1" ? 1 : 0,
 					"priv_read"   => $array_key['r'.$menu_id] == "1" ? 1 : 0,
@@ -724,61 +749,4 @@ class AdminController extends Master_Controller
 
 		endforeach;
 	}
-	public function show_privilege_user($user_id)
-	{
-		$this->db->from("tbl_privileges a");
-		$this->db->join("tbl_users b", "a.user_id = b.id");
-		$this->db->where("CONCAT(b.username,a.id)", $user_id);
-
-		$data = $this->db->get()->row();
-
-		$param_data = [];
-
-		$data_array =
-		[
-			"user_id" => $user_id,
-			"data_user_privilege" => $data
-		];
-
-		$param_data["data"] = $data_array;
-
-		$this->load->view("master_admin/header");
-        $this->load->view("admin/privilege_show", $param_data);
-        $this->load->view("master_admin/footer");
-	}
-	// private function insert_privilege()
-	// {
-	//
-	// 	// $user = $this->User->get_user_profile($this->input->post('user_id'));
-	//
-	// 	$count = $this->get_count_privilege();
-	//
-	// 	$menu_id = "";
-	// 	$array_key = [];
-	//
-	// 	foreach (partition($this->input->post('data'), $count) as $data):
-	//
-	// 		foreach ($data as $value):
-	// 			$menu_id = substr($value["name"], 1);
-	// 			$array_key[$value['name']] = $value['value'];
-	// 		endforeach;
-	//
-	// 		// CONVERT INT TO ARRAY
-	// 		// $num = array_map('intval', str_split((int) $value_));
-	// 		// OUTPUT
-	// 		// [0] => data
-	// 		// [1] => data
-	//
-	// 		$datas =
-	// 		[
-	// 			"user_id" 	  => 1,
-	// 			"menu_id" 	  => $menu_id,
-	// 			"priv_create" => $array_key['c'.$menu_id] == "1" ? 1 : 0,
-	// 			"priv_read"   => $array_key['r'.$menu_id] == "1" ? 1 : 0,
-	// 			"priv_update" => $array_key['u'.$menu_id] == "1" ? 1 : 0,
-	// 			"priv_delete" => $array_key['d'.$menu_id] == "1" ? 1 : 0
-	// 		];
-	// 		$this->db->insert("tbl_privileges", $datas);
-	// 	endforeach;
-	// }
 }

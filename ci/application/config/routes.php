@@ -58,7 +58,7 @@ $route['admin/change-password']['GET'] = 'admin/AdminController/change_password'
 $route['admin/privilege']['GET'] = 'admin/AdminController/privilege';
 
 // ADMIN SHOW USER PRIVILEGE
-$route['admin/show-privilege-user/(:any)']['GET'] = 'admin/AdminController/show_privilege_user/$1'; 
+$route['admin/show-privilege-user/(:any)']['GET'] = 'admin/AdminController/show_privilege_user/$1';
 
 // ADMIN ALL USERS DATATABLES
 $route['admin/all-user-datatables']['GET'] = 'admin/AdminController/user_datatables';
@@ -79,7 +79,7 @@ $route['admin/destroy-user-datatables'] = 'admin/AdminController/destroy_user_da
 $route['admin/update-user-datatables'] = 'admin/AdminController/update_user_datatables';
 
 // ADMIN SAVE PRIVILEGE
-$route['admin/save-privilege'] = 'admin/AdminController/save_privilege';
+$route['admin/save-privilege/(:any)'] = 'admin/AdminController/save_privilege/$1';
 
 // TEST
 $route['test'] = 'test/TestController/test';

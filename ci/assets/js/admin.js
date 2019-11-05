@@ -1,50 +1,50 @@
-(function ($) {
-    'use strict';
-    $(function() {
+    (function ($) {
+        'use strict';
+        $(function() {
 
-    const count_admin_group_menu = $("[name=count_admin_group_menu]").val();
+        const count_admin_group_menu = $("[name=count_admin_group_menu]").val();
 
-    for (var i = 0; i <= count_admin_group_menu; i++)
-    {
-        const content_admin_dropdown = document.getElementById("content-admin-dropdown-"+i);
-        const chevron_right_admin_dropdown = $("#chevron-right-admin-dropdown-"+i);
+        for (var i = 0; i <= count_admin_group_menu; i++)
+        {
+            const content_admin_dropdown = document.getElementById("content-admin-dropdown-"+i);
+            const chevron_right_admin_dropdown = $("#chevron-right-admin-dropdown-"+i);
 
-        $(document).on("click", "#btn-admin-dropdown-"+i, function() {
-            if(content_admin_dropdown.style.maxHeight)
+            $(document).on("click", "#btn-admin-dropdown-"+i, function() {
+                if(content_admin_dropdown.style.maxHeight)
+                {
+                    chevron_right_admin_dropdown.removeClass("fa-chevron-down");
+                    chevron_right_admin_dropdown.addClass("fa-chevron-right");
+                    content_admin_dropdown.style.maxHeight = null;
+                }
+                else
+                {
+                    chevron_right_admin_dropdown.removeClass("fa-chevron-right");
+                    chevron_right_admin_dropdown.addClass("fa-chevron-down");
+                    content_admin_dropdown.style.maxHeight =  content_admin_dropdown.scrollHeight + "px";
+                }
+            });
+        }
+
+        const child_nav_admin = document.getElementById("child-nav-admin");
+        const chevron_right_nav = $("#chevron-right-nav");
+
+        $(document).on("click", "#btn-nav-admin", function() {
+            if(child_nav_admin.style.maxHeight)
             {
-                chevron_right_admin_dropdown.removeClass("fa-chevron-down");
-                chevron_right_admin_dropdown.addClass("fa-chevron-right");
-                content_admin_dropdown.style.maxHeight = null;
+                chevron_right_nav.removeClass("fa-chevron-down");
+                chevron_right_nav.addClass("fa-chevron-right");
+                child_nav_admin.style.maxHeight = null;
             }
             else
             {
-                chevron_right_admin_dropdown.removeClass("fa-chevron-right");
-                chevron_right_admin_dropdown.addClass("fa-chevron-down");
-                content_admin_dropdown.style.maxHeight =  content_admin_dropdown.scrollHeight + "px";
+                chevron_right_nav.removeClass("fa-chevron-right");
+                chevron_right_nav.addClass("fa-chevron-down");
+                child_nav_admin.style.maxHeight =  child_nav_admin.scrollHeight + "px";
             }
         });
-    }
 
-    const child_nav_admin = document.getElementById("child-nav-admin");
-    const chevron_right_nav = $("#chevron-right-nav");
-
-    $(document).on("click", "#btn-nav-admin", function() {
-        if(child_nav_admin.style.maxHeight)
-        {
-            chevron_right_nav.removeClass("fa-chevron-down");
-            chevron_right_nav.addClass("fa-chevron-right");
-            child_nav_admin.style.maxHeight = null;
-        }
-        else
-        {
-            chevron_right_nav.removeClass("fa-chevron-right");
-            chevron_right_nav.addClass("fa-chevron-down");
-            child_nav_admin.style.maxHeight =  child_nav_admin.scrollHeight + "px";
-        }
-    });
-
-    });
-})(jQuery);
+        });
+    })(jQuery);
 
 
     function checkbox_privilege_create(id)
@@ -140,9 +140,9 @@
         // 1: {name: "", value: ""}
         // 2: {name: "", value: ""}
 
-        $.post($("[name=site_url]").val() + "admin/save-privilege",
+        $.post($("[name=site_url]").val() + "admin/save-privilege/" + $("[name=user_id]").val(),
         {
-            data:  $(this).serializeArray()
+            data: $(this).serializeArray()
         }
         ,   (data) => {
                 console.log(data);
