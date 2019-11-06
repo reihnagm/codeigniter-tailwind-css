@@ -9,13 +9,13 @@ class AdminController extends Master_Controller
 	{
 		parent::__construct();
 
-		$data =
-		[
-			"get_temp_privilege" => get_temp_privilege(),
-			"get_menus_admin" => get_menus_admin()
-		];
+		// $data =
+		// [
+		// 	"get_temp_privilege" => get_temp_privilege(),
+		// 	"get_menus_admin" => get_menus_admin()
+		// ];
 
-		$this->data["data"] = $data;
+		// $this->data["data"] = $data;
 	}
 	public function index()
 	{
@@ -677,7 +677,7 @@ class AdminController extends Master_Controller
 		$this->db->from("tbl_privileges a");
 		$this->db->join("tbl_users b", "a.user_id = b.id");
 		$this->db->where("CONCAT(b.username,a.id)", $user_id);
-
+		
 		$data = $this->db->get()->row();
 
 		$user = $this->User->get_user_profile($user_id);
