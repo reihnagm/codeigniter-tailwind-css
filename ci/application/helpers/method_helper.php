@@ -307,9 +307,9 @@ function get_temp_privilege($user_id)
 
         $id = "$privilege->admin_menu_id";
 
-        $priv_create_class   = !empty($test->priv_create) ? 'block' : 'hidden';
-        $priv_create_checked = !empty($test->priv_create) ? 'checked' : '';
-        $priv_create_value   = !empty($test->priv_create) ? 1 : 0;
+        $priv_create_class   = !empty($user_privilege->priv_create) ? 'block' : 'hidden';
+        $priv_create_checked = !empty($user_privilege->priv_create) ? 'checked' : '';
+        $priv_create_value   = !empty($user_privilege->priv_create) ? 1 : 0;
         
         $priv_read_class   = !empty($user_privilege->priv_read) ? 'block' : 'hidden';
         $priv_read_checked = !empty($user_privilege->priv_read) ? 'checked' : '';
