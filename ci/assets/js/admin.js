@@ -127,8 +127,8 @@
     $("#form-privilege").submit(function(e){
         e.preventDefault();
 
-        // let unindexed_array = $(this).serializeArray();
-        // let indexed_array = {};
+        // const unindexed_array = $(this).serializeArray();
+        // const indexed_array = {};
         //
         // $.map(unindexed_array, function(n, i){
         //     indexed_array[n['name']] = n['value'];
@@ -139,12 +139,43 @@
         // 0: {name: "", value: ""}
         // 1: {name: "", value: ""}
         // 2: {name: "", value: ""}
+        NProgress.start();
 
-        $.post($("[name=site_url]").val() + "admin/save-privilege/" + $("[name=user_id]").val(),
-        {
-            data: $(this).serializeArray()
-        }
-        ,   (data) => {
+        $("#form-submit-privilege").text('');
+        $("#form-submit-privilege").append('<img src="'+ $("[name=site_url]").val() + 'assets/loader/loader-2.gif" style="width: 25px; display: block; margin: 0 auto;">');
+        $("#form-submit-privilege").addClass("cursor-not-allowed");
+        $("#form-submit-privilege").addClass("opacity-50");
+        $("#form-submit-privilege").removeClass("hover:bg-pink-400");
+        $("#form-submit-privilege").prop("disabled", true);
+
+        $.ajax({
+            url: $("[name=site_url]").val() + "admin/settings/save-privilege/" + $("[name=user_id]").val(),
+            type: "POST",
+            data: 
+            {
+                data: $(this).serializeArray()
+            },
+            success: function(data) 
+            {
+                if(data.type)
+                {
+                    Swal.fire(
+                        data.title,
+                        data.description,
+                        data.type
+                    );
+                    $("#form-submit-privilege").text('Save Privilege');
+                    $("#form-submit-privilege").removeClass("cursor-not-allowed");
+                    $("#form-submit-privilege").removeClass("opacity-50");
+                    $("#form-submit-privilege").addClass("hover:bg-pink-400");
+                    $("#form-submit-privilege").prop("disabled", false);
+                }
+            }, 
+            error: function(data) 
+            {
                 console.log(data);
-            });
+            }
+        });
+
+       
     })

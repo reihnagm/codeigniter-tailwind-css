@@ -704,6 +704,8 @@ class AdminController extends Master_Controller
 	}
 	function save_privilege($user_id)
 	{
+		$data_response = [];
+
 		$count = $this->get_count_privilege();
 
 		$menu_id = "";
@@ -736,6 +738,10 @@ class AdminController extends Master_Controller
 				$this->db->set("priv_delete", $array_key['d'.$menu_id] == "1" ? 1 : 0);
 				$this->db->where("menu_id", $menu_id);
 				$this->db->update("tbl_privileges");
+
+				$data_response["title"] = "Succesfully Updated Privilege !";
+				$data_response["description"] = "";
+				$data_response["type"]	= "success";
 			}
 			else
 			{
@@ -751,8 +757,14 @@ class AdminController extends Master_Controller
 				];
 
 				$this->db->insert("tbl_privileges", $data);
-			}
+
+				$data_response["title"] = "Succesfully Updated Privilege !";
+				$data_response["description"] = "";
+				$data_response["type"]	  = "success";
+ 			}
 
 		endforeach;
+
+		echo json_encode($data_response); 
 	}
 }

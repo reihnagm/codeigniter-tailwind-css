@@ -82,7 +82,7 @@ $route['admin/destroy-user-datatables'] = 'admin/AdminController/destroy_user_da
 $route['admin/update-user-datatables'] = 'admin/AdminController/update_user_datatables';
 
 // ADMIN SAVE PRIVILEGE
-$route['admin/save-privilege/(:any)'] = 'admin/AdminController/save_privilege/$1';
+$route['admin/settings/save-privilege/(:any)'] = 'admin/AdminController/save_privilege/$1';
 
 // TEST
 $route['test'] = 'test/TestController/test';
