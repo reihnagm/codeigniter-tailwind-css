@@ -188,8 +188,19 @@ function edit_user_privilege_datatables(id)
 
 function destroy_user_datatables(id)
 {
-    $.post($("[name=site_url]").val() + "admin/destroy-user-datatables", { id : id })
-        .done(function(data) {
+    Swal.fire({
+        title: 'Submit your Github username',
+        inputAttributes: {
+          autocapitalize: 'off'
+        },
+        confirmButtonText: 'Delete',
+        showCancelButton: true,
+        showLoaderOnConfirm: true   
+    }).then((result) => {
+        if(result.value)
+        {
+            $.post($("[name=site_url]").val() + "admin/destroy-user-datatables", { id : id })
+            .done(function(data) {
 
             if(data.valid)
             {
@@ -210,8 +221,11 @@ function destroy_user_datatables(id)
                 )
             }
 
-            toggleModal();
-        })
+                toggleModal();
+            })
+        }
+    });
+    
 }
 
 function validate_update_user_datatables()
