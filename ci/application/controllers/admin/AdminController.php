@@ -34,7 +34,13 @@ class AdminController extends Master_Controller
         $this->load->view('master_admin/header');
         $this->load->view('admin/privilege');
         $this->load->view('master_admin/footer');
-    }
+	}
+	public function general()
+	{
+		$this->load->view('master_admin/header');
+        $this->load->view('admin/general');
+        $this->load->view('master_admin/footer');
+	}
 	public function user_datatables()
 	{
 		// DEFINE COLUMN
