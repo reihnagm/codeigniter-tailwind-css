@@ -55,10 +55,10 @@ $route['admin']['GET'] = 'admin/AdminController/index';
 $route['admin/change-password']['GET'] = 'admin/AdminController/change_password';
 
 // ADMIN SETTINGS / PRIVILEGES
-$route['admin/settings/privilege']['GET'] = 'admin/AdminController/privilege';
+$route['admin/privilege']['GET'] = 'admin/AdminController/privilege';
 
 // ADMIN SETTINGS / PRIVILEGES
-$route['admin/settings/general']['GET'] = 'admin/AdminController/general';
+$route['admin/general']['GET'] = 'admin/AdminController/general';
 
 // ADMIN SHOW USER PRIVILEGE
 $route['admin/show-privilege-user/(:any)']['GET'] = 'admin/AdminController/show_privilege_user/$1';

@@ -2,7 +2,7 @@
     <div class="flex -mx-6">
 
         <!-- SIDEBAR -->
-        <?php components('master_admin/sidebar', $data) ?>
+        <?php components('master_admin/sidebar') ?>
 
         <!-- CONTENT -->
         <?php components('master_admin/user') ?>

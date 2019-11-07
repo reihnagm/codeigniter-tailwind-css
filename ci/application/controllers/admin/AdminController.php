@@ -604,6 +604,8 @@ class AdminController extends Master_Controller
 
 	public function destroy_user_datatables()
 	{
+		$msg = [];
+
 		$id = $this->input->post("id");
 
 		$this->db->trans_start();
@@ -611,22 +613,22 @@ class AdminController extends Master_Controller
 		$this->db->delete('tbl_users');
 		$this->db->trans_complete();
 
-		$data_param = [];
-
 		if ($this->db->trans_status() === FALSE)
 		{
-			$data_param["valid"] = FALSE;
-			$data_param["title"] = "Update error !";
- 			$data_param["desc"]  = "Something Wrong !";
-			$data_param["type"]  = "error";
+			$msg["valid"] = FALSE;
+			$msg["title"] = "Delete error !";
+ 			$msg["desc"]  = "Something Wrong !";
+			$msg["type"]  = "error";
 		}
 		else
 		{
-			$data_param["valid"] = TRUE;
-			$data_param["title"] = "Update Success !";
-			$data_param["desc"] = "Successfully !";
-			$data_param["type"] = "success";
+			$msg["valid"] = TRUE;
+			$msg["title"] = "Delete Successfully !";
+			$msg["desc"]  = "Successfully !";
+			$msg["type"]  = "success";
 		}
+
+		echo json_encode($msg);
 	}
 	private function total_user_datatables()
 	{
@@ -688,7 +690,7 @@ class AdminController extends Master_Controller
 
 		$user = $this->User->get_user_profile($user_id);
 
-		$param_data = [];
+		$msg = [];
 
 		$data_array =
 		[
@@ -696,15 +698,15 @@ class AdminController extends Master_Controller
 			"data_user_privilege" => $data
 		];
 
-		$param_data["data"] = $data_array;
+		$msg["data"] = $data_array;
 
 		$this->load->view("master_admin/header");
-        $this->load->view("admin/privilege_show", $param_data);
+        $this->load->view("admin/privilege_show", $msg);
         $this->load->view("master_admin/footer");
 	}
 	function save_privilege($user_id)
 	{
-		$data_response = [];
+		$msg = [];
 
 		$count = $this->get_count_privilege();
 
@@ -739,9 +741,9 @@ class AdminController extends Master_Controller
 				$this->db->where("menu_id", $menu_id);
 				$this->db->update("tbl_privileges");
 
-				$data_response["title"] = "Succesfully Updated Privilege !";
-				$data_response["description"] = "";
-				$data_response["type"]	= "success";
+				$msg["title"] 		= "Succesfully Updated Privilege !";
+				$msg["description"] = "";
+				$msg["type"]		= "success";
 			}
 			else
 			{
@@ -758,9 +760,9 @@ class AdminController extends Master_Controller
 
 				$this->db->insert("tbl_privileges", $data);
 
-				$data_response["title"] = "Succesfully Updated Privilege !";
-				$data_response["description"] = "";
-				$data_response["type"]	  = "success";
+				$msg["title"] 		= "Succesfully Updated Privilege !";
+				$msg["description"] = "";
+				$msg["type"]	  	= "success";
  			}
 
 		endforeach;
