@@ -313,7 +313,7 @@ class AdminController extends Master_Controller
 						</div>
 					</div>
 
-					<form class="flex flex-wrap overflow-hidden -mx-5" id="form-edit-user-datatables" data-parsley-validate data-parsley-focus="first">
+					<form class="flex flex-wrap overflow-hidden -mx-5" id="form-edit-user-datatables">
 						<div class="w-1/3 overflow-hidden my-5 px-5">
 
 							<div class="block mx-3">
@@ -327,30 +327,30 @@ class AdminController extends Master_Controller
 								<label class="block text-gray-700 text-sm font-bold mb-2" for="'.$key[1].'">
 									'.$key[1].'
 						 		</label>
-					 			<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="'.$key[1].'" name="'.$key[1].'" type="text" placeholder="'.$key[1].'" value="'.$user['first_name'].'" data-parsley-required>
+					 			<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="'.$key[1].'" name="'.$key[1].'" type="text" placeholder="'.$key[1].'" value="'.$user['first_name'].'">
 							</div>
 
-							<div class="border errors form-field invisible opacity-0 mt-2 text-sm font-bold border-red-400 rounded bg-red-100 px-4 py-3 text-red-700">
+							<div id="errors-first-name" class="border form-field-first-name invisible opacity-0 mt-2 text-sm font-bold border-red-400 rounded bg-red-100 px-4 py-3 text-red-700">
 							</div>
 
 							<div class="block mx-3">
 						 		<label class="block text-gray-700 text-sm font-bold mb-2" for="'.$key[2].'">
 					 				'.$key[2].'
 						 		</label>
-						 		<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="'.$key[2].'" type="text" placeholder="'.$key[2].'" name="'.$key[2].'" value="'.$user['last_name'].'" data-parsley-required>
+						 		<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="'.$key[2].'" type="text" placeholder="'.$key[2].'" name="'.$key[2].'" value="'.$user['last_name'].'">
 							 </div>
 							 
-							 <div class="border errors form-field invisible opacity-0 mt-2 text-sm font-bold border-red-400 rounded bg-red-100 px-4 py-3 text-red-700">
+							 <div id="errors-last-name" class="border form-field-last-name invisible opacity-0 mt-2 text-sm font-bold border-red-400 rounded bg-red-100 px-4 py-3 text-red-700">
 							 </div>
 
 							<div class="block mx-3 form-group">
 								<label class="block text-gray-700 text-sm font-bold mb-2" for="'.$key[3].'">
 								'.$key[3].'
 								</label>
-								<input  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="'.$key[3].'" type="text" placeholder="'.$key[3].'" name="'.$key[3].'" value="'.$user['username'].'" data-parsley-required>
+								<input  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="'.$key[3].'" type="text" placeholder="'.$key[3].'" name="'.$key[3].'" value="'.$user['username'].'">
 							</div>
 
-							<div class="border errors form-field invisible opacity-0 mt-2 text-sm font-bold border-red-400 rounded bg-red-100 px-4 py-3 text-red-700">
+							<div id="errors-username" class="border form-field-username invisible opacity-0 mt-2 text-sm font-bold border-red-400 rounded bg-red-100 px-4 py-3 text-red-700">
 							</div>
 
 						</div>
