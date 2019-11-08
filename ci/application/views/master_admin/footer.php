@@ -7,8 +7,8 @@
     <!-- DATERANGEPICKER JS -->
     <script src="<?php echo base_url('assets/daterangepicker/daterangepicker.js') ?>"></script>
 
-    <!-- ADMIN DATATABLES JS -->
-    <script src="<?php echo base_url('assets/js/datatables.admin.js') ?>"></script>
+    <!-- JQUERY VALIDATE JS -->
+    <script src="<?php echo base_url('assets/js/jquery.validate.js') ?>"></script>
 
     <!-- ADMIN MODAL JS-->
     <script src="<?php echo base_url('assets/js/modal.admin.js') ?>"></script>

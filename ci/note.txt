@@ -56,5 +56,19 @@ foo()
         $config['permitted_uri_chars'] = 'a-z 0-9~%.:_\-@';
 - Tips: if you want to get html dom object
         use  - const el = $('#el')[0];
-        do'nt use  - const el = $('#el');
+        don't use  - const el = $('#el');
 - Tips: if you want upload image use ajax and want to use bar loading, properties async: false, don't use
+- Tips: submitting on form input use JQuery
+        $(function() {
+            $("#submit-edit-user-datatables").click(function() {
+                if (this.id === "submit-edit-user-datatables") // TRIGGER THE FORM
+                { 
+                    $("#form-edit-user-datatables").submit();
+                } 
+            })
+
+            $("#form-edit-user-datatables").submit(function(e) {
+                e.preventDefault()
+            })
+        })
+- Tips: Different $(this) [OBJECT] while this NOT [OBJECT]

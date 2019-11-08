@@ -1,5 +1,5 @@
 // CHECKING BROWSER
-const user_agent = $("[name=user_agent]").val();
+// const user_agent = $("[name=user_agent]").val();
 
 // // GETTING BASE URL
 // const site_url = $("[name=site_url]").val();
@@ -142,6 +142,27 @@ var global_func;
         });
     }).draw()
 
+    // $("#form-edit-user-datatables").parsley({
+    //     classHandler: function (el) {
+    //         return el.$element.closest('.form-group');
+    //     },
+    //     errorsWrapper: '<div class="border form-field invisible opacity-0 mt-2 text-sm font-bold border-red-400 rounded bg-red-100 px-4 py-3 text-red-700"></div>',
+    //     errorTemplate: '<p></p>'
+    // }).on('field:success', function() {
+    //     const el = this.$element[0].id
+    //     $('#'+el).addClass("border-green-500");
+    //     $('#'+el).parent().find(".form-field").hide(250);
+    //     $('#'+el).parent().find(".form-field").addClass("opacity-0");
+    //     $('#'+el).parent().find(".form-field").addClass("invisible");
+    // }).on('field:error', function() {
+    //     const el = this.$element[0].id
+    //     $('#'+el).parent().find(".form-field").removeClass("invisible");
+    //     $('#'+el).parent().find(".form-field").addClass("visible");
+    //     $('#'+el).parent().find(".form-field").show(250);
+    //     $('#'+el).parent().find(".form-field").animate({opacity: 1.0}, 250);
+    //     $('#'+el).removeClass("border-green-500");
+    // });
+
     global_func = function()
     {
         const created_at = $("#created_at").val();
@@ -161,18 +182,31 @@ var global_func;
     });
 })(jQuery);
 
+
+
 function edit_user_datatables(id)
 {
     // const url = user_agent == "Firefox" ? "edit-user-datatables" : "admin/edit-user-datatables";
-
     $.get($("[name=site_url]").val() + "admin/edit-user-datatables", { id: id })
         .done(function(data) {
-            $("#wrapper-modal").html(data.temp);
-            global_func();
-            toggleModal();
-        })
-}
+            $("[name=id").val(data.id);
+            $("[name=avatar_trigger]").attr("src", data.avatar);
+            $("[name=first_name]").val(data.first_name);
+            $("[name=last_name]").val(data.last_name);
+            $("[name=username]").val(data.username);
+            $("[name=email]").val(data.email);
+            $("[name=gender]").val(data.gender);
+            $("[name=age]").val(data.age);
+            $("[name=created_at]").val(data.created_at);
+            $("[name=updated_at]").val(data.updated_at);
 
+            toggleModal();  
+            global_func();
+
+            // IF DATA USE PHP TEMPLATE
+            // $("#wrapper-modal").html(data.temp);
+    })
+}
 function edit_user_privilege_datatables(id)
 {
     // const url = user_agent == "Firefox" ? "edit-user-datatables" : "admin/edit-user-datatables";
@@ -229,62 +263,6 @@ function destroy_user_datatables(id)
     
 }
 
-function validate_update_user_datatables()
-{   
-    if($("#username").val() == "")
-    {   
-        Swal.fire({
-            title: $("#username")[0].id.charAt(0).toUpperCase() + $("#username")[0].id.slice(1) +' '+  "Required !",
-            confirmButtonColor: '#d53f8c',
-            icon: "warning",
-        }).then((result) => {
-            if(result.value)
-            {
-                $("#username").focus();
-            }
-        })
-        return false;
-    }
-
-    $("#submit_update_user_datatables").text('');
-    $("#submit_update_user_datatables").append('<img src="'+$("[name=site_url]").val()+'assets/loader/loader.gif" style="width: 25px; display: block; margin: 0 auto;">');
-    $("#submit_update_user_datatables").addClass("cursor-not-allowed");
-    $("#submit_update_user_datatables").addClass("opacity-50");
-    $("#submit_update_user_datatables").removeClass("hover:text-pink-300");
-    $("#submit_update_user_datatables").prop("disabled", true);
-
-    return true;
-}
-
-function submit_update_user_datatables()
-{
-    if(validate_update_user_datatables())
-    {
-        setTimeout(() => {
-            $.post($("[name=site_url]").val() + "admin/update-user-datatables", $("#form-edit-user-datatables").serialize(), (data) => {
-                if(data.valid)
-                {
-                    Swal.fire(
-                        data.title,
-                        data.desc,
-                        data.type
-                    )
-                    location.reload();
-                    close_modal();
-                }
-                else
-                {
-                    Swal.fire(
-                        data.title,
-                        data.desc,
-                        data.type
-                    )
-                }
-            });
-        }, 400);
-    }
-}
-
 function close_modal()
 {
     toggleModal();
@@ -320,9 +298,7 @@ $(document).on("change","#avatar", function() {
 
     }
 });
-function show_user_privilege_datatables(user_id)
-{
-}
+
 function is_allowed_ext(ext)
 {
     switch (ext)
@@ -337,14 +313,16 @@ function is_allowed_ext(ext)
 }
 function toggleModal ()
 {
-    // const body = document.querySelector('body');
-    // const modal = document.querySelector('.modal');
     const body = $("body");
     const modal = $(".modal");
 
     modal.toggleClass("opacity-0");
     modal.toggleClass("pointer-events-none");
     body.toggleClass("modal-active");
+
+    // DEFAULT JAVASCRIPT
+    // const body = document.querySelector('body');
+    // const modal = document.querySelector('.modal');
     // modal.classList.toggle('opacity-0');
     // modal.classList.toggle('pointer-events-none');
     // body.classList.toggle('modal-active');
