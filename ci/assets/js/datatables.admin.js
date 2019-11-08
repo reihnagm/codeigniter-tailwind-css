@@ -4,7 +4,7 @@ const user_agent = $("[name=user_agent]").val();
 // // GETTING BASE URL
 // const site_url = $("[name=site_url]").val();
 
-// let url = user_agent == "Firefox" ? "all-user-datatables" : "admin/all-user-datatables";
+// const url = user_agent == "Firefox" ? "all-user-datatables" : "admin/all-user-datatables";
 
 $(document)
 .on('turbolinks:click', function() {
@@ -189,13 +189,16 @@ function edit_user_privilege_datatables(id)
 function destroy_user_datatables(id)
 {
     Swal.fire({
-        title: 'Submit your Github username',
+        title: 'Delete User ?',
         inputAttributes: {
           autocapitalize: 'off'
         },
-        confirmButtonText: 'Delete',
-        showCancelButton: true,
-        showLoaderOnConfirm: true   
+        icon: 'question',
+        confirmButtonColor: '#d53f8c',
+        confirmButtonText: 'Yes',
+        cancelButtonText: 'No',
+        reverseButtons: true,
+        showCancelButton: true
     }).then((result) => {
         if(result.value)
         {
@@ -207,7 +210,7 @@ function destroy_user_datatables(id)
                 Swal.fire(
                     data.title,
                     data.desc,
-                    data.type
+                    data.type,
                 )
                 location.reload();
                 close_modal();
@@ -237,7 +240,7 @@ function validate_update_user_datatables()
     }
 
     $("#submit_update_user_datatables").text('');
-    $("#submit_update_user_datatables").append('<img src="'+$(["name=site_url"]).val()+'assets/loader/loader.gif" style="width: 25px; display: block; margin: 0 auto;">');
+    $("#submit_update_user_datatables").append('<img src="'+$("[name=site_url]").val()+'assets/loader/loader.gif" style="width: 25px; display: block; margin: 0 auto;">');
     $("#submit_update_user_datatables").addClass("cursor-not-allowed");
     $("#submit_update_user_datatables").addClass("opacity-50");
     $("#submit_update_user_datatables").removeClass("hover:text-pink-300");
@@ -246,7 +249,7 @@ function validate_update_user_datatables()
     return true;
 }
 
-function submit_update_user_datatables(evt)
+function submit_update_user_datatables()
 {
     if(validate_update_user_datatables())
     {

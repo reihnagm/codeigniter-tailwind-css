@@ -20,7 +20,7 @@
     <script src="<?php echo base_url('assets/js/modal.admin.js') ?>"></script>
 
     <!-- SWEETALERT2 -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     
     <!-- NPROGRESS JS -->
     <script src="<?php echo base_url('assets/js/nprogress.js') ?>"></script>
