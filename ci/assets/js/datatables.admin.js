@@ -159,6 +159,8 @@ var global_func;
         $(".daterangepicker").addClass("custom-movement");
     }
 
+    
+
     });
 })(jQuery);
 
@@ -233,11 +235,20 @@ function destroy_user_datatables(id)
 
 function validate_update_user_datatables()
 {
-    if($("#first_name").val() === '' || $("#last_name").val() === '' || $("#username").val() === '')
-    {
-        alert('test');
+    if(!$("#form-edit-user-datatables").parsley().isValid())
+    {   
+        $('.errors').html("<p>This value is required.</p>");
+        $('.errors').parent().find(".form-field").removeClass("invisible");
+        $('.errors').parent().find(".form-field").addClass("visible");
+        $('.errors').parent().find(".form-field").show(250);
+        $('.errors').parent().find(".form-field").animate({opacity: 1.0}, 250);
+
         return false;
     }
+
+    $('.errors').parent().find(".form-field").hide(250);
+    $('.errors').parent().find(".form-field").addClass("opacity-0");
+    $('.errors').parent().find(".form-field").addClass("invisible");
 
     $("#submit_update_user_datatables").text('');
     $("#submit_update_user_datatables").append('<img src="'+$("[name=site_url]").val()+'assets/loader/loader.gif" style="width: 25px; display: block; margin: 0 auto;">');

@@ -19,13 +19,13 @@
             errorsWrapper: '<div class="border form-field invisible opacity-0 mt-2 text-sm font-bold border-red-400 rounded bg-red-100 px-4 py-3 text-red-700"></div>',
             errorTemplate: '<p></p>'
         }).on('field:success', function() {
-            let el = this.$element[0].id
+            const el = this.$element[0].id
             $('#'+el).addClass("border-green-500");
             $('#'+el).parent().find(".form-field").hide(250);
             $('#'+el).parent().find(".form-field").addClass("opacity-0");
             $('#'+el).parent().find(".form-field").addClass("invisible");
         }).on('field:error', function() {
-            let el = this.$element[0].id
+            const el = this.$element[0].id
             $('#'+el).parent().find(".form-field").removeClass("invisible");
             $('#'+el).parent().find(".form-field").addClass("visible");
             $('#'+el).parent().find(".form-field").show(250);
@@ -37,16 +37,17 @@
             classHandler: function (el) {
                 return el.$element.closest('.form-group');
             },
-            errorsWrapper: '<div class="border form-field invisible opacity-0 mt-2 text-sm font-bold border-red-400 rounded bg-red-100 px-4 py-3 text-red-700"></div>',
+            errorsWrapper: 
+            '<div class="border form-field invisible opacity-0 mt-2 text-sm font-bold border-red-400 rounded bg-red-100 px-4 py-3 text-red-700"></div>',
             errorTemplate: '<p></p>'
         }).on('field:success', function() {
-            let el = this.$element[0].id
+            const el = this.$element[0].id
             $('#'+el).addClass("border-green-500");
             $('#'+el).parent().find(".form-field").hide(250);
             $('#'+el).parent().find(".form-field").addClass("opacity-0");
             $('#'+el).parent().find(".form-field").addClass("invisible");
         }).on('field:error', function() {
-            let el = this.$element[0].id
+            const el = this.$element[0].id
             $('#'+el).parent().find(".form-field").removeClass("invisible");
             $('#'+el).parent().find(".form-field").addClass("visible");
             $('#'+el).parent().find(".form-field").show(250);
