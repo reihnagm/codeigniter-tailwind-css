@@ -1,9 +1,3 @@
-    <!-- DATATABLES JS -->
-    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-
-    <!-- DATATABLES RESPONSIVE JS -->
-    <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
-
     <!-- ADMIN JS -->
     <script src="<?php echo base_url('assets/js/admin.js') ?>"></script>
 
@@ -27,6 +21,9 @@
 
     <!-- PARSLY JS -->
     <script src="<?php echo base_url('assets/parsley/parsley.min.js') ?>"></script>
+
+    <!-- DATATABLES JS -->
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 
     <!-- PACE JS -->
     <script src="<?php echo base_url('assets/js/pace.min.js') ?>"></script>

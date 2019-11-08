@@ -158,9 +158,6 @@ var global_func;
 
         $(".daterangepicker").addClass("custom-movement");
     }
-
-    
-
     });
 })(jQuery);
 
@@ -225,7 +222,6 @@ function destroy_user_datatables(id)
                     data.type
                 )
             }
-
                 toggleModal();
             })
         }
@@ -234,63 +230,28 @@ function destroy_user_datatables(id)
 }
 
 function validate_update_user_datatables()
-{
-    if($("#username").val() == '')
+{   
+    if($("#username").val() == "")
     {   
-        $('#errors-username').html("<p>This value is required.</p>");
-        $('#errors-username').parent().find(".form-field-username").removeClass("invisible");
-        $('#errors-username').parent().find(".form-field-username").addClass("visible");
-        $('#errors-username').parent().find(".form-field-username").show(250);
-        $('#errors-username').parent().find(".form-field-username").animate({opacity: 1.0}, 250);
-        
-        return false;
-    }
-    if($("#first_name").val() == '') 
-    {
-        $('#errors-first-name').html("<p>This value is required.</p>");
-        $('#errors-first-name').parent().find(".form-field-first-name").removeClass("invisible");
-        $('#errors-first-name').parent().find(".form-field-first-name").addClass("visible");
-        $('#errors-first-name').parent().find(".form-field-first-name").show(250);
-        $('#errors-first-name').parent().find(".form-field-first-name").animate({opacity: 1.0}, 250);
-
-        return false;
-    }
-    if($("#last_name").val() == '')
-    {   
-        $('#errors-last-name').html("<p>This value is required.</p>");
-        $('#errors-last-name').parent().find(".form-field-last-name").removeClass("invisible");
-        $('#errors-last-name').parent().find(".form-field-last-name").addClass("visible");
-        $('#errors-last-name').parent().find(".form-field-last-name").show(250);
-        $('#errors-last-name').parent().find(".form-field-last-name").animate({opacity: 1.0}, 250);
-        
+        Swal.fire({
+            title: $("#username")[0].id.charAt(0).toUpperCase() + $("#username")[0].id.slice(1) +' '+  "Required !",
+            confirmButtonColor: '#d53f8c',
+            icon: "warning",
+        }).then((result) => {
+            if(result.value)
+            {
+                $("#username").focus();
+            }
+        })
         return false;
     }
 
-    if($("#username").val() != '') 
-    {
-        $('#errors-username').parent().find(".form-field-username").hide(250);
-        $('#errors-username').parent().find(".form-field-username").addClass("opacity-0");
-        $('#errors-username').parent().find(".form-field-username").addClass("invisible");
-    } 
-    if($("#first_name").val() != '') 
-    {
-        $('#errors-first-name').parent().find(".form-field-first-name").hide(250);
-        $('#errors-first-name').parent().find(".form-field-first-name").addClass("opacity-0");
-        $('#errors-first-name').parent().find(".form-field-first-name").addClass("invisible");
-    }
-    if($("#last_name").val() != '') 
-    {
-        $('#errors-last-name').parent().find(".form-field-last-name").hide(250);
-        $('#errors-last-name').parent().find(".form-field-last-name").addClass("opacity-0");
-        $('#errors-last-name').parent().find(".form-field-last-name").addClass("invisible");
-    }
-   
     $("#submit_update_user_datatables").text('');
     $("#submit_update_user_datatables").append('<img src="'+$("[name=site_url]").val()+'assets/loader/loader.gif" style="width: 25px; display: block; margin: 0 auto;">');
     $("#submit_update_user_datatables").addClass("cursor-not-allowed");
     $("#submit_update_user_datatables").addClass("opacity-50");
     $("#submit_update_user_datatables").removeClass("hover:text-pink-300");
-    $("#submit_update_user_datatables").prop("disabled",true);
+    $("#submit_update_user_datatables").prop("disabled", true);
 
     return true;
 }
