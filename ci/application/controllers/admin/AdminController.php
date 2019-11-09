@@ -264,171 +264,163 @@ class AdminController extends Master_Controller
 
 		$this->db->select("a.id, a.first_name, a.last_name, a.username, a.email, a.gender,  a.age, a.created_at, a.updated_at, a.avatar");
 		$this->db->from("tbl_users a");
-		$this->db->where("a.id", "$id");
+		$this->db->where("a.id", $id);
 
 		$user = $this->db->get()->row();
 
-		// $key = array_keys($user);
+		$get_object_vars = get_object_vars($user);
+		$key = array_keys($get_object_vars);
 
-		// $male_selected = $user['gender'] == "Male" ? "selected" : "";
-		// $female_selected = $user['gender'] == "Female" ? "selected" : "";
+		$male_selected = $user->gender == "Male" ? "selected" : "";
+		$female_selected = $user->gender == "Female" ? "selected" : "";
 
-		// $replace_created_at = str_replace('-', '/', $user['created_at']);
-		// $replace_updated_at = str_replace('-', '/', $user['updated_at']);
+		$replace_created_at = str_replace('-', '/', $user->created_at);
+		$replace_updated_at = str_replace('-', '/', $user->updated_at);
 
-		// $created_at = $replace_created_at;
-		// $updated_at = $replace_updated_at;
+		$created_at = $replace_created_at;
+		$updated_at = $replace_updated_at;
 
-		// $updated_at = date('M-D-d-Y', strtotime($updated_at));
+		$updated_at = date('M-D-d-Y', strtotime($updated_at));
 
-		// $avatar = $user['avatar'];
+		$avatar = $user->avatar;
 
-		// <div>
-		// 	<div class="block mx-3">
-		// 		<label class="block text-gray-700 text-sm font-bold mb-2" for="'.$key[8].'">
-		// 			'.$key[8].'
-		// 		</label>
-		// 		<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="'.$key[8].'" type="text" placeholder="'.$key[8].'" name="'.$key[8].'" value="'.$updated_at.'">
-		// 	</div>
-		// </div>
+		$temp =
+		'<div class="modal opacity-0 pointer-events-none z-50 fixed w-full h-full top-0 left-0 flex items-center justify-center">
+			<div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
 
-		// $temp =
-		// '<div class="modal opacity-0 pointer-events-none z-50 fixed w-full h-full top-0 left-0 flex items-center justify-center">
-		// 	<div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
+			<div class="modal-container bg-white w-11/12 mx-auto rounded shadow-lg z-50 overflow-y-auto">
 
-		// 	<div class="modal-container bg-white w-11/12 mx-auto rounded shadow-lg z-50 overflow-y-auto">
+				<div onclick="close_modal();" class="modal-close absolute top-0 right-0 cursor-pointer flex flex-col items-center mt-4 mr-4 text-white text-sm z-50">
+					<svg class="fill-current text-white" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+						<path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
+					</svg>
+					<span class="text-sm">(Esc)</span>
+				</div>
 
-		// 		<div onclick="close_modal();" class="modal-close absolute top-0 right-0 cursor-pointer flex flex-col items-center mt-4 mr-4 text-white text-sm z-50">
-		// 			<svg class="fill-current text-white" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
-		// 				<path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
-		// 			</svg>
-		// 			<span class="text-sm">(Esc)</span>
-		// 		</div>
+				<div class="modal-content py-4 text-left px-6 w-full">
 
-		// 		<div class="modal-content py-4 text-left px-6 w-full">
+					<div class="flex justify-end items-center pb-3">
+						<div onclick="close_modal();" class="cursor-pointer z-50">
+							<svg class="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+								<path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
+							</svg>
+						</div>
+					</div>
 
-		// 			<div class="flex justify-end items-center pb-3">
-		// 				<div onclick="close_modal();" class="cursor-pointer z-50">
-		// 					<svg class="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
-		// 						<path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
-		// 					</svg>
-		// 				</div>
-		// 			</div>
+					<form class="flex flex-wrap overflow-hidden -mx-5" id="form-edit-user-datatables" data-parsley-validate data-parsley-focus="first">
+						<div class="w-1/3 overflow-hidden my-5 px-5">
 
-		// 			<form class="flex flex-wrap overflow-hidden -mx-5" id="form-edit-user-datatables">
-		// 				<div class="w-1/3 overflow-hidden my-5 px-5">
+							<div class="block mx-3">
+								<label class="block text-gray-700 text-sm font-bold mb-2" for="'.$key[0].'">
+									'.$key[0].'
+				 				</label>
+					 			<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="'.$key[0].'" name="'.$key[0].'" type="text" placeholder="'.$key[0].'" value="'.$user->id.'" readonly>
+							</div>
 
-		// 					<div class="block mx-3">
-		// 						<label class="block text-gray-700 text-sm font-bold mb-2" for="'.$key[0].'">
-		// 							'.$key[0].'
-		// 		 				</label>
-		// 			 			<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="'.$key[0].'" name="'.$key[0].'" type="text" placeholder="'.$key[0].'" value="'.$user['id'].'" readonly>
-		// 					</div>
+							<div class="block mx-3">
+								<label class="block text-gray-700 text-sm font-bold mb-2" for="'.$key[1].'">
+									'.$key[1].'
+						 		</label>
+					 			<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="'.$key[1].'" name="'.$key[1].'" type="text" placeholder="'.$key[1].'" value="'.$user->first_name.'">
+							</div>
 
-		// 					<div class="block mx-3">
-		// 						<label class="block text-gray-700 text-sm font-bold mb-2" for="'.$key[1].'">
-		// 							'.$key[1].'
-		// 				 		</label>
-		// 			 			<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="'.$key[1].'" name="'.$key[1].'" type="text" placeholder="'.$key[1].'" value="'.$user['first_name'].'">
-		// 					</div>
+							<div class="block mx-3">
+						 		<label class="block text-gray-700 text-sm font-bold mb-2" for="'.$key[2].'">
+					 				'.$key[2].'
+						 		</label>
+						 		<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="'.$key[2].'" type="text" placeholder="'.$key[2].'" name="'.$key[2].'" value="'.$user->last_name.'">
+							 </div>
 
-		// 					<div class="block mx-3">
-		// 				 		<label class="block text-gray-700 text-sm font-bold mb-2" for="'.$key[2].'">
-		// 			 				'.$key[2].'
-		// 				 		</label>
-		// 				 		<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="'.$key[2].'" type="text" placeholder="'.$key[2].'" name="'.$key[2].'" value="'.$user['last_name'].'">
-		// 					 </div>
-
-		// 					 <div id="errors-last-name" class="border form-field-last-name invisible opacity-0 mt-2 text-sm font-bold border-red-400 rounded bg-red-100 px-4 py-3 text-red-700"></div>
+							 <div id="errors-last-name" class="border form-field-last-name invisible opacity-0 mt-2 text-sm font-bold border-red-400 rounded bg-red-100 px-4 py-3 text-red-700"></div>
 	
-		// 					<div class="block mx-3 form-group">
-		// 						<label class="block text-gray-700 text-sm font-bold mb-2" for="'.$key[3].'">
-		// 						'.$key[3].'
-		// 						</label>
-		// 						<input  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="'.$key[3].'" type="text" placeholder="'.$key[3].'" name="'.$key[3].'" value="'.$user['username'].'" required>
-		// 					</div>
+							<div class="block mx-3 form-group">
+								<label class="block text-gray-700 text-sm font-bold mb-2" for="'.$key[3].'">
+								'.$key[3].'
+								</label>
+								<input  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="'.$key[3].'" type="text" placeholder="'.$key[3].'" name="'.$key[3].'" value="'.$user->username.'" required>
+							</div>
 
-	
-		// 				</div>
+						</div>
 
-		// 				<div class="w-1/3 overflow-hidden my-5 px-5">
+						<div class="w-1/3 overflow-hidden my-5 px-5">
 
-		// 					<div class="block mx-3">
-		// 						<label class="block text-gray-700 text-sm font-bold mb-2" for="'.$key[4].'">
-		// 							'.$key[4].'
-		// 						</label>
-		// 						<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="'.$key[4].'" type="text" placeholder="'.$key[4].'" name="'.$key[4].'" value="'.$user['email'].'">
-		// 					</div>
+							<div class="block mx-3">
+								<label class="block text-gray-700 text-sm font-bold mb-2" for="'.$key[4].'">
+									'.$key[4].'
+								</label>
+								<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="'.$key[4].'" type="text" placeholder="'.$key[4].'" name="'.$key[4].'" value="'.$user->email.'">
+							</div>
 
-		// 					<div class="block mx-3">
-		// 						<label class="block text-gray-700 text-sm font-bold mb-2" for="'.$key[5].'">
-		// 							'.$key[5].'
-		// 						</label>
-		// 						<div class="relative">
-		// 							<select name="'.$key[5].'" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-2 px-3 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
-		// 							  <option '.$male_selected.'>Male</option>
-		// 							  <option '.$female_selected.'>Female</option>
-		// 							</select>
-		// 							<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-		// 							  <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
-		// 							</div>
-		// 						</div>
-		// 					</div>
+							<div class="block mx-3">
+								<label class="block text-gray-700 text-sm font-bold mb-2" for="'.$key[5].'">
+									'.$key[5].'
+								</label>
+								<div class="relative">
+									<select name="'.$key[5].'" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-2 px-3 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
+									  <option '.$male_selected.'>Male</option>
+									  <option '.$female_selected.'>Female</option>
+									</select>
+									<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+									  <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+									</div>
+								</div>
+							</div>
 
-		// 					<div class="block mx-3">
-		// 						<label class="block text-gray-700 text-sm font-bold mb-2" for="'.$key[6].'">
-		// 							'.$key[6].'
-		// 						</label>
-		// 						<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="'.$key[6].'" type="text" placeholder="'.$key[6].'" name="'.$key[6].'" value="'.$user['age'].'">
-		// 					</div>
+							<div class="block mx-3">
+								<label class="block text-gray-700 text-sm font-bold mb-2" for="'.$key[6].'">
+									'.$key[6].'
+								</label>
+								<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="'.$key[6].'" type="text" placeholder="'.$key[6].'" name="'.$key[6].'" value="'.$user->age.'">
+							</div>
 
-		// 					<div class="block mx-3">
-		// 						<label class="block text-gray-700 text-sm font-bold mb-2" for="'.$key[7].'">
-		// 							'.$key[7].'
-		// 						</label>
-		// 						<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="'.$key[7].'" type="text" placeholder="'.$key[7].'" name="'.$key[7].'" value="'.$created_at.'">
-		// 					</div>
+							<div class="block mx-3">
+								<label class="block text-gray-700 text-sm font-bold mb-2" for="'.$key[7].'">
+									'.$key[7].'
+								</label>
+								<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="'.$key[7].'" type="text" placeholder="'.$key[7].'" name="'.$key[7].'" value="'.$created_at.'">
+							</div>
 
-		// 				</div>
+						</div>
 
-		// 				<div class="w-1/3 overflow-hidden my-5 px-5">
-		// 					<div class="block mx-3">
-		// 						<label class="block text-gray-700 text-sm font-bold mb-2" for="'.$key[8].'">
-		// 							'.$key[8].'
-		// 						</label>
-		// 						<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="'.$key[8].'" type="text" placeholder="'.$key[8].'" name="'.$key[8].'" value="'.$updated_at.'" disabled>
-		// 					</div>
+						<div class="w-1/3 overflow-hidden my-5 px-5">
+							<div class="block mx-3">
+								<label class="block text-gray-700 text-sm font-bold mb-2" for="'.$key[8].'">
+									'.$key[8].'
+								</label>
+								<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="'.$key[8].'" type="text" placeholder="'.$key[8].'" name="'.$key[8].'" value="'.$updated_at.'" disabled>
+							</div>
 
-		// 					<div class="block my-5 mx-3">
-		// 						<label class="block text-gray-700 text-sm font-bold mb-2" for="'.$key[9].'">
-		// 							'.$key[9].'
-		// 						</label>
-		// 						<div class="bg-gray-400 hover:bg-gray-500 cursor-pointer">
-		// 							<form id="form-'.$key[9].'" enctype="mulitpart/form-data">
-		// 								<input id="'.$key[9].'" type="file" class="hidden" name="'.$key[9].'" >
-		// 								<img id="'.$key[9].'-trigger" class="h-40 w-full object-contain" src="'.$avatar.'">
-		// 							</form>
-		// 						</div>
-		// 					</div>
-		// 				</div>
+							<div class="block my-5 mx-3">
+								<label class="block text-gray-700 text-sm font-bold mb-2" for="'.$key[9].'">
+									'.$key[9].'
+								</label>
+								<div class="bg-gray-400 hover:bg-gray-500 cursor-pointer">
+									<form id="form-'.$key[9].'" enctype="mulitpart/form-data">
+										<input id="'.$key[9].'" type="file" class="hidden" name="'.$key[9].'" >
+										<img id="'.$key[9].'-trigger" class="h-40 w-full object-contain" src="'.$avatar.'">
+									</form>
+								</div>
+							</div>
+						</div>
 
-		// 			</form>
+					</form>
 
-		// 			<div class="flex flex-wrap overflow-hidden w-full justify-end my-6">
-		// 				<div class="flex justify-end w-1/2">
-		// 					<button id="submit_update_user_datatables" type="submit" onclick="submit_update_user_datatables();" class="w-1/6 px-2 py-2 bg-pink-500 rounded-lg text-white hover:text-pink-300 mr-2">Submit</button>
+					<div class="flex flex-wrap overflow-hidden w-full justify-end my-6">
+						<div class="flex justify-end w-1/2">
+							<button id="submit-edit-user-datatables" class="w-1/6 px-2 py-2 bg-pink-500 rounded-lg text-white hover:text-pink-300 mr-2">Submit</button>
 
-		// 					<button onclick="close_modal();" class="w-1/6 px-2 py-2 bg-pink-500 rounded-lg text-white hover:text-pink-300">Close</button>
-		// 				</div>
-		// 			</div>
+							<button onclick="close_modal();" class="w-1/6 px-2 py-2 bg-pink-500 rounded-lg text-white hover:text-pink-300">Close</button>
+						</div>
+					</div>
 
-		// 		</div>
+				</div>
 
 
-		// 	</div>
+			</div>
 
-		// </div>';
+		</div>';
 
+		// echo json_encode($temp);
 		echo json_encode($user);
 	}
 	public function edit_user_privilege_datatables()

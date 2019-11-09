@@ -1,6 +1,6 @@
 <div class="min-h-screen w-3/4">
     <!-- WRAPPER MODAL -->
-    <div id="wrapper-modal"></div>
+    <!-- <div id="wrapper-modal"></div> -->
 
     <!-- LOADER PAC-MAN ^_^ -->
     <div class="wrapper-loader fixed">
@@ -66,14 +66,14 @@
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="first_name">
                                 First Name
                             </label>
-                            <input id="first_name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"  type="text" placeholder="First Name" name="first_name">
+                            <input id="first_name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"  type="text" placeholder="First Name" name="first_name" data-parsley-required>
                         </div>
 
                         <div class="block mx-3">
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="last_name">
                                 Last Name
                             </label>
-                            <input id="last_name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Last Name" name="last_name">
+                            <input id="last_name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Last Name" name="last_name" data-parsley-required>
                         </div>
 
                         <div class="block mx-3 form-group">
@@ -146,7 +146,6 @@
                         </div>
                     </div>
                     
-
                     <div class="flex flex-wrap overflow-hidden w-full justify-end my-6">
                         <div class="flex justify-end w-1/2">
                             <button id="submit-edit-user-datatables" class="w-1/6 px-2 py-2 bg-pink-500 rounded-lg text-white hover:text-pink-300 mr-2">Submit</button>
@@ -167,21 +166,6 @@
 
 </div>
 
-<script>
-    $(function() {
-        $("#submit-edit-user-datatables").click(function() {
-            if ($(this).attr('id') === "submit-edit-user-datatables") 
-            { 
-                $("#form-edit-user-datatables").submit();
-            }
-        })
-
-        $("#form-edit-user-datatables").submit(function(e) {
-            e.preventDefault()
-        })
-    })
-</script>
-    	
-
+    
 <!-- DATATABLES ADMIN JS -->
 <script src="<?php echo base_url('assets/js/datatables.admin.js') ?>"></script>
