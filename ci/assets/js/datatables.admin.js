@@ -21,7 +21,6 @@ var global_func;
     'use strict';
     $(function() {
 
-   
         const user_datatables = $('#all-user-datatables').DataTable({
             dom: '"<"flex items-center"<"flex-grow items-center w-2/4"l><"flex flex-grow items-center w-2/4 justify-end"f>><"w-full"rt><"flex items-center"<"flex-grow items-center w-2/4"i><"flex flex-grow items-center w-2/4 justify-end"p>>',
             responsive: true,
@@ -301,6 +300,42 @@ $("#submit-edit-user-datatables").click(function() {
 
 $("#form-edit-user-datatables").submit(function(e) {
     e.preventDefault()
+})
+
+$("#first_name").keyup(function() {
+    $.ajax({
+        url: $("[name=site_url]").val() + 'admin/get-suggestion-username',
+        type: "GET",
+        data: 
+        {
+            first_name: $("#first_name").val().trim(),
+            last_name: $("#last_name").val().trim()
+        }, 
+        success: function(data) {
+           $("#username").html(data);
+        },
+        error: function(data) {
+            console.log(data);
+        }
+    });
+});
+
+$("#last_name").keyup(function() {
+    $.ajax({
+        url: $("[name=site_url]").val() + 'admin/get-suggestion-username',
+        type: "GET",
+        data: 
+        {
+            first_name: $("#first_name").val().trim(),
+            last_name: $("#last_name").val().trim()
+        }, 
+        success: function(data) {
+           $("#username").html(data);
+        },
+        error: function(data) {
+            console.log(data);
+        }
+    });
 })
 
 $(document).keydown(function(event){

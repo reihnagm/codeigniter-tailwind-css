@@ -760,4 +760,48 @@ class AdminController extends Master_Controller
 
 		echo json_encode($data_response); 
 	}
+	public function get_suggestion_username()
+    {
+		$temp = "";
+
+        $first_name = strtolower(str_replace(' ','',$this->input->get('first_name')));
+		$last_name  = strtolower(str_replace(' ','',$this->input->get('last_name')));
+		$random_num1 = rand(1,12);
+		$random_num2 = rand(2,2);
+		$random_num3 = rand(3,3);
+		$random_num4 = rand(4,5);
+		$random_num5 = rand(5,7);
+		$random_num6 = rand(6,8);
+		$username_suggestion_1 = $first_name.$last_name;
+		$username_suggestion_2 = $first_name.$last_name;
+		$username_suggestion_3 = $first_name.$last_name;
+
+	
+		// $this->db->from('tbl_users');
+		// $this->db->where('username', $username);
+		// $result = $this->db->get();
+	
+		// if($result->num_rows() > 0) 
+		// {
+		// 	$temp = '<option> Username already reserved ! Please select the other first name or last name !</option>';
+		// }
+		// else 
+		// {
+			if(empty($username_suggestion_1) && empty($username_suggestion_2) && empty($username_suggestion_3))
+			{
+				$temp .= '<option></option>';
+			} 
+			else 
+			{
+				$temp  = '<option>'.$username_suggestion_1.'_'.$random_num1.$random_num4.'</option>';
+				$temp .= '<option>'.$username_suggestion_2.'_'.$random_num2.$random_num5.'</option>';
+				$temp .= '<option>'.$username_suggestion_3.'_'.$random_num3.$random_num6.'</option>';
+			}
+		// }
+
+	
+
+
+        echo json_encode($temp);
+    }
 }

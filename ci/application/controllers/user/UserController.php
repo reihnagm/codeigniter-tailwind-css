@@ -157,5 +157,4 @@ class UserController extends Master_Controller
 
         echo json_encode($msg);
     }
-
 }

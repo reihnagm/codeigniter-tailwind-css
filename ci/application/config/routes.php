@@ -84,6 +84,9 @@ $route['admin/update-user-datatables'] = 'admin/AdminController/update_user_data
 // ADMIN SAVE PRIVILEGE
 $route['admin/settings/save-privilege/(:any)'] = 'admin/AdminController/save_privilege/$1';
 
+// ADMIN GET SUGGESTION USERNAME
+$route['admin/get-suggestion-username']['GET'] = 'admin/AdminController/get_suggestion_username';
+
 // TEST
 $route['test'] = 'test/TestController/test';
 
