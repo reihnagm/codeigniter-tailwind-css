@@ -226,6 +226,34 @@
     });
 })(jQuery);
 
+$(document).ready(function() {
+    
+    $("#first_name").inputmask({
+        mask: "aaaaaaaaaaaa",
+        casing: "lower",
+        placeholder: "" // REMOVE UNDERLINE
+    });
+
+    $("#last_name").inputmask({
+        mask: "aaaaaaaaaaaa",
+        casing: "lower",
+        placeholder: "" // REMOVE UNDERLINE
+    });
+
+    // NOT ALLOWED SPACE BAR
+    $("#first_name").keydown(function(e) {
+        if (e.keyCode == 32) {
+            return false;
+        }
+    });
+    $("#last_name").keydown(function(e) {
+        if (e.keyCode == 32) {
+            return false;
+        }
+    });
+
+})
+
 function regencies(province_id)
 {
     $.get($("[name=site_url]").val() + "get-regencies", { province_id : province_id },function(data){

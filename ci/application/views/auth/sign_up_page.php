@@ -46,10 +46,10 @@
             </div>
 
             <div class="flex flex-wrap overflow-hidden items-center justify-between">
-                <button id="form-submit-sign-up" class="bg-blue-500 hover:bg-blue-700 text-white font-bold w-1/3 py-2 px-2 rounded" type="submit">
+                <button id="form-submit-sign-up" class="bg-gray-700 hover:bg-gray-600 text-white font-bold w-1/3 py-2 px-2 rounded" type="submit">
                     Sign Up
                 </button>
-                <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="<?php site_url(); ?>forgot-password-page">
+                <a class="inline-block align-baseline font-bold text-sm text-gray-700 hover:text-gray-600" href="<?php site_url(); ?>forgot-password-page">
                     Forgot Password?
                 </a>
             </div>

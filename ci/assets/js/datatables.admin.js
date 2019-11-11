@@ -352,16 +352,14 @@ $("#form-edit-user-datatables").submit(function(e) {
 
                 location.reload();
             }
-        });
-
-        
+        });      
     }  
 })
 
 $("#first_name").keyup(function() {
 
     $(this).val().replace(/ /g, "");
-    
+
     $.ajax({
         url: $("[name=site_url]").val() + 'admin/get-suggestion-username',
         type: "GET",

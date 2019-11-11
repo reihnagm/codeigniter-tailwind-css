@@ -22,7 +22,7 @@
                     <button class="bg-gray-700 hover:bg-gray-600 w-1/3 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline">
                         Sign In
                     </button>
-                    <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#">
+                    <a class="inline-block align-baseline font-bold text-sm text-gray-700 hover:text-gray-600" href="#">
                         Forgot Password?
                     </a>
                 </div>
