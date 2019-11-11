@@ -179,8 +179,29 @@ var global_func;
                 $('#'+el).removeClass("border-green-500");
             });   
             
+            $("#first_name").inputmask({
+                mask: "aaaaaaaaaaaa",
+                casing: "lower",
+                placeholder: "" // REMOVE UNDERLINE
+            });
 
-            $("#last_name").inputmask({"mask": "(999) 999-9999"});
+            $("#last_name").inputmask({
+                mask: "aaaaaaaaaaaa",
+                casing: "lower",
+                placeholder: "" // REMOVE UNDERLINE
+            });
+
+            // NOT ALLOWED SPACE BAR
+            $("#first_name").keydown(function(e) {
+                if (e.keyCode == 32) {
+                    return false;
+                }
+            });
+            $("#last_name").keydown(function(e) {
+                if (e.keyCode == 32) {
+                    return false;
+                }
+            });
          
         }
     });
