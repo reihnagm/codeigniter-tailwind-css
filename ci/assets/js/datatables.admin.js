@@ -177,10 +177,15 @@ var global_func;
                 $('#'+el).parent().find(".form-field").show(250);
                 $('#'+el).parent().find(".form-field").animate({opacity: 1.0}, 250);
                 $('#'+el).removeClass("border-green-500");
-            });        
+            });   
+            
+
+            $("#last_name").inputmask({"mask": "(999) 999-9999"});
+         
         }
     });
 })(jQuery);
+
 function edit_user_datatables(id)
 {
     // const url = user_agent == "Firefox" ? "edit-user-datatables" : "admin/edit-user-datatables";
@@ -190,7 +195,7 @@ function edit_user_datatables(id)
             $("[name=avatar_trigger]").attr("src", data.avatar);
             $("[name=first_name]").val(data.first_name);
             $("[name=last_name]").val(data.last_name);
-            $("[name=username]").val(data.username);
+            $("[name=username]").html('<option value="'+data.username+'">'+data.username+'</option>');
             $("[name=email]").val(data.email);
             $("[name=gender]").val(data.gender);
             $("[name=age]").val(data.age);
@@ -299,10 +304,43 @@ $("#submit-edit-user-datatables").click(function() {
 })
 
 $("#form-edit-user-datatables").submit(function(e) {
-    e.preventDefault()
+    e.preventDefault();
+
+    $("#submit-edit-user-datatables").text('');
+    $("#submit-edit-user-datatables").append('<img src="'+$("[name=site_url]").val()+'assets/loader/loader.gif" style="width: 25px; display: block; margin: 0 auto;">');
+    $("#submit-edit-user-datatables").addClass("cursor-not-allowed");
+    $("#submit-edit-user-datatables").addClass("opacity-50");
+    $("#submit-edit-user-datatables").removeClass("hover:bg-pink-600");
+    $("#submit-edit-user-datatables").prop("disabled", true);
+
+    if($(this).parsley().isValid())
+    {
+        $.post($("[name=site_url]").val() + "admin/update-user-datatables", $("#form-edit-user-datatables").serialize() , function(data) {
+            if(data.valid)
+            {
+                Swal.fire(
+                    data.title,
+                    data.description,
+                    data.type
+                )
+                $("#submit-edit-user-datatables").text('Submit');
+                $("#submit-edit-user-datatables").removeClass("cursor-not-allowed");
+                $("#submit-edit-user-datatables").removeClass("opacity-50");
+                $("#submit-edit-user-datatables").addClass("hover:bg-pink-600");
+                $("#submit-edit-user-datatables").prop("disabled", false);
+
+                location.reload();
+            }
+        });
+
+        
+    }  
 })
 
 $("#first_name").keyup(function() {
+
+    $(this).val().replace(/ /g, "");
+    
     $.ajax({
         url: $("[name=site_url]").val() + 'admin/get-suggestion-username',
         type: "GET",
@@ -320,7 +358,11 @@ $("#first_name").keyup(function() {
     });
 });
 
+
 $("#last_name").keyup(function() {
+    
+    $(this).val().replace(/ /g, "");
+
     $.ajax({
         url: $("[name=site_url]").val() + 'admin/get-suggestion-username',
         type: "GET",

@@ -76,11 +76,9 @@
                             <input id="last_name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Last Name" name="last_name" data-parsley-required>
                         </div>
 
-                      
-
                         <div class="block mx-3">
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
-                            Username
+                                Username
                             </label>
                             <div class="relative">
                                 <select id="username" name="username" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-2 px-3 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state" required>
@@ -158,8 +156,7 @@
                     
                     <div class="flex flex-wrap overflow-hidden w-full justify-end my-6">
                         <div class="flex justify-end w-1/2">
-                            <button id="submit-edit-user-datatables" class="w-1/6 px-2 py-2 bg-pink-500 rounded-lg text-white hover:text-pink-300 mr-2">Submit</button>
-
+                            <button id="submit-edit-user-datatables" class="w-1/6 px-2 py-2 bg-pink-500 rounded-lg text-white hover:bg-pink-600 mr-2">Submit</button>
                             <button onclick="close_modal();" class="w-1/6 px-2 py-2 bg-pink-500 rounded-lg text-white hover:text-pink-300">Close</button>
                         </div>
                     </div>
@@ -176,6 +173,7 @@
 
 </div>
 
-    
-<!-- DATATABLES ADMIN JS -->
-<script src="<?php echo base_url('assets/js/datatables.admin.js') ?>"></script>
+
+
+
+

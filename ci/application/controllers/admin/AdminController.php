@@ -547,6 +547,8 @@ class AdminController extends Master_Controller
 	}
 	public function update_user_datatables()
 	{
+		$msg = [];
+
 		$id  = $this->input->post("id");
 		$first_name = $this->input->post("first_name");
 		$last_name = $this->input->post("last_name");
@@ -573,24 +575,22 @@ class AdminController extends Master_Controller
 		$this->db->update('tbl_users');
 		$this->db->trans_complete();
 
-		$data_param = [];
-
 		if ($this->db->trans_status() === FALSE)
 		{
-			$data_param["valid"] = FALSE;
-			$data_param["title"] = "Update error !";
- 			$data_param["desc"]  = "Something Wrong !";
-			$data_param["type"]  = "error";
+			$msg["valid"] = FALSE;
+			$msg["title"] = "Update error !";
+ 			$msg["description"]  = "Something Wrong !";
+			$msg["type"]  = "error";
 		}
 		else
 		{
-			$data_param["valid"] = TRUE;
-			$data_param["title"] = "Update Success !";
-			$data_param["desc"] = "Successfully !";
-			$data_param["type"] = "success";
+			$msg["valid"] = TRUE;
+			$msg["title"] = "Update Success !";
+			$msg["description"] = "Successfully !";
+			$msg["type"] = "success";
 		}
 
-		echo json_encode($data_param);
+		echo json_encode($msg);
 	}
 
 	public function destroy_user_datatables()
@@ -776,17 +776,18 @@ class AdminController extends Master_Controller
 		$username_suggestion_2 = $first_name.$last_name;
 		$username_suggestion_3 = $first_name.$last_name;
 
+		$username_arr = [$username_suggestion_1, $username_suggestion_2, $username_suggestion_3];
 	
-		// $this->db->from('tbl_users');
-		// $this->db->where('username', $username);
-		// $result = $this->db->get();
+		$this->db->from('tbl_users');
+		$this->db->where_in('username', $username_arr);
+		$result = $this->db->get();
 	
-		// if($result->num_rows() > 0) 
-		// {
-		// 	$temp = '<option> Username already reserved ! Please select the other first name or last name !</option>';
-		// }
-		// else 
-		// {
+		if($result->num_rows() > 0) 
+		{
+			$temp = '<option> Username already reserved ! Please select the other first name or last name !</option>';
+		}
+		else 
+		{
 			if(empty($username_suggestion_1) && empty($username_suggestion_2) && empty($username_suggestion_3))
 			{
 				$temp .= '<option></option>';
@@ -797,11 +798,9 @@ class AdminController extends Master_Controller
 				$temp .= '<option>'.$username_suggestion_2.'_'.$random_num2.$random_num5.'</option>';
 				$temp .= '<option>'.$username_suggestion_3.'_'.$random_num3.$random_num6.'</option>';
 			}
-		// }
+		}
 
 	
-
-
         echo json_encode($temp);
     }
 }
