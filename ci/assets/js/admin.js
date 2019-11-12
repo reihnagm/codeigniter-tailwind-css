@@ -139,7 +139,6 @@
         // 0: {name: "", value: ""}
         // 1: {name: "", value: ""}
         // 2: {name: "", value: ""}
-        NProgress.start();
 
         $("#form-submit-privilege").text('');
         $("#form-submit-privilege").append('<img src="'+ $("[name=site_url]").val() + 'assets/loader/loader-2.gif" style="width: 25px; display: block; margin: 0 auto;">');
@@ -148,8 +147,10 @@
         $("#form-submit-privilege").removeClass("hover:bg-pink-400");
         $("#form-submit-privilege").prop("disabled", true);
 
+        NProgress.start();
+
         $.ajax({
-            url: $("[name=site_url]").val() + "admin/settings/save-privilege/" + $("[name=user_id]").val(),
+            url: $("[name=site_url]").val() + "admin/save-privilege/" + $("[name=user_id]").val(),
             type: "POST",
             data: 
             {
@@ -159,6 +160,7 @@
             {
                 if(data.type)
                 {
+                   
                     Swal.fire(
                         data.title,
                         data.description,
@@ -169,6 +171,9 @@
                     $("#form-submit-privilege").removeClass("opacity-50");
                     $("#form-submit-privilege").addClass("hover:bg-pink-400");
                     $("#form-submit-privilege").prop("disabled", false);
+
+                    location.reload();
+                    NProgress.done();
                 }
             }, 
             error: function(data) 

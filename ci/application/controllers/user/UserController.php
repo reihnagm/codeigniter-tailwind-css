@@ -102,7 +102,7 @@ class UserController extends Master_Controller
         $filename = $_FILES['banner']['name'];
 
         $x = explode('.', $filename);
-        $extension = strtolower(end($x)); // png | jpg | jpeg
+        $extension = strtolower(end($x)); // png || jpg || jpeg
 
         $config['upload_path']      = './assets/banner/';
         $config['allowed_types']    = 'gif|jpg|jpeg|png';
@@ -110,7 +110,7 @@ class UserController extends Master_Controller
         $config['file_ext_tolower'] = TRUE;
         $config['overwrite']        = TRUE;
         $config['mod_mime_fix']     = TRUE;
-        $config['max_size']         = 2048; // 1MB
+        $config['max_size']         = 2048; // 2MB
 
         $this->upload->initialize($config);
 

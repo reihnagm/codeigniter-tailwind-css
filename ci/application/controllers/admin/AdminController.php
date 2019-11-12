@@ -206,10 +206,10 @@ class AdminController extends Master_Controller
 			$row['name'] = $user->name;
 
 			$row['option'] =  	'<a href="javascript:void(0)" class="hover:text-pink-300">
-									<i onclick="edit_user_privilege_datatables('.$user->id.')" id="edit-user-datatables-'.$user->id.'" class="fas fa-edit w-8"></i>
+									<i onclick="edit_user_privilege_datatables('.$user->id.')"  class="fas fa-edit w-8"></i>
 								</a>
 								<a href="javascript:void(0)" class="hover:text-pink-300">
-									<i onclick="destroy_user_privelege_datatables('.$user->id.')" id="destroy-user-datatables-'.$user->id.'" class="fa fa-trash w-8"></i>
+									<i onclick="destroy_user_privilege_datatables('.$user->id.')" class="fa fa-trash w-8"></i>
 								</a>
 								<a href="'.site_url().'admin/show-privilege-user/'.$user->username.$user->id.'" class="hover:text-pink-300">
 									<i id="show-user-privilege-datatables" class="fas fa-eye w-8">
@@ -260,11 +260,10 @@ class AdminController extends Master_Controller
 	public function edit_user_datatables()
 	{
 		$data = [];
-		$id = $this->input->get("id");
 
 		$this->db->select("a.id, a.first_name, a.last_name, a.username, a.email, a.gender,  a.age, a.created_at, a.updated_at, a.avatar");
 		$this->db->from("tbl_users a");
-		$this->db->where("a.id", $id);
+		$this->db->where("a.id", $this->input->get("id"));
 
 		$user = $this->db->get()->row();
 
@@ -538,8 +537,7 @@ class AdminController extends Master_Controller
 
 			</div>
 
-		</div>
-		';
+		</div>';
 
 		echo json_encode([
 			"temp" => $temp
@@ -549,29 +547,20 @@ class AdminController extends Master_Controller
 	{
 		$msg = [];
 
-		$id  = $this->input->post("id");
-		$first_name = $this->input->post("first_name");
-		$last_name = $this->input->post("last_name");
-		$username = $this->input->post("username");
-		$email = $this->input->post("email");
-		$age = $this->input->post("age");
-		$gender = $this->input->post("gender");
-		$updated_at =  Date('Y-m-d');
-
 		$data =
 		[
-			"first_name" => $first_name,
-			"last_name" => $last_name,
-			"username" => $username,
-			"email" => $email,
-			"age" => $age,
-			"gender" => $gender,
-			"updated_at" => $updated_at
+			"first_name" => $this->input->post("first_name"),
+			"last_name" => $this->input->post("last_name"),
+			"username" => $this->input->post("username"),
+			"email" => $this->input->post("email"),
+			"age" => $this->input->post("age"),
+			"gender" => $this->input->post("gender"),
+			"updated_at" => Date('Y-m-d')
 		];
 
 		$this->db->trans_start();
 		$this->db->set($data);
-		$this->db->where('id', $id);
+		$this->db->where('id', $this->input->post("id"));
 		$this->db->update('tbl_users');
 		$this->db->trans_complete();
 
@@ -597,10 +586,34 @@ class AdminController extends Master_Controller
 	{
 		$msg = [];
 
-		$id = $this->input->post("id");
+		$this->db->trans_start();
+		$this->db->where('id', $this->input->post("id"));
+		$this->db->delete('tbl_users');
+		$this->db->trans_complete();
+
+		if ($this->db->trans_status() === FALSE)
+		{
+			$msg["valid"] = FALSE;
+			$msg["title"] = "Delete error !";
+ 			$msg["desc"]  = "Something Wrong !";
+			$msg["type"]  = "error";
+		}
+		else
+		{
+			$msg["valid"] = TRUE;
+			$msg["title"] = "Delete Successfully !";
+			$msg["desc"]  = "Successfully !";
+			$msg["type"]  = "success";
+		}
+
+		echo json_encode($msg);
+	}
+	public function destroy_user_privilege_datatables()
+	{
+		$msg = [];
 
 		$this->db->trans_start();
-		$this->db->where('id', $id);
+		$this->db->where('id', $this->input->post("id"));
 		$this->db->delete('tbl_users');
 		$this->db->trans_complete();
 
@@ -653,7 +666,7 @@ class AdminController extends Master_Controller
 			return $this->db->count_all_results();
 		}
 	}
-	public function user_read()
+	public function read_user_datatables()
 	{
 		$this->load->view('master_admin/header');
 		$this->load->view('admin/user', $this->data);
@@ -665,12 +678,6 @@ class AdminController extends Master_Controller
 
         redirect('/', 'refresh');
     }
-	public function get_count_privilege()
-	{
-		$this->db->from("tbl_app_admin_menu");
-		$this->db->where("type", "crud");
-		return $this->db->count_all_results();
-	}
 	public function show_privilege_user($user_id)
 	{
 		$this->db->from("tbl_privileges a");
@@ -699,7 +706,7 @@ class AdminController extends Master_Controller
 	{
 		$msg = [];
 
-		$count = $this->get_count_privilege();
+		$count = get_count_privilege();
 
 		$menu_id = "";
 		$array_key = [];
@@ -758,7 +765,7 @@ class AdminController extends Master_Controller
 
 		endforeach;
 
-		echo json_encode($data_response); 
+		echo json_encode($msg); 
 	}
 	public function get_suggestion_username()
     {
@@ -784,7 +791,7 @@ class AdminController extends Master_Controller
 	
 		if($result->num_rows() > 0) 
 		{
-			$temp = '<option> Username already reserved ! Please select the other first name or last name !</option>';
+			$temp = '<option> Username already reserved !</option>';
 		}
 		else 
 		{

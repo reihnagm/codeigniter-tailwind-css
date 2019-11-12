@@ -1,19 +1,17 @@
-// CHECKING BROWSER
-// const user_agent = $("[name=user_agent]").val();
-
-// // GETTING BASE URL
+// GETTING BASE URL
 // const site_url = $("[name=site_url]").val();
 
-// const url = user_agent == "Firefox" ? "all-user-datatables" : "admin/all-user-datatables";
+// CHECKING BROWSER
+// const url = $("[name=user_agent]").val() == "Firefox" ? "all-user-datatables" : "admin/all-user-datatables";
 
-$(document)
-.on('turbolinks:click', function() {
-    NProgress.start();
-})
-.on('turbolinks:render', function() {
-    NProgress.done();
-    NProgress.remove(); 
-});
+// $(document)
+// .on('turbolinks:click', function() {
+//     NProgress.start();
+// })
+// .on('turbolinks:render', function() {
+//     NProgress.done();
+//     NProgress.remove(); 
+// });
 
 var global_func;
 
@@ -145,7 +143,7 @@ var global_func;
         global_func = function()
         {
             const created_at = $("#created_at").val();
-
+            
             $("#created_at").daterangepicker({
                 singleDatePicker: true,
                 showDropdowns: true,
@@ -240,7 +238,6 @@ function edit_user_privilege_datatables(id)
             toggleModal();
     })
 }
-
 function destroy_user_datatables(id)
 {
     Swal.fire({
@@ -282,11 +279,48 @@ function destroy_user_datatables(id)
             })
         }
     });
-    
 }
-function close_modal()
+function destroy_user_privilege_datatables(id)
 {
-    toggleModal();
+    Swal.fire({
+        title: 'Delete User ?',
+        inputAttributes: {
+          autocapitalize: 'off'
+        },
+        icon: 'question',
+        confirmButtonColor: '#d53f8c',
+        confirmButtonText: 'Yes',
+        cancelButtonText: 'No',
+        reverseButtons: true,
+        showCancelButton: true
+    }).then((result) => {
+        if(result.value)
+        {
+            $.post($("[name=site_url]").val() + "admin/destroy-user-privilege-datatables", { id : id })
+            .done(function(data) {
+
+            if(data.valid)
+            {
+                Swal.fire(
+                    data.title,
+                    data.desc,
+                    data.type,
+                )
+                location.reload();
+                close_modal();
+            }
+            else
+            {
+                Swal.fire(
+                    data.title,
+                    data.desc,
+                    data.type
+                )
+            }
+                toggleModal();
+            })
+        }
+    });
 }
 function is_allowed_ext(ext)
 {
@@ -299,6 +333,10 @@ function is_allowed_ext(ext)
         return true;
     }
     return false;
+}
+function close_modal()
+{
+    toggleModal();
 }
 function toggleModal ()
 {
@@ -327,6 +365,7 @@ $("#submit-edit-user-datatables").click(function() {
 $("#form-edit-user-datatables").submit(function(e) {
     e.preventDefault();
 
+    NProgress.start();
     $("#submit-edit-user-datatables").text('');
     $("#submit-edit-user-datatables").append('<img src="'+$("[name=site_url]").val()+'assets/loader/loader.gif" style="width: 25px; display: block; margin: 0 auto;">');
     $("#submit-edit-user-datatables").addClass("cursor-not-allowed");
@@ -344,6 +383,7 @@ $("#form-edit-user-datatables").submit(function(e) {
                     data.description,
                     data.type
                 )
+                NProgress.done();
                 $("#submit-edit-user-datatables").text('Submit');
                 $("#submit-edit-user-datatables").removeClass("cursor-not-allowed");
                 $("#submit-edit-user-datatables").removeClass("opacity-50");
@@ -355,7 +395,6 @@ $("#form-edit-user-datatables").submit(function(e) {
         });      
     }  
 })
-
 $("#first_name").keyup(function() {
 
     $(this).val().replace(/ /g, "");
@@ -376,8 +415,6 @@ $("#first_name").keyup(function() {
         }
     });
 });
-
-
 $("#last_name").keyup(function() {
     
     $(this).val().replace(/ /g, "");

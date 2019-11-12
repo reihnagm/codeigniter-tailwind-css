@@ -1,7 +1,6 @@
 (function ($) {
     'use strict';
     $(function() {
-
         $(document).on("click", "#logo", function(e) {
             e.preventDefault();
             NProgress.configure({ showSpinner: false });
@@ -38,10 +37,5 @@
                 NProgress.done();
             }, 900);
         });
-
-        $(document).on("click", "#verify", function() {
-            alert('test');
-        })
-
     });
 })(jQuery);

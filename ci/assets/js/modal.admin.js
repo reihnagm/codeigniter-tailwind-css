@@ -1,22 +1,37 @@
-    var openmodal = document.querySelectorAll('.modal-open')
+    // // JQUERY
+    // let open_modal = $(".modal-open");
 
-    for (var i = 0; i < openmodal.length; i++)
-    {
-        openmodal[i].addEventListener('click', function(event){
-            event.preventDefault();
-            toggleModal();
-        });
-    }
+    // JAVASCRIPT
+    // var openmodal = document.querySelectorAll('.modal-open')
+
+    // JAVASCRIPT
+    // for (let i = 0; i < openmodal.length; i++)
+    // {
+    //     // JAVASCRIPT
+    //     // openmodal[i].addEventListener('click', function(event){
+    //     //     event.preventDefault();
+    //     //     toggleModal();
+    //     // });
+    // }
+
+    // for (let i = 0; i < open_modal.length; i++) 
+    // {
+    //     // JQUERY
+    //     open_modal[i].click(function(e) {
+    //          e.preventDefault();
+    //         toggleModal();
+    //     })
+    // }
 
     // const overlay = document.querySelector('.modal-overlay');
     // overlay.addEventListener('click', toggleModal);
 
-    var closemodal = document.querySelectorAll('.modal-close');
+    // var closemodal = document.querySelectorAll('.modal-close');
 
-    for (var i = 0; i < closemodal.length; i++)
-    {
-        closemodal[i].addEventListener('click', toggleModal);
-    }
+    // for (var i = 0; i < closemodal.length; i++)
+    // {
+    //     closemodal[i].addEventListener('click', toggleModal);
+    // }
 
     // document.onkeydown = function(evt)
     // {

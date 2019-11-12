@@ -302,9 +302,8 @@ function get_temp_privilege($user_id)
             </thead>';
         endif;
 
-        // $name_string = "'$privilege->admin_menu_name'"; // STRING ""
-        // $name = "$privilege->admin_menu_name";
-
+        // $name_string = "'$privilege->admin_menu_name'"; // STRING 
+      
         $id = "$privilege->admin_menu_id";
 
         $priv_create_class   = !empty($user_privilege->priv_create) ? 'block' : 'hidden';
@@ -385,6 +384,14 @@ function get_temp_privilege($user_id)
     </table>';
 
     return $temp;
+}
+function get_count_privilege() 
+{
+    $CI = __db();
+
+    $CI->db->from("tbl_app_admin_menu");
+	$CI->db->where("type", "crud");
+	return $this->db->count_all_results();
 }
 function partition($list, $p)
 {

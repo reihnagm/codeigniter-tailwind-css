@@ -16,13 +16,14 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.1.2/base.min.css">
         <!-- DATATABLES CUSTOM TAILWIND CSS -->
         <link rel="stylesheet" href="<?php echo base_url('assets/css/custom.tailwindcss.css'); ?>">
+       
         <!-- DATERANGEPICKER -->
-        <link rel="stylesheet" href="<?php echo base_url('assets/daterangepicker/daterangepicker.css') ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/vendor/daterangepicker/daterangepicker.css') ?>">
+       
         <!-- MAIN CSS -->
         <link rel="stylesheet" href="<?php echo base_url('assets/css/main.css') ?>">
         <!-- PACE CSS -->
         <link rel="stylesheet" href="<?php echo base_url('assets/css/pace.css') ?>">
-
 
         <!-- SITE URL -->
 		<input type="hidden" name="site_url" value="<?php echo site_url() ?>">
