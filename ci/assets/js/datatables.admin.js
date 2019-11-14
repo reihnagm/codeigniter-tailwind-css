@@ -224,7 +224,7 @@ function edit_user_datatables(id)
             // IF DATA USE PHP TEMPLATE
             // $("#wrapper-modal").html(data.temp);
 
-            toggleModal();  
+            show_user_datatables();
             global_func();
     })
 }
@@ -235,9 +235,34 @@ function edit_user_privilege_datatables(id)
         .done(function(data) {
             // $("#wrapper-modal").html(data.temp);
             global_func();
-            toggleModal();
     })
 }
+function show_user_datatables()
+{
+    $(".modal-user-datatables").toggleClass("opacity-0");
+    $(".modal-user-datatables").toggleClass("pointer-events-none");
+    $("body").toggleClass("modal-active");
+
+    // DEFAULT JAVASCRIPT
+    // const body = document.querySelector('body');
+    // const modal = document.querySelector('.modal');
+    // modal.classList.toggle('opacity-0');
+    // modal.classList.toggle('pointer-events-none');
+    // body.classList.toggle('modal-active');
+}
+function close_show_user_datatables()
+{
+    $(".modal-user-datatables").toggleClass("opacity-0");
+    $(".modal-user-datatables").toggleClass("pointer-events-none");
+    $("body").toggleClass("modal-active");
+}
+$(document).keydown(function(event){
+    var key = (event.keyCode ? event.keyCode : event.which);
+    if (key == 27)
+    {
+        close_show_user_datatables();
+    }
+});
 function destroy_user_datatables(id)
 {
     Swal.fire({
@@ -265,7 +290,6 @@ function destroy_user_datatables(id)
                     data.type,
                 )
                 location.reload();
-                close_modal();
             }
             else
             {
@@ -275,7 +299,6 @@ function destroy_user_datatables(id)
                     data.type
                 )
             }
-                toggleModal();
             })
         }
     });
@@ -334,34 +357,12 @@ function is_allowed_ext(ext)
     }
     return false;
 }
-function close_modal()
-{
-    toggleModal();
-}
-function toggleModal ()
-{
-    const body = $("body");
-    const modal = $(".modal");
-
-    modal.toggleClass("opacity-0");
-    modal.toggleClass("pointer-events-none");
-    body.toggleClass("modal-active");
-
-    // DEFAULT JAVASCRIPT
-    // const body = document.querySelector('body');
-    // const modal = document.querySelector('.modal');
-    // modal.classList.toggle('opacity-0');
-    // modal.classList.toggle('pointer-events-none');
-    // body.classList.toggle('modal-active');
-}
-
 $("#submit-edit-user-datatables").click(function() {
     if ($(this).attr('id') === "submit-edit-user-datatables") 
     { 
         $("#form-edit-user-datatables").submit();
     }
 })
-
 $("#form-edit-user-datatables").submit(function(e) {
     e.preventDefault();
 
@@ -434,14 +435,6 @@ $("#last_name").keyup(function() {
             console.log(data);
         }
     });
-})
-
-$(document).keydown(function(event){
-    var key = (event.keyCode ? event.keyCode : event.which);
-    if (key == 27)
-    {
-        toggleModal();
-    }
 });
 $(document).on("click", "#avatar-trigger", function() {
     $("#avatar").trigger("click");

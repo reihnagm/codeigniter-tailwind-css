@@ -25,6 +25,9 @@
     <!-- DATATABLES JS -->
     <script src="<?php echo base_url('assets/vendor/datatables/datatables.min.js') ?>"></script>
 
+    <!-- MODAL ADMIN JS -->
+    <script src="<?php echo base_url('assets/js/modal.admin.js') ?>"></script>
+
      <!-- INPUTMASK JS -->
      <script src="<?php echo base_url('assets/vendor/inputmask/dist/jquery.inputmask.bundle.js') ?>"></script>
 

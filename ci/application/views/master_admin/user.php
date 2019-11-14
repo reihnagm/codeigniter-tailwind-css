@@ -30,7 +30,7 @@
         </table>
     </div>
 
-    <div class="modal opacity-0 pointer-events-none z-50 fixed w-full h-full top-0 left-0 flex items-center justify-center">
+    <div class="modal-user-datatables opacity-0 pointer-events-none z-50 fixed w-full h-full top-0 left-0 flex items-center justify-center">
 		<div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
 
         <div class="modal-container bg-white w-11/12 mx-auto rounded shadow-lg z-50 overflow-y-auto">
@@ -157,16 +157,13 @@
                     <div class="flex flex-wrap overflow-hidden w-full justify-end my-6">
                         <div class="flex justify-end w-1/2">
                             <button id="submit-edit-user-datatables" class="w-1/6 px-2 py-2 bg-pink-500 rounded-lg text-white hover:bg-pink-600 mr-2">Submit</button>
-                            <button onclick="close_modal();" class="w-1/6 px-2 py-2 bg-pink-500 rounded-lg text-white hover:text-pink-300">Close</button>
+                            <button onclick="close_show_user_datatables();" class="w-1/6 px-2 py-2 bg-pink-500 rounded-lg text-white hover:text-pink-300">Close</button>
                         </div>
                     </div>
 
                 </form>
-
-              
-
+            
             </div>
-
 
         </div>
 	</div>

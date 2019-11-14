@@ -253,7 +253,6 @@ $(document).ready(function() {
     });
 
 })
-
 function regencies(province_id)
 {
     $.get($("[name=site_url]").val() + "get-regencies", { province_id : province_id },function(data){
@@ -284,3 +283,27 @@ function is_allowed_ext(ext)
     }
     return false;
 }
+
+function close_show_change_address()
+{
+    $(".modal-show-address").toggleClass("opacity-0");
+    $(".modal-show-address").toggleClass("pointer-events-none");
+    $("body").toggleClass("modal-active");
+}
+
+function show_change_address(village_id)
+{
+    $(".modal-show-address").toggleClass("opacity-0");
+    $(".modal-show-address").toggleClass("pointer-events-none");
+    $("body").toggleClass("modal-active");
+}
+
+$(document).keydown(function(event){
+    var key = (event.keyCode ? event.keyCode : event.which);
+    if (key == 27)
+    {
+        close_show_change_address();
+    }
+});
+
+
