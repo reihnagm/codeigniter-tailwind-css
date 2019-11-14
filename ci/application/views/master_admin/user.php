@@ -31,6 +31,7 @@
     </div>
 
     <div class="modal-user-datatables opacity-0 pointer-events-none z-50 fixed w-full h-full top-0 left-0 flex items-center justify-center">
+        
 		<div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
 
         <div class="modal-container bg-white w-11/12 mx-auto rounded shadow-lg z-50 overflow-y-auto">
@@ -43,7 +44,6 @@
             </div>
 
             <div class="modal-content py-4 text-left px-6 w-full">
-
                 <div class="flex justify-end items-center pb-3">
                     <div onclick="close_modal();" class="cursor-pointer z-50">
                         <svg class="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
@@ -54,7 +54,6 @@
 
                 <form id="form-edit-user-datatables" class="flex -mx-5" data-parsley-validate data-parsley-focus="first">
                     <div class="w-1/3 overflow-hidden my-5 px-5">
-
                         <div class="block mx-3">
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="id">
                                 ID
@@ -89,11 +88,9 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
 
                     <div class="w-1/3 overflow-hidden my-5 px-5">
-
                         <div class="block mx-3">
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
                                 E-mail
@@ -129,7 +126,6 @@
                             </label>
                             <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="created_at" type="text" name="created_at">
                         </div>
-
                     </div>
 
                     <div class="w-1/3 overflow-hidden my-5 px-5">
@@ -140,7 +136,6 @@
                             <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             id="updated_at" type="text" name="updated_at" readonly>
                         </div>
-
                         <div class="block my-5 mx-3">
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="avatar">
                                 Avatar
@@ -162,7 +157,6 @@
                     </div>
 
                 </form>
-            
             </div>
 
         </div>

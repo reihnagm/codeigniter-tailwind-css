@@ -23,21 +23,26 @@
                 },
                 success: function(data)
                 {
-                    console.log(data);
-                    Swal.fire(
-                        data.title,
-                        data.description,
-                        data.type
-                    )
+                    if(data.valid)
+                    {
+                        Swal.fire(
+                            data.title,
+                            data.description,
+                            data.type
+                        )
+                    }
+                    else 
+                    {
+                        Swal.fire(
+                            data.title,
+                            data.description,
+                            data.type
+                        )
+                    }
                 },
                 error: function(data)
                 {
                     console.log(data);
-                    Swal.fire(
-                        data.title,
-                        data.description,
-                        data.type
-                    )
                 }
             });
         });
@@ -78,6 +83,17 @@
             $("#villages").removeClass("opacity-50");
             $("#villages").removeClass("cursor-not-allowed");
         })
+
+        // $(document).on("change", "#villages", function(){
+        //     const districts = $("#districts").val(),
+        //           provinces = $("#provinces").val(),
+        //           regencies = $("#regencies").val();
+
+        //     if(districts && provinces && regencies != '') 
+        //     {   
+        //         $("#save-address").attr("disabled", "disabled");
+        //     }
+        // });
 
         $(document).on("change","#banner", function() {
             const unique = new Date().getTime();
@@ -283,21 +299,18 @@ function is_allowed_ext(ext)
     }
     return false;
 }
-
 function close_show_change_address()
 {
     $(".modal-show-address").toggleClass("opacity-0");
     $(".modal-show-address").toggleClass("pointer-events-none");
     $("body").toggleClass("modal-active");
 }
-
 function show_change_address(village_id)
 {
     $(".modal-show-address").toggleClass("opacity-0");
     $(".modal-show-address").toggleClass("pointer-events-none");
     $("body").toggleClass("modal-active");
 }
-
 $(document).keydown(function(event){
     var key = (event.keyCode ? event.keyCode : event.which);
     if (key == 27)

@@ -143,6 +143,7 @@ class UserController extends Master_Controller
         if ($this->db->trans_status() === FALSE)
         {
             $this->db->trans_rollback();
+            $msg["valid"] = FALSE;
             $msg["title"] = "Failed !";
             $msg["description"] = "Oops something wrong !";
             $msg["type"] = "error";
@@ -150,6 +151,7 @@ class UserController extends Master_Controller
         else
         {
             $this->db->trans_commit();
+            $msg["valid"] = TRUE;
             $msg["title"] = "Successfully !";
             $msg["description"] = "Address has been changed !";
             $msg["type"] = "success";
