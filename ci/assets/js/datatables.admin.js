@@ -180,13 +180,13 @@ var global_func;
             $("#first_name").inputmask({
                 mask: "aaaaaaaaaaaa",
                 casing: "lower",
-                placeholder: "" // REMOVE UNDERLINE
+                placeholder: "" // __ REMOVE UNDERLINE
             });
 
             $("#last_name").inputmask({
                 mask: "aaaaaaaaaaaa",
                 casing: "lower",
-                placeholder: "" // REMOVE UNDERLINE
+                placeholder: "" // __ REMOVE UNDERLINE
             });
 
             // NOT ALLOWED SPACE BAR
@@ -221,9 +221,6 @@ function edit_user_datatables(id)
             $("[name=created_at]").val(data.created_at);
             $("[name=updated_at]").val(data.updated_at);
             
-            // IF DATA USE PHP TEMPLATE
-            // $("#wrapper-modal").html(data.temp);
-
             show_user_datatables();
             global_func();
     })
@@ -233,7 +230,6 @@ function edit_user_privilege_datatables(id)
     // const url = user_agent == "Firefox" ? "edit-user-datatables" : "admin/edit-user-datatables";
     $.get($("[name=site_url]").val() + "admin/edit-user-privilege-datatables", { id: id })
         .done(function(data) {
-            // $("#wrapper-modal").html(data.temp);
             global_func();
     })
 }

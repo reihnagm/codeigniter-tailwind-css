@@ -58,32 +58,67 @@
                 </p>
         <?php else: ?>
             <div class="rounded shadow-lg w-1/2 mx-auto">
-                <form id="save-address">
+                <form id="form-save-address" data-parsley-validate>
                     <div class="px-3 py-3">
-                        <div class="flex overflow-hidden justify-center my-4">
-                            <div class="mx-3">
-                                <div id="container-provinces">
-                                    <?php echo $provinces; ?>
+                        
+                        <div class="flex justify-center">
+                            <div>
+                                <div>
+                                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                                        Provinces
+                                    </label>
+                                    <select id="provinces" class="block rounded appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 my-3" data-parsley-required>
+                                    <option value="">-- Select Provinces --</option>
+                                        <optgroup>
+                                            <?php foreach($provinces as $province): ?>
+                                                <option value="<?php echo $province->id ?>"> 
+                                                    <?php echo $province->name; ?>
+                                                </option>
+                                            <?php endforeach; ?>
+                                        </optgroup>
+                                    </select>
                                 </div>
-                                <div id="container-districts">
-                                    <?php echo $districts; ?>
-                                    <!-- LOAD FROM AJAX -->
+                                
+                                <div>
+                                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                                        Districts
+                                    </label>
+                                    <select id="districts" class="block rounded appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 my-3" data-parsley-required>
+                                        <option value="">-- Select Districts --</option>
+                                        <optgroup id="container-districts"></optgroup>
+                                    </select>
                                 </div>
                             </div>
-                            <div class="mx-3">
-                                <div id="container-regencies">
-                                    <?php echo $regencies; ?>
-                                    <!-- LOAD FROM AJAX -->
+                                                
+                            <div>
+                                <div>
+                                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                                        Regencies
+                                    </label>
+                                    <select id="regencies" class="block rounded appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 my-3" data-parsley-required>
+                                        <option value="">-- Select Regencies --</option>
+                                        <optgroup id="container-regencies"></optgroup>
+                                    </select>
                                 </div>
-                                <div id="container-villages">
-                                    <?php echo $villages; ?>
-                                    <!-- LOAD FROM AJAX -->
+                                
+                                <div>
+                                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                                        Villages
+                                    </label>
+                                    <select id="villages" class="block rounded appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 my-3" data-parsley-required>
+                                        <option value="">-- Select Villages --</option>
+                                        <optgroup id="container-villages"></optgroup> 
+                                    </select> 
                                 </div>
                             </div>
                         </div>
+
                         <div class="text-right">
-                            <input type="submit" id="save-address" class="bg-gray-700 hover:bg-gray-600 text-white opacity-50 cursor-not-allowed font-bold py-2 px-4 m-4 rounded-full text-right" value="Save Address" disabled/>
+                            <button id="submit-save-address" class="w-1/4 bg-gray-700 hover:bg-gray-600 text-white cursor-pointer font-bold py-2 px-2 m-2 rounded-full">
+                            Save Address
+                            </button>
                         </div>
+
                     </div>
                 </form>
             </div>
@@ -124,7 +159,7 @@
                                 </div>
                             </div>
                             <div class="text-right">
-                                <button id="save-address" class="bg-gray-700 hover:bg-gray-600 text-white font-bold py-2 px-4 m-4 rounded-full text-right">
+                                <button class="bg-gray-700 hover:bg-gray-600 text-white font-bold py-2 px-4 m-4 rounded-full text-right">
                                     Save Address
                                 </button>
                             </div>
@@ -138,6 +173,9 @@
 
     </div>
 </div>
+
+ <!-- PROFILE JS -->
+<script src="<?php echo base_url('assets/js/profile.js') ?>"></script>
 
 <script type="text/javascript">
     <?php if($this->session->flashdata("msg_verified")): ?>

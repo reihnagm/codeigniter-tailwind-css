@@ -72,3 +72,4 @@ foo()
             })
         })
 - Tips: Different $(this) [OBJECT] while this NOT [OBJECT]
+- Tips: if use parsley don't render HTML in php it's can't work, only render in HTML can work.  

@@ -43,20 +43,22 @@ function provinces()
     $CI->db->from("provinces");
 
     $provinces =  $CI->db->get()->result();
+    
+    // USE SERVERSIDE RENDERING PHP 
 
-    $temp = '<label class=" block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                Provinces
-            </label>
-            <select id="provinces" class="block rounded appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 my-3">
-            ';
+    // $temp = '<label class=" block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+    //             Provinces
+    //         </label>
+    //         <select id="provinces" class="block rounded appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 my-3">
+    //         ';
 
-    foreach ($provinces as $province):
-        $temp .= '<option value="'.$province->id.'">'.$province->name.'</option>';
-    endforeach;
+    // foreach ($provinces as $province):
+    //     $temp .= '<option value="'.$province->id.'">'.$province->name.'</option>';
+    // endforeach;
 
-    $temp .='</select>';
+    // $temp .='</select>';
 
-    return $temp;
+    return $provinces;
 }
 function regencies($province_id)
 {
@@ -66,19 +68,22 @@ function regencies($province_id)
 
     $regencies = $CI->db->get()->result();
 
-    $temp = '<label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                Regencies
-            </label>
-            <select id="regencies" class="block rounded appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 my-3">
-            ';
+    // USE SERVERSIDE RENDERING PHP 
 
-    foreach ($regencies as $regencie):
-        $temp .= '<option value="'.$regencie->id.'">'.$regencie->name.'</option>';
-    endforeach;
+    // $temp = '<label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+    //             Regencies
+    //         </label>
+    //         <select id="regencies" class="block rounded appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 my-3">
+    //         ';
 
-    $temp .='</select>';
+    // foreach ($regencies as $regencie):
+    //     $temp .= '<option value="'.$regencie->id.'">'.$regencie->name.'</option>';
+    // endforeach;
 
-    echo json_encode($temp);
+    // $temp .='</select>';
+    // echo json_encode($temp);
+
+    echo json_encode($regencies);
 }
 function districts($regency_id)
 {
@@ -88,19 +93,21 @@ function districts($regency_id)
 
     $districts = $CI->db->get()->result();
 
-    $temp = '<label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                Districts
-            </label>
-            <select id="districts" class="block rounded appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 my-3">
-            ';
+    // $temp = '<label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+    //             Districts
+    //         </label>
+    //         <select id="districts" class="block rounded appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 my-3">
+    //         ';
 
-    foreach ($districts as $district):
-        $temp .= '<option value="'.$district->id.'">'.$district->name.'</option>';
-    endforeach;
+    // foreach ($districts as $district):
+    //     $temp .= '<option value="'.$district->id.'">'.$district->name.'</option>';
+    // endforeach;
 
-    $temp .='</select>';
+    // $temp .='</select>';
 
-    echo json_encode($temp);
+    // echo json_encode($temp);
+
+    echo json_encode($districts);
 }
 function villages($district_id)
 {
@@ -110,19 +117,20 @@ function villages($district_id)
 
     $villages = $CI->db->get()->result();
 
-    $temp = '<label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                Villages
-            </label>
-            <select id="villages" class="block rounded appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 my-3">
-            ';
+    // $temp = '<label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+    //             Villages
+    //         </label>
+    //         <select id="villages" class="block rounded appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 my-3">
+    //         ';
 
-    foreach ($villages as $village):
-        $temp .= '<option value="'.$village->id.'">'.$village->name.'</option>';
-    endforeach;
+    // foreach ($villages as $village):
+    //     $temp .= '<option value="'.$village->id.'">'.$village->name.'</option>';
+    // endforeach;
 
-    $temp .='</select>';
+    // $temp .='</select>';
+    // echo json_encode($temp);
 
-    echo json_encode($temp);
+    echo json_encode($villages);
 }
 function get_regencies()
 {

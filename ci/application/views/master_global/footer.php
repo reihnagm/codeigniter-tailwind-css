@@ -1,9 +1,6 @@
     <!-- MAIN JS -->
     <script src="<?php echo base_url('assets/js/main.js') ?>"></script>
 
-    <!-- PROFILE JS -->
-    <script src="<?php echo base_url('assets/js/profile.js') ?>"></script>
-
     <!-- SWEETALERT2 -->
     <script src="<?php echo base_url('assets/vendor/sweetalert2/dist/sweetalert2.all.min.js') ?>"></script>
 
