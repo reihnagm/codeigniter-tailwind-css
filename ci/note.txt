@@ -1,6 +1,6 @@
-- use Postgre SQL in Codeigniter, table case sensitive must be lowercase typing
-- automatically schemas public
-- Tips: use Backend or ServerSide to manipulate data, if use frontend to manipulate could be lagging or crash.
+- postgre pada codeigniter, tabel case sensitive, harus lowercase dalam penulisan
+- postgre otomatis akan pada schemas public
+- Tips: gunakan backend or server side untuk manipulasi data, jika menggunakan frontend untuk manipulasi akan terjadi lagging atau crash.
 - Tips: use Ajax in some any trick you can do it
         - $.ajax({
             url = "your/url"
@@ -21,18 +21,17 @@
             console.log(data)
         })
 
-- Tips: prop("disabled", true) only works in select option
-- Tips: Align is Horizontal if flex-col but is Vertical if flex-row
-- Tips: if url not found the problem maybe is user agent different e.g "url1/param1" or "url1"
+- Tips: prop("disabled", true) hanya bekerja pada select option
+- Tips: pada flex-col arah menjadi horizontal sementara pada flex-row arah menjadi vertical 
+- Tips: apabila url tidak ditemukan, kemungkinan user berbeda user agentnya, ini terjadi pada browser chrome dan firefox 
+        contohnya adalah seperti contoh pada chrome "url1/param1" lalu dibaca pada firefox "url1"
 - Tips: padding with background margin without background
 - Tips: if input type checkbox cannot reserved submit change to hidden
 - Tips: if error pgsql column doest not exists, delete column, and create new column
-- Tips: for handling if statement in foreach, problem is data (not incrementing) but getting last value or first value
-- Tips: if button cannot submit, change type="button" to type="submit"
 - Tips: isset check empty or not in session
-- Tips: if you want to submit in form, use this $("#form") and in submit $("#form").submit()
-- Tips: if you want data json parse and do not wont use every when use ajax, use this $.ajaxSetup({ dataType: json})
-- Tips: dont return false in form, but use e.preventDefault()
+- Tips: jika kamu ingin submit pada form, gunakan $("#form") dan pada submit $("#form").submit()
+- Tips: jika kamu ingin data json sudah di parse, gunakan ini $.ajaxSetup({ dataType: json})
+- Tips: jangan return false pada form, tapi gunakan e.preventDefault()
 - Tips: in $(document).ready(function() {
 
 }) or $(function() {
@@ -50,26 +49,32 @@ $(function() {
 })
 foo()
 
-- Tips: if you have email verification when click button confirmation would be getting error
-        "The URI you submitted has disallowed characters."
-        to fix it go application/config/config.php and add symbol @
+- Tips: jika email verifikasi ketika button di klik konfirmasi akan mendapatkan error
+        error yang akan muncul adalah "The URI you submitted has disallowed characters."
+        untuk mengatasi nya adalah pergi ke application/config/config.php and add symbol @
         $config['permitted_uri_chars'] = 'a-z 0-9~%.:_\-@';
-- Tips: if you want to get html dom object
-        use  - const el = $('#el')[0];
-        don't use  - const el = $('#el');
-- Tips: if you want upload image use ajax and want to use bar loading, properties async: false, don't use
-- Tips: submitting on form input use JQuery
+		
+- Tips: jika kamu ingin mendapatkan html dom object
+        gunakan  		- const el = $('#el')[0];
+        jangan gunakan  - const el = $('#el');
+
+- Tips: jika kamu ingin upload gambar menggunakan ajax dan ingin menggunakan bar loading, properties async: false, jangan gunakan
+- Tips: apabila ingin menggunakan submit pada form jquery
         $(function() {
-            $("#submit-edit-user-datatables").click(function() {
-                if (this.id === "submit-edit-user-datatables") // TRIGGER THE FORM
+            $("#submit-btn").click(function() {
+                if (this.id === "submit-edit-user-datatables") // akan memacu form ter-submit
                 { 
-                    $("#form-edit-user-datatables").submit();
+                    $("#form").submit();
                 } 
             })
 
-            $("#form-edit-user-datatables").submit(function(e) {
+            $("#form").submit(function(e) {
                 e.preventDefault()
             })
         })
-- Tips: Different $(this) [OBJECT] while this NOT [OBJECT]
-- Tips: if use parsley don't render HTML in php it's can't work, only render in HTML can work.  
+		
+- Tips: penggunaan $(this) adalah sebagai [OBJECT] 
+- Tips: parsley tidak bekerja pada server side, hanya pada sisi client side atau html 
+- Tips: jika menggunakan parsley, harus dibungkus oleh div atau element pembungkus lainnya, untuk memvalidasi dari setiap element, jika tidak dibungkus, validasi akan terbaca pada semua element yang ingin di validasi tidak setiap element
+- Tips: if use parsley, you must be wrap a div on input or any element, to validate each element, if not wrapping, parsley can read all element, any other words, validate not each element but all element 
+- Tips: penulisan controller atau file pada linux harus first uppercase diawali huruf besar 

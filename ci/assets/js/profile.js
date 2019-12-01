@@ -428,10 +428,7 @@ function villages(district_id)
         for(let villages of data)
         {
             temp += '<option value="'+villages.id+'">'+villages.name+'</option>'; 
-        }
-
-        console.log(temp);
-        
+        }       
         $("#container-villages").html(temp);
     });
 }

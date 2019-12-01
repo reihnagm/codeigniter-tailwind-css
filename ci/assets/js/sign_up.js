@@ -20,6 +20,7 @@
                 en: 'Invalid Email Format ! e.g johndoe@gmail.com'
             }
         });
+        
         window.Parsley.addValidator('passwordRegex', {
             validateString: function(value) {
                 return /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/.test(value)
@@ -99,6 +100,7 @@
             $('.parsley-emailRegex').hide().show(250);
         });
 
+
         $("#password-sign-up").parsley({
             classHandler: function (el) {
                 return el.$element.closest('.form-group');
@@ -122,11 +124,37 @@
             $('#parsley-id-13').find('.parsley-required').hide().show(250);
             $('.parsley-passwordRegex').hide().show(250);
         });
+    
+        $(document).on("keyup", "#password-sign-up", function() {
+           
+            const passwordRegex = $("#password-sign-up").parsley();
+            let _this = $(this);
+            const val   = _this.val();
+
+            if(/^(?=.*[a-z])/.test(val))
+            { 
+                window.ParsleyUI.updateError(passwordRegex, 'passwordRegex', 'character must contain at least 1 uppercase <br> character must contain at least 1 numeric <br> character must contain at least one special character <br> character must be eight or longer');
+            }
+            if(/^(?=.*[A-Z])/.test(val))
+            {
+                window.ParsleyUI.updateError(passwordRegex, 'passwordRegex', 'character must contain at least 1 numeric <br> character must contain at least one special character <br> character must be eight or longer');
+            }
+            if(/^(?=.*[0-9])/.test(val))
+            {
+                window.ParsleyUI.updateError(passwordRegex, 'passwordRegex', 'character must contain at least one special character <br> character must be eight or longer');
+            }
+            if(/^(?=.*[!@#\$%\^&\*])/.test(val))
+            {
+                window.ParsleyUI.updateError(passwordRegex, 'passwordRegex', 'character must be eight or longer');
+            }
+
+            // check semua nya
+       
+        });
 
 
-        $("#form-sign-up").on('submit', function(e){
-            e.preventDefault();
-
+        $("#form-sign-up").on('submit', function()
+        {
             // $(this).parsley().validate();
 
             if ($(this).parsley().isValid())
@@ -157,6 +185,9 @@
                     $("#form-sign-up").trigger("reset");
                 });
             }
+
+              
+            return false;
        });
 
         $(document).on("keyup", "#username-sign-up", function() {

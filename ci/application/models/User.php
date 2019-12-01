@@ -107,7 +107,7 @@ class User extends MY_Model
         $input_email = $this->get_user('email', $email)['email'];
         $password_hash = $this->get_user('email', $email)['password'];
 
-        if($input_email == $email && password_verify($password, $password_hash)) return TRUE;
+        if($input_email === $email && password_verify($password, $password_hash)) return TRUE;
         return FALSE;
     }
     public function save_address($village_id, $user_id)

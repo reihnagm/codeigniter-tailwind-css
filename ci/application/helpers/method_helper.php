@@ -205,7 +205,7 @@ function get_menus_admin_count()
     $CI->db->select("a.name parent_name, a.icon parent_icon, a.id parent_id");
     $CI->db->from("tbl_app_admin_menu_group a");
     $CI->db->join("tbl_app_admin_menu b",
-    "a.id = b.admin_menu_group_id","inner");
+    "a.id = b.admin_menu_group_id");
     $CI->db->order_by("a.id");
     $count = $CI->db->count_all_results();
 
@@ -231,7 +231,7 @@ function get_menus_admin()
     $CI->db->select("a.name parent_name, a.icon parent_icon, a.id parent_id");
     $CI->db->from("tbl_app_admin_menu_group a");
     $CI->db->join("tbl_app_admin_menu b",
-    "a.id = b.admin_menu_group_id","inner");
+    "a.id = b.admin_menu_group_id");
     $CI->db->order_by("a.id");
     $menus_parent = $CI->db->get()->result();
 
