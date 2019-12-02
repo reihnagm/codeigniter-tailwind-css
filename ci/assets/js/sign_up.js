@@ -147,8 +147,10 @@
             {
                 window.ParsleyUI.updateError(passwordRegex, 'passwordRegex', 'character must be eight or longer');
             }
-
-            // check semua nya
+            if(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/.test(val))
+            {   
+                window.ParsleyUI.removeError(passwordRegex);
+            }
        
         });
 
